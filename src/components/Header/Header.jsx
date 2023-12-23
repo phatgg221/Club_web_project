@@ -1,7 +1,8 @@
-import "./Header.css";
-import gfcc from "./GFCC.png";
-import expand_more from "./dropdown.png";
-import { useState } from "react";
+'use client'
+import React, { useState } from 'react';
+// import styles from '@/styles/Header.module.css'; 
+
+// import { useState } from "react
 
 function Header() {
   const [dataVisible, setDataVisible] = useState("false");
@@ -10,7 +11,7 @@ function Header() {
     <header class="primary-header">
       <div class="logo">
         <a href="#">
-          <img src={gfcc} width="50" height="46" />
+          <img src='./GFCC.png' width="50" height="46" />
         </a>
       </div>
 
@@ -52,7 +53,7 @@ function Header() {
         <div class="nav-options">
           <ul class="left-nav">
             <li>
-              <a id="about" href="index.html">
+              <a className="about" href="index.html">
                 About
               </a>
             </li>
@@ -61,7 +62,7 @@ function Header() {
                 Library
                 <img
                   class="drop-down-icon"
-                  src={expand_more}
+                  src='./dropdown.png'
                   alt="expand more"
                   width="18"
                   height="18"
@@ -76,17 +77,17 @@ function Header() {
           </ul>
           <ul class="right-nav">
             <li>
-              <a id="booking" href="index.html">
+              <a className="booking" href="index.html">
                 Booking
               </a>
             </li>
             <li>
-              <a id="teams" href="index.html">
+              <a className="teams" href="index.html">
                 Teams
               </a>
             </li>
             <button class="login-button">
-              <a id="login-text" href="index.html">
+              <a className="login-text" href="/userMain">
                 Login
               </a>
             </button>

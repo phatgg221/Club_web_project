@@ -1,13 +1,13 @@
-import "./Footer.css";
+import React from 'react';
+import styles from '@/styles/Footer.module.css'; // Make sure the path to your CSS module is correct
 
 function Footer() {
   return (
-    <footer>
-      <div className="info">
-        <span className="head-text">KEEP IN TOUCH</span>
-        <div className="logos">
-    // Mai mot doi logo - hinh nhu dang dinh ban quyen //
-          <svg
+    <footer className={styles.footer}>
+      <div className={styles.info}>
+        <span className={styles.headText}>KEEP IN TOUCH</span>
+        <div className={styles.logos}>
+        <svg
             xmlns="http://www.w3.org/2000/svg"
             height="32"
             width="32"
@@ -32,16 +32,17 @@ function Footer() {
             <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" />
           </svg>
         </div>
-        <span className="address">
+        <span className={styles.address}>
           702 Nguyen Van Linh, Ward Tan Hung, District 7, Ho Chi Minh City
         </span>
       </div>
-      <div className="copyright">
-        <span className="copyright-text">
+      <div className={styles.copyright}>
+        <span>
           Copyright Golden Flame Competition Club. All rights reserved.
         </span>
       </div>
     </footer>
   );
 }
+
 export default Footer;

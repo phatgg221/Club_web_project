@@ -1,5 +1,5 @@
 "use client";
-import "@/styles/champ.css";
+import "@/styles/champ.module.css";
 import CardName from "./cardName";
 import { useState } from "react";
 import TeamSlider from "./slider";
