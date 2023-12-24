@@ -1,7 +1,7 @@
 // Cards.jsx
 import React from "react";
 import Card from "./Card";
-import "./Card.css"; // Import specific component styles
+// import "@/styles/Card.module.css"; // Import specific component styles
 
 const Cards = () => {
   return (

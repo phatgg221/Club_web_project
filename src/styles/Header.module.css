@@ -1,4 +1,4 @@
-.nav {
+.MyApp__nav {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -10,9 +10,13 @@
   top: 0;
   margin: auto;
 }
+.MyApp__nav a {
+  text-decoration: none ; 
+  color: black;
+}
 
-.button {
-  text-decoration: none;
+.MyApp__button {
+  text-decoration: none !important;
   font-size: 1.15rem;
   font-weight: normal;
   color: #181818;
@@ -20,7 +24,7 @@
   transition: color 150ms linear;
 }
 
-/* .nav:after {
+/* .MyApp__nav:after {
   content: "";
   position: absolute;
   z-index: 1;
@@ -31,24 +35,24 @@
 } */
 
 /* Main parts of navigation */
-.nav-options {
+.MyApp__nav-options {
   display: flex;
   flex: 1;
 }
-.about, .booking, .teams {
+.MyApp__about, .MyApp__booking, .MyApp__teams {
   margin-right: 60px;
  }
- .library {
+ .MyApp__library {
   margin-right: 60px;
  }
  
- .booking {
+ .MyApp__booking {
   margin-left: 50px;
  }
  
 
-.left-nav,
-.right-nav {
+.MyApp__left-nav,
+.MyApp__right-nav {
   display: flex;
   flex: 1;
   align-items: center;
@@ -56,20 +60,20 @@
   padding: 0;
   list-style: none;
 }
-.left-nav {
+.MyApp__left-nav {
   justify-content: flex-end;
-  .li {
+  .MyApp__li {
     margin: 0 min(30%, 70px) 0 0;
   }
 }
-.right-nav {
+.MyApp__right-nav {
   justify-content: flex-start;
-  .li {
+  .MyApp__li {
     margin: 0 0 0 min(30%, 70px);
   }
 }
 
-.logo {
+.MyApp__logo {
   display: inline-block;
   z-index: 1;
   flex: 0;
@@ -78,36 +82,39 @@
   right: 0;
   margin: 7px;
   pointer-events: none;
-  .a {
+  .MyApp__a {
     z-index: 2;
     pointer-events: all;
   }
 }
-.mobile-nav-toggle {
+.MyApp__mobile-nav-toggle {
   display: none;
 }
 
 /* Library drop down section */
-.drop-down {
+.MyApp__drop-down {
   position: absolute;
   margin: 0 -2.5rem 0;
   visibility: hidden;
   opacity: 0;
   transition: visibility 150ms, opacity 150ms linear;
   align-items: center;
+  
   a {
     display: block;
     color: #181818;
     text-align: left;
     margin: 1.5rem 0 0 0;
-    font-size: 1.1rem;
+    font-size: 1.0rem;
   }
 }
-.drop-down a:hover {
-  color: #f8a61b;
+.MyApp__drop-down a:hover {
+  color: #201f1e;
+  background-color:  #f8a61b;
+  border-radius: 5px;
 }
 
-.drop-down-icon {
+.MyApp__drop-down-icon {
   scale: 100%;
   position: relative;
   bottom: 2px;
@@ -117,18 +124,18 @@
   transition: 150ms ease-in-out;
 }
 
-.library:hover .drop-down {
+.MyApp__library:hover .MyApp__drop-down {
   visibility: visible;
   opacity: 1;
   transition: visibility 150ms, opacity 150ms linear;
 }
-.library:hover .drop-down-icon {
+.MyApp__library:hover .MyApp__drop-down-icon {
   transform: rotate(180deg);
   transition: 150ms ease-in-out;
 }
 
 /* Login button */
-.login-button {
+.MyApp__login-button {
   border: none;
   vertical-align: middle;
   display: inline-block;
@@ -138,28 +145,28 @@
   border: #f8a61b 2px solid;
   background: none;
   transition: background 150ms linear;
-  .login-text {
+  .MyApp__login-text {
     color: #f8a61b;
   }
-  .login-button:hover {
+  .MyApp__login-button:hover {
     background: #f8a61b;
     transition: background 150ms linear;
   }
-  &:hover .login-text {
+  &:hover .MyApp__login-text {
     color: #fffefa;
   }
 }
 
 /* Hovering animation of options */
-.about:hover,
-.booking:hover,
-.teams:hover {
+.MyApp__about:hover,
+.MyApp__booking:hover,
+.MyApp__teams:hover {
   color: #f8a61b;
   transition: 150ms linear;
 }
-.about::after,
-.booking::after,
-.teams::after {
+.MyApp__about::after,
+.MyApp__booking::after,
+.MyApp__teams::after {
   content: "";
   height: 0.1rem;
   width: 100%;
@@ -171,23 +178,23 @@
   pointer-events: none;
   transform: scale(0, 1);
 }
-.about:hover::after,
-.booking:hover::after,
-.teams:hover::after {
+.MyApp__about:hover::after,
+.MyApp__booking:hover::after,
+.MyApp__teams:hover::after {
   width: 100%;
   transform: scale(1, 1);
 }
 
 /* Mobile layout */
 @media (max-width: 750px) {
-  .primary-header {
+  .MyApp__primary-header {
     display: flex;
     align-self: center;
     justify-content: space-between;
     background: #fffefa;
     height: 60px;
   }
-  .nav {
+  .MyApp__nav {
     align-items: baseline;
     position: fixed;
     inset: 0 0 0 40%;
@@ -199,68 +206,68 @@
     /* Set overflow-x: hidden in body */
     transform: translateX(100%);
     transition: transform 350ms ease-in;
-     .nav-options {
+     .MyApp__nav-options {
       display: block;
       justify-content: space-evenly;
       padding: min(20vh, 2rem) 3em;
     }
   }
-  .nav[dataVisible="true"] {
+  .MyApp__nav[dataVisible="true"] {
     transform: translateX(0%);
   }
 
-  .left-nav,
-  .right-nav {
+  .MyApp__left-nav,
+  .MyApp__right-nav {
     align-items: start;
     flex-direction: column;
     justify-content: initial;
     margin: 0;
     flex: 0;
     padding: 50px 20px 0;
-    .right-nav li {
+    .MyApp__right-nav li {
       margin: 20px 0 0 0;
     }
   }
-  .right-nav {
+  .MyApp__right-nav {
     padding: 140px 20px 0;
   }
-  .drop-down {
+  .MyApp__drop-down {
     display: block;
     visibility: visible;
     opacity: 1;
     padding: 0 0 0 55px;
   }
 
-  .logo {
+  .MyApp__logo {
     display: flex;
     position: static;
     top: auto;
     margin: 0.5rem;
   }
 
-  .drop-down-icon {
+  .MyApp__drop-down-icon {
     display: none;
   }
 
-  .login-button {
+  .MyApp__login-button {
     margin: 20px 0 0 0;
     padding: 0;
     background: none;
     border: #f8a61b 2px solid;
     border-radius: 5px;
     padding: 7.5px 15px;
-    & .login-text {
+    & .MyApp__login-text {
       color: #f8a61b;
     }
-    .login-button:hover {
+    .MyApp__login-button:hover {
       background: none;
     }
-    &:hover .login-text {
+    &:hover .MyApp__login-text {
       color: #f8a61b;
     }
   }
 
-  .mobile-nav-toggle {
+  .MyApp__mobile-nav-toggle {
     display: block;
     position: absolute;
     z-index: 999;
@@ -277,9 +284,9 @@
     align-items: center;
   }
 
-  .about:hover::after,
-  .booking:hover::after,
-  .teams:hover::after {
+  .MyApp__about:hover::after,
+  .MyApp__booking:hover::after,
+  .MyApp__teams:hover::after {
     transform: scale(0, 0);
   }
 }

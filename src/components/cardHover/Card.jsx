@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import "./Card.css";
+// import "./Card.css";
 
 const Card = ({ logo, organizer, title, description, imageUrl, linkUrl }) => {
   const [showScroll, setShowScroll] = useState(false);
