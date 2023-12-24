@@ -9,7 +9,7 @@ const TeamSlider = ({ images, team, activeTeam }) => {
     <Carousel className={isActive ? "carousel" : "hidden carousel"}>
       {isImagesEmpty ? (
         <Carousel.Item className="carousel-item">
-          <Image className="carousel-img" src="/champCard/champ-bg.png" fluid />
+          <Image className="carousel-img" src="champ-bg.png" fluid />
         </Carousel.Item>
       ) : (
         images.map((image) => (

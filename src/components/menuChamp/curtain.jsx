@@ -1,4 +1,6 @@
+'use client'
 import Form from "react-bootstrap/Form";
+
 import { useState } from "react";
 
 const Curtain = ({ team, activeTeam }) => {

@@ -1,5 +1,5 @@
 "use client";
-import "@/styles/champ.css";
+import styles from "@/styles/champ.module.css";
 
 const CardName = ({ team, activeTeam, handleClick }) => {
   const isActive = activeTeam == team.index;

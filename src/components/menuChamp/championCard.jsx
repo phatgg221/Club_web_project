@@ -1,5 +1,5 @@
 "use client";
-import "@/styles/champ.module.css";
+import styles from "@/styles/champ.module.css";
 import CardName from "./cardName";
 import { useState } from "react";
 import TeamSlider from "./slider";
@@ -48,8 +48,8 @@ export default function ChampionCard() {
   };
 
   return (
-    <div className="container">
-      <div className="champ-tabs">
+    <div className={styles.container}>
+      <div className={styles.champTabs}>
         {teamlist.map((team, index) => (
           <ChampTabs
             team={{ ...team, index }}
@@ -58,7 +58,7 @@ export default function ChampionCard() {
           />
         ))}
       </div>
-      <div className="name-list">
+      <div className={styles.nameList}>
         {teamlist.map((team, index) => (
           <CardName
             team={{ ...team, index }}
@@ -67,7 +67,7 @@ export default function ChampionCard() {
           />
         ))}
       </div>
-      <div className="slider">
+      <div className={styles.slider}>
         {teamlist.map((team, index) => (
           <TeamSlider
             team={{ ...team, index }}

@@ -10,13 +10,13 @@ function Header() {
   return (
     <header class="primary-header">
       <div class="logo">
-        <a href="#">
+        <a href="/">
           <img src='./GFCC.png' width="50" height="46" />
         </a>
       </div>
 
       <button
-        class="mobile-nav-toggle"
+        className="mobile-nav-toggle"
         onClick={() =>
           setDataVisible(dataVisible === "true" ? "false" : "true")
         }
@@ -49,33 +49,33 @@ function Header() {
         </svg>
       </button>
 
-      <nav dataVisible={dataVisible} class="nav">
-        <div class="nav-options">
-          <ul class="left-nav">
+      <nav dataVisible={dataVisible} className="nav">
+        <div className="nav-options">
+          <ul className="left-nav">
             <li>
               <a className="about" href="index.html">
                 About
               </a>
             </li>
-            <li class="library">
+            <li className="library">
               <a href="index.html">
                 Library
                 <img
-                  class="drop-down-icon"
+                  className="drop-down-icon"
                   src='./dropdown.png'
                   alt="expand more"
                   width="18"
                   height="18"
                 />
               </a>
-              <ul class="drop-down">
+              <ul className="drop-down">
                 <a href="index.html">Competitions</a>
                 <a href="index.html">Samples</a>
                 <a href="index.html">Tips</a>
               </ul>
             </li>
           </ul>
-          <ul class="right-nav">
+          <ul className="right-nav">
             <li>
               <a className="booking" href="index.html">
                 Booking
