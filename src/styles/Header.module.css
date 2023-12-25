@@ -1,4 +1,4 @@
-.MyApp__nav {
+.nav {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -6,17 +6,12 @@
   background-color: #fffefa;
   backdrop-filter: blur(5px);
   position: sticky;
-  position: -webkit-sticky;
   top: 0;
   margin: auto;
 }
-.MyApp__nav a {
-  text-decoration: none ; 
-  color: black;
-}
 
-.MyApp__button {
-  text-decoration: none !important;
+.primary-header a {
+  text-decoration: none;
   font-size: 1.15rem;
   font-weight: normal;
   color: #181818;
@@ -24,7 +19,7 @@
   transition: color 150ms linear;
 }
 
-/* .MyApp__nav:after {
+/* .nav:after {
   content: "";
   position: absolute;
   z-index: 1;
@@ -35,24 +30,13 @@
 } */
 
 /* Main parts of navigation */
-.MyApp__nav-options {
+.nav-options {
   display: flex;
   flex: 1;
 }
-.MyApp__about, .MyApp__booking, .MyApp__teams {
-  margin-right: 60px;
- }
- .MyApp__library {
-  margin-right: 60px;
- }
- 
- .MyApp__booking {
-  margin-left: 50px;
- }
- 
 
-.MyApp__left-nav,
-.MyApp__right-nav {
+.left-nav,
+.right-nav {
   display: flex;
   flex: 1;
   align-items: center;
@@ -60,61 +44,65 @@
   padding: 0;
   list-style: none;
 }
-.MyApp__left-nav {
+.left-nav {
   justify-content: flex-end;
-  .MyApp__li {
+  & li {
     margin: 0 min(30%, 70px) 0 0;
   }
 }
-.MyApp__right-nav {
+.right-nav {
   justify-content: flex-start;
-  .MyApp__li {
+  & li {
     margin: 0 0 0 min(30%, 70px);
   }
 }
 
-.MyApp__logo {
-  display: inline-block;
-  z-index: 1;
-  flex: 0;
-  position: absolute;
-  left: 47%;
-  right: 0;
-  margin: 7px;
-  pointer-events: none;
-  .MyApp__a {
-    z-index: 2;
-    pointer-events: all;
+.primary-header {
+  position: relative;
+  & .logo {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    & a {
+      z-index: 2;
+      pointer-events: all;
+    }
   }
 }
-.MyApp__mobile-nav-toggle {
+
+.mobile-nav-toggle {
   display: none;
 }
 
 /* Library drop down section */
-.MyApp__drop-down {
+.drop-down {
+  background-color: #fffefa;
+  /* border: #18181869 1px solid; */
+  border-radius: 0 0 5px 5px;
   position: absolute;
   margin: 0 -2.5rem 0;
+  padding: 20px;
   visibility: hidden;
   opacity: 0;
   transition: visibility 150ms, opacity 150ms linear;
   align-items: center;
-  
-  a {
+  & a {
+    margin-top: 5px;
     display: block;
     color: #181818;
     text-align: left;
-    margin: 1.5rem 0 0 0;
-    font-size: 1.0rem;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
   }
 }
-.MyApp__drop-down a:hover {
-  color: #201f1e;
-  background-color:  #f8a61b;
-  border-radius: 5px;
+.drop-down a:hover {
+  color: #f8a61b;
 }
 
-.MyApp__drop-down-icon {
+.drop-down-icon {
   scale: 100%;
   position: relative;
   bottom: 2px;
@@ -124,18 +112,18 @@
   transition: 150ms ease-in-out;
 }
 
-.MyApp__library:hover .MyApp__drop-down {
+.library:hover .drop-down {
   visibility: visible;
   opacity: 1;
   transition: visibility 150ms, opacity 150ms linear;
 }
-.MyApp__library:hover .MyApp__drop-down-icon {
+.library:hover .drop-down-icon {
   transform: rotate(180deg);
   transition: 150ms ease-in-out;
 }
 
 /* Login button */
-.MyApp__login-button {
+.login-button {
   border: none;
   vertical-align: middle;
   display: inline-block;
@@ -145,28 +133,28 @@
   border: #f8a61b 2px solid;
   background: none;
   transition: background 150ms linear;
-  .MyApp__login-text {
+  #login-text {
     color: #f8a61b;
   }
-  .MyApp__login-button:hover {
+  &:hover {
     background: #f8a61b;
     transition: background 150ms linear;
   }
-  &:hover .MyApp__login-text {
+  &:hover #login-text {
     color: #fffefa;
   }
 }
 
 /* Hovering animation of options */
-.MyApp__about:hover,
-.MyApp__booking:hover,
-.MyApp__teams:hover {
+#about:hover,
+#booking:hover,
+#teams:hover {
   color: #f8a61b;
   transition: 150ms linear;
 }
-.MyApp__about::after,
-.MyApp__booking::after,
-.MyApp__teams::after {
+#about::after,
+#booking::after,
+#teams::after {
   content: "";
   height: 0.1rem;
   width: 100%;
@@ -178,23 +166,24 @@
   pointer-events: none;
   transform: scale(0, 1);
 }
-.MyApp__about:hover::after,
-.MyApp__booking:hover::after,
-.MyApp__teams:hover::after {
+#about:hover::after,
+#booking:hover::after,
+#teams:hover::after {
   width: 100%;
   transform: scale(1, 1);
 }
 
 /* Mobile layout */
 @media (max-width: 750px) {
-  .MyApp__primary-header {
+  .primary-header {
+    position: initial;
     display: flex;
     align-self: center;
     justify-content: space-between;
     background: #fffefa;
     height: 60px;
   }
-  .MyApp__nav {
+  .nav {
     align-items: baseline;
     position: fixed;
     inset: 0 0 0 40%;
@@ -206,68 +195,82 @@
     /* Set overflow-x: hidden in body */
     transform: translateX(100%);
     transition: transform 350ms ease-in;
-     .MyApp__nav-options {
+    & .nav-options {
       display: block;
       justify-content: space-evenly;
       padding: min(20vh, 2rem) 3em;
     }
   }
-  .MyApp__nav[dataVisible="true"] {
+  .nav[datavisible="true"] {
     transform: translateX(0%);
   }
 
-  .MyApp__left-nav,
-  .MyApp__right-nav {
+  .left-nav,
+  .right-nav {
     align-items: start;
     flex-direction: column;
     justify-content: initial;
     margin: 0;
     flex: 0;
     padding: 50px 20px 0;
-    .MyApp__right-nav li {
+    & li {
       margin: 20px 0 0 0;
     }
   }
-  .MyApp__right-nav {
-    padding: 140px 20px 0;
-  }
-  .MyApp__drop-down {
-    display: block;
-    visibility: visible;
-    opacity: 1;
-    padding: 0 0 0 55px;
+  .right-nav {
+    padding: 100px 20px 0;
   }
 
-  .MyApp__logo {
-    display: flex;
-    position: static;
-    top: auto;
-    margin: 0.5rem;
+  .library {
+    width: 0;
+    height: 0;
+    visibility: hidden;
   }
-
-  .MyApp__drop-down-icon {
+  #library {
     display: none;
   }
 
-  .MyApp__login-button {
+  .drop-down {
+    background: none;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    padding: 0 0 0 40px;
+    margin-top: 0;
+  }
+
+  .primary-header .logo {
+    display: flex;
+    position: static;
+    transform: none;
+    left: 0;
+    top: auto;
+    margin: 7px;
+  }
+
+  .drop-down-icon {
+    display: none;
+  }
+
+  .login-button {
     margin: 20px 0 0 0;
     padding: 0;
     background: none;
     border: #f8a61b 2px solid;
     border-radius: 5px;
     padding: 7.5px 15px;
-    & .MyApp__login-text {
+    & #login-text {
       color: #f8a61b;
     }
-    .MyApp__login-button:hover {
+    &:hover {
       background: none;
     }
-    &:hover .MyApp__login-text {
+    &:hover #login-text {
       color: #f8a61b;
     }
   }
 
-  .MyApp__mobile-nav-toggle {
+  .mobile-nav-toggle {
     display: block;
     position: absolute;
     z-index: 999;
@@ -275,8 +278,8 @@
     width: 2rem;
     background: none;
     aspect-ratio: 1;
-    top: 1.5rem;
-    right: 1.5rem;
+    top: 15px;
+    right: 20px;
     cursor: pointer;
     padding: 0;
     margin: 0;
@@ -284,9 +287,9 @@
     align-items: center;
   }
 
-  .MyApp__about:hover::after,
-  .MyApp__booking:hover::after,
-  .MyApp__teams:hover::after {
+  #about:hover::after,
+  #booking:hover::after,
+  #teams:hover::after {
     transform: scale(0, 0);
   }
 }

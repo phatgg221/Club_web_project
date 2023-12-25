@@ -8,15 +8,15 @@ function Header() {
   const [dataVisible, setDataVisible] = useState("false");
 
   return (
-    <header className="MyApp__primary-header">
-      <div className="MyApp__logo">
-        <a href="/">
-          <img src='./GFCC.png' width="50" height="46" />
+    <header className="primary-header">
+      <div className="logo">
+        <a href="#">
+          <img src="./GFCC.png" width="50" height="46" />
         </a>
       </div>
 
       <button
-        className="MyApp__mobile-nav-toggle"
+        className="mobile-nav-toggle"
         onClick={() =>
           setDataVisible(dataVisible === "true" ? "false" : "true")
         }
@@ -31,63 +31,63 @@ function Header() {
           <path
             d="M4 18L20 18"
             stroke="#f8a61b"
-            strokeWidth="2.5"
-            strokeLinecap="round"
+            stroke-width="2.5"
+            stroke-linecap="round"
           />
           <path
             d="M4 12L20 12"
             stroke="#f8a61b"
-            strokeWidth="2.5"
-            strokeLinecap="round"
+            stroke-width="2.5"
+            stroke-linecap="round"
           />
           <path
             d="M4 6L20 6"
             stroke="#f8a61b"
-            strokeWidth="2.5"
-            strokeLinecap="round"
+            stroke-width="2.5"
+            stroke-linecap="round"
           />
         </svg>
       </button>
 
-      <nav dataVisible={dataVisible} className="MyApp__nav">
-        <div className="MyApp__nav-options">
-          <ul className="MyApp__left-nav">
+      <nav datavisible={dataVisible} className="nav">
+        <div className="nav-options">
+          <ul className="left-nav">
             <li>
-              <a className="MyApp__about" href="index.html">
+              <a id="about" href="index.html">
                 About
               </a>
             </li>
-            <li className="MyApp__library">
-              <a href="index.html">
+            <li className="library">
+              <a href="#" id="library">
                 Library
                 <img
-                  className="MyApp__drop-down-icon"
-                  src='./dropdown.png'
+                  className="drop-down-icon"
+                  src="./dropdown.png"
                   alt="expand more"
                   width="18"
                   height="18"
                 />
               </a>
-              <ul className="MyApp__drop-down">
+              <ul className="drop-down">
                 <a href="index.html">Competitions</a>
                 <a href="index.html">Samples</a>
                 <a href="index.html">Tips</a>
               </ul>
             </li>
           </ul>
-          <ul className="MyApp__right-nav">
+          <ul className="right-nav">
             <li>
-              <a className="MyApp__booking" href="index.html">
+              <a id="booking" href="index.html">
                 Booking
               </a>
             </li>
             <li>
-              <a className="MyApp__teams" href="index.html">
+              <a id="teams" href="index.html">
                 Teams
               </a>
             </li>
-            <button className="MyApp__login-button">
-              <a className="MyApp__login-text" href="/userMain">
+            <button className="login-button">
+              <a id="login-text" href="index.html">
                 Login
               </a>
             </button>
