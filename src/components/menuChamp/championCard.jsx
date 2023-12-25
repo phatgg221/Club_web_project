@@ -48,7 +48,8 @@ export default function ChampionCard() {
   };
 
   return (
-    <div className="container">
+    <main className= "champCardMain">
+    <div className="Champcontainer">
       <div className="champ-tabs">
         {teamlist.map((team, index) => (
           <ChampTabs
@@ -81,5 +82,6 @@ export default function ChampionCard() {
         ))}
       </div>
     </div>
+    </main>
   );
 }

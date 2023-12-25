@@ -1,13 +1,17 @@
 /* @import "~bootstrap/dist/css/bootstrap.min.css"; */
 
-.container{
+.Champcontainer{
+    
     width: 70%;
     display: grid;
+    left: 30;
     grid-template-columns: 25% 75%;
     height: 100%;
     background-color: #f8a61b;
     padding: 0;
     border-radius: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .name-list {
@@ -181,3 +185,11 @@ button .team-card {
         }
     }
 }
+
+.champCardMain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh;  */
+    background-color: #F4EDE4;
+  }

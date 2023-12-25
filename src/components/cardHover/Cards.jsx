@@ -5,8 +5,9 @@ import Card from "./Card";
 
 const Cards = () => {
   return (
+    
     <div className="app">
-      <h1>Ongoing Events</h1>
+      <h1 className= "header1">Ongoing Events</h1>
       <div className="card-container">
         <Card
           logo="/cat.jpg"
@@ -34,7 +35,16 @@ const Cards = () => {
           imageUrl="https://www.vnisa.org.vn/wp-content/uploads/2023/12/Australia-Award-Fellowship-422x237.jpg"
           linkUrl="https://www.vnisa.org.vn/khoa-dao-tao-ngan-ve-an-toan-thong-tin-mang-cua-rmit/"
         />
+      <div/>
+      <div className="show-more-container">
+      <a className="NutShowMore" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" >
+          Show More
+      </a>
+      </div>
+        <main className="main2">
+        <h1 className="header2">More Event</h1>
         {/* Add more Card components as needed */}
+        <div className="card-container2">
         <Card
           logo="/cat.jpg"
           organizer="RMIT University Vietnam"
@@ -62,6 +72,12 @@ const Cards = () => {
           linkUrl="https://app.datacamp.com/learn/competitions/nutrition-fact-check"
         />
         {/* Add more Card components as needed */}
+      </div>
+      <div className="show-more-container">
+      <a className="NutShowMore" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Show More</a>
+      </div>
+     
+      </main>
       </div>
     </div>
   );

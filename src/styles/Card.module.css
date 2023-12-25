@@ -17,8 +17,9 @@
       display: flex;
       align-items: center;
       overflow: clip;
-      width: 270px;
-      min-height: 160px;
+      width: 350px;
+      /* min-height: 160px; */
+      height: 240px !important;
       padding: 20px;
       border: none;
       border-radius: 5px;
@@ -106,4 +107,49 @@
       /* justify-content: center; */
       cursor: pointer;
     }
-    
+    .main2{
+     
+      background-color: #F4EDE4;
+      width: 100%;
+      align-items: center;
+  
+      
+    }
+    .card-container, .card-container2 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .header1, .header2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .card-container + .card-container2 {
+      margin-top: 30px; 
+    }
+    .header2{
+      width: 100%; 
+      text-align: center; 
+      margin-top: 40px; 
+    }
+    .card-container2{
+      margin-bottom: 40px;
+    }
+
+      .NutShowMore{
+      color: black !important;
+      padding: 10px 20px;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border: none; 
+      cursor: pointer; 
+    }
+    .show-more-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start; 
+      padding-left: 20px; 
+    }
