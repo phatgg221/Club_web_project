@@ -6,7 +6,7 @@ function userMain() {
     return (
       <>
           <Hero></Hero>
-          {/* <ChampionCard></ChampionCard> */}
+          <ChampionCard></ChampionCard>
           <Cards></Cards>
       </>
     );

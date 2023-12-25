@@ -4,6 +4,7 @@ function ChampTabs({ team, activeTeam, handleClick }) {
   return (
     <button
       type="button"
+      id={"i"+team.index}
       onClick={() => handleClick(team.index)}
       className={isActive ? "hidden-name card-name" : "card-name"}
     >
