@@ -13,7 +13,7 @@ const Card = ({ logo, organizer, title, description, imageUrl, linkUrl }) => {
   }, [description]);
 
   return (
-    <div className="card">
+    <div className="card-item">
       <a href={linkUrl} className="card-link"></a>
       <div className="card-content" id="cardContent">
         <span>
