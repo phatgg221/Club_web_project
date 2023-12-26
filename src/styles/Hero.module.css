@@ -1,4 +1,4 @@
-.main{
+.main {
   background-color: #fffefa;
 }
 
@@ -8,85 +8,84 @@
   align-items: center;
   padding: 0;
   width: 100%;
- }
- 
- .hero-text {
+}
+
+.hero-text {
   padding: 0;
   margin: 0;
- }
- 
- .GreetingTile {
+}
+
+.GreetingTile {
   font-size: 5rem;
   color: #f8a61b;
   margin: 0;
- }
- 
- .PageContent {
+}
+
+.PageContent {
   font-size: 2.5rem;
   color: #181818;
   margin: 30px 0;
   max-width: 700px;
- }
- 
- .image {
+}
+
+.image {
   padding: 0;
   margin: 0;
- }
- 
- .image .imageContent {
+}
+
+.image .imageContent {
   height: 600px;
- }
- 
- .button-container {
+}
+
+.button-container {
   margin: 0;
- }
- 
- .button-container button {
+}
+
+.button-container button {
   font-size: 1.5rem;
   display: block;
   margin-bottom: 30px;
   padding: 15px 10px;
   background: 0;
   border-radius: 0.5rem;
- }
- 
- .button1 {
+}
+
+.button1 {
   border: 3px #0a71ba solid;
   color: #0a71ba;
   transition: color 150ms ease-in-out, background 150ms ease-in-out;
- }
- 
- .button1:hover {
+}
+
+.button1:hover {
   background: #0a71ba;
   color: #fffefa;
- }
- 
- .button2 {
+}
+
+.button2 {
   border: 3px #f8a61b solid;
   background: #f8a61b;
-  color: #1f1d17;
+  color: #f8a61b;
   transition: color 150ms ease-in-out, background 150ms ease-in-out;
- }
- 
- .button2:hover {
+}
+
+.button2:hover {
   background: #f8a61b;
-  color: #302d27;
- }
- 
- .button3 {
+  color: #fefefa;
+}
+
+.button3 {
   border: 3px #181818 solid;
   color: #181818;
   transition: color 150ms ease-in-out, background 150ms ease-in-out;
- }
- 
- .button3:hover {
+}
+
+.button3:hover {
   background: #181818;
   color: #fffefa;
- }
- 
- @media (max-width: 900px) {
+}
+
+@media (max-width: 900px) {
   .image {
     display: none;
   }
- }
- 
+}
