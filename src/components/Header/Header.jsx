@@ -53,12 +53,12 @@ function Header() {
         <div className="nav-options">
           <ul className="left-nav">
             <li>
-              <a id="about" href="index.html">
+              <a id="about" href="/">
                 About
               </a>
             </li>
             <li className="library">
-              <a href="#" id="library">
+              <a id="library">
                 Library
                 <img
                   className="drop-down-icon"
@@ -69,7 +69,7 @@ function Header() {
                 />
               </a>
               <ul className="drop-down">
-                <a href="index.html">Competitions</a>
+                <a href="/competitions">Competitions</a>
                 <a href="index.html">Samples</a>
                 <a href="index.html">Tips</a>
               </ul>

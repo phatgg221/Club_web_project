@@ -1,6 +1,6 @@
-import SearchBar from "./SearchBar.js";
-import FilterBox from "./FilterBox.js";
-import "./SearchPage.css";
+import SearchBar from "@/components/Competitions/SearchBar.jsx";
+import FilterBox from "@/components/Competitions/FilterBox.jsx";
+// import "./SearchPage.css";
 import { useState } from "react";
 
 export default function SearchPage() {

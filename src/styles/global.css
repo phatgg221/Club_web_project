@@ -1,6 +1,9 @@
 @import "Header.module.css";
 @import "Card.module.css";
 @import "champ.module.css";
+@import "SearchBar.module.css";
+@import "SearchPage.module.css";
+@import "FilterBox.module.css";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
 
 

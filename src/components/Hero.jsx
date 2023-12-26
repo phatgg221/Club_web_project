@@ -1,6 +1,15 @@
 import styles from "@/styles/Hero.module.css"
 
 function Hero() {
+  function competition(){
+    document.location="/competitions";
+  }
+  function prepare(){
+    console.log("Prepare");
+  }
+  function Booking(){
+    console.log("Book");
+  }
  return (
   <main className={styles.main}>
    <div className={styles.hero}>
@@ -10,7 +19,7 @@ function Hero() {
          Welcome to the largest (probably) competition database in Vietnam.
        </p>
        <div className={styles['button-container']}>
-         <button className={styles.button1}>Explore Competition</button>
+         <button onClick={competition} className={styles.button1}>Explore Competition</button>
          <button className={styles.button2}>Prepare for Competition</button>
          <button className={styles.button3}>Book a counter-pitching session</button>
        </div>
