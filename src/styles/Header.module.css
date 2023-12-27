@@ -1,13 +1,15 @@
+.primary-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
 .nav {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 60px;
+  height: 70px;
   background-color: #fffefa;
-  backdrop-filter: blur(5px);
-  position: sticky;
-  top: 0;
-  margin: auto;
 }
 
 .primary-header a {
@@ -57,19 +59,16 @@
   }
 }
 
-.primary-header {
-  position: relative;
-  & .logo {
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    & a {
-      z-index: 2;
-      pointer-events: all;
-    }
+.logo {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  & a {
+    z-index: 2;
+    pointer-events: all;
   }
 }
 
@@ -176,12 +175,10 @@
 /* Mobile layout */
 @media (max-width: 750px) {
   .primary-header {
-    position: initial;
     display: flex;
     align-self: center;
     justify-content: space-between;
     background: #fffefa;
-    height: 60px;
   }
   .nav {
     align-items: baseline;
@@ -189,8 +186,7 @@
     inset: 0 0 0 40%;
     margin: 0;
     padding: 0;
-    background: hsla(36, 100%, 94%, 0.5);
-    backdrop-filter: blur(0.5rem);
+    background: hsl(36, 100%, 94%);
     height: 100%;
     /* Set overflow-x: hidden in body */
     transform: translateX(100%);
@@ -245,7 +241,7 @@
     transform: none;
     left: 0;
     top: auto;
-    margin: 7px;
+    margin: 8px;
   }
 
   .drop-down-icon {

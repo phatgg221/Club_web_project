@@ -1,4 +1,4 @@
-body {
+.main-search {
   margin: 0;
   background-color: #fffefa;
 }
@@ -14,7 +14,7 @@ body {
   display: none;
 }
 
-h1 {
+.main-search h1 {
   color: #f8a61b;
 }
 
@@ -48,6 +48,10 @@ h1 {
   & .search-bar {
     margin: 0;
   }
+}
+
+.filter-box-checkbox {
+  margin-right: 5px;
 }
 
 @media (max-width: 490px) {

@@ -1,195 +1,197 @@
 /* @import "~bootstrap/dist/css/bootstrap.min.css"; */
 
-.Champcontainer{
-    
-    width: 70%;
-    display: grid;
-    left: 30;
-    grid-template-columns: 25% 75%;
-    height: 100%;
-    background-color: #f8a61b;
-    padding: 0;
-    border-radius: 5px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.name-list {
-    position: relative;
-    height: 100%;
-    display: grid;
-    grid-template-columns: auto;
-    font-size: 1.5rem;
-    border: #f8a61b 2px solid;
-    border-right: 0;
-    border-radius: 5px;
-}
-
-button .team-card {
-    height: 20%;
-    width: 100%;
-    gap: 0px;
-}
-
-.card-name{
-    background-color: #fffefa;
-    color: #f8a61b;
-    text-align: left;
-    border: none;
-    padding: 0 0 0 10px;
-    transition: background 150ms;
-    &#i0 {
-        border-radius: 3px 0 0 0;
-    }
-    &#i4 {
-        border-radius: 0 0 0 3px;
-    }
-}
-
-.hidden-name{
-    background: none;
-    color: #fffefa;
-    transition: background 150ms, color 150ms;
-}
-
-.carousel, .carousel-inner{
-    width: 100%;
-    height: 100%;
-    & .img-fluid {
-        max-height: 500px;
-        width: 100%;
-    }
-}
-
-.hidden{
-    display: none !important;
-}
-
-.slider{
-    position: relative;
-    right: 0;
-    height: 500px;
-    border-radius: 0 5px 5px 0;
-    overflow: hidden;
-}
-
-.curtain{
-    visibility: hidden;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    z-index: 2;
-    opacity: 80%;
-    width: 100%;
-    height: 100%;
-    background-color: #181818;
-    color: #f8a61b;
-    text-align: center;
-    padding-top: 100px;
-    transform: translateY(100%);
-    transition: all 300ms ease-in;
-    &.curtain[clicked=true] {
-        visibility: visible;
-        transform: translateY(0%);
-        transition: all 300ms ease-out;
-    }
-}
-
-.curtain h2 h3{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    vertical-align: middle;
-    margin: 0;
-}
-
-.curtain-form{
-    display: block;
-    position: absolute;
-    right: 4%;
-    top: 5%;
-    width: 4%;
-    z-index: 8;
-    cursor: pointer;
-    & .icon-trophy{
-        width: 100%;
-    }
-}
-
-.champ-tabs{
-    display: none ;
-}
-
-@media (max-width: 950px){
-    .container{
-        display: block;
-        grid-template-rows: auto auto;
-    }
-
-    .slider{
-        width: 100%;
-        border-radius: 0 0 5px 5px;
-        overflow: clip;
-        & .carousel-inner, .carousel-item {
-            height: 100%;
-        }
-        & img {
-            width: 100%;
-            overflow: hidden;
-        }
-    }
-
-    .card-name{
-        padding: 0 5px;
-        &#i0 {
-            border-radius: 3px 0 0 0;
-        }
-        &#i4 {
-            border-radius: 0 3px 0 0;
-        }
-    }
-
-    .champ-tabs{
-        border: #f8a61b 2px solid;
-        border-bottom: none;
-        border-radius: 5px 5px 0 0;
-        display: block;
-        width: 100%;
-    }
-
-    .champ-tabs button{
-        width: 20%;
-        height: 50px;
-    }
-
-    .champ-tabs .card-name{
-        text-align: center;
-    }
-
-    .name-list{
-        display: none;
-    }
-}
-
-@media (max-width: 430px){
-    .slider{
-        aspect-ratio: 1;
-        max-height: 262px;
-        border-radius: 0 0 5px 5px;
-        overflow: clip;
-        & .carousel-inner, .carousel-item {
-            height: 100%;
-        }
-        & img {
-            height: 100%;
-        }
-    }
+.Champcontainer {
+  width: 70%;
+  display: grid;
+  left: 30;
+  grid-template-columns: 25% 75%;
+  height: 100%;
+  background-color: #f8a61b;
+  padding: 0;
+  border-radius: 5px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .champCardMain {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* height: 100vh;  */
-    background-color: #F4EDE4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh;  */
+  background-color: #fffefa;
+}
+
+.name-list {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  font-size: 1.5rem;
+  border: #f8a61b 2px solid;
+  border-right: 0;
+  border-radius: 5px;
+}
+
+button .team-card {
+  height: 20%;
+  width: 100%;
+  gap: 0px;
+}
+
+.card-name {
+  background-color: #fffefa;
+  color: #f8a61b;
+  text-align: left;
+  border: none;
+  padding: 0 0 0 10px;
+  transition: background 150ms;
+  &#i0 {
+    border-radius: 3px 0 0 0;
   }
+  &#i4 {
+    border-radius: 0 0 0 3px;
+  }
+}
+
+.hidden-name {
+  background: none;
+  color: #fffefa;
+  transition: background 150ms, color 150ms;
+}
+
+.carousel,
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+  & .img-fluid {
+    max-height: 500px;
+    width: 100%;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.slider {
+  position: relative;
+  right: 0;
+  height: 500px;
+  border-radius: 0 5px 5px 0;
+  overflow: hidden;
+}
+
+.curtain {
+  visibility: hidden;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 2;
+  opacity: 80%;
+  width: 100%;
+  height: 100%;
+  background-color: #181818;
+  color: #f8a61b;
+  text-align: center;
+  padding-top: 100px;
+  transform: translateY(100%);
+  transition: all 300ms ease-in;
+  &.curtain[clicked="true"] {
+    visibility: visible;
+    transform: translateY(0%);
+    transition: all 300ms ease-out;
+  }
+}
+
+.curtain h2 h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.curtain-form {
+  display: block;
+  position: absolute;
+  right: 4%;
+  top: 5%;
+  width: 4%;
+  z-index: 8;
+  cursor: pointer;
+  & .icon-trophy {
+    width: 100%;
+  }
+}
+
+.champ-tabs {
+  display: none;
+}
+
+@media (max-width: 950px) {
+  .container {
+    display: block;
+    grid-template-rows: auto auto;
+  }
+
+  .slider {
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+    overflow: clip;
+    & .carousel-inner,
+    .carousel-item {
+      height: 100%;
+    }
+    & img {
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+
+  .card-name {
+    padding: 0 5px;
+    &#i0 {
+      border-radius: 3px 0 0 0;
+    }
+    &#i4 {
+      border-radius: 0 3px 0 0;
+    }
+  }
+
+  .champ-tabs {
+    border: #f8a61b 2px solid;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    display: block;
+    width: 100%;
+  }
+
+  .champ-tabs button {
+    width: 20%;
+    height: 50px;
+  }
+
+  .champ-tabs .card-name {
+    text-align: center;
+  }
+
+  .name-list {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .slider {
+    aspect-ratio: 1;
+    max-height: 262px;
+    border-radius: 0 0 5px 5px;
+    overflow: clip;
+    & .carousel-inner,
+    .carousel-item {
+      height: 100%;
+    }
+    & img {
+      height: 100%;
+    }
+  }
+}

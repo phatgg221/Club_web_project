@@ -1,6 +1,6 @@
-'use client'
-import React, { useState } from 'react';
-// import styles from '@/styles/Header.module.css'; 
+"use client";
+import React, { useState } from "react";
+// import styles from '@/styles/Header.module.css';
 
 // import { useState } from "react
 
