@@ -77,7 +77,7 @@ function Header() {
           </ul>
           <ul className="right-nav">
             <li>
-              <a id="booking" href="index.html">
+              <a id="booking" href="/booking">
                 Booking
               </a>
             </li>
