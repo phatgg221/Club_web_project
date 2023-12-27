@@ -1,6 +1,6 @@
-'use client'
-import React, { useState } from 'react';
-// import styles from '@/styles/Header.module.css'; 
+"use client";
+import React, { useState } from "react";
+// import styles from '@/styles/Header.module.css';
 
 // import { useState } from "react
 
@@ -77,7 +77,7 @@ function Header() {
           </ul>
           <ul className="right-nav">
             <li>
-              <a id="booking" href="index.html">
+              <a id="booking" href="/booking">
                 Booking
               </a>
             </li>
