@@ -19,6 +19,8 @@ function MyApp({ Component, pageProps }) {
           display: "flex",
           flexDirection: "column",
           minHeight: "calc(100vh - 70px)",
+          background: "#fffefa",
+          paddingTop: "20px",
         }}
       >
         <Component {...pageProps} />

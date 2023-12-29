@@ -4,6 +4,7 @@
 @import "SearchBar.module.css";
 @import "SearchPage.module.css";
 @import "FilterBox.module.css";
+@import "Booking.module.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap");
 
 :root {
@@ -47,12 +48,25 @@
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
 
-  /* #__next main {
-    height: 100vh;
-  } */
+  h1 {
+    font-size: 50px;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 20px;
+  }
+
+  @media (max-width: 750px) {
+    h1 {
+      font-size: 35px;
+    }
+    p {
+      font-size: 15px;
+    }
+  }
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 255, 254, 250;
@@ -122,4 +136,4 @@ a {
     --background-start-rgb: 255, 254, 250;
     --background-end-rgb: 255, 254, 250;
   }
-}
+} */
