@@ -1,7 +1,8 @@
 .welcomeMain {
-  height: 66vh;
+  height: 100%;
   background-color: #fffefa;
   padding: 20px 0;
+  margin: 0 10vw;
 }
 
 .welcomeTitle {
@@ -11,6 +12,8 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 20px;
+  text-align: center;
+  margin: 0;
 }
 
 .mainContent {
@@ -20,7 +23,7 @@
 }
 
 .textContainer {
-  width: 650px;
+  width: 50vw;
   font-size: 20px;
 }
 
@@ -28,4 +31,14 @@
   height: 240px;
   width: 200px;
   float: right;
+}
+
+@media (max-width: 750px) {
+  .mainContent {
+    flex-direction: column;
+  }
+
+  .textContainer {
+    width: 100%;
+  }
 }

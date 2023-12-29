@@ -15,17 +15,18 @@
 
 .mainContent p {
   font-size: 20px;
+  margin: 10px 3vh;
   display: flex;
+  text-align: center;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
 }
 
 .box {
   border-style: solid;
   border-width: 2px;
   border-color: #f8a61b;
-  height: 400px;
-  width: 800px;
+  height: 60vh;
+  width: 70vw;
   margin: auto;
 }
