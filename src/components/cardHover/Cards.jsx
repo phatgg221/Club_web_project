@@ -23,7 +23,7 @@ const Cards = () => {
             organizer="RMIT Univeristy Vietnam"
             title="PwC Hack-A-Day"
             description="HCMC 7/11/2023"
-            imageUrl="https://www.pwchk.com/en/issues/cybersecurity-and-data-privacy/hack-a-day/2023/website-277x216-prize.png"
+            imageUrl="https://drive.google.com/uc?export=view&id=1w_z-MRHVTJJaMvZ8jA68BZtbH21C2O5W"
             linkUrl="https://www.pwc.com/vn/en/services/risk-assurance/cyber-security/hack-a-day.html"
           />
           {/* Add more Card components as needed */}
