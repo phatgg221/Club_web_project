@@ -1,19 +1,16 @@
 .welcomeMain {
   height: 100%;
   background-color: #fffefa;
-  padding: 20px 0;
   margin: 0 10vw;
 }
 
 .welcomeTitle {
   color: #f8a61b;
-  font-size: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 20px;
   text-align: center;
-  margin: 0;
+  margin-bottom: 20px;
 }
 
 .mainContent {
@@ -40,5 +37,11 @@
 
   .textContainer {
     width: 100%;
+  }
+
+  .logo {
+    height: 120px;
+    width: 100px;
+    float: right;
   }
 }
