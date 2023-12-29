@@ -31,20 +31,20 @@ function Header() {
           <path
             d="M4 18L20 18"
             stroke="#f8a61b"
-            stroke-width="2.5"
-            stroke-linecap="round"
+            strokeWidth="2.5"
+            strokeLinecap="round"
           />
           <path
             d="M4 12L20 12"
             stroke="#f8a61b"
-            stroke-width="2.5"
-            stroke-linecap="round"
+            strokeWidth="2.5"
+            strokeLinecap="round"
           />
           <path
             d="M4 6L20 6"
             stroke="#f8a61b"
-            stroke-width="2.5"
-            stroke-linecap="round"
+            strokeWidth="2.5"
+            strokeLinecap="round"
           />
         </svg>
       </button>
