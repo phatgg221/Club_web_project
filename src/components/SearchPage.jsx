@@ -21,7 +21,7 @@ export default function SearchPage() {
           }
         />
       </div>
-      <div dataVisible={dataVisible} className="filter-sect">
+      <div datavisible={dataVisible} className="filter-sect">
         <div className="filter-sect-title">
           <h2>Filters</h2>
           <span>clear all filters</span>

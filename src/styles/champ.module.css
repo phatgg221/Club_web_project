@@ -129,9 +129,8 @@ button .team-card {
 }
 
 @media (max-width: 950px) {
-  .container {
+  .Champcontainer {
     display: block;
-    grid-template-rows: auto auto;
   }
 
   .slider {
