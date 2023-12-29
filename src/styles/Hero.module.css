@@ -48,6 +48,7 @@
   padding: 15px 10px;
   background: 0;
   border-radius: 0.5rem;
+  text-align: center;
 }
 
 .button1 {
@@ -88,4 +89,29 @@
   .image {
     display: none;
   }
+  .hero-text{
+    width: 100%;
+    margin: 0 10vw;
+  }
+  .GreetingTile{
+    font-size: 50px;
+    height:100%;
+    width: 100%;
+  }
+  
+}
+
+@media (max-width:400px) {
+  .PageContent{
+    font-size: 2rem;
+  }
+}
+
+@media (max-width:400px) {
+  .button-container button{
+    height: 70px;
+    width: 80%;
+    font-size: 1rem;
+  }
+  
 }
