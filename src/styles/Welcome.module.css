@@ -21,7 +21,9 @@
 
 .textContainer {
   width: 50vw;
-  font-size: 20px;
+}
+.textContainer p:last-child {
+  margin: 0;
 }
 
 .logo {

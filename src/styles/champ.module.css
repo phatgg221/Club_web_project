@@ -93,7 +93,7 @@ button .team-card {
   background-color: #181818;
   color: #f8a61b;
   text-align: center;
-  padding-top: 100px;
+  padding-top: 50px;
   transform: translateY(100%);
   transition: all 300ms ease-in;
   &.curtain[clicked="true"] {
@@ -134,9 +134,11 @@ button .team-card {
   }
 
   .slider {
-    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 1/1;
     border-radius: 0 0 5px 5px;
     overflow: clip;
+    height: auto;
     & .carousel-inner,
     .carousel-item {
       height: 100%;
@@ -176,21 +178,5 @@ button .team-card {
 
   .name-list {
     display: none;
-  }
-}
-
-@media (max-width: 430px) {
-  .slider {
-    aspect-ratio: 1;
-    max-height: 262px;
-    border-radius: 0 0 5px 5px;
-    overflow: clip;
-    & .carousel-inner,
-    .carousel-item {
-      height: 100%;
-    }
-    & img {
-      height: 100%;
-    }
   }
 }
