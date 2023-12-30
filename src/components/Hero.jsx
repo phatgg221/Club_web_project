@@ -14,10 +14,10 @@ function Hero() {
   <main className={styles.main}>
    <div className={styles.hero}>
      <div className={styles['hero-text']}>
-       <h1 className={styles['GreetingTile']}>Greetings, User!</h1>
-       <p className={styles['PageContent']}>
+       <title className={styles['GreetingTile']}>Greetings, User!</title>
+       <tri className={styles['PageContent']}>
          Welcome to the largest (probably) competition database in Vietnam.
-       </p>
+       </tri>
        <div className={styles['button-container']}>
          <button onClick={competition} className={styles.button1}>Explore Competition</button>
          <button className={styles.button2}>Prepare for Competition</button>
