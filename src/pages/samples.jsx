@@ -1,11 +1,19 @@
-// src/pages/samples.jsx
-import Foldable from "@/components/Foldables/Foldable";
+import FoldableItem from "@/components/Foldables/FoldableItem";
+import SearchBar from "@/components/Competitions/SearchBar.jsx";
 import styles from "@/styles/Samples.module.css";
 function SamplesPage() {
   return (
     <div className={styles.mainContainer}>
       <h1 className={styles.title}>Samples</h1>
-      <Foldable />
+      <SearchBar
+        showButton={true}
+        placeholder="Search for Competitions"
+        style={{ width: "80%" }}
+      />
+      <FoldableItem title="Sample" />
+      <FoldableItem title="Sample" />
+      <FoldableItem title="Sample" />
+      <FoldableItem title="Sample" />
     </div>
   );
 }
