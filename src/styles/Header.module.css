@@ -77,57 +77,6 @@
   display: none;
 }
 
-/* Library drop down section */
-.drop-down {
-  background-color: hsla(36, 100%, 94%);
-  z-index: -1;
-  /* border: #18181869 1px solid; */
-  border-radius: 0 0 5px 5px;
-  position: absolute;
-  margin: 20px -2.5rem 0;
-  padding: 20px;
-  visibility: hidden;
-  opacity: 1;
-  /* transition: visibility 150ms, opacity 150ms linear; */
-  transform: translateY(-100%);
-  transition: transform 300ms ease-in-out, visibility 200ms;
-  transition-delay: 200ms;
-  align-items: center;
-  & a {
-    margin-top: 5px;
-    display: block;
-    color: #181818;
-    text-align: left;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-}
-.drop-down a:hover {
-  color: #f8a61b;
-}
-
-.drop-down-icon {
-  scale: 100%;
-  position: relative;
-  bottom: 2px;
-  display: flexbox;
-  vertical-align: middle;
-  transform: rotate(0deg);
-  transition: 150ms ease-in-out;
-}
-
-.library:hover .drop-down {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0%);
-  transition: transform 300ms ease-in-out, visibility 200ms;
-  /* transition: visibility 150ms, opacity 150ms linear; */
-}
-.library:hover .drop-down-icon {
-  transform: rotate(180deg);
-  transition: 150ms ease-in-out;
-}
-
 /* Login button */
 .login-button {
   border: none;
@@ -154,13 +103,17 @@
 /* Hovering animation of options */
 #about:hover,
 #booking:hover,
-#teams:hover {
+#competitions:hover,
+#samples:hover,
+#tips:hover {
   color: #f8a61b;
   transition: 150ms linear;
 }
 #about::after,
 #booking::after,
-#teams::after {
+#competitions::after,
+#samples::after,
+#tips::after {
   content: "";
   height: 0.1rem;
   width: 100%;
@@ -174,13 +127,15 @@
 }
 #about:hover::after,
 #booking:hover::after,
-#teams:hover::after {
+#competitions:hover::after,
+#samples:hover::after,
+#tips:hover::after {
   width: 100%;
   transform: scale(1, 1);
 }
 
 /* Mobile layout */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .primary-header {
     display: flex;
     align-self: center;
@@ -194,7 +149,7 @@
     padding: 0;
     background: hsl(36, 100%, 94%);
     width: 100%;
-    height: 400px;
+    height: 350px;
     transform: translateY(-100%);
     transition: transform 350ms ease-in-out;
     & .nav-options {
@@ -212,45 +167,13 @@
     flex-direction: column;
     justify-content: initial;
     margin: 0;
+    & li {
+      margin: 0 0 12px 0;
+    }
+  }
+
+  .left-nav {
     padding-top: 65px;
-    & li {
-      margin: 0 0 10px 0;
-    }
-  }
-
-  .right-nav {
-    padding-top: 110px;
-    & li {
-      margin-bottom: 10px;
-    }
-  }
-
-  .library {
-    width: 0;
-    height: 0;
-    visibility: hidden;
-  }
-  #library {
-    display: none;
-  }
-
-  .drop-down {
-    z-index: 1;
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: fit-content;
-    background: none;
-    display: flex;
-    flex-direction: column;
-    visibility: visible;
-    opacity: 1;
-    padding: 0;
-    margin: 0;
-    transform: none;
-    & a {
-      margin: 0 0 10px 0;
-    }
   }
 
   .primary-header .logo {
@@ -262,20 +185,8 @@
     margin: 8px 10px;
   }
 
-  .drop-down-icon {
-    display: none;
-  }
-
   .login-button {
     margin: 0;
-    padding: 0;
-    background: none;
-    border: #f8a61b 2px solid;
-    border-radius: 5px;
-    padding: 7.5px 15px;
-    & #login-text {
-      color: #f8a61b;
-    }
     &:hover {
       background: none;
     }
@@ -297,13 +208,13 @@
     cursor: pointer;
     padding: 0;
     margin: 0;
-    text-align: center;
-    align-items: center;
   }
 
-  #about:hover::after,
-  #booking:hover::after,
-  #teams:hover::after {
-    transform: scale(0, 0);
+  #about::after,
+  #booking::after,
+  #competitions::after,
+  #samples::after,
+  #tips::after {
+    content: none;
   }
 }

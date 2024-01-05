@@ -7,16 +7,17 @@ export default function About() {
       <div className={styles.mainContent}>
         <div className={styles.textContainer}>
           <p>
-            Cristiano Ronaldo dos Santos Aveiro GOIH ComM là một cầu thủ bóng đá
-            chuyên nghiệp người Bồ Đào Nha hiện đang thi đấu ở vị trí tiền đạo
-            và là đội trưởng của câu lạc bộ Saudi Pro League Al Nassr và đội
-            tuyển bóng đá quốc gia Bồ Đào Nha.
-          </p>
-          <p>
-            Messi đã chuyển đến Tây Ban Nha từ Argentina khi mới 13 tuổi để gia
-            nhập Barcelona, anh có trận ra mắt chính thức cho đội bóng xứ
-            Catalan ở tuổi 17 vào tháng 10 năm 2004. Anh dần là cầu thủ chủ chốt
-            của câu lạc bộ trong ba năm tiếp theo.
+            Operated since 2018,
+            <strong> RMIT Golden Flames Competition Club (GFCC) </strong> brings
+            together individuals with a great passion for{" "}
+            <strong> character development, collaboration, </strong> and
+            <strong> experiential learning </strong> through participating in
+            university-level competitions. Our mission is to deliver a
+            supportive and sharing playground for students to learn from each
+            other, showcase their talents, apply their skills, and achieve
+            educational and professional goals in life. Through resourceful
+            workshops, mentorship, and materials, GFCC is here to help nurture
+            your inner warrior and set the Flames in side you.
           </p>
         </div>
         <img src="/HappyGFCC.png" alt="GFCC Logo" className={styles.logo}></img>

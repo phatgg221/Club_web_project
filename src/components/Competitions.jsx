@@ -1,14 +1,30 @@
 import SearchBar from "@/components/Competitions/SearchBar.jsx";
 import FilterBox from "@/components/Competitions/FilterBox.jsx";
-// import "./SearchPage.css";
-import { useState } from "react";
+// import "./Competitions.css";
+import { useState, useEffect } from "react";
 
 export default function SearchPage() {
   const [dataVisible, setDataVisible] = useState("false");
 
+  const [isDesktopOrLaptop, setIsDesktopOrLaptop] = useState(false);
+  const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
+
+  const handleResize = () => {
+    setIsDesktopOrLaptop(window.matchMedia("(min-width: 490px)").matches);
+    setIsTabletOrMobile(window.matchMedia("(max-width: 490px)").matches);
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="search-container">
-      <h1>On-going Competitions</h1>
       <div className="search-bar-sect">
         <SearchBar showButton={true} placeholder="Search for Competitions" />
         <img
@@ -42,9 +58,29 @@ export default function SearchPage() {
               style={{ width: "100%" }}
               placeholder="Filter by Organizer"
             />
+            {isDesktopOrLaptop && (
+              <>
+                <div className="competition-list">
+                  <div className="sample-content">sample</div>
+                  <div className="sample-content">sample</div>
+                  <div className="sample-content">sample</div>
+                  <div className="sample-content">sample</div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
+      {isTabletOrMobile && (
+        <>
+          <div className="competition-list">
+            <div className="sample-content">sample</div>
+            <div className="sample-content">sample</div>
+            <div className="sample-content">sample</div>
+            <div className="sample-content">sample</div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

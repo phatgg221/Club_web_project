@@ -7,10 +7,10 @@ const Cards = () => {
   return (
     <div className="app">
       <div className="competition-section">
-        <h1 className= "competition-header">Ongoing Competitions</h1>
+        <h1 className="competition-header">Ongoing Competitions</h1>
         <div className="card-container">
           <Card
-            logo="/cat.jpg"
+            logo="/RMIT-logo.png"
             organizer="RMIT University Vietnam"
             title="Sustainable Leadership in FMCG"
             description="HCMC 28/11/2023 - 31/12/2023"
@@ -19,7 +19,7 @@ const Cards = () => {
           />
           {/* Add more Card components as needed */}
           <Card
-            logo="/cat.jpg"
+            logo="/RMIT-logo.png"
             organizer="RMIT Univeristy Vietnam"
             title="PwC Hack-A-Day"
             description="HCMC 7/11/2023"
@@ -28,7 +28,7 @@ const Cards = () => {
           />
           {/* Add more Card components as needed */}
           <Card
-            logo="/cat.jpg"
+            logo="/RMIT-logo.png"
             organizer="RMIT University Vietnam"
             title="ASCIS - Cyberseciruty Competition"
             description="HCMC 7/10/2023 - 28/10/2023"
@@ -37,8 +37,11 @@ const Cards = () => {
           />
         </div>
         <div className="show-more-container">
-          <a className="NutShowMore" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" >
-              Show More
+          <a
+            className="NutShowMore"
+            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          >
+            Show More
           </a>
         </div>
       </div>
@@ -46,7 +49,7 @@ const Cards = () => {
         <h1 className="event-header">Ongoing Events</h1>
         <div className="card-container">
           <Card
-            logo="/cat.jpg"
+            logo="/RMIT-logo.png"
             organizer="RMIT University Vietnam"
             title="Google Summer of Code"
             description="HCMC 22/01/2024 - 11/11/2024"
@@ -54,7 +57,7 @@ const Cards = () => {
             linkUrl="https://summerofcode.withgoogle.com/"
           />
           <Card
-            logo="/cat.jpg"
+            logo="/RMIT-logo.png"
             organizer="RMIT University Vietnam"
             title="Acknowledgement of Country"
             description="HCMC 1/12/2023 - 1/2/2024"
@@ -62,7 +65,7 @@ const Cards = () => {
             linkUrl="https://www.rmit.edu.au/about/our-values/respect-for-australian-indigenous-cultures"
           />
           <Card
-            logo="/cat.jpg"
+            logo="/RMIT-logo.png"
             organizer="RMIT University Vietnam"
             title="What foods are the most nutritious? THis is used to test whether the card will overflow or not."
             description="HCMC 17/12/2023 - 1/1/2024"
@@ -72,7 +75,12 @@ const Cards = () => {
           {/* Add more Card components as needed */}
         </div>
         <div className="show-more-container">
-          <a className="NutShowMore" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Show More</a>
+          <a
+            className="NutShowMore"
+            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          >
+            Show More
+          </a>
         </div>
       </div>
     </div>
