@@ -5,10 +5,10 @@ function Hero() {
     document.location = "/competitions";
   }
   function prepare() {
-    console.log("Prepare");
+    document.location = "/samples";
   }
-  function Booking() {
-    console.log("Book");
+  function booking() {
+    document.location = "/booking";
   }
   return (
     <main className={styles.main}>
@@ -22,8 +22,10 @@ function Hero() {
             <button onClick={competition} className={styles.button1}>
               Explore Competition
             </button>
-            <button className={styles.button2}>Prepare for Competition</button>
-            <button className={styles.button3}>
+            <button onClick={prepare} className={styles.button2}>
+              Prepare for Competition
+            </button>
+            <button onClick={booking} className={styles.button3}>
               Book a counter-pitching session
             </button>
           </div>
