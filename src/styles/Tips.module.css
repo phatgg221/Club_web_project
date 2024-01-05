@@ -1,0 +1,9 @@
+.mainContainer {
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
+.title {
+  color: #f8a61b;
+}

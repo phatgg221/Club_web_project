@@ -38,7 +38,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .text-box {
   width: 100%;
-  border: 1px #18181885 solid;
+  border: 1px #dddfe2 solid;
   border-radius: 3px 0 0 3px;
   &::placeholder {
     text-align: center;
