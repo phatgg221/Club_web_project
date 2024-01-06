@@ -9,35 +9,41 @@ import ChampTabs from "./champTabs";
 // temporary data
 const teamlist = [
   {
-    name: "Team 1",
-    competition: "Comp1",
-    award: "First prize",
-    images: ["test1.png", "test2.png"],
+    name: "ONEZ",
+    competition: "RMIT Business Analytics Champion",
+    award: "Champion",
+    images: ["rbacchampion.jpg"],
   },
   {
     name: "Team 2",
-    competition: "Comp2",
-    award: "Second prize",
-    images: ["test3.png", "test4.png", "test5.png"],
+    competition: "RMIT Business Analytics Champion",
+    award: "Fourth Place",
+    images: ["rbac4th.jpg"],
   },
   {
-    name: "Team 3",
-    competition: "Comp2",
-    award: "Second prize",
-    images: ["test6.png", "test1.png", "test3.png"],
+    name: "Team RMIT",
+    competition: "IIBD International Case Competition",
+    award: "Second Runner-up",
+    images: ["iibd.jpg"],
   },
   {
-    name: "Team 4",
-    competition: "Comp2",
-    award: "Second prize",
-    images: ["test7.png", "test8.png"],
+    name: "Onyx Mustang",
+    competition: "Swin-Biz-Rockstar Season 3",
+    award: "Champion",
+    images: [
+      "swinbiz.jpg",
+      "swinbiz2.jpg",
+      "swinbiz3.jpg",
+      "swinbiz4.jpg",
+      "swinbiz5.jpg",
+    ],
   },
-  {
-    name: "Team 5",
-    competition: "Comp2",
-    award: "Second prize",
-    images: [],
-  },
+  // {
+  //   name: "Team 5",
+  //   competition: "Comp2",
+  //   award: "Second prize",
+  //   images: [],
+  // },
 ];
 
 export default function ChampionCard() {
@@ -48,40 +54,40 @@ export default function ChampionCard() {
   };
 
   return (
-    <main className= "champCardMain">
-    <div className="Champcontainer">
-      <div className="champ-tabs">
-        {teamlist.map((team, index) => (
-          <ChampTabs
-            team={{ ...team, index }}
-            activeTeam={activeTeam}
-            handleClick={handleClick}
-          />
-        ))}
-      </div>
-      <div className="name-list">
-        {teamlist.map((team, index) => (
-          <CardName
-            team={{ ...team, index }}
-            activeTeam={activeTeam}
-            handleClick={handleClick}
-          />
-        ))}
-      </div>
-      <div className="slider">
-        {teamlist.map((team, index) => (
-          <TeamSlider
-            team={{ ...team, index }}
-            activeTeam={activeTeam}
-            images={team.images}
-          />
-        ))}
+    <main className="champCardMain">
+      <div className="Champcontainer">
+        <div className="champ-tabs">
+          {teamlist.map((team, index) => (
+            <ChampTabs
+              team={{ ...team, index }}
+              activeTeam={activeTeam}
+              handleClick={handleClick}
+            />
+          ))}
+        </div>
+        <div className="name-list">
+          {teamlist.map((team, index) => (
+            <CardName
+              team={{ ...team, index }}
+              activeTeam={activeTeam}
+              handleClick={handleClick}
+            />
+          ))}
+        </div>
+        <div className="slider">
+          {teamlist.map((team, index) => (
+            <TeamSlider
+              team={{ ...team, index }}
+              activeTeam={activeTeam}
+              images={team.images}
+            />
+          ))}
 
-        {teamlist.map((team, index) => (
-          <Curtain team={{ ...team, index }} activeTeam={activeTeam} />
-        ))}
+          {teamlist.map((team, index) => (
+            <Curtain team={{ ...team, index }} activeTeam={activeTeam} />
+          ))}
+        </div>
       </div>
-    </div>
     </main>
   );
 }

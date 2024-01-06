@@ -23,7 +23,7 @@ const Card = ({ logo, organizer, title, description, imageUrl, linkUrl }) => {
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
-      {showScroll && <div className="scroll-indicator">Scroll</div>}
+      {showScroll && <div className="scroll-indicator">Tag</div>}
       <div
         className="card-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
