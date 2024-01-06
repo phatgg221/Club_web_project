@@ -1,6 +1,7 @@
 .main-search {
   margin: 0;
   background-color: #fffefa;
+  text-align: center;
 }
 
 .search-container {
@@ -32,6 +33,13 @@
   }
 }
 
+.filter-sect-container {
+  display: flex;
+  & .search-bar {
+    margin: 0;
+  }
+}
+
 .filter-sect-boxes {
   margin-right: 20px;
   & .filter-box {
@@ -43,15 +51,20 @@
   flex: 1;
 }
 
-.filter-sect-container {
-  display: flex;
-  & .search-bar {
-    margin: 0;
-  }
-}
-
 .filter-box-checkbox {
   margin-right: 5px;
+}
+
+.competition-list {
+  margin-top: 10px;
+  max-height: 400px;
+  overflow: visible;
+}
+.sample-content {
+  border: #dddfe2 1px solid;
+  border-radius: 5px;
+  padding: 30px 0;
+  margin: 0 0 10px 0;
 }
 
 @media (max-width: 490px) {

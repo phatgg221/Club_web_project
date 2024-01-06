@@ -2,15 +2,13 @@
 import React, { useState } from "react";
 // import styles from '@/styles/Header.module.css';
 
-// import { useState } from "react
-
 function Header() {
   const [dataVisible, setDataVisible] = useState("false");
 
   return (
     <header className="primary-header">
       <div className="logo">
-        <a href="#">
+        <a href="/userMain">
           <img src="./GFCC.png" width="50" height="46" />
         </a>
       </div>
@@ -53,37 +51,30 @@ function Header() {
         <div className="nav-options">
           <ul className="left-nav">
             <li>
-              <a id="about" href="/">
-                About
+              <a id="competitions" href="/competitions">
+                Competitions
               </a>
             </li>
-            <li className="library">
-              <a id="library">
-                Library
-                <img
-                  className="drop-down-icon"
-                  src="./dropdown.png"
-                  alt="expand more"
-                  width="18"
-                  height="18"
-                />
+            <li>
+              <a id="samples" href="/samples">
+                Samples
               </a>
-              <ul className="drop-down">
-                <a href="/competitions">Competitions</a>
-                <a href="index.html">Samples</a>
-                <a href="index.html">Tips</a>
-              </ul>
+            </li>
+            <li>
+              <a id="tips" href="/tips">
+                Tips
+              </a>
             </li>
           </ul>
           <ul className="right-nav">
             <li>
-              <a id="booking" href="/booking">
-                Booking
+              <a id="about" href="/">
+                About
               </a>
             </li>
             <li>
-              <a id="teams" href="index.html">
-                Teams
+              <a id="booking" href="/booking">
+                Booking
               </a>
             </li>
             <button className="login-button">

@@ -10,9 +10,10 @@ import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ weight: "400", subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }) {
+  const hideLayout = Component.hideLayout || false;
   return (
     <main className={montserrat.className}>
-      <Header />
+      {!hideLayout && <Header />}
       <div
         className="mainBody"
         style={{
@@ -24,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         }}
       >
         <Component {...pageProps} />
-        <Footer />
+        {!hideLayout&& <Footer />}
       </div>
     </main>
   );

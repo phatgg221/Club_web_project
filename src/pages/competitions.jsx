@@ -1,11 +1,11 @@
 // src/pages/competitions.jsx
-import Search from "@/components/SearchPage";
-function SearchPage() {
+import Comp from "@/components/Competitions";
+function CompetitionsPage() {
   return (
-    <div className="main-search">
-      <Search />
-    </div>
+    <>
+      <Comp />
+    </>
   );
 }
 
-export default SearchPage;
+export default CompetitionsPage;
