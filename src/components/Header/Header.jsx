@@ -51,13 +51,13 @@ function Header() {
         <div className="nav-options">
           <ul className="left-nav">
             <li>
-              <a id="competitions" href="/competitions">
-                Competitions
+              <a id="about" href="/">
+                About
               </a>
             </li>
             <li>
               <a id="samples" href="/samples">
-                Samples
+                Showcase
               </a>
             </li>
             <li>
@@ -68,8 +68,8 @@ function Header() {
           </ul>
           <ul className="right-nav">
             <li>
-              <a id="about" href="/">
-                About
+              <a id="competitions" href="/competitions">
+                Competitions
               </a>
             </li>
             <li>

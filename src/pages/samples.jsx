@@ -4,7 +4,7 @@ import styles from "@/styles/Samples.module.css";
 function SamplesPage() {
   return (
     <div className={styles.mainContainer}>
-      <h1 className={styles.title}>Samples</h1>
+      <h1 className={styles.title}>Showcase</h1>
       <SearchBar
         showButton={true}
         placeholder="Search for Competitions"
