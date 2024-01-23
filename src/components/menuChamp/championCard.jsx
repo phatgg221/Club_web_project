@@ -1,12 +1,12 @@
 "use client";
 // import "./champ.css";
 import CardName from "./cardName";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import TeamSlider from "./slider";
 import Curtain from "./curtain";
 import ChampTabs from "./champTabs";
 
-// temporary data
+
 const teamlist = [
   {
     name: "ONEZ",
@@ -49,6 +49,31 @@ const teamlist = [
 export default function ChampionCard() {
   const [activeTeam, setActiveTeam] = useState(0);
 
+  const [teamList, setTeamList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/champion_api');
+        const data = await response.json();
+
+        // Transform the data into the desired format
+        const formattedData = data.data.mongoData.map((item, index) => ({
+          name: item.teamName,
+          competition: item.competitionDescription,
+          award: item.awardDes,
+          images: item.image,
+          index,
+        }));
+
+        setTeamList(formattedData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const handleClick = (team) => {
     setActiveTeam(team);
   };
@@ -59,7 +84,8 @@ export default function ChampionCard() {
         <div className="champ-tabs">
           {teamlist.map((team, index) => (
             <ChampTabs
-              team={{ ...team, index }}
+            key={team.index}
+              team={{ ...team }}
               activeTeam={activeTeam}
               handleClick={handleClick}
             />
