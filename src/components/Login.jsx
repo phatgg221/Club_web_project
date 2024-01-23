@@ -1,6 +1,27 @@
 import styles from "@/styles/Login.module.css";
-
+import { useState } from 'react';
 export default function Login() {
+  const [username,setUsername]= useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+   
+    const response = await fetch('/api/login', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({ action: 'login', username, password }),
+    });
+   
+    if (response.ok) {
+       const data = await response.json();
+       console.log("Login successful");
+       
+    } else {
+       console.log("Login failed");
+      
+    }
+   };
   return (
     <div className={styles.mainContainer}>
       <div className={styles.brand}>
@@ -19,9 +40,21 @@ export default function Login() {
       </div>
       <div className={styles.loginSect}>
         <form className={styles.loginForm}>
-          <input type="text" id={styles.username} placeholder="Username" />
-          <input type="password" id={styles.password} placeholder="Password" />
-          <button type="submit" className={styles.loginButton}>
+        <input
+            type="text"
+            id={styles.username}
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            id={styles.password}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit" className={styles.loginButton} onClick={'handleSubmit'}>
             Login
           </button>
         </form>

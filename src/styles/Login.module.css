@@ -57,3 +57,23 @@
   box-sizing: border-box;
   width: 100%;
 }
+
+@media (max-width: 850px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+  .brand {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  .loginForm {
+    width: 80vw;
+    max-width: 396px;
+  }
+}
+
+@media (max-width: 350px) {
+  .slogan .line {
+    font-size: 1rem;
+  }
+}

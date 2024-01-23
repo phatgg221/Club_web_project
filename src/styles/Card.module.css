@@ -102,10 +102,10 @@
 .scroll-indicator {
   position: absolute;
   bottom: 5px;
-  right: 5px;
+  left: 20px;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
-  padding: 3px 8px;
+  padding: 5px 10px;
   border-radius: 5px;
   font-size: 12px;
   display: flex;
