@@ -78,7 +78,7 @@ function Header() {
               </a>
             </li>
             <button className="login-button">
-              <a id="login-text" href="/userMain">
+              <a id="login-text" href="/login">
                 Login
               </a>
             </button>

@@ -1,12 +1,50 @@
 
 import Service from "./Service";
-
+const bcrypt = require('bcryptjs');
 
 class MemberService extends Service{
     constructor(model){
         super(model);
     }
 
+    async loginMember(username, password){
+        try{
+            const user= await this.getOne({username});
+
+            if(!user){
+                throw new Error ("User not found");
+            }
+
+            const isMatch= await bcrypt.compare(password, user.password);
+
+            if(!isMatch){
+                throw new Error("Invalid credentials");
+            }
+
+            const payload= {
+                user:{
+                    id: user.id
+                }
+            };
+            const token= jwt.sign (payload, process.env.JWT_SECRET, {expiresIn: 3600});
+
+            return{
+                error: false,
+                statusCode: 200,
+                data: {
+                    token
+            }
+        };
+        }catch(error){
+            console.log(error);
+            return {
+                error: true,
+                statusCode: 500,
+                errors: error.message,
+        };
+    }
+
+    }
     async createMember(Member){
         return await this.insert({
             username: Member.username,
@@ -77,3 +115,5 @@ class MemberService extends Service{
         }
     }
 }
+
+export default MemberService;

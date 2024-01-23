@@ -2,7 +2,7 @@ import service from "@/models/member";
 import memberService from '@/services/memberService';
 
 
-const MemberService = new MemberService(new service().getInstance());
+const MemberService = new memberService(new service().getInstance());
 
 
 export default async function handler (req, res){
@@ -10,13 +10,13 @@ export default async function handler (req, res){
 
     switch(method){
         case 'GET':
-            return handleRequest(() => championsService.getMember(), res);
+            return handleRequest(() => MemberService.getMember(), res);
       
         case 'POST':
-            return handleRequest(() => championsService.createMember(body), res);
+            return handleRequest(() => MemberService.createMember(body), res);
       
         case 'DELETE':
-            return handleRequest(() => championsService.deleteMember(query.id), res);
+            return handleRequest(() => MemberService.deleteMember(query.id), res);
       
         default:
             res.status(405).end(`Method ${method} Not Allowed`);
