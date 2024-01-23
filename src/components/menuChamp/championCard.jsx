@@ -7,44 +7,44 @@ import Curtain from "./curtain";
 import ChampTabs from "./champTabs";
 
 
-const teamlist = [
-  {
-    name: "ONEZ",
-    competition: "RMIT Business Analytics Champion",
-    award: "Champion",
-    images: ["rbacchampion.jpg"],
-  },
-  {
-    name: "Team 2",
-    competition: "RMIT Business Analytics Champion",
-    award: "Fourth Place",
-    images: ["rbac4th.jpg"],
-  },
-  {
-    name: "Team RMIT",
-    competition: "IIBD International Case Competition",
-    award: "Second Runner-up",
-    images: ["iibd.jpg"],
-  },
-  {
-    name: "Onyx Mustang",
-    competition: "Swin-Biz-Rockstar Season 3",
-    award: "Champion",
-    images: [
-      "swinbiz.jpg",
-      "swinbiz2.jpg",
-      "swinbiz3.jpg",
-      "swinbiz4.jpg",
-      "swinbiz5.jpg",
-    ],
-  },
-  // {
-  //   name: "Team 5",
-  //   competition: "Comp2",
-  //   award: "Second prize",
-  //   images: [],
-  // },
-];
+// const teamlist = [
+//   {
+//     name: "ONEZ",
+//     competition: "RMIT Business Analytics Champion",
+//     award: "Champion",
+//     images: ["rbacchampion.jpg"],
+//   },
+//   {
+//     name: "Team 2",
+//     competition: "RMIT Business Analytics Champion",
+//     award: "Fourth Place",
+//     images: ["rbac4th.jpg"],
+//   },
+//   {
+//     name: "Team RMIT",
+//     competition: "IIBD International Case Competition",
+//     award: "Second Runner-up",
+//     images: ["iibd.jpg"],
+//   },
+//   {
+//     name: "Onyx Mustang",
+//     competition: "Swin-Biz-Rockstar Season 3",
+//     award: "Champion",
+//     images: [
+//       "swinbiz.jpg",
+//       "swinbiz2.jpg",
+//       "swinbiz3.jpg",
+//       "swinbiz4.jpg",
+//       "swinbiz5.jpg",
+//     ],
+//   },
+//   // {
+//   //   name: "Team 5",
+//   //   competition: "Comp2",
+//   //   award: "Second prize",
+//   //   images: [],
+//   // },
+// ];
 
 export default function ChampionCard() {
   const [activeTeam, setActiveTeam] = useState(0);
@@ -62,11 +62,12 @@ export default function ChampionCard() {
           name: item.teamName,
           competition: item.competitionDescription,
           award: item.awardDes,
-          images: item.image,
+          images: item.images,
           index,
         }));
 
         setTeamList(formattedData);
+        console.log("teamList state:", teamList); 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -82,7 +83,7 @@ export default function ChampionCard() {
     <main className="champCardMain">
       <div className="Champcontainer">
         <div className="champ-tabs">
-          {teamlist.map((team, index) => (
+          {teamList.map((team, index) => (
             <ChampTabs
             key={team.index}
               team={{ ...team }}
@@ -92,7 +93,7 @@ export default function ChampionCard() {
           ))}
         </div>
         <div className="name-list">
-          {teamlist.map((team, index) => (
+          {teamList.map((team, index) => (
             <CardName
               team={{ ...team, index }}
               activeTeam={activeTeam}
@@ -101,7 +102,7 @@ export default function ChampionCard() {
           ))}
         </div>
         <div className="slider">
-          {teamlist.map((team, index) => (
+          {teamList.map((team, index) => (
             <TeamSlider
               team={{ ...team, index }}
               activeTeam={activeTeam}
@@ -109,7 +110,7 @@ export default function ChampionCard() {
             />
           ))}
 
-          {teamlist.map((team, index) => (
+          {teamList.map((team, index) => (
             <Curtain team={{ ...team, index }} activeTeam={activeTeam} />
           ))}
         </div>
