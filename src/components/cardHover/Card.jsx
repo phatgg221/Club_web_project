@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 // import "./Card.css";
 
-const Card = ({ logo, organizer, title, description, imageUrl, linkUrl }) => {
+const Card = ({ logoURL, organizer, title, description, imageUrl, linkUrl }) => {
   const [showScroll, setShowScroll] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Card = ({ logo, organizer, title, description, imageUrl, linkUrl }) => {
       <a href={linkUrl} className="card-link"></a>
       <div className="card-content" id="cardContent">
         <span>
-          <img src={logo} />
+          <img src={logoURL} />
           {organizer}
         </span>
         <h3>{title}</h3>

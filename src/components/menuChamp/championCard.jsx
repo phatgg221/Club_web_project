@@ -51,29 +51,29 @@ export default function ChampionCard() {
 
   const [teamList, setTeamList] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/champion_api');
-        const data = await response.json();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('/api/champion_api');
+  //       const data = await response.json();
 
-        // Transform the data into the desired format
-        const formattedData = data.data.mongoData.map((item, index) => ({
-          name: item.teamName,
-          competition: item.competitionDescription,
-          award: item.awardDes,
-          images: item.image,
-          index,
-        }));
+  //       // Transform the data into the desired format
+  //       const formattedData = data.data.mongoData.map((item, index) => ({
+  //         name: item.teamName,
+  //         competition: item.competitionDescription,
+  //         award: item.awardDes,
+  //         images: item.image,
+  //         index,
+  //       }));
 
-        setTeamList(formattedData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  //       setTeamList(formattedData);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
   const handleClick = (team) => {
     setActiveTeam(team);
   };
