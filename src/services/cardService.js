@@ -94,7 +94,7 @@ class CardService extends Service{
           return {
             error: true,
             statusCode: 500,
-            errors: "Failed to delete event",
+            errors: "Failed to delete card",
           };
         }
       }
