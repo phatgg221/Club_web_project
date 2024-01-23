@@ -9,12 +9,12 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  // Connect to MongoDB
+
   connectDB();
 
-  // No need to manually handle API routes, Next.js does it automatically
+ 
 
-  // Handle other routes
+ 
   server.get('*', (req, res) => {
     return handle(req, res);
   });
