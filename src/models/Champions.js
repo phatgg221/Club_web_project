@@ -16,7 +16,7 @@ class Champions {
             type: String,
             require: true,
           },
-          image: [
+          images: [
             {
               type: [String],
               validate: {
