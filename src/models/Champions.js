@@ -30,7 +30,7 @@ class Champions {
             },
           ],
     });
-    return mongoose.model("Champions", champSchema); // Return the model directly
+    return mongoose.model("Champions", champSchema); 
   }
 
   getInstance() {

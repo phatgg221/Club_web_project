@@ -15,17 +15,16 @@ class Card{
                 require:true,
                 trim:true,
             },
-            logoURL:{
+            logoURL: {
                 type: String,
-                require:true,
+                required: true,
                 validate: {
-                    // use validate to check if the image URL is valid
                     validator: function (v) {
                       const isCorrectImageLink = (currentValue) => /^https?:\/\/.+/.test(currentValue);
-                      return v.every(isCorrectImageLink);
+                      return isCorrectImageLink(v);
                     },
                     message: (props) => `${props.value} is not a valid image URL`,
-                  },
+                },
                 trim: true,
             },
             competitionName:{
@@ -38,30 +37,28 @@ class Card{
                 require:true,
                 trim:true,
             },
-            imageURL:{
+            imageURL: {
                 type: String,
-                require:true,
+                required: true,
                 validate: {
-                    // use validate to check if the image URL is valid
                     validator: function (v) {
                       const isCorrectImageLink = (currentValue) => /^https?:\/\/.+/.test(currentValue);
-                      return v.every(isCorrectImageLink);
+                      return isCorrectImageLink(v);
                     },
                     message: (props) => `${props.value} is not a valid image URL`,
-                  },
+                },
                 trim: true,
             },
-            linkToWeb:{
+            linkToWeb: {
                 type: String,
-                require:true,
+                required: true,
                 validate: {
-                    // use validate to check if the image URL is valid
                     validator: function (v) {
                       const isCorrectImageLink = (currentValue) => /^https?:\/\/.+/.test(currentValue);
-                      return v.every(isCorrectImageLink);
+                      return isCorrectImageLink(v);
                     },
                     message: (props) => `${props.value} is not a valid image URL`,
-                  },
+                },
                 trim: true,
             }
         });

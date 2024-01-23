@@ -1,5 +1,5 @@
 import service from "@/models/Champions";
-const connectDB = require('@/lib/mongodb');
+// const connectDB = require('@/lib/mongodb');
 import ChampionsService from '@/services/championsService';
 
 // connectDB();
