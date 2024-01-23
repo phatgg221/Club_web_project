@@ -4,7 +4,7 @@ import Image from "react-bootstrap/Image";
 const TeamSlider = ({ images, team, activeTeam }) => {
   const isActive = activeTeam === team.index;
   const isImagesEmpty = !images || images.length === 0;
-
+  console.log(images+ "askldjasldkjaslkcz,m.xn,mznx");
   return (
     <Carousel className={isActive ? "carousel" : "hidden carousel"}>
       {isImagesEmpty ? (

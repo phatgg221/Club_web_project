@@ -62,11 +62,12 @@ export default function ChampionCard() {
           name: item.teamName,
           competition: item.competitionDescription,
           award: item.awardDes,
-          images: item.image,
+          images: item.images,
           index,
         }));
 
         setTeamList(formattedData);
+        console.log("teamList state:", teamList); 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
