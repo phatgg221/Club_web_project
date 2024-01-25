@@ -6,7 +6,7 @@ import ChampionsService from '@/services/championsService';
 const championsService = new ChampionsService(new service().getInstance());
 
 export default async function handler(req, res) {
-  const { method, query, body } = req;
+  const { method, body, query } = req;
 
   switch (method) {
     case 'GET':
@@ -17,7 +17,14 @@ export default async function handler(req, res) {
 
     case 'DELETE':
       return handleRequest(() => championsService.deleteChampion(query.id), res);
-
+    case 'PUT':
+      if (query.teamOrder) {
+        // Handle the teamOrder update
+        return handleRequest(() => championsService.changeTeamOrder(query.id, query.teamOrder), res);
+      } else {
+        // Handle the regular update
+        return handleRequest(() => championsService.updateChampion(query.id, body), res);
+      }
     default:
       res.status(405).end(`Method ${method} Not Allowed`);
   }
