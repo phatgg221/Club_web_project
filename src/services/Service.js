@@ -93,6 +93,10 @@ class Service {
       };
     }
 }
+async getOne(query) {
+  return await this.model.findOne(query).select('+password').exec();
+}
+
 
   async update(id, data) {
     try {

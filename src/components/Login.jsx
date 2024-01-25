@@ -7,7 +7,7 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
    
-    const response = await fetch('/api/login', {
+    const response = await fetch('/api/login_api', {
        method: 'POST',
        headers: { 'Content-Type': 'application/json' },
        body: JSON.stringify({ action: 'login', username, password }),
@@ -16,6 +16,7 @@ export default function Login() {
     if (response.ok) {
        const data = await response.json();
        console.log("Login successful");
+       window.location.href = '/userMain';
        
     } else {
        console.log("Login failed");
@@ -54,7 +55,7 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit" className={styles.loginButton} onClick={'handleSubmit'}>
+          <button type="submit" className={styles.loginButton} onClick={handleSubmit}>
             Login
           </button>
         </form>

@@ -1,7 +1,6 @@
 // src/pages/_app.jsx
 import "../styles/global.css"; // Import global styles here
 import "bootstrap/dist/css/bootstrap.min.global.css";
-const Champions = require('@/models/Champions');
 const connectDB = require('@/lib/mongodb');
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
