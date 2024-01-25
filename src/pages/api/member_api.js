@@ -1,5 +1,5 @@
-import service from "@/models/member";
-import memberService from '@/services/memberService';
+// import service from "@/models/member";
+// import memberService from '@/services/memberService';
 
 
 const MemberService = new memberService(new service().getInstance());

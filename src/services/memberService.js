@@ -1,5 +1,6 @@
 
 import Service from "./Service";
+import jwt from 'jsonwebtoken';
 const bcrypt = require('bcryptjs');
 
 class MemberService extends Service{
@@ -14,9 +15,13 @@ class MemberService extends Service{
             if(!user){
                 throw new Error ("User not found");
             }
-
+            console.log("Entered password:", password);
+        console.log("Hashed password:", user.password);
+            if (user.password === undefined) {
+                throw new Error("User password is undefined");
+              }
             const isMatch= await bcrypt.compare(password, user.password);
-
+            
             if(!isMatch){
                 throw new Error("Invalid credentials");
             }
@@ -46,9 +51,10 @@ class MemberService extends Service{
 
     }
     async createMember(Member){
+        const hashedPassword = await bcrypt.hash(Member.password, 10);
         return await this.insert({
             username: Member.username,
-            password: Member.password,
+            password: hashedPassword,
         })
     }
     async getSearchMember(query){
@@ -115,5 +121,7 @@ class MemberService extends Service{
         }
     }
 }
+
+
 
 export default MemberService;
