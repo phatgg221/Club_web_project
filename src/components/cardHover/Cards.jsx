@@ -82,7 +82,7 @@ const Cards = () => {
     for(let i=3; i<= 5; i++){
       let item2 = ongoingCompetitions.data.mongoData[i];
       // console.log(ongoingCompetitions.data.mongoData[i]+ "alksdjalksjda");
-      console.log("Item data:", item2);
+      // console.log("Item data:", item2);
       cards2.push(
         <Card
         logoURL="/RMIT-logo.png"
