@@ -20,7 +20,8 @@
     "next": "14.0.4",
     "react": "^18",
     "react-bootstrap": "^2.9.2",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-sortablejs": "^6.1.4"
   },
   "devDependencies": {
     "css-loader": "^6.8.1",

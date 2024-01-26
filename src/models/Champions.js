@@ -15,38 +15,43 @@ class Champions {
     const champSchema = new mongoose.Schema({
       teamName: {
         type: String,
-        required: true,
+
+        require: true,
       },
       competitionDescription: {
         type: String,
-        required: true,
+        require: true,
       },
       awardDes: {
         type: String,
-        required: true,
+        require: true,
       },
       images: [
         {
-          type: [String],
+          type: String,
           validate: {
             validator: function (v) {
               const isCorrectImageLink = (currentValue) => /^https?:\/\/.+/.test(currentValue);
-              return v.every(isCorrectImageLink);
+              return isCorrectImageLink(v);
+
             },
             message: (props) => `${props.value} is not a valid image URL`,
           },
           trim: true,
         },
       ],
-    });
 
-    // Create the "Champions" model
-    this.ChampionsModel = mongoose.model("Champions", champSchema);
+      teamOrder: {
+        type: Number,
+        require: true,
+      },
+    });
+    return mongoose.models.Champions || mongoose.model("Champions", champSchema);   // avoid OverwriteModelError
   }
 
   getInstance() {
-    // Return the model instance
-    return this.ChampionsModel;
+    return this.initSchema();
+
   }
 }
 
