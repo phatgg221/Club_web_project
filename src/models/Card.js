@@ -67,12 +67,12 @@ class Card {
     });
 
    
-    this.CardModel = mongoose.model("Card", cardSchema);
+    return mongoose.models.Card || mongoose.model("Card",cardSchema);
   }
 
   getInstance() {
     
-    return this.CardModel;
+    return this.initSchema();
   }
 }
 

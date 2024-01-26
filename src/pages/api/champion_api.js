@@ -12,14 +12,14 @@ export default async function handler(req, res) {
 
     case 'DELETE':
 
-      return handleRequest(() => championsService.deleteChampion(query.id), res);
+      return handleRequest(() => ChampionController.deleteChamp(query.id), res);
     case 'PUT':
       if (query.teamOrder) {
         // Handle the teamOrder update
-        return handleRequest(() => championsService.changeTeamOrder(query.id, query.teamOrder), res);
+        return handleRequest(() => ChampionController.changeTeamOrder(query.id, query.teamOrder), res);
       } else {
         // Handle the regular update
-        return handleRequest(() => championsService.updateChampion(query.id, body), res);
+        return handleRequest(() => ChampionController.updateChamp(query.id, body), res);
       }
 
     default:
