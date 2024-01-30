@@ -1,0 +1,81 @@
+.mainContainer,
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  display: block;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.innerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  border: 1px solid #dddfe2;
+  border-radius: 5px;
+}
+
+.foldButton {
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f8a61b;
+  color: #fefefa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.title {
+  margin: 0;
+  align-self: center;
+  color: #181818;
+}
+
+.contentContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8a61b;
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+  height: 100px;
+  max-height: 200px;
+}
+
+.foldedContent {
+  height: 0px !important;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  color: #fefefa;
+  text-align: center;
+  width: 80%;
+}
+
+.contentContainerChamp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8a61b;
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+  height: 100%;
+  padding: 3%;
+  /* max-height: 200px; */
+}
+
+.hideChamp {
+  display: none;
+}

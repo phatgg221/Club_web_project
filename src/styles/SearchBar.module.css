@@ -3,7 +3,6 @@
   height: 2.5rem;
   display: flex;
   justify-content: center;
-  flex: 1;
   margin: 20px 0;
 }
 
@@ -34,11 +33,12 @@ input[type="search"]::-webkit-search-results-decoration {
   border: none;
   border-radius: 0 3px 3px 0;
   background-color: #f8a61b;
+  width: 40px;
 }
 
 .text-box {
   width: 100%;
-  border: 1px #18181885 solid;
+  border: 1px #dddfe2 solid;
   border-radius: 3px 0 0 3px;
   &::placeholder {
     text-align: center;

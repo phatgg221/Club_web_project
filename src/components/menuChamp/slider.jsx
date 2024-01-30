@@ -3,8 +3,8 @@ import Image from "react-bootstrap/Image";
 
 const TeamSlider = ({ images, team, activeTeam }) => {
   const isActive = activeTeam === team.index;
-  const isImagesEmpty = images.length === 0;
-
+  const isImagesEmpty = !images || images.length === 0;
+  console.log(images+ "askldjasldkjaslkcz,m.xn,mznx");
   return (
     <Carousel className={isActive ? "carousel" : "hidden carousel"}>
       {isImagesEmpty ? (
@@ -14,7 +14,7 @@ const TeamSlider = ({ images, team, activeTeam }) => {
       ) : (
         images.map((image) => (
           <Carousel.Item className="carousel-item">
-            <Image className="carousel-img" src={`/${image}`} fluid />
+            <Image className="carousel-img" src={image} fluid />
           </Carousel.Item>
         ))
       )}

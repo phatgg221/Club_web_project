@@ -2,9 +2,10 @@
 @import "Card.module.css";
 @import "champ.module.css";
 @import "SearchBar.module.css";
-@import "SearchPage.module.css";
+@import "Competitions.module.css";
 @import "FilterBox.module.css";
 @import "Booking.module.css";
+@import "table.module.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap");
 
 :root {
@@ -50,7 +51,7 @@
 
   h1 {
     font-size: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   p {
     font-size: 20px;
