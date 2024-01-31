@@ -79,7 +79,7 @@ const Cards = () => {
   }
   let cards2= [];
   if(ongoingCompetitions.data && ongoingCompetitions.data.mongoData){
-    for(let i=3; i<= 5; i++){
+    for(let i=3; i<= ongoingCompetitions.data.mongoData.length-1; i++){
       let item2 = ongoingCompetitions.data.mongoData[i];
       // console.log(ongoingCompetitions.data.mongoData[i]+ "alksdjalksjda");
       // console.log("Item data:", item2);

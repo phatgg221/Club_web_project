@@ -8,13 +8,13 @@ class CardService extends Service{
 
 
     async createCard(Card) {
-        if (!Card || !Card.organizer || !Card.logoURL || !Card.competitionName || !Card.location || !Card.imageURL || !Card.linkToWeb) {
-          return {
-            error: true,
-            statusCode: 400,
-            message: "Invalid request body. Please provide all required fields.",
-          };
-        }
+        // if (!Card || !Card.organizer || !Card.logoURL || !Card.competitionName || !Card.location || !Card.imageURL || !Card.linkToWeb) {
+        //   return {
+        //     error: true,
+        //     statusCode: 400,
+        //     message: "Invalid request body. Please provide all required fields.",
+        //   };
+        // }
       
         try {
           return await this.insert({

@@ -21,13 +21,6 @@ class Card {
       logoURL: {
         type: String,
         required: true,
-        validate: {
-          validator: function (v) {
-            const isCorrectImageLink = (currentValue) => /^https?:\/\/.+/.test(currentValue);
-            return isCorrectImageLink(v);
-          },
-          message: (props) => `${props.value} is not a valid image URL`,
-        },
         trim: true,
       },
       competitionName: {
@@ -42,7 +35,6 @@ class Card {
       },
       imageURL: {
         type: String,
-        required: true,
         validate: {
           validator: function (v) {
             const isCorrectImageLink = (currentValue) => /^https?:\/\/.+/.test(currentValue);
