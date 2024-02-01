@@ -117,4 +117,5 @@ const NewCardForm = () => {
     );
 };
 
+NewCardForm.hideLayout = true;
 export default NewCardForm;
