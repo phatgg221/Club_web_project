@@ -1,10 +1,24 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect ,useState } from "react";
 // import styles from '@/styles/Header.module.css';
-
+import { useAuth } from "@/contexts/AuthContext";
+// import { useRouter } from 'next/router';
 function Header() {
+  // const router = useRouter();
   const [dataVisible, setDataVisible] = useState("false");
-
+  const { isLoggedIn, logout } = useAuth();
+  const HandleLogOUT = () => {
+    if(isLoggedIn){
+      // console.log("logout");
+      logout();
+      window.location.href = "/";
+    }else{
+      window.location.href = "/login";
+    }
+  }
+  useEffect(() => {
+    console.log("Current login status: ", isLoggedIn);
+ }, [isLoggedIn]);
   return (
     <header className="primary-header">
       <div className="logo">
@@ -51,17 +65,17 @@ function Header() {
         <div className="nav-options">
           <ul className="left-nav">
             <li>
-              <a id="competitions" href="/competitions">
+              <a id="competitions" href={isLoggedIn?"/competitions": "/login"}>
                 Competitions
               </a>
             </li>
             <li>
-              <a id="samples" href="/samples">
+              <a id="samples" href={isLoggedIn?"/samples": "/login"}>
                 Samples
               </a>
             </li>
             <li>
-              <a id="tips" href="/tips">
+              <a id="tips" href={isLoggedIn?"/tips": "/login"}>
                 Tips
               </a>
             </li>
@@ -73,13 +87,13 @@ function Header() {
               </a>
             </li>
             <li>
-              <a id="booking" href="/booking">
+              <a id="booking" href={isLoggedIn?"/booking": "/login"}>
                 Booking
               </a>
             </li>
             <button className="login-button">
-              <a id="login-text" href="/login">
-                Login
+              <a id="login-text" onClick={HandleLogOUT}>
+                {isLoggedIn? 'Logout' : 'Login'}
               </a>
             </button>
           </ul>
