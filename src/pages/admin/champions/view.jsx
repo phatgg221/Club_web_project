@@ -149,5 +149,5 @@ function Champion() {
         </div>
     );
 }
-
+Champion.hideLayout = true;
 export default Champion;

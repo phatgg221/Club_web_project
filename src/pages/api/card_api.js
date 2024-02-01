@@ -9,13 +9,19 @@ import CardService from "@/services/cardService";
 
         switch(method){
         case 'GET':
-        return handleRequest(() => cardService.getCard(),res);
+                if(query.id){
+                        return handleRequest(() => cardService.getCardById(query.id), res);
+                }else{
+                        return handleRequest(() => cardService.getCard(),res);
+                }
 
         case 'POST':
-        return handleRequest(() => cardService.createCard(body), res);
+                return handleRequest(() => cardService.createCard(body), res);
 
+        case 'PUT':
+                return handleRequest(() => cardService.updateCard(query.id, body), res);
         case 'DELETE':
-        return handleRequest(() => cardService.deleteCard(query.id), res);
+                return handleRequest(() => cardService.deleteCard(query.id), res);
 
         }
         }
