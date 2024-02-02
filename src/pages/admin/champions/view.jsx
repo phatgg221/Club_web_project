@@ -3,7 +3,7 @@ import React from "react";
 import ChampionCard from "@/components/menuChamp/championCard";
 import styles from "@/styles/Foldable.module.css";
 import CreateChampion from "@/components/menuChamp/champForm";
-
+import AdminHeader from "@/components/Header/adminHeader";
 function Champion() {
     const [teamList, setTeamList] = useState([]);
     const [championToUpdate, setChampionToUpdate] = useState(null);
@@ -86,6 +86,7 @@ function Champion() {
 
     return (
         <div>
+            <AdminHeader/>
             <ChampionCard></ChampionCard>
 
             {[...Array(5)].map((_, index) => {

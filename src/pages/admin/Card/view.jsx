@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import style from "@/styles/table.module.css";
-
+import AdminHeader from "@/components/Header/adminHeader";
 const CardTable= () => {
     const [ongoingCompetitions, setOngoingCompetitions] = useState([]);
 
@@ -48,6 +48,7 @@ const CardTable= () => {
     
     return (
         <>
+            <AdminHeader/>
             <table className={style.mainTable}>
                 <thead>
                     <tr>
@@ -79,5 +80,5 @@ const CardTable= () => {
         </>
     );
 }
-
+CardTable.hideLayout = true;
 export default CardTable;
