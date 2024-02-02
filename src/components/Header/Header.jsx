@@ -22,7 +22,7 @@ function Header() {
   return (
     <header className="primary-header">
       <div className="logo">
-        <a href="/userMain">
+        <a href={isLoggedIn?"/userMain": "/login"}>
           <img src="./GFCC.png" width="50" height="46" />
         </a>
       </div>
