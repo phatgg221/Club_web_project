@@ -44,7 +44,7 @@ class Sample{
     }
 
     getInstance(){
-        return Sample.instance;
+        return this.initSchema();
     }
 }
 

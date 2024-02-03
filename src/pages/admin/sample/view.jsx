@@ -11,7 +11,7 @@ const SampleTable= () => {
             try {
                 const competitionsResponse = await fetch('/api/sample_api');
                 const competitionsData = await competitionsResponse.json();
-                console.log("aklsdjalskdja" + JSON.stringify(competitionsData.data));
+                // console.log("aklsdjalskdja" + JSON.stringify(competitionsData.data));
                 setOngoingCompetitions(competitionsData);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -37,6 +37,9 @@ const SampleTable= () => {
         }catch(error){
             console.error("Error deleting sample", error);
         }
+    }
+    const handleReturn = async() =>{
+        window.location.href= '/admin/dashboard/view';
     }
 
     const handleCreateButton = async () => {
@@ -73,8 +76,9 @@ const SampleTable= () => {
                 </tbody>
             </table>
             <button className={style.createButton} onClick={handleCreateButton}>Create</button>
+            <button onClick={handleReturn}>Return</button>
         </>
     );
 }
-
+SampleTable.hideLayout= true;
 export default SampleTable;

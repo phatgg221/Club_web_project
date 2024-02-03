@@ -36,6 +36,9 @@ const CardTable= () => {
             console.error("Error deleting card", error);
         }
     }
+    const handleReturnBut= async() =>{
+        window.location.href= '/admin/dashboard/view';
+    }
 
     const handleCreateButton = async () => {
         window.location.href = '/admin/Card/form';
@@ -75,8 +78,10 @@ const CardTable= () => {
             </table>
             <div className="button-container">
                 <button onClick={handleCreateButton}>Create new card evnet</button>
-                <button>Return</button>
+                <button onClick={handleReturnBut}>Return</button>
+                
             </div>
+            
         </>
     );
 }

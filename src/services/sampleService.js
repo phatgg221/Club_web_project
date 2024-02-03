@@ -86,7 +86,7 @@ class SampleService extends Service {
                 sampleLink: sample.sampleLink
             });
 
-            if(!updateData){
+            if(!result){
                 throw new Error("Card not found");
               }
             return{

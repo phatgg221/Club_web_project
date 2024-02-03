@@ -112,7 +112,7 @@ const NewCardForm = () => {
             </label>
 
             <button type="submit" onClick={isEditMode ? handleUpdate : handleSubmit}>{isEditMode ? 'Update' : 'Create'}</button>
-            <button onClick={handleReturn}>Return</button>
+            <button type ="button" onClick={handleReturn}>Return</button>
         </form>
     );
 };
