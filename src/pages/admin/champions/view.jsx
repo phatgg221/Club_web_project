@@ -40,7 +40,9 @@ function Champion() {
         fetchData();
     }, []);
 
-
+    const handleReturn= async () =>{
+        window.location.href= '/admin/dashboard/view';
+    }
     const handleToggleFold = (index) => {
         setSelectedItemIndex((prevIndex) => (prevIndex === index ? null : index));
     };
@@ -147,6 +149,7 @@ function Champion() {
                     </div>
                 );
             })}
+            <button onClick={handleReturn}>Return to dashboard</button>
         </div>
     );
 }
