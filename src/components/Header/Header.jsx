@@ -75,7 +75,7 @@ function Header() {
               </a>
             </li>
             <li>
-              <a id="tips" href={isLoggedIn?"/tips": "/login"}>
+              <a id="tips" href={"/tips"}>
                 Tips
               </a>
             </li>
