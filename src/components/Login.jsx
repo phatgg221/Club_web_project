@@ -17,10 +17,9 @@ export default function Login() {
       setFormSubmit(true);
       return;
     }
-  
- 
+
       
-   
+  
     const response = await fetch('/api/login_api', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -90,7 +89,7 @@ export default function Login() {
           <input
             type="password"
             id={styles.password}
-            require = {true}
+            require = 'true'
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

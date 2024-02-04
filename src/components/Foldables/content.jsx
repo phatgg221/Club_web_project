@@ -12,7 +12,7 @@ export default ({ close, content }) => (
       {" "}
       
       <p>{content.contents}</p>
-      <p><img src={content.tipImage} alt="" width={500} height={300}/></p>
+      <p><img  className={style.cotentImage} src={content.tipImage} alt="" width={500} height={300}/></p>
 
     </div>
   </div>
