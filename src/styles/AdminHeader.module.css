@@ -1,0 +1,52 @@
+
+.headerStyle {
+  top: 0;
+  margin-bottom: 50px;
+  background-color: #fce2d35c;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.Hstyle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textStyle {
+  margin-bottom: 0;
+  color: #f8a61b;
+  font-size: 50px;
+  font-weight: 900;
+}
+
+.buttonStyle {
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  border: #f8a61b 2px solid;
+  background: none;
+  transition: background 150ms linear;
+  color: #f8a61b;
+  font-size: 1.2rem;
+}
+
+.buttonStyle:hover {
+  background-color: #f8a61b;
+  color: #fff; /* Change text color when hovering if needed */
+}
+
+@media (max-width: 768px) { /* Adjust the font size for smaller screens */
+  .textStyle {
+    font-size: 30px;
+    font-weight: 900;
+  }
+
+  .buttonStyle {
+    font-size: 1rem;
+    padding: 0.3rem 0.8rem; 
+  }
+}

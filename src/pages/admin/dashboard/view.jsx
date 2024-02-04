@@ -1,6 +1,6 @@
 import React from "react";
 import AdminHeader from "@/components/Header/adminHeader";
-import style from "@/styles/AdminDasboard.module.css";
+import style from "@/styles/Admin.module.css";
 
 function Dashboard() {
   const handleCardButton = async () => {
