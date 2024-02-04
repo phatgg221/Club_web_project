@@ -16,6 +16,10 @@ function Dashboard() {
   const hanldeMember = async () => {
     window.location.href = "/admin/member/view";
   };
+
+  const handleTips= async () =>{
+    window.location.href = "/admin/tips/tips";
+  }
   return (
     <div>
       <AdminHeader />
@@ -38,7 +42,7 @@ function Dashboard() {
         <button className={`${style.btn} ${style.btn4}`} onClick={handleSample}>
           Manage Sample
         </button>
-        <button>Manage Tips</button>
+        <button onClick={handleTips}>Manage Tips</button>
       </div>
     </div>
   );
