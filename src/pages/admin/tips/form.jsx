@@ -5,7 +5,7 @@ const NewTipForm = () => {
   const router = useRouter();
   const { id } = router.query;
   const [contentCount, setContentCount] = useState(1);
-  const [contents, setContents] = useState([{ name: '', content: '' }]);
+  const [contents, setContents] = useState([{ name: '', contents: '', tipImage: '' }]);
   const [isEditMode, setIsEditMode] = useState(false);
   const [formData, setFormData] = useState({
     tipName: '',
@@ -32,10 +32,10 @@ const NewTipForm = () => {
   const hanldeSubmit = async (event) => {
     event.preventDefault();
 
-    // Update formData with dynamic contents
+  
     setFormData({ ...formData, realContent: contents });
 
-    fetch('/api/sample_api', {
+    fetch('/api/tip_api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const NewTipForm = () => {
           throw new Error('Network response was not ok');
         }
 
-        window.location.href = '/admin/sample/view';
+        window.location.href = '/admin/tips/tips';
 
         return response.json();
       })
@@ -84,7 +84,7 @@ const NewTipForm = () => {
             Content Name:
             <input
               type='text'
-              name={`name`}
+              name='name'
               value={content.name}
               onChange={(e) => handleInputChange(index, e)}
             />
@@ -93,8 +93,17 @@ const NewTipForm = () => {
             Content:
             <input
               type='text'
-              name={`content`}
-              value={content.content}
+              name= 'contents'
+              value={content.contents}
+              onChange={(e) => handleInputChange(index, e)}
+            />
+          </label>
+          <label>
+            Image Link:
+            <input
+              type='text'
+              name= 'tipImage'
+              value={content.tipImage}
               onChange={(e) => handleInputChange(index, e)}
             />
           </label>
