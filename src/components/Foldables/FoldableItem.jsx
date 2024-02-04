@@ -1,7 +1,7 @@
 import styles from "@/styles/Foldable.module.css";
 import React, { useState } from "react";
-
-export default function FoldableItem({ title }) {
+import Link from "next/link";
+export default function FoldableItem({ title,year,author,link }) {
   const [isFolded, setIsFolded] = useState(true);
 
   const handleToggleFold = () => {
@@ -28,10 +28,9 @@ export default function FoldableItem({ title }) {
         }`}
       >
         <div className={styles.content}>
-          <span>Year</span>
-          <span>Rank</span>
-          <span>Team/Author</span>
-          <a href="#">Link</a>
+        <span>{year}</span>
+          <span>{author}</span>
+          <Link href={link}>Link</Link>
         </div>
       </div>
     </div>
