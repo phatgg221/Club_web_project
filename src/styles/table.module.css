@@ -1,26 +1,80 @@
-.mainTable .th  .td{
-padding: 15px;
+/* .mainTable .th  .td{
+  padding: 15px;
   text-align: center;
   border: 3px solid black;
+} */
+.divTable{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* This use separate the table and the 2 buttons below*/
 }
 .mainTable {
-    margin-left: auto;
-    margin-right: auto ;
-    border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: auto;
+  width: 95%;
+  
 }
 
-.imageTable {
-    width: 50px; 
-    height: auto;
+/* media for small device */
+@media (max-width: 768px) {
+  .mainTable {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+
+.mainTable th:not(:last-child),
+.mainTable th:not(:last-child) {
+ border-right: 1px solid black;
 }
 .mainTable td, .mainTable th {
-    border: 2px solid black; 
+  padding: 15px;
+  text-align: center;
+  border: 1px solid black; 
 }
 
+.tableHeading{
+  background-color: #d5d1defe;
+  font-size: 20px;
+}
+.tableHeading th{
+  font-weight: bold;
+}
+
+.tableRow:hover{
+  background-color: #f2f2f2;
+}
+
+.mainTable td:nth-child(2),
+.mainTable th:nth-child(2) {
+ /* This use to edit the heading and data of column "Competition name" */
+  width: 400px;
+}
 
 .imageTable {
-    width: 50px; 
-    height: auto;
+  width: 100px; 
+  height: auto;
+  vertical-align: middle;
+  border-radius: 10%;
 }
+
+.btnUpdate,
+.btnDelete{
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+.btnUpdate{
+  margin-right: 10px;
+  background-color: lightblue;
+
+}
+.btnDelete{
+  background-color: lightcoral;
+}
+
 
 
