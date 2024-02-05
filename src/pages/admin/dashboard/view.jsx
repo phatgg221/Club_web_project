@@ -17,7 +17,7 @@ function Dashboard() {
     window.location.href = "/admin/member/view";
   };
   return (
-    <div>
+    <div className="bodyContainer">
       <AdminHeader />
       <div className={style.container}>
         <button
@@ -38,8 +38,8 @@ function Dashboard() {
         <button className={`${style.btn} ${style.btn4}`} onClick={handleSample}>
           Manage Sample
         </button>
-        <button>Manage Tips</button>
-      </div>
+        <button className={`${style.btn} ${style.btn5}`}>Manage Tips</button>
+      </div>  
     </div>
   );
 }

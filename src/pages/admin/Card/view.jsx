@@ -83,22 +83,40 @@ const CardTable = () => {
                       alt="Compete image"
                     />
                   </td>
-                  <td className={style.btnContainer}>
-                    <button className={style.btnUpdate} onClick={() => handleUpdateButton(item._id)}>
-                      Update
-                    </button>
-                    <button className={style.btnDelete} onClick={() => handleDelete(item)}>Delete</button>
+                  <td>
+                    <div className={style.btnTableDiv}>
+                      <button
+                        className={`${style.btn} ${style.btnTable}`}
+                        onClick={() => handleUpdateButton(item._id)}
+                      >
+                        Update
+                      </button>
+                      <button
+                        className={`${style.btn} ${style.btnTable}`}
+                        onClick={() => handleDelete(item)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
           </tbody>
         </table>
       </div>
-      <div className={style.btnCreateNewCardDiv}>
-        <button className={style.btnCreateCard} onClick={handleCreateButton}>
+      <div className={style.btnBottomDiv}>
+        <button
+          className={`${style.btn} ${style.btnBottom}`}
+          onClick={handleCreateButton}
+        >
           Create new card event
         </button>
-        <button className={style.btnReturn} onClick={handleReturnBut}>Return</button>
+        <button
+          className={`${style.btn} ${style.btnBottom}`}
+          onClick={handleReturnBut}
+        >
+          Return
+        </button>
       </div>
     </>
   );

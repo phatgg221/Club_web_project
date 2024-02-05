@@ -33,12 +33,6 @@
   background-color: #f2f2f2;
 }
 
-.mainTable td:nth-child(2),
-.mainTable th:nth-child(2) {
- /* This use to edit the heading and data of column "Competition name" */
-  width: 400px;
-}
-
 .imageTable {
   width: 100px; 
   height: auto;
@@ -46,45 +40,62 @@
   border-radius: 10%;
 }
 
-.btnUpdate,
-.btnDelete{
+.btnTableDiv{
+  display: flex;
+}
+
+.btn{
   padding: 0.5rem 1rem;
   border-radius: 10px;
   background: none;
   transition: background 200ms linear;
   font-size: 1.2rem;
+  margin: 3px;
 }
 
-.btnUpdate{
-  margin-right: 10px;
+.btnTable{
+  flex: 1;
 }
-.btnUpdate:hover,
-.btnDelete:hover{
+
+.btn:hover{
   background-color: #f8a61b;
   color: #fff;
 }
 
+.btnBottomDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.btnBottom{
+  padding: 1rem 2rem;
+}
+
 @media screen and (max-width: 750px) {
-  .table {
+  .mainTable {
     display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+  }
+  .btnTableDiv{
+    display: block;
+  }
+  .tableHeading{
+    font-size: 20px;
+  }
+  .mainTable td{
+    font-size: 1rem;
   }
 
-  .btnUpdate,
-  .btnDelete{
+  .btn{
     font-size: 1rem;
     padding: 0.3rem 0.8rem; 
+    margin-bottom: 5px;
+
   }
 
-  .btnUpdate{
-    margin-bottom: 15px;
-  }
-  .mainTable td:nth-child(2),
-  .mainTable th:nth-child(2) {
-  /* This use to edit the heading and data of column "Competition name" */
-    width: 200px;
-  }
 
 }
 

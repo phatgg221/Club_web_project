@@ -6,14 +6,16 @@ function AdminHeader() {
     window.location.href = "/";
   };
   return (
-    <header className={style.headerStyle}>
-      <div className={style.Hstyle}>
-        <h3 className={style.textStyle}>Admin Dashboard</h3>
-        <button onClick={handleButton} className={style.buttonStyle}>
-          <a>Logout</a>
-        </button>
-      </div>
-    </header>
+    <div className="Body">
+      <header className={style.headerStyle}>
+        <div className={style.Hstyle}>
+          <h3 className={style.textStyle}>Admin Dashboard</h3>
+          <button onClick={handleButton} className={style.buttonStyle}>
+            <a>Logout</a>
+          </button>
+        </div>
+      </header>
+    </div>
   );
 }
 
