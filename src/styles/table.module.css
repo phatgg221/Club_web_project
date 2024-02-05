@@ -97,5 +97,6 @@
 }
 .btnForm {
   /* Using this css to remove border of 2 buttons */
+  background-color: #f8a61b;
   border: none;
 }
