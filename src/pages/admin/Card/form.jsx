@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import style from "@/styles/Admin.Form.module.css";
+import styleBtn from "@/styles/table.module.css";
 
 const NewCardForm = () => {
   const router = useRouter();
@@ -98,8 +99,19 @@ const NewCardForm = () => {
     <div className={style.formContainer}>
       <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.inputGroup}>
-          <label>
-            Organizer:
+          <label>Competition Name</label>
+          <input
+            required={true}
+            type="text"
+            name="competitionName"
+            placeholder={isEditMode ? formData.competitionName : ""}
+            value={formData.competitionName}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className={style.Row}>
+          <div className={`${style.inputGroup} ${style.organizerInput}`}>
+            <label>Organizer</label>
             <input
               required={true}
               type="text"
@@ -108,24 +120,9 @@ const NewCardForm = () => {
               value={formData.organizer}
               onChange={handleInputChange}
             />
-          </label>
-        </div>
-        <div className={style.inputGroup}>
-          <label>
-            Competition Name:
-            <input
-              required={true}
-              type="text"
-              name="competitionName"
-              placeholder={isEditMode ? formData.competitionName : ""}
-              value={formData.competitionName}
-              onChange={handleInputChange}
-            />
-          </label>
-        </div>
-        <div className={style.inputGroup}>
-          <label>
-            Location:
+          </div>
+          <div className={style.inputGroup}>
+            <label>Location</label>
             <input
               required={true}
               type="text"
@@ -134,43 +131,46 @@ const NewCardForm = () => {
               value={formData.location}
               onChange={handleInputChange}
             />
-          </label>
+          </div>
         </div>
         <div className={style.inputGroup}>
-          <label>
-            Link to Web:
-            <input
-              type="text"
-              name="linkToWeb"
-              placeholder={isEditMode ? formData.linkToWeb : ""}
-              value={formData.linkToWeb}
-              onChange={handleInputChange}
-            />
-          </label>
+          <label>Link to Web</label>
+          <input
+            type="text"
+            name="linkToWeb"
+            placeholder={isEditMode ? formData.linkToWeb : ""}
+            value={formData.linkToWeb}
+            onChange={handleInputChange}
+          />
         </div>
 
         <div className={style.inputGroup}>
-          <label>
-            Image URL:
-            <input
-              type="text"
-              name="imageURL"
-              placeholder={isEditMode ? formData.imageURL : ""}
-              value={formData.imageURL}
-              onChange={handleInputChange}
-            />
-          </label>
+          <label>Image URL</label>
+          <input
+            type="text"
+            name="imageURL"
+            placeholder={isEditMode ? formData.imageURL : ""}
+            value={formData.imageURL}
+            onChange={handleInputChange}
+          />
         </div>
 
-        <button
-          type="submit"
-          onClick={isEditMode ? handleUpdate : handleSubmit}
-        >
-          {isEditMode ? "Update" : "Create"}
-        </button>
-        <button type="button" onClick={handleReturn}>
-          Return
-        </button>
+        <div className={styleBtn.btnBottomDiv}>
+          <button
+            className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
+            type="button"
+            onClick={handleReturn}
+          >
+            Return
+          </button>
+          <button
+            className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm} `}
+            type="submit"
+            onClick={isEditMode ? handleUpdate : handleSubmit}
+          >
+            {isEditMode ? "Update" : "Create"}
+          </button>
+        </div>
       </form>
     </div>
   );

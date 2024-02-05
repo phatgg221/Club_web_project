@@ -93,9 +93,9 @@
     font-size: 1rem;
     padding: 0.3rem 0.8rem; 
     margin-bottom: 5px;
-
   }
-
-
 }
-
+.btnForm {
+  /* Using this css to remove border of 2 buttons */
+  border: none;
+}
