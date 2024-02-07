@@ -47,7 +47,7 @@ const TipsTable = () => {
     }
 
     const createButton = async () => {
-        // Implement your create button logic
+        window.location.href = '/admin/tips/form';
     }
 
     const handleUpdate= async(tip)=>{
