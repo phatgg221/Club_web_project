@@ -95,7 +95,7 @@ class TipsService extends Service{
             return {
                 error: false,
                 statusCode: 200,
-                data: result,
+                data: reuslt,
             }
         }catch(error){
             console.log(error);
