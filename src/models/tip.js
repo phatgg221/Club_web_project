@@ -41,7 +41,7 @@ class Tips{
                     },
                     message: (props) => `${props.value} is not a valid image URL`,
                   },
-                require: true,
+            
             },
             
             realContent: [contentSchema]

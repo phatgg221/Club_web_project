@@ -13,6 +13,10 @@ const NewTipForm = () => {
     realContent: [],
   });
 
+  useEffect(() => {
+    setFormData(prevState => ({ ...prevState, realContent: contents }));
+  }, [contents]);
+  
   const handleInputChange = (index, event) => {
     const newContents = [...contents];
     newContents[index][event.target.name] = event.target.value;
@@ -21,7 +25,7 @@ const NewTipForm = () => {
 
   const handleAddContent = () => {
     setContentCount(contentCount + 1);
-    setContents([...contents, { name: '', content: '' }]);
+    setContents([...contents, { name: '', content: '' , tipImage: ''}]);
   };
   
   const handleDelete= (index) =>{
@@ -31,10 +35,14 @@ const NewTipForm = () => {
   }
   const hanldeSubmit = async (event) => {
     event.preventDefault();
-
   
-    setFormData({ ...formData, realContent: contents });
-
+    // Update formData with the latest contents
+    setFormData(prevState => ({ ...prevState, realContent: contents }));
+    
+    // Log the updated formData
+    // console.log("Updated formData: ", formData);
+  
+    // Send fetch request
     fetch('/api/tip_api', {
       method: 'POST',
       headers: {
@@ -46,14 +54,15 @@ const NewTipForm = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-
-        window.location.href = '/admin/tips/tips';
-
+        window.location.href= '/admin/tips/tips';
         return response.json();
       })
       .then((data) => console.log('Success: ', data))
       .catch((error) => console.error('Error', error));
   };
+  
+  
+  
 
   return (
     <form onSubmit={hanldeSubmit}>
