@@ -25,21 +25,48 @@ const Content = ({ close, content, isAdminChangePass }) => {
     fetchData();
   }, []);
 
-  const handleSubmit= async (event)=>{
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if(!oldPass || !newPass){
+    const id = admin.data.mongoData[0]._id;
+    console.log(id+"id");
+    // Validate the inputs
+    if (!oldPass || !newPass) {
       setCannotEmpty(true);
       return;
     }
-
-    if(oldPass === admin.data.mongoData[0].adminPassword){
-        setSuccess(true);
-    }else{
+  
+    // Check if the old password matches the current password
+    if (oldPass !== admin.data.mongoData[0].adminPassword) {
       setWropass(true);
+      return;
     }
-    
-  }
+  
+    // Send a request to the server to update the password
+    try {
+      const response = await fetch(`/api/admin_api?id=${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ adminUsername: admin.data.mongoData[0].adminUsername , adminPassword: newPass }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      window.location.reload();
+      const data = await response.json();
+  
+      if (data.success) {
+        setSuccess(true);
+      } else {
+        console.error(data.message);
+      }
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+    }
+  };
+  
   
   return (
     !isAdminChangePass ? (
@@ -54,20 +81,20 @@ const Content = ({ close, content, isAdminChangePass }) => {
         </div>
       </div>
     ) : (
-      <div className={style.modal}>
-        <label>
-          Your old Password:
-          <input require={true} type='text' value={oldPass} onChange={(e) => setOld(e.target.value)}></input>
-        </label>
-        <label>
-          Your new Password:
-          <input require={true} type='text' value={newPass} onChange={(e) => setnewPass(e.target.value)}></input>
-        </label>
-        <button type="submit" onSubmit={handleSubmit}>Change password</button>
-        {cannotEmpty && <p style= {{color: 'red'}}> Please fill in the blank. </p>}
-        {wrongPass && <p style= {{color: 'red'}}> Wrong usernamne or password. </p>}
-        {changeSuccessful && <p style= {{color: 'green'}}> Wrong usernamne or password. </p>}
-      </div>
+      <form onSubmit={handleSubmit}>
+      <label>
+        Your old Password:
+        <input required type='password' value={oldPass} onChange={(e) => setOld(e.target.value)} />
+      </label>
+      <label>
+        Your new Password:
+        <input required type='password' value={newPass} onChange={(e) => setnewPass(e.target.value)} />
+      </label>
+      <button type="submit">Change password</button>
+      {cannotEmpty && <p style={{ color: 'red' }}>Please fill in the blank.</p>}
+      {wrongPass && <p style={{ color: 'red' }}>Wrong old password.</p>}
+      {changeSuccessful && <p style={{ color: 'green' }}>Password successfully updated.</p>}
+    </form>
     )
   );
 };
