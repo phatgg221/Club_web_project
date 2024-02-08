@@ -1,7 +1,8 @@
 import React from "react";
 import AdminHeader from "@/components/Header/adminHeader";
 import style from "@/styles/AdminDasboard.module.css";
-
+import Popup from "reactjs-popup";
+import Content from "@/components/Foldables/content";
 function Dashboard() {
   const handleCardButton = async () => {
     window.location.href = "/admin/Card/view";
@@ -43,6 +44,10 @@ function Dashboard() {
           Manage Sample
         </button>
         <button onClick={handleTips}>Manage Tips</button>
+        <Popup modal trigger={<button>Change admin password</button>}>
+          {close => <Content close={close} isAdminChangePass={true} />}
+        </Popup>
+        
       </div>
     </div>
   );

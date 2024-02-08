@@ -10,6 +10,25 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const[formSubmit, setFormSubmit]= useState(false);
   const [isNotCorrect, setIsnotcorrect] = useState(false);
+  const [admin, setAdmin]= useState([]);
+
+  useEffect(() => {
+    const fetchData= async () =>{
+      try{
+        const response= await fetch(`/api/admin_api`);
+        const data= await response.json();
+
+        setAdmin(data);
+      }catch(err){
+        console.log('Error fecthing data: ', err);
+      }
+    };
+    fetchData();
+  }, []);
+
+
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -18,6 +37,17 @@ export default function Login() {
       return;
     }
 
+    if (username === 'admin') {
+      // Check if the entered password matches the admin password
+      if (password === admin.data.mongoData[0].adminPassword) {
+        // Perform admin login logic here, for example, redirect to admin dashboard
+        router.push('/admin/dashboard/view');
+        return;
+      } else {
+        setIsnotcorrect(true);
+        return;
+      }
+    }
       
   
     const response = await fetch('/api/login_api', {
