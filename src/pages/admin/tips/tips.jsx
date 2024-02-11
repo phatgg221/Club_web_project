@@ -4,9 +4,14 @@ import style from "@/styles/table.module.css";
 import Link from 'next/link';
 import Popup from "reactjs-popup";
 import Content from "@/components/Foldables/content";
+import SearchBar from "@/components/Competitions/SearchBar";
 const TipsTable = () => {
     const [tips, setTips] = useState([]);
+    const [searchTerm, setSearchItem]= useState('');
 
+    const handleSearchInput= (search)=>{
+        setSearchItem(search);
+    }
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -54,9 +59,12 @@ const TipsTable = () => {
         console.log("ID to update "+ tip._id);
         window.location.href= `/admin/tips/form?id=${tip._id}`;
     }
-
+    const filteredTips = tips && tips.data && tips.data.mongoData && tips.data.mongoData.filter((item) => {
+        return item.tipName.toLowerCase().includes(searchTerm.toLowerCase());
+    });
     return (
         <>
+        <SearchBar showButton={true} placeholder="Search for tips" onChange={handleSearchInput}></SearchBar>
             <table className={style.mainTable}>
                 <thead>
                     <tr>
@@ -67,7 +75,7 @@ const TipsTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {tips && tips.data && tips.data.mongoData && tips.data.mongoData.map((item, index) => (
+                    {filteredTips && filteredTips.map((item, index) => (
                         <tr key={index}>
                             <td>{item.tipName}</td>
                             <td><Link href={item.tipsLink}>Link</Link></td>

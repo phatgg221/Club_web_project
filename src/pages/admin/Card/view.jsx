@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import React from "react";
 import style from "@/styles/table.module.css";
 import AdminHeader from "@/components/Header/adminHeader";
+import SearchBar from "@/components/Competitions/SearchBar";
 const CardTable = () => {
   const [ongoingCompetitions, setOngoingCompetitions] = useState([]);
+  const [searchTerm, setSearchItem]= useState('');
 
+  const handleSearchInput= (searchTerm)=>{
+    setSearchItem(searchTerm);
+}
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,10 +53,12 @@ const CardTable = () => {
     console.log("ID to update " + id);
     window.location.href = `/admin/Card/form?id=${id}`;
   };
-
+  const filteredTips = ongoingCompetitions && ongoingCompetitions.data && ongoingCompetitions.data.mongoData && ongoingCompetitions.data.mongoData.filter((item) => {
+    return item.competitionName.toLowerCase().includes(searchTerm.toLowerCase());
+});
   return (
     <>
-      <AdminHeader />
+      <SearchBar placeholder="Search for competition name" onChange={handleSearchInput} showButton={true}></SearchBar>
       <div className={style.divTable}>
         <table className={style.mainTable}>
           <thead className={style.tableHeading}>
@@ -65,33 +72,31 @@ const CardTable = () => {
             </tr>
           </thead>
           <tbody>
-            {ongoingCompetitions &&
-              ongoingCompetitions.data &&
-              ongoingCompetitions.data.mongoData &&
-              ongoingCompetitions.data.mongoData.map((item, index) => (
-                <tr key={index} className={style.tableRow}>
-                  <td>{item.organizer}</td>
-                  <td>{item.competitionName}</td>
-                  <td>{item.location}</td>
-                  <td>
-                    <a href={item.linkToWeb}>Link</a>
-                  </td>
-                  <td>
-                    <img
-                      className={style.imageTable}
-                      src={item.imageURL}
-                      alt="Compete image"
-                    />
-                  </td>
-                  <td className={style.btnContainer}>
-                    <button className={style.btnUpdate} onClick={() => handleUpdateButton(item._id)}>
-                      Update
-                    </button>
-                    <button className={style.btnDelete} onClick={() => handleDelete(item)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
+                    {filteredTips && filteredTips.map((item, index) => (
+                        <tr key={index} className={style.tableRow}>
+                        <td>{item.organizer}</td>
+                        <td>{item.competitionName}</td>
+                        <td>{item.location}</td>
+                        <td>
+                          <a href={item.linkToWeb}>Link</a>
+                        </td>
+                        <td>
+                          <img
+                            className={style.imageTable}
+                            src={item.imageURL}
+                            alt="Compete image"
+                          />
+                        </td>
+                        <td className={style.btnContainer}>
+                          <button className={style.btnUpdate} onClick={() => handleUpdateButton(item._id)}>
+                            Update
+                          </button>
+                          <button className={style.btnDelete} onClick={() => handleDelete(item)}>Delete</button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+          
         </table>
       </div>
       <div className={style.btnCreateNewCardDiv}>

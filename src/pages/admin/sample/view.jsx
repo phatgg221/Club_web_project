@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import style from "@/styles/table.module.css";
-
+import SearchBar from "@/components/Competitions/SearchBar";
 
 const SampleTable= () => {
     const [ongoingCompetitions, setOngoingCompetitions] = useState([]);
+    const [searchTerm, setSearchItem]= useState('');
 
+    const handleSearchInput= (searchTerm)=>{
+        setSearchItem(searchTerm);
+    }
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -51,8 +55,12 @@ const SampleTable= () => {
         window.location.href = `/admin/sample/form?id=${id}`;
     };
     
+    const filteredTips = ongoingCompetitions && ongoingCompetitions.data && ongoingCompetitions.data.mongoData && ongoingCompetitions.data.mongoData.filter((item) => {
+        return item.sampleName.toLowerCase().includes(searchTerm.toLowerCase());
+    });
     return (
         <>
+            <SearchBar placeholder="Search for sample" onChange={handleSearchInput} showButton={true}></SearchBar>
             <table className={style.mainTable}>
                 <thead>
                     <tr>
@@ -64,6 +72,17 @@ const SampleTable= () => {
                     </tr>
                 </thead>
                 <tbody>
+                    {filteredTips && filteredTips.map((item, index) => (
+                        <tr key={index}>
+                        <td>{item.sampleName}</td>
+                        <td>{item.sampleContents}</td>
+                        <td>{item.sampleAuthor}</td>
+                        <td><a href={item.sampleLink}>Link</a></td>
+                        <td><button onClick={() => handleUpdateButton(item._id)}>Update</button><button onClick={() => handleDelete(item)}>Delete</button></td>
+                    </tr>
+                    ))}
+                </tbody>
+                {/* <tbody>
                     {ongoingCompetitions && ongoingCompetitions.data && ongoingCompetitions.data.mongoData && ongoingCompetitions.data.mongoData.map((item, index) => (
                         <tr key={index}>
                             <td>{item.sampleName}</td>
@@ -73,7 +92,7 @@ const SampleTable= () => {
                             <td><button onClick={() => handleUpdateButton(item._id)}>Update</button><button onClick={() => handleDelete(item)}>Delete</button></td>
                         </tr>
                     ))}
-                </tbody>
+                </tbody> */}
             </table>
             <button className={style.createButton} onClick={handleCreateButton}>Create</button>
             <button onClick={handleReturn}>Return</button>
