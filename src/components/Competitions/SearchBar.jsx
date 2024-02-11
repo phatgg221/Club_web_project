@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 // import "./SearchBar.css";
 
-function SearchBar({ style, showButton, placeholder = "" }) {
+function SearchBar({ onChange,style, showButton, placeholder = "" }) {
   const [query, setQuery] = useState("");
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
+    onChange(event.target.value);
   };
 
   const handleFormSubmit = (event) => {
