@@ -26,7 +26,6 @@ const SampleTable= () => {
     }, []);
 
     const handleDelete= async(sample)=>{
-        // console.log("sample id "+ sample._id)
         try{
             const response = await fetch(`/api/sample_api?id=${sample._id}`,{
                 method: 'DELETE',

@@ -4,7 +4,9 @@ import styles from "@/styles/Samples.module.css";
 import React from "react";
 import { useEffect,useState } from "react";
 function SamplesPage() {
-  const [samples, setSamples] = useState([]);
+  const [samples, setSamples] = useState({ data: [] });
+
+
   const [searchTerm, setSearchItem]= useState('');
 
   const handleSearchInput = (searchItem) => {
@@ -23,10 +25,14 @@ function SamplesPage() {
     };
     fetchData();
   }, []);
-  const filteredSamples = samples.data.mongoData.filter((item) => {
+  const filteredSamples = samples.data && samples.data.mongoData ? samples.data.mongoData.filter((item) => {
     return item.sampleName.toLowerCase().includes(searchTerm.toLowerCase());
-  });
-  // console.log(JSON.stringify(samples.data) + "aksdjhasdkjashdkasdahsdmv,navkadljj");
+  }) : [];
+  
+  
+  
+  
+  console.log(JSON.stringify(samples.data) + "aksdjhasdkjashdkasdahsdmv,navkadljj");
   return (
     <div className={styles.mainContainer}>
       <h1 className={styles.title}>Samples</h1>
