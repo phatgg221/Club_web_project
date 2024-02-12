@@ -3,7 +3,7 @@ import React from "react";
 import ChampionCard from "@/components/menuChamp/championCard";
 import styles from "@/styles/Foldable.module.css";
 import CreateChampion from "@/components/menuChamp/champForm";
-
+import AdminHeader from "@/components/Header/adminHeader";
 function Champion() {
     const [teamList, setTeamList] = useState([]);
     const [championToUpdate, setChampionToUpdate] = useState(null);
@@ -40,7 +40,9 @@ function Champion() {
         fetchData();
     }, []);
 
-
+    const handleReturn= async () =>{
+        window.location.href= '/admin/dashboard/view';
+    }
     const handleToggleFold = (index) => {
         setSelectedItemIndex((prevIndex) => (prevIndex === index ? null : index));
     };
@@ -86,6 +88,7 @@ function Champion() {
 
     return (
         <div>
+            <AdminHeader/>
             <ChampionCard></ChampionCard>
 
             {[...Array(5)].map((_, index) => {
@@ -146,8 +149,9 @@ function Champion() {
                     </div>
                 );
             })}
+            <button onClick={handleReturn}>Return to dashboard</button>
         </div>
     );
 }
-
+Champion.hideLayout = true;
 export default Champion;
