@@ -56,12 +56,12 @@ console.log(categories.length + " categories found.");
     fetchData();
   }, []);
   const renderSearchResults = () => {
-    // Safely access mongoData and filter the samples
+   
     const filteredSamples = samples.data?.mongoData?.filter((item) => {
       const matchesSearch = !searchItem || item.competitionName.toLowerCase().includes(searchItem.toLowerCase());
       const matchesOrganizer = !selectedOrganizer || item.organizer.toLowerCase().includes(selectedOrganizer.toLowerCase());
       return matchesSearch && matchesOrganizer;
-    }) ?? []; // Provide a fallback empty array if mongoData is undefined
+    }) ?? []; 
   
     // Map over the filtered samples to render them
     return filteredSamples.map((item, index) => (
