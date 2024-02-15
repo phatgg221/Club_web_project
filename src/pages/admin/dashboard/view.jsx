@@ -46,7 +46,7 @@ function Dashboard() {
         <Popup
           modal
           trigger={
-            <button className={`${style.btn}`}>Change admin password</button>
+            <button className={`${style.btn}`}>Change Admin Password</button>
           }
         >
           {(close) => <Content close={close} isAdminChangePass={true} />}

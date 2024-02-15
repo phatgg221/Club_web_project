@@ -1,18 +1,18 @@
 .container{
     text-align: center;
-    
+    margin-top: 50px;
 }
 .bodyContainer{
     margin: 0;
     padding: 0;
   }
   
-  .container{
+.container{
     text-align: center;
     background-color: #fffefa;
   }
   
-  .btn{
+.btn{
     font-weight: 900;
     border: 1px solid #f8a61b;
     background: none;
@@ -27,11 +27,11 @@
     z-index: 1;
   }
   
-  .btn:hover{
+.btn:hover{
     color: #f8a61b;
   }
   
-  .btn::before{ /* This use to insert the content before elements*/
+.btn::before{ /* This use to insert the content before elements*/
     content:"";
     position: absolute;
     left: 0;
@@ -46,6 +46,6 @@
   
   }
   
-  .btn:hover::before{
+.btn:hover::before{
     height: 0%;
   }
