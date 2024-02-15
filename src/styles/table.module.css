@@ -1,35 +1,17 @@
-/* .mainTable .th  .td{
-  padding: 15px;
-  text-align: center;
-  border: 3px solid black;
-} */
 .divTable{
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px; /* This use separate the table and the 2 buttons below*/
+  overflow-x: auto;
 }
 .mainTable {
   margin-left: auto;
   margin-right: auto;
-  overflow-x: auto;
   width: 95%;
-  
+  overflow-x: auto;
 }
 
-/* media for small device */
-@media (max-width: 768px) {
-  .mainTable {
-    width: 100%;
-    overflow-x: auto;
-  }
-}
-
-
-.mainTable th:not(:last-child),
-.mainTable th:not(:last-child) {
- border-right: 1px solid black;
-}
 .mainTable td, .mainTable th {
   padding: 15px;
   text-align: center;
@@ -37,21 +19,18 @@
 }
 
 .tableHeading{
-  background-color: #d5d1defe;
-  font-size: 20px;
+  background-color: #f8a61b ;
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
 }
-.tableHeading th{
-  font-weight: bold;
+
+.mainTable td{
+  font-size: 1.2rem;
 }
 
 .tableRow:hover{
   background-color: #f2f2f2;
-}
-
-.mainTable td:nth-child(2),
-.mainTable th:nth-child(2) {
- /* This use to edit the heading and data of column "Competition name" */
-  width: 400px;
 }
 
 .imageTable {
@@ -61,20 +40,63 @@
   border-radius: 10%;
 }
 
-.btnUpdate,
-.btnDelete{
+.btnTableDiv{
+  display: flex;
+}
+
+.btn{
   padding: 0.5rem 1rem;
   border-radius: 10px;
+  background: none;
+  transition: background 200ms linear;
+  font-size: 1.2rem;
+  margin: 3px;
 }
 
-.btnUpdate{
-  margin-right: 10px;
-  background-color: lightblue;
-
-}
-.btnDelete{
-  background-color: lightcoral;
+.btnTable{
+  flex: 1;
 }
 
+.btn:hover{
+  background-color: #f8a61b;
+  color: #fff;
+}
 
+.btnBottomDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 20px;
+}
 
+.btnBottom{
+  padding: 1rem 2rem;
+}
+
+@media screen and (max-width: 750px) {
+  .mainTable {
+    display: block;
+  }
+  .btnTableDiv{
+    display: block;
+  }
+  .tableHeading{
+    font-size: 20px;
+  }
+  .mainTable td{
+    font-size: 1rem;
+  }
+
+  .btn{
+    font-size: 1rem;
+    padding: 0.3rem 0.8rem; 
+    margin-bottom: 5px;
+  }
+}
+.btnForm {
+  /* Using this css to remove border of 2 buttons */
+  background-color: #f8a61b;
+  border: none;
+}
