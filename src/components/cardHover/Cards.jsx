@@ -59,24 +59,27 @@ const Cards = () => {
   //   console.log("No organizer found.");
   //  }
    
-  let cards1= [];
-  if(ongoingCompetitions.data && ongoingCompetitions.data.mongoData){
-    for(let i=0; i< 3; i++){
-      let item = ongoingCompetitions.data.mongoData[i];
-      // console.log(ongoingCompetitions.data.mongoData[i]+ "alksdjalksjda");
-      // console.log("Item data:", item);
-      cards1.push(
-        <Card
+
+  
+  let cards1 = [];
+if (ongoingCompetitions.data && ongoingCompetitions.data.mongoData) {
+  // Get the minimum of  3 or the actual length of the array
+  const limit = Math.min(3, ongoingCompetitions.data.mongoData.length);
+  for (let i =  0; i < limit; i++) {
+    let item = ongoingCompetitions.data.mongoData[i];
+    cards1.push(
+      <Card
         logoURL="/RMIT-logo.png"
         organizer={item.organizer}
         title={item.competitionName}
         description={item.description}
         imageUrl={item.imageURL}
         linkUrl={item.linkToWeb}
-        />
-      )
-    }
+      />
+    );
   }
+}
+
   let cards2= [];
   if(ongoingCompetitions.data && ongoingCompetitions.data.mongoData){
     for(let i=3; i<= ongoingCompetitions.data.mongoData.length-1; i++){

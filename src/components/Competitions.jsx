@@ -14,6 +14,19 @@ export default function SearchPage() {
     setIsTabletOrMobile(window.matchMedia("(max-width: 490px)").matches);
   };
 
+  let categories = [];
+if (samples.data && samples.data.mongoData) {
+  for (let i =  0; i <= samples.data.mongoData.length-1; i++) {
+    let item = samples.data.mongoData[i].organizer;
+
+    // Check if the item is not already in the categories array
+    if (!categories.includes(item)) {
+      categories.push(item);
+    }
+  }
+}
+console.log(categories.length + " categories found.");
+
   useEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -77,8 +90,8 @@ export default function SearchPage() {
           <div className="filter-sect-container">
             <div className="filter-sect-boxes">
               <FilterBox
-                categories={["Category1", "Category2", "Category3"]}
-                name={"By type"}
+                categories= {categories}
+                name={"By organizer"}
               />
               <FilterBox
                 categories={[
@@ -114,15 +127,19 @@ export default function SearchPage() {
           </div>
         </div>
         {isTabletOrMobile && (
-          <>
-            <div className="competition-list">
-              <div className="sample-content">sample</div>
-              <div className="sample-content">sample</div>
-              <div className="sample-content">sample</div>
-              <div className="sample-content">sample</div>
-            </div>
-          </>
-        )}
+                <>
+                
+                  <div className="competition-list">
+                  {samples && samples.data && samples.data.mongoData && samples.data.mongoData.filter((item) => {
+                    return item.competitionName.toLowerCase().includes(searchItem.toLowerCase());
+                  }).map((item, index) => (
+                    <div className="sample-content" key={index}>
+                        {item.competitionName}-{item.organizer}
+                    </div>
+                  ))}
+                  </div>
+                </>
+              )}
       </div>
     </div>
   );
