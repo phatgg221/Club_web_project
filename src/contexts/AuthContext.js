@@ -8,9 +8,10 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-    const [isLoggedIn, setIsLoggedIn] = useState(
-        () => typeof window !== 'undefined' ? Boolean(localStorage.getItem('isLoggedIn')) : false
-     );
+      const [isLoggedIn, setIsLoggedIn] = useState(
+         () => typeof window !== 'undefined' && localStorage.getItem('isLoggedIn') === 'false'
+      );
+  
      const [userId, setUserId] = useState(
         () => typeof window !== 'undefined' ? localStorage.getItem('userId') : null
      );
@@ -18,7 +19,7 @@ export function AuthProvider({ children }) {
      const login = (id) => {
         setIsLoggedIn(true);
         setUserId(id);
-        localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userId', id);
      };
     
