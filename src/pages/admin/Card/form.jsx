@@ -98,20 +98,18 @@ const NewCardForm = () => {
     <div className={style.formContainer}>
       <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.inputGroup}>
-          <label>
-            Competition Name:
-            <input
-              required={true}
-              type="text"
-              name="competitionName"
-              placeholder={isEditMode ? formData.competitionName : ""}
-              value={formData.competitionName}
-              onChange={handleInputChange}
-            />
-          </label>
+          <label>Competition Name:</label>
+          <input
+            required={true}
+            type="text"
+            name="competitionName"
+            placeholder={isEditMode ? formData.competitionName : ""}
+            value={formData.competitionName}
+            onChange={handleInputChange}
+          />
         </div>
         <div className={style.Row}>
-          <div className={style.inputGroup}>
+          <div className={`${style.inputGroup} ${style.organizerInput}`}>
             <label>Organizer:</label>
             <input
               required={true}
