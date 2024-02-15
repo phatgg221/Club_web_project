@@ -9,6 +9,7 @@ export default function SearchPage() {
   const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
   const [samples, setSample]= useState([]);
   const [searchItem, setSearchItem]= useState('');
+  const [selectedOrganizer, setselectedOrganizer]= useState('');
   const handleResize = () => {
     setIsDesktopOrLaptop(window.matchMedia("(min-width: 490px)").matches);
     setIsTabletOrMobile(window.matchMedia("(max-width: 490px)").matches);
@@ -39,6 +40,9 @@ console.log(categories.length + " categories found.");
   const handleSearchInput = (searchTerm) => {
     setSearchItem(searchTerm);
   };
+  const handleSearchForOrganizer= (searchItem)=>{
+    setselectedOrganizer(searchItem);
+  }
   useEffect(() =>{
     const fetchData= async() => {
       try{
@@ -52,13 +56,13 @@ console.log(categories.length + " categories found.");
     fetchData();
   }, []);
   const renderSearchResults = () => {
-    // Filter the samples based on the search term and the selected organizer
-    const filteredSamples = samples.data.mongoData.filter((item) => {
+    // Safely access mongoData and filter the samples
+    const filteredSamples = samples.data?.mongoData?.filter((item) => {
       const matchesSearch = !searchItem || item.competitionName.toLowerCase().includes(searchItem.toLowerCase());
-      const matchesOrganizer = !selectedOrganizer || item.organizer.toLowerCase() === selectedOrganizer.toLowerCase();
+      const matchesOrganizer = !selectedOrganizer || item.organizer.toLowerCase().includes(selectedOrganizer.toLowerCase());
       return matchesSearch && matchesOrganizer;
-    });
-
+    }) ?? []; // Provide a fallback empty array if mongoData is undefined
+  
     // Map over the filtered samples to render them
     return filteredSamples.map((item, index) => (
       <div key={index} className="sample-content">
@@ -66,6 +70,7 @@ console.log(categories.length + " categories found.");
       </div>
     ));
   };
+  
   return (
     <div className="main-search">
       <h1>On-going Competitions</h1>
@@ -92,8 +97,9 @@ console.log(categories.length + " categories found.");
               <FilterBox
                 categories= {categories}
                 name={"By organizer"}
+                onChange={handleSearchForOrganizer}
               />
-              <FilterBox
+              {/* <FilterBox
                 categories={[
                   "Category1",
                   "Category2",
@@ -101,45 +107,27 @@ console.log(categories.length + " categories found.");
                   "Category4",
                 ]}
                 name={"By category"}
-              />
+              /> */}
             </div>
             <div className="filter-sect-search">
               <SearchBar
                 style={{ width: "100%" }}
                 placeholder="Filter by Organizer"
-                onChange={handleSearchInput}
+                onChange={handleSearchForOrganizer}
               />
-              {isDesktopOrLaptop && (
-                <>
-                
-                  <div className="competition-list">
-                  {samples && samples.data && samples.data.mongoData && samples.data.mongoData.filter((item) => {
-                    return item.competitionName.toLowerCase().includes(searchItem.toLowerCase());
-                  }).map((item, index) => (
-                    <div className="sample-content" key={index}>
-                        {item.competitionName}-{item.organizer}
-                    </div>
-                  ))}
-                  </div>
-                </>
-              )}
+              {isDesktopOrLaptop &&  (
+        <div className="competition-list">
+          {renderSearchResults()}
+        </div>
+      )}
             </div>
           </div>
         </div>
-        {isTabletOrMobile && (
-                <>
-                
-                  <div className="competition-list">
-                  {samples && samples.data && samples.data.mongoData && samples.data.mongoData.filter((item) => {
-                    return item.competitionName.toLowerCase().includes(searchItem.toLowerCase());
-                  }).map((item, index) => (
-                    <div className="sample-content" key={index}>
-                        {item.competitionName}-{item.organizer}
-                    </div>
-                  ))}
-                  </div>
-                </>
-              )}
+        {isTabletOrMobile &&  (
+        <div className="competition-list">
+          {renderSearchResults()}
+        </div>
+      )}
       </div>
     </div>
   );
