@@ -18,9 +18,9 @@ function Dashboard() {
     window.location.href = "/admin/member/view";
   };
 
-  const handleTips= async () =>{
+  const handleTips = async () => {
     window.location.href = "/admin/tips/tips";
-  }
+  };
   return (
     <div>
       <AdminHeader />
@@ -31,23 +31,26 @@ function Dashboard() {
         >
           Manage Card
         </button>
-        <button
-          className={`${style.btn} ${style.btn2}`}
-          onClick={handleChampButton}
-        >
+        <button className={`${style.btn}`} onClick={handleChampButton}>
           Manage Champion
         </button>
-        <button className={`${style.btn} ${style.btn3}`} onClick={hanldeMember}>
+        <button className={`${style.btn} `} onClick={hanldeMember}>
           Manage Member
         </button>
-        <button className={`${style.btn} ${style.btn4}`} onClick={handleSample}>
+        <button className={`${style.btn}`} onClick={handleSample}>
           Manage Sample
         </button>
-        <button onClick={handleTips}>Manage Tips</button>
-        <Popup modal trigger={<button>Change admin password</button>}>
-          {close => <Content close={close} isAdminChangePass={true} />}
+        <button className={`${style.btn} `} onClick={handleTips}>
+          Manage Tips
+        </button>
+        <Popup
+          modal
+          trigger={
+            <button className={`${style.btn} `}>Change admin password</button>
+          }
+        >
+          {(close) => <Content close={close} isAdminChangePass={true} />}
         </Popup>
-        
       </div>
     </div>
   );

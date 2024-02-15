@@ -2,3 +2,50 @@
     text-align: center;
     
 }
+.bodyContainer{
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container{
+    text-align: center;
+    background-color: #fffefa;
+  }
+  
+  .btn{
+    font-weight: 900;
+    border: 1px solid #f8a61b;
+    background: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: 0.8s;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    z-index: 1;
+  }
+  
+  .btn:hover{
+    color: #f8a61b;
+  }
+  
+  .btn::before{ /* This use to insert the content before elements*/
+    content:"";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0%; 
+    background: #f8a61b;
+    z-index: -1;
+    transition: 0.8s;
+    bottom: 0;
+    border-radius: 50% 50% 0 0;
+    height: 180%;
+  
+  }
+  
+  .btn:hover::before{
+    height: 0%;
+  }
