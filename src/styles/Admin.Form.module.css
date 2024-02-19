@@ -9,6 +9,10 @@
   height: 100%;
 }
 
+.formContainerAdminChangePassword{
+  margin-top: 150px;
+}
+
 .form{
   width: 90%;
   max-width: 600px;
@@ -74,4 +78,9 @@
     font-size: 0.9rem !important;
     padding: 0.21rem 0.5rem; 
   }
+}
+
+.notificationMessage{
+  margin-top: 20px;
+
 }

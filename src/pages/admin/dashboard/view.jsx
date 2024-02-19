@@ -43,6 +43,7 @@ function Dashboard() {
         <button className={`${style.btn}`} onClick={handleTips}>
           Manage Tips
         </button>
+
         <Popup
           modal
           trigger={
