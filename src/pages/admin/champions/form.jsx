@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import style from "@/styles/content.module.css";
 
-export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuccess, order, teamList, setTeamList }) {
+export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuccess, order, teamList, setTeamList, close }) {
     const [championData, setChampionData] = useState({
         teamName: '',
         competitionDescription: '',
@@ -170,88 +171,96 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
 
     return (
         <div>
-            <form onSubmit={saveChampion}>
-                <label htmlFor="teamName">Team Name</label>
-                <input
-                    type="text"
-                    id="teamName"
-                    name="teamName"
-                    placeholder={championToUpdate ? championToUpdate.teamName : ''}
-                    value={championData.teamName}
-                    onChange={handleInputChange}
-                    required
-                />
-
-                <br />
-
-                <label htmlFor="competitionDescription">Competition Description</label>
-                <input
-                    type="text"
-                    id="competitionDescription"
-                    name="competitionDescription"
-                    placeholder={championToUpdate ? championToUpdate.competitionDescription : ''}
-                    value={championData.competitionDescription}
-                    onChange={handleInputChange}
-                    required
-                />
-
-                <br />
-
-                <label htmlFor="awardDes">Award Description</label>
-                <input
-                    type="text"
-                    id="awardDes"
-                    name="awardDes"
-                    placeholder={championToUpdate ? championToUpdate.awardDes : ''}
-                    value={championData.awardDes}
-                    onChange={handleInputChange}
-                    required
-                />
-
-                <br />
-                {isUpdate && (
-                    <>
-                        <label htmlFor={`changeOrder_${order}`}>Change Order:</label>
-                        <select
-                            id={`changeOrder_${order}`}
-                            onChange={(e) => handleChangeOrder(parseInt(e.target.value))}
-                            value={championData.teamOrder}
-                        >
-                            {[1, 2, 3, 4, 5].map((order) => (
-                                <option key={order} value={order} disabled={order === championData.teamOrder}>
-                                    {order}
-                                </option>
-                            ))}
-                        </select>
-                    </>)}
-
-
-                <br />
-                <label>Image Links</label>
-                {imageLinks.map((link, index) => (
-                    <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+            <div className={style.modal}>
+                <a className={style.close} onClick={close} mou>
+                    ×
+                </a>
+                <div className={style.content}>
+                    <form onSubmit={saveChampion}>
+                        <h2>{isUpdate ? 'Update' : 'Add New'} Champion</h2>
+                        <label htmlFor="teamName">Team Name</label>
                         <input
                             type="text"
-                            placeholder={`Image Link ${index + 1}`}
-                            value={link}
-                            onChange={(e) => updateImageLink(index, e.target.value)}
-                            name="images"
+                            id="teamName"
+                            name="teamName"
+                            placeholder={championToUpdate ? championToUpdate.teamName : ''}
+                            value={championData.teamName}
+                            onChange={handleInputChange}
+                            required
                         />
-                        {link && (
-                            <img
-                                src={link}
-                                alt={`Image ${index + 1}`}
-                                style={{ width: '50px', height: '50px', marginLeft: '10px' }}
-                            />
-                        )}
-                    </div>
-                ))}
-                <button type="button" onClick={addImageLinkField}>
-                    Add Image Link
-                </button>
-                <br />
-                <button type="submit">{isUpdate ? 'Update' : 'Add'} Champion</button>
-            </form>
+
+                        <br />
+
+                        <label htmlFor="competitionDescription">Competition Description</label>
+                        <input
+                            type="text"
+                            id="competitionDescription"
+                            name="competitionDescription"
+                            placeholder={championToUpdate ? championToUpdate.competitionDescription : ''}
+                            value={championData.competitionDescription}
+                            onChange={handleInputChange}
+                            required
+                        />
+
+                        <br />
+
+                        <label htmlFor="awardDes">Award Description</label>
+                        <input
+                            type="text"
+                            id="awardDes"
+                            name="awardDes"
+                            placeholder={championToUpdate ? championToUpdate.awardDes : ''}
+                            value={championData.awardDes}
+                            onChange={handleInputChange}
+                            required
+                        />
+
+                        <br />
+                        {isUpdate && (
+                            <>
+                                <label htmlFor={`changeOrder_${order}`}>Change Order:</label>
+                                <select
+                                    id={`changeOrder_${order}`}
+                                    onChange={(e) => handleChangeOrder(parseInt(e.target.value))}
+                                    value={championData.teamOrder}
+                                >
+                                    {[1, 2, 3, 4, 5].map((order) => (
+                                        <option key={order} value={order} disabled={order === championData.teamOrder}>
+                                            {order}
+                                        </option>
+                                    ))}
+                                </select>
+                            </>)}
+
+
+                        <br />
+                        <label>Image Links</label>
+                        {imageLinks.map((link, index) => (
+                            <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                                <input
+                                    type="text"
+                                    placeholder={`Image Link ${index + 1}`}
+                                    value={link}
+                                    onChange={(e) => updateImageLink(index, e.target.value)}
+                                    name="images"
+                                />
+                                {link && (
+                                    <img
+                                        src={link}
+                                        alt={`Image ${index + 1}`}
+                                        style={{ width: '50px', height: '50px', marginLeft: '10px' }}
+                                    />
+                                )}
+                            </div>
+                        ))}
+                        <button type="button" onClick={addImageLinkField}>
+                            Add Image Link
+                        </button>
+                        <br />
+                        <button type="submit">{isUpdate ? 'Update' : 'Add'} Champion</button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 }
