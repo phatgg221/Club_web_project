@@ -24,7 +24,7 @@ class Account{
                 require:true,
             },
         });
-        return mongoose.model("Account", accountSchema);
+        return  mongoose.models.Account|| mongoose.model("Account", accountSchema);
     }
     getInstance() {
         return this.initSchema(); 

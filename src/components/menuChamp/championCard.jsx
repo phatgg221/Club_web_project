@@ -1,50 +1,9 @@
 "use client";
-// import "./champ.css";
 import CardName from "./cardName";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import TeamSlider from "./slider";
 import Curtain from "./curtain";
 import ChampTabs from "./champTabs";
-
-
-// const teamlist = [
-//   {
-//     name: "ONEZ",
-//     competition: "RMIT Business Analytics Champion",
-//     award: "Champion",
-//     images: ["rbacchampion.jpg"],
-//   },
-//   {
-//     name: "Team 2",
-//     competition: "RMIT Business Analytics Champion",
-//     award: "Fourth Place",
-//     images: ["rbac4th.jpg"],
-//   },
-//   {
-//     name: "Team RMIT",
-//     competition: "IIBD International Case Competition",
-//     award: "Second Runner-up",
-//     images: ["iibd.jpg"],
-//   },
-//   {
-//     name: "Onyx Mustang",
-//     competition: "Swin-Biz-Rockstar Season 3",
-//     award: "Champion",
-//     images: [
-//       "swinbiz.jpg",
-//       "swinbiz2.jpg",
-//       "swinbiz3.jpg",
-//       "swinbiz4.jpg",
-//       "swinbiz5.jpg",
-//     ],
-//   },
-//   // {
-//   //   name: "Team 5",
-//   //   competition: "Comp2",
-//   //   award: "Second prize",
-//   //   images: [],
-//   // },
-// ];
 
 export default function ChampionCard() {
   const [activeTeam, setActiveTeam] = useState(0);
@@ -58,16 +17,23 @@ export default function ChampionCard() {
         const data = await response.json();
 
         // Transform the data into the desired format
-        const formattedData = data.data.mongoData.map((item, index) => ({
-          name: item.teamName,
-          competition: item.competitionDescription,
-          award: item.awardDes,
-          images: item.images,
+        let formattedData = data.data.mongoData.map((item, index) => ({
+          name: item.teamName || "Name Not Available",
+          competition: item.competitionDescription || "Description Not Available",
+          award: item.awardDes || "Award Not Available",
+          images: item.images || [], // Ensure images is an array, handle undefined case
           index,
+          teamOrder: item.teamOrder || index, // Add teamOrder to each item
         }));
 
-        setTeamList(formattedData);
-        console.log("teamList state:", teamList); 
+        // Sort the formattedData array by teamOrder
+        formattedData = formattedData.sort((a, b) => a.teamOrder - b.teamOrder);
+
+        // Fix teamList to 5 objects
+        const fixedTeamList = Array.from({ length: 5 }, (_, index) => formattedData[index] || { name: "Empty" });
+
+        setTeamList(fixedTeamList);
+        console.log("teamList state:", teamList);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -75,6 +41,8 @@ export default function ChampionCard() {
 
     fetchData();
   }, []);
+
+
   const handleClick = (team) => {
     setActiveTeam(team);
   };
@@ -85,7 +53,7 @@ export default function ChampionCard() {
         <div className="champ-tabs">
           {teamList.map((team, index) => (
             <ChampTabs
-            key={team.index}
+              key={team.index}
               team={{ ...team }}
               activeTeam={activeTeam}
               handleClick={handleClick}
@@ -95,6 +63,7 @@ export default function ChampionCard() {
         <div className="name-list">
           {teamList.map((team, index) => (
             <CardName
+              key={index}
               team={{ ...team, index }}
               activeTeam={activeTeam}
               handleClick={handleClick}
@@ -104,6 +73,7 @@ export default function ChampionCard() {
         <div className="slider">
           {teamList.map((team, index) => (
             <TeamSlider
+              key={index}
               team={{ ...team, index }}
               activeTeam={activeTeam}
               images={team.images}
@@ -111,7 +81,9 @@ export default function ChampionCard() {
           ))}
 
           {teamList.map((team, index) => (
-            <Curtain team={{ ...team, index }} activeTeam={activeTeam} />
+            <Curtain
+              key={index}
+              team={{ ...team, index }} activeTeam={activeTeam} />
           ))}
         </div>
       </div>

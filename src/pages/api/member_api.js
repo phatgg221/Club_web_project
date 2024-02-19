@@ -16,7 +16,9 @@ export default async function handler (req, res){
             return handleRequest(() => MemberService.createMember(body), res);
       
         case 'DELETE':
-            return handleRequest(() => MemberService.deleteMember(query.id), res);
+            let obj = query;
+            // console.log(query.id + "id in api ")
+            return handleRequest(() => MemberService.deleteMember(obj['']), res);
       
         default:
             res.status(405).end(`Method ${method} Not Allowed`);

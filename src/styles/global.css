@@ -5,6 +5,7 @@
 @import "Competitions.module.css";
 @import "FilterBox.module.css";
 @import "Booking.module.css";
+@import "table.module.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap");
 
 :root {
