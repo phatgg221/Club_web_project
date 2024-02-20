@@ -29,15 +29,7 @@ class Champions {
       images: [
         {
           type: String,
-          validate: {
-            validator: function (v) {
-              const isCorrectImageLink = (currentValue) => /^https?:\/\/.+/.test(currentValue);
-              return isCorrectImageLink(v);
-
-            },
-            message: (props) => `${props.value} is not a valid image URL`,
-          },
-          trim: true,
+          require: true,
         },
       ],
 

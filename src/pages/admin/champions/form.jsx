@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import style from "@/styles/content.module.css";
+import styles from "@/styles/table.module.css";
+import styleForm from "@/styles/Admin.Form.module.css";
+import Image from 'next/image';
 
 export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuccess, order, teamList, setTeamList, close }) {
     const [championData, setChampionData] = useState({
@@ -9,13 +12,13 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
         images: [],
         teamOrder: order,
     });
-    const [imageLinks, setImageLinks] = useState([]);
+    const [images, setImages] = useState([]);
 
     useEffect(() => {
         // If in update mode, populate the form with current champion information
         if (isUpdate && championToUpdate) {
             setChampionData({
-                // id: championToUpdate.id || '',
+                id: championToUpdate.id || '',
                 teamName: championToUpdate.name || '',
                 competitionDescription: championToUpdate.competition || '',
                 awardDes: championToUpdate.award || '',
@@ -23,10 +26,10 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
                 teamOrder: championToUpdate.teamOrder || order,
             });
 
-            // Set image links for display
-            setImageLinks(championToUpdate.images || ['']);
+            setImages(championToUpdate.images || []);
         }
     }, [isUpdate, championToUpdate, order]);
+
 
     async function saveChampion(event) {
         event.preventDefault();
@@ -37,13 +40,12 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
             params.append('competitionDescription', championData.competitionDescription);
             params.append('awardDes', championData.awardDes);
 
-            // Append each image link to the form data
-            imageLinks.forEach((link, index) => {
-                params.append('images', link);
+            // Append each image link to the form data with the correct base64 format
+            images.forEach((base64, index) => {
+                params.append('images', base64);
             });
 
-            params.append('teamOrder', Number(order));
-
+            params.append('teamOrder', Number(championData.teamOrder));
 
             const url = isUpdate ? `/api/champion_api?id=${championToUpdate.id}` : '/api/champion_api';
 
@@ -70,7 +72,6 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
         }
     }
 
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setChampionData({
@@ -80,7 +81,7 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
     };
 
     const addImageLinkField = () => {
-        setImageLinks((prevLinks) => [...prevLinks, '']);
+        setImages((prevLinks) => [...prevLinks, '']);
 
         setChampionData((prevData) => ({
             ...prevData,
@@ -88,20 +89,40 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
         }));
     };
 
-    const updateImageLink = (index, value) => {
-        const updatedLinks = [...imageLinks];
-        updatedLinks[index] = value;
-        setImageLinks(updatedLinks);
+    const updateImage = async (index, e) => {
+        const file = e.target.files[0]; // Get the file from the event object
+        if (file) {
+            try {
+                const base64 = await convertToBase64(file);
+                const updatedImages = [...images];
+                updatedImages[index] = base64;
+                setImages(updatedImages);
 
-        setChampionData((prevData) => {
-            const updatedImages = [...prevData.images];
-            updatedImages[index] = value;
-            return {
+                const updatedImagesData = [...championData.images];
+                updatedImagesData[index] = base64;
+                setChampionData((prevData) => ({
+                    ...prevData,
+                    images: updatedImagesData,
+                }));
+            } catch (error) {
+                console.error('Error converting image to base64:', error);
+            }
+        } else {
+            // If no file is selected, clear the image
+            const updatedImages = [...images];
+            updatedImages[index] = '';
+            setImages(updatedImages);
+
+            const updatedImagesData = [...championData.images];
+            updatedImagesData[index] = '';
+            setChampionData((prevData) => ({
                 ...prevData,
-                images: updatedImages,
-            };
-        });
+                images: updatedImagesData,
+            }));
+        }
     };
+
+
 
     const updateTeamOrderInDatabase = async (id, newOrder) => {
         try {
@@ -166,18 +187,36 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
         setTeamList((prevTeamList) => prevTeamList.sort((a, b) => a.teamOrder - b.teamOrder));
     };
 
+    // update - remove any image
+    const removeImage = (index) => {
+        const newImages = [...images];
+        newImages.splice(index, 1);
+        setImages(newImages);
 
+        const newImagesData = [...championData.images];
+        newImagesData.splice(index, 1);
+        setChampionData((prevData) => ({
+            ...prevData,
+            images: newImagesData,
+        }));
+    };
 
 
     return (
         <div>
             <div className={style.modal}>
-                <a className={style.close} onClick={close} mou>
+                <a className={style.close} onClick={close}>
                     ×
                 </a>
+                <div
+                    className={style.header}
+                    style={{ fontSize: '30px' }}
+                > {isUpdate ? 'Update' : 'Add New'} Champion</div>
                 <div className={style.content}>
-                    <form onSubmit={saveChampion}>
-                        <h2>{isUpdate ? 'Update' : 'Add New'} Champion</h2>
+                    <form
+                        style={{ marginLeft: '20%' }}
+                        className={styleForm.form}
+                        onSubmit={saveChampion}>
                         <label htmlFor="teamName">Team Name</label>
                         <input
                             type="text"
@@ -234,33 +273,53 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
 
 
                         <br />
-                        <label>Image Links</label>
-                        {imageLinks.map((link, index) => (
+                        <label>Images</label>
+                        {images.map((image, index) => (
                             <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
                                 <input
-                                    type="text"
-                                    placeholder={`Image Link ${index + 1}`}
-                                    value={link}
-                                    onChange={(e) => updateImageLink(index, e.target.value)}
+                                    type="file"
+                                    onChange={(e) => updateImage(index, e)}
                                     name="images"
+                                    accept='.jpeg, .png, .jpg'
                                 />
-                                {link && (
-                                    <img
-                                        src={link}
-                                        alt={`Image ${index + 1}`}
-                                        style={{ width: '50px', height: '50px', marginLeft: '10px' }}
-                                    />
+                                {image && (
+                                    <>
+                                        <Image
+                                            src={image}
+                                            alt={`Image ${index + 1}`}
+                                            width={50}
+                                            height={50}
+                                            style={{ marginRight: '10px' }}
+                                        />
+                                        <button onClick={() => removeImage(index)}>Delete</button>
+                                    </>
                                 )}
                             </div>
                         ))}
+
+
                         <button type="button" onClick={addImageLinkField}>
-                            Add Image Link
+                            Add new image
                         </button>
                         <br />
-                        <button type="submit">{isUpdate ? 'Update' : 'Add'} Champion</button>
+                        <button
+                            style={{ marginTop: '5%', marginLeft: '30%' }}
+                            className={`${styles.btn} ${styles.btnBottom}`}
+                            type="submit">{isUpdate ? 'Update' : 'Add'}
+                            Champion
+                        </button>
                     </form>
                 </div>
             </div>
-        </div>
+        </div >
     );
+}
+
+function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => resolve(fileReader.result);
+        fileReader.onerror = (error) => reject(error);
+    });
 }
