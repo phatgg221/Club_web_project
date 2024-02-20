@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect ,useState } from "react";
+import React, { useEffect, useState } from "react";
 // import styles from '@/styles/Header.module.css';
 import { useAuth } from "@/contexts/AuthContext";
 // import { useRouter } from 'next/router';
@@ -8,21 +8,21 @@ function Header() {
   const [dataVisible, setDataVisible] = useState("false");
   const { isLoggedIn, logout } = useAuth();
   const HandleLogOUT = () => {
-    if(isLoggedIn){
+    if (isLoggedIn) {
       // console.log("logout");
       logout();
       window.location.href = "/";
-    }else{
+    } else {
       window.location.href = "/login";
     }
-  }
+  };
   useEffect(() => {
     console.log("Current login status: ", isLoggedIn);
- }, [isLoggedIn]);
+  }, [isLoggedIn]);
   return (
     <header className="primary-header">
       <div className="logo">
-        <a href={isLoggedIn?"/userMain": "/login"}>
+        <a href={isLoggedIn ? "/userMain" : "/login"}>
           <img src="./GFCC.png" width="50" height="46" />
         </a>
       </div>
@@ -65,13 +65,13 @@ function Header() {
         <div className="nav-options">
           <ul className="left-nav">
             <li>
-              <a id="competitions" href={isLoggedIn?"/competitions": "/login"}>
-                Competitions
+              <a id="about" href="/">
+                About
               </a>
             </li>
             <li>
-              <a id="samples" href={isLoggedIn?"/samples": "/login"}>
-                Samples
+              <a id="samples" href="/samples">
+                Showcase
               </a>
             </li>
             <li>
@@ -82,18 +82,18 @@ function Header() {
           </ul>
           <ul className="right-nav">
             <li>
-              <a id="about" href="/">
-                About
+              <a id="competitions" href="/competitions">
+                Competitions
               </a>
             </li>
             <li>
-              <a id="booking" href={isLoggedIn?"/booking": "/login"}>
+              <a id="booking" href={isLoggedIn ? "/booking" : "/login"}>
                 Booking
               </a>
             </li>
             <button className="login-button">
               <a id="login-text" onClick={HandleLogOUT}>
-                {isLoggedIn? 'Logout' : 'Login'}
+                {isLoggedIn ? "Logout" : "Login"}
               </a>
             </button>
           </ul>
