@@ -65,13 +65,13 @@ function Header() {
         <div className="nav-options">
           <ul className="left-nav">
             <li>
-              <a id="competitions" href="/competitions">
-                Competitions
+              <a id="about" href="/">
+                About
               </a>
             </li>
             <li>
               <a id="samples" href="/samples">
-                Samples
+                Showcase
               </a>
             </li>
             <li>
