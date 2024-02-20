@@ -45,11 +45,21 @@ const NewCardForm = () => {
       fetchData();
     }
   }, [id]);
-  const handleInputChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
+
+  const handleInputChange = async (event) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const base64 = await convertToBase64(file);
+      setFormData({
+        ...formData,
+        imageURL: base64,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   const handleReturn = () => {
@@ -145,10 +155,9 @@ const NewCardForm = () => {
         <div className={style.inputGroup}>
           <label>Image URL:</label>
           <input
-            type="text"
+            type="file"
             name="imageURL"
-            placeholder={isEditMode ? formData.imageURL : ""}
-            value={formData.imageURL}
+            accept='.jpeg, .png, .jpg'
             onChange={handleInputChange}
           />
         </div>
@@ -175,3 +184,12 @@ const NewCardForm = () => {
 
 NewCardForm.hideLayout = true;
 export default NewCardForm;
+
+function convertToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => resolve(fileReader.result);
+    fileReader.onerror = (error) => reject(error);
+  });
+}

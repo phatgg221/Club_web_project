@@ -3,6 +3,8 @@ import React from "react";
 import style from "@/styles/table.module.css";
 import AdminHeader from "@/components/Header/adminHeader";
 import SearchBar from "@/components/Competitions/SearchBar";
+import Image from "next/image";
+
 const CardTable = () => {
   const [ongoingCompetitions, setOngoingCompetitions] = useState([]);
   const [searchTerm, setSearchItem] = useState("");
@@ -96,6 +98,8 @@ const CardTable = () => {
                       className={style.imageTable}
                       src={item.imageURL}
                       alt="Compete image"
+                      width={0}
+                      height={0}
                     />
                   </td>
 

@@ -35,14 +35,7 @@ class Card {
       },
       imageURL: {
         type: String,
-        validate: {
-          validator: function (v) {
-            const isCorrectImageLink = (currentValue) => /^https?:\/\/.+/.test(currentValue);
-            return isCorrectImageLink(v);
-          },
-          message: (props) => `${props.value} is not a valid image URL`,
-        },
-        trim: true,
+        required: true,
       },
       linkToWeb: {
         type: String,
@@ -58,12 +51,12 @@ class Card {
       },
     });
 
-   
-    return mongoose.models.Card || mongoose.model("Card",cardSchema);
+
+    return mongoose.models.Card || mongoose.model("Card", cardSchema);
   }
 
   getInstance() {
-    
+
     return this.initSchema();
   }
 }
