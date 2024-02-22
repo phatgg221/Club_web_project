@@ -22,17 +22,6 @@
   transition: color 150ms linear;
 }
 
-/* .nav:after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  border-left: 2px dotted #ff0000;
-} */
-
-/* Main parts of navigation */
 .nav-options {
   display: flex;
   flex: 1;
@@ -47,17 +36,21 @@
   padding: 0;
   list-style: none;
 }
+
 .left-nav {
   justify-content: flex-end;
-  & li {
-    margin: 0 min(30%, 70px) 0 0;
-  }
 }
+
+.left-nav li {
+  margin: 0 min(30%, 70px) 0 0;
+}
+
 .right-nav {
   justify-content: flex-start;
-  & li {
-    margin: 0 0 0 min(30%, 70px);
-  }
+}
+
+.right-nav li {
+  margin: 0 0 0 min(30%, 70px);
 }
 
 .logo {
@@ -67,17 +60,17 @@
   top: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  & a {
-    z-index: 2;
-    pointer-events: all;
-  }
+}
+
+.logo a {
+  z-index: 2;
+  pointer-events: all;
 }
 
 .mobile-nav-toggle {
   display: none;
 }
 
-/* Login button */
 .login-button {
   border: none;
   vertical-align: middle;
@@ -88,27 +81,28 @@
   border: #f8a61b 2px solid;
   background: none;
   transition: background 150ms linear;
-  #login-text {
-    color: #f8a61b;
-  }
-  &:hover {
-    background: #f8a61b;
-    transition: background 150ms linear;
-  }
-  &:hover #login-text {
-    color: #fffefa;
-  }
 }
 
-/* Hovering animation of options */
+#login-text {
+  color: #f8a61b;
+}
+
+.login-button:hover {
+  background: #f8a61b;
+}
+
+.login-button:hover #login-text {
+  color: #fffefa;
+}
+
 #about:hover,
 #booking:hover,
 #competitions:hover,
 #samples:hover,
 #tips:hover {
   color: #f8a61b;
-  transition: 150ms linear;
 }
+
 #about::after,
 #booking::after,
 #competitions::after,
@@ -125,6 +119,7 @@
   pointer-events: none;
   transform: scale(0, 1);
 }
+
 #about:hover::after,
 #booking:hover::after,
 #competitions:hover::after,
@@ -134,7 +129,6 @@
   transform: scale(1, 1);
 }
 
-/* Mobile layout */
 @media (max-width: 1100px) {
   .primary-header {
     display: flex;
@@ -142,6 +136,7 @@
     justify-content: space-between;
     background: #fffefa;
   }
+
   .nav {
     align-items: baseline;
     position: fixed;
@@ -152,11 +147,13 @@
     height: 350px;
     transform: translateY(-100%);
     transition: transform 350ms ease-in-out;
-    & .nav-options {
-      display: block;
-      text-align: center;
-    }
   }
+
+  .nav .nav-options {
+    display: block;
+    text-align: center;
+  }
+
   .nav[datavisible="true"] {
     transform: translateY(0%);
   }
@@ -167,9 +164,11 @@
     flex-direction: column;
     justify-content: initial;
     margin: 0;
-    & li {
-      margin: 0 0 12px 0;
-    }
+  }
+
+  .left-nav li,
+  .right-nav li {
+    margin: 0 0 12px 0;
   }
 
   .left-nav {
@@ -187,12 +186,14 @@
 
   .login-button {
     margin: 0;
-    &:hover {
-      background: none;
-    }
-    &:hover #login-text {
-      color: #f8a61b;
-    }
+  }
+
+  .login-button:hover {
+    background: none;
+  }
+
+  .login-button:hover #login-text {
+    color: #f8a61b;
   }
 
   .mobile-nav-toggle {
