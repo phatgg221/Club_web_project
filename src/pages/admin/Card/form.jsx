@@ -143,12 +143,11 @@ const NewCardForm = () => {
           />
         </div>
         <div className={style.inputGroup}>
-          <label>Image URL:</label>
+          <label>Image:</label>
           <input
-            type="text"
+            type="file"
             name="imageURL"
-            placeholder={isEditMode ? formData.imageURL : ""}
-            value={formData.imageURL}
+            accept='.jpeg, .png, .jpg'
             onChange={handleInputChange}
           />
         </div>

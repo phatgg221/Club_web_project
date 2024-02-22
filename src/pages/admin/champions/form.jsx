@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import style from "@/styles/content.module.css";
+import styles from "@/styles/table.module.css";
+import styleForm from "@/styles/Admin.Form.module.css";
+import Image from 'next/image';
 
 export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuccess, order, teamList, setTeamList, close }) {
     const [championData, setChampionData] = useState({
@@ -15,7 +18,7 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
         // If in update mode, populate the form with current champion information
         if (isUpdate && championToUpdate) {
             setChampionData({
-                // id: championToUpdate.id || '',
+                id: championToUpdate.id || '',
                 teamName: championToUpdate.name || '',
                 competitionDescription: championToUpdate.competition || '',
                 awardDes: championToUpdate.award || '',
@@ -166,18 +169,35 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
         setTeamList((prevTeamList) => prevTeamList.sort((a, b) => a.teamOrder - b.teamOrder));
     };
 
+    // update - remove any image
+    const removeImage = (index) => {
+        const newImages = [...imageLinks];
+        newImages.splice(index, 1);
+        setImageLinks(newImages);
 
-
+        const newImagesData = [...championData.images];
+        newImagesData.splice(index, 1);
+        setChampionData((prevData) => ({
+            ...prevData,
+            images: newImagesData,
+        }));
+    };
 
     return (
         <div>
             <div className={style.modal}>
-                <a className={style.close} onClick={close} mou>
+                <a className={style.close} onClick={close}>
                     ×
                 </a>
+                <div
+                    className={style.header}
+                    style={{ fontSize: '30px' }}
+                > {isUpdate ? 'Update' : 'Add New'} Champion</div>
                 <div className={style.content}>
-                    <form onSubmit={saveChampion}>
-                        <h2>{isUpdate ? 'Update' : 'Add New'} Champion</h2>
+                    <form
+                        style={{ marginLeft: '20%' }}
+                        className={styleForm.form}
+                        onSubmit={saveChampion}>
                         <label htmlFor="teamName">Team Name</label>
                         <input
                             type="text"
@@ -234,30 +254,39 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
 
 
                         <br />
-                        <label>Image Links</label>
+                        <label>Images</label>
                         {imageLinks.map((link, index) => (
                             <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
                                 <input
-                                    type="text"
-                                    placeholder={`Image Link ${index + 1}`}
-                                    value={link}
+                                    type="file"
                                     onChange={(e) => updateImageLink(index, e.target.value)}
                                     name="images"
+                                    accept='.jpeg, .png, .jpg'
                                 />
                                 {link && (
-                                    <img
-                                        src={link}
-                                        alt={`Image ${index + 1}`}
-                                        style={{ width: '50px', height: '50px', marginLeft: '10px' }}
-                                    />
+                                    <>
+                                        <Image
+                                            src={link}
+                                            alt={`Image ${index + 1}`}
+                                            width={50}
+                                            height={50}
+                                            style={{ marginRight: '10px' }}
+                                        />
+                                        <button onClick={() => removeImage(index)}>Delete</button>
+                                    </>
                                 )}
                             </div>
                         ))}
                         <button type="button" onClick={addImageLinkField}>
-                            Add Image Link
+                            Add New Image
                         </button>
                         <br />
-                        <button type="submit">{isUpdate ? 'Update' : 'Add'} Champion</button>
+                        <button
+                            style={{ marginTop: '5%', marginLeft: '30%' }}
+                            className={`${styles.btn} ${styles.btnBottom}`}
+                            type="submit">{isUpdate ? 'Update' : 'Add'}
+                            Champion
+                        </button>
                     </form>
                 </div>
             </div>
