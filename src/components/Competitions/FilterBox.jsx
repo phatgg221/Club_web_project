@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 // import "./FilterBox.css";
 
-function FilterBox({ categories, name }) {
+function FilterBox({ categories, name, onChange }) {
   const [checkedItems, setCheckedItems] = useState(
     new Array(categories.length).fill(false)
   );
 
-  const handleCheckboxChange = (index) => {
+  const handleCheckboxChange = (event,index) => {
     const newCheckedItems = [...checkedItems];
     newCheckedItems[index] = !newCheckedItems[index];
+    if(event.target.checked){
+      onChange(categories[index]);
+    }else{
+      onChange('');
+    }
+    
     setCheckedItems(newCheckedItems);
   };
 
@@ -22,7 +28,7 @@ function FilterBox({ categories, name }) {
               type="checkbox"
               className="filter-box-checkbox"
               checked={checkedItems[index]}
-              onChange={() => handleCheckboxChange(index)}
+              onChange={(event) => handleCheckboxChange(event, index)}
             />
             {category}
           </label>

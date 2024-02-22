@@ -63,3 +63,19 @@
   text-align: center;
   width: 80%;
 }
+
+.contentContainerChamp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8a61b;
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+  height: 100%;
+  padding: 3%;
+  /* max-height: 200px; */
+}
+
+.hideChamp {
+  display: none;
+}

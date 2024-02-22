@@ -1,0 +1,86 @@
+.formContainer{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+}
+.formContainerTips{
+  height: 100%;
+}
+
+.formContainerAdminChangePassword{
+  margin-top: 150px;
+}
+
+.form{
+  width: 90%;
+  max-width: 600px;
+}
+.formTips{
+  max-width: 700px;
+}
+
+.inputGroup{
+  margin-bottom: 30px;
+}
+
+.inputGroupTips label{
+  display: none;
+}
+
+.form label{
+  font-size: 20px;
+  font-weight: 900;
+  cursor: text;
+  margin: 10px;
+}
+
+.form input{
+  width: 100%;
+  padding: 10px;
+  outline: 0;
+  border: 1px solid #f8a61b;
+  color: black  ;
+  background: transparent;
+  font-size: 15px;
+}
+
+.Row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.row .inputGroup{
+  flex-basis: 48%;
+}
+
+.organizerInput{ 
+  /* This helps when the screne is shrinked --> the 2 forms doesn't stick to each other */
+  margin-right: 10px;
+}
+
+.hideLable {
+  color: white;
+}
+
+.btnTip{
+  margin-left: 10px;
+}
+
+
+@media screen and (max-width: 768px){
+  .form label{
+    font-size: 13px;
+  }
+  .btnTip{ 
+    font-size: 0.9rem !important;
+    padding: 0.21rem 0.5rem; 
+  }
+}
+
+.notificationMessage{
+  margin-top: 20px;
+
+}
