@@ -15,6 +15,8 @@ const NewSampleForm = () => {
   });
 
   const [isEditMode, setIsEditMode] = useState(false);
+  const [errorLink, setErrorLink] = useState('');
+  const [errorSubmit, setErrorSubmit] = useState('');
 
   useEffect(() => {
     if (id) {
@@ -45,6 +47,16 @@ const NewSampleForm = () => {
   }, [id]);
 
   const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    const linkPattern = /^(http|https):\/\/.+/;
+    if (name === "sampleLink") {
+      if (!linkPattern.test(value)) {
+        setErrorSubmit('Invalid format. Cannot submit.');
+        setErrorLink('Invalid link format. Requires to start with: http:// or https://');
+      } else {
+        setErrorSubmit(''); setErrorLink('')
+      };
+    }
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -144,6 +156,7 @@ const NewSampleForm = () => {
             value={formData.sampleLink}
             onChange={handleInputChange}
           />
+          {errorLink && <p className="error">{errorLink}</p>}
         </div>
         <div className={styleBtn.btnBottomDiv}>
           <button
@@ -162,6 +175,7 @@ const NewSampleForm = () => {
             Return{" "}
           </button>
         </div>
+        {errorSubmit && <p className="error">{errorSubmit}</p>}
       </form>
     </div>
   );

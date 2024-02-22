@@ -17,6 +17,9 @@ const NewTipForm = () => {
     realContent: [],
   });
 
+  const [errorLink, setErrorLink] = useState('');
+  const [errorSubmit, setErrorSubmit] = useState('');
+
   useEffect(() => {
     setFormData((prevState) => ({ ...prevState, realContent: contents }));
   }, [contents]);
@@ -114,6 +117,21 @@ const NewTipForm = () => {
     }
   };
 
+  const handleInputValidation = (event) => {
+    const { name, value } = event.target;
+    const linkPattern = /^(http|https):\/\/.+/;
+    if (name === "tipsLink") {
+      if (!linkPattern.test(value)) {
+        setErrorSubmit('Invalid format. Cannot submit.');
+        setErrorLink('Invalid link format. Requires to start with: http:// or https://');
+        return false;
+      } else {
+        setErrorSubmit(''); setErrorLink('');
+        return true;
+      };
+    }
+  }
+
   return (
     <div className={`${style.formContainer} ${style.formContainerTips}`}>
       <form
@@ -141,10 +159,12 @@ const NewTipForm = () => {
             name="tipsLink"
             value={formData.tipsLink}
             placeholder={isEditMode ? formData.tipsLink : ""}
-            onChange={(e) =>
+            onChange={(e) => {
+              handleInputValidation(e)
               setFormData({ ...formData, tipsLink: e.target.value })
-            }
+            }}
           />
+          {errorLink && <p className="error">{errorLink}</p>}
         </div>
 
         {!isEditMode &&
@@ -261,6 +281,7 @@ const NewTipForm = () => {
             Return
           </button>
         </div>
+        {errorSubmit && <p className="error">{errorSubmit}</p>}
       </form>
     </div>
   );

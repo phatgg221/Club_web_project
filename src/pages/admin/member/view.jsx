@@ -4,6 +4,8 @@ import style from "@/styles/table.module.css";
 import Popup from "reactjs-popup";
 
 const MemberTable = () => {
+  const [usernameError, setUsernameError] = useState('');
+  const [errorSubmit, setErrorSubmit] = useState('');
   const [members, setMembers] = useState([]);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -26,11 +28,23 @@ const MemberTable = () => {
   }, []);
 
   const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    const usernamePattern = /^[sS]\d{6}$/;
+    if (name === 'username') {
+      if (!usernamePattern.test(value)) {
+        setErrorSubmit('Invalid format. Cannot submit.');
+        setUsernameError('Invalid username. Required format: "sXXXXXXX" or "SXXXXXXX"');
+      } else {
+        setErrorSubmit('');
+        setUsernameError('');
+      }
+    }
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
   };
+
   const handleDelete = async (id) => {
     try {
       // console.log("akjsdna member id : " + member._id)
@@ -88,12 +102,14 @@ const MemberTable = () => {
               type="text"
               onChange={handleInputChange}
             ></input>
+            {usernameError && <p className="error">{usernameError}</p>}
           </label>
           <label>
             Password: The password will be 1 as default. Member can change it
             later.
           </label>
           <button type="submit">Create Account</button>
+          {errorSubmit && <p className="error">{errorSubmit}</p>}
         </form>
       </Popup>
       <div className={style.divTable}>
