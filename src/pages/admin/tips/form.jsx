@@ -121,7 +121,7 @@ const NewTipForm = () => {
         onSubmit={hanldeSubmit}
       >
         <div className={style.inputGroup}>
-          <label>Tip Name:</label>
+          <label>Tip Name</label>
           <input
             required={true}
             type="text"
@@ -134,7 +134,7 @@ const NewTipForm = () => {
           />
         </div>
         <div className={style.inputGroup}>
-          <label>Tip Link:</label>
+          <label>Tip Link</label>
           <input
             required={true}
             type="text"
@@ -150,8 +150,8 @@ const NewTipForm = () => {
         {!isEditMode &&
           contents.map((content, index) => (
             <div key={index} className={style.Row}>
-              <div className={`${style.inputGroup} ${style.organizerInput}`}>
-                <label>Content Name:</label>
+              <div className={`${style.inputGroup} ${style.organizerInput} `}>
+                <label>Content Name</label>
                 <input
                   type="text"
                   name="name"
@@ -159,8 +159,10 @@ const NewTipForm = () => {
                   onChange={(e) => handleInputChange(index, e)}
                 />
               </div>
-              <div className={`${style.inputGroup} ${style.organizerInput}`}>
-                <label>Content:</label>
+              <div
+                className={`${style.inputGroup} ${style.organizerInput} ${style.contentInput}`}
+              >
+                <label>Content</label>
                 <input
                   type="text"
                   name="contents"
@@ -168,8 +170,8 @@ const NewTipForm = () => {
                   onChange={(e) => handleInputChange(index, e)}
                 />
               </div>
-              <div className={style.inputGroup}>
-                <label>Image Link:</label>
+              <div className={`${style.inputGroup}  `}>
+                <label>Image Link</label>
                 <input
                   type="text"
                   name="tipImage"
@@ -178,10 +180,10 @@ const NewTipForm = () => {
                 />
               </div>
 
-              <div className={`${style.inputGroup} `}>
+              <div className={`${style.inputGroup} ${style.centered} `}>
                 <label className={style.hideLable}> a</label>
                 <button
-                  className={`${styleBtn.btn} ${style.btnTip}`}
+                  className={`${styleBtn.btn} ${style.btnTip} `}
                   type="button"
                   onClick={() => handleDelete(index)}
                 >
@@ -193,9 +195,9 @@ const NewTipForm = () => {
 
         {isEditMode &&
           contents.map((content, index) => (
-            <div key={index} className={style.Row}>
+            <div key={index} className={`${style.Row} }`}>
               <div className={`${style.inputGroup} ${style.organizerInput}`}>
-                <label>Content Name:</label>
+                <label>Content Name</label>
                 <input
                   type="text"
                   name="name"
@@ -203,8 +205,10 @@ const NewTipForm = () => {
                   onChange={(e) => handleInputChangeUpdate(index, e)}
                 />
               </div>
-              <div className={`${style.inputGroup} ${style.organizerInput}`}>
-                <label>Content:</label>
+              <div
+                className={`${style.inputGroup} ${style.organizerInput} ${style.contentInput}`}
+              >
+                <label>Content</label>
                 <input
                   type="text"
                   name="contents"
@@ -213,7 +217,7 @@ const NewTipForm = () => {
                 />
               </div>
               <div className={style.inputGroup}>
-                <label>Image Link:</label>
+                <label>Image Link</label>
                 <input
                   type="text"
                   name="tipImage"
@@ -221,7 +225,7 @@ const NewTipForm = () => {
                   onChange={(e) => handleInputChangeUpdate(index, e)}
                 />
               </div>
-              <div className={`${style.inputGroup} `}>
+              <div className={`${style.inputGroup} ${style.centered} `}>
                 <label className={style.hideLable}> a</label>
                 <button
                   className={`${styleBtn.btn} ${style.btnTip}`}

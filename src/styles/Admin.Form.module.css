@@ -18,7 +18,7 @@
   max-width: 600px;
 }
 .formTips{
-  max-width: 700px;
+  max-width: 1000px;
 }
 
 .inputGroup{
@@ -50,6 +50,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: row;
+
 }
 
 .row .inputGroup{
@@ -69,6 +71,9 @@
   margin-left: 10px;
 }
 
+.contentInput{
+  width: 80%;
+}
 
 @media screen and (max-width: 768px){
   .form label{
@@ -77,6 +82,16 @@
   .btnTip{ 
     font-size: 0.9rem !important;
     padding: 0.21rem 0.5rem; 
+  }
+  .Row{
+    flex-direction: column;
+  }
+  .inputGroup{
+    width: 100%;
+  }
+  .centered {
+    display: flex;
+    justify-content: center;
   }
 }
 
