@@ -120,6 +120,32 @@ class MemberService extends Service{
             }
         }
     }
+
+    async updateMember(id, Member){
+        try{
+            //find the member id
+            let updateData = await this.update(id, {
+                username: Member.username,
+                password: Member.password
+            });
+            if(!updateData){
+                throw new Error("Member not found");
+            }
+
+            return {
+                updated_data: updateData,
+                error: false,
+                statusCode: 200,
+            };
+        } catch (errors){
+            console.log(errors);
+            return {
+                error:true,
+                statusCode: 500,
+                errors: "Failed to update member"
+            };
+        }
+    }
 }
 
 
