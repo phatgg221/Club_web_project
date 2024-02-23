@@ -16,6 +16,9 @@ const NewCardForm = () => {
   });
   const [isEditMode, setIsEditMode] = useState(false);
 
+  const [errorLink, setErrorLink] = useState('');
+  const [errorSubmit, setErrorSubmit] = useState('');
+
   // console.log("id "+ initialCard._id);
 
   useEffect(() => {
@@ -46,6 +49,16 @@ const NewCardForm = () => {
     }
   }, [id]);
   const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    const linkPattern = /^(http|https):\/\/.+/;
+    if (name === "linkToWeb") {
+      if (!linkPattern.test(value)) {
+        setErrorSubmit('Invalid format. Cannot submit.');
+        setErrorLink('Invalid link format. Requires to start with: http:// or https://');
+      } else {
+        setErrorSubmit(''); setErrorLink('')
+      };
+    }
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -141,6 +154,7 @@ const NewCardForm = () => {
             value={formData.linkToWeb}
             onChange={handleInputChange}
           />
+          {errorLink && <p className="error">{errorLink}</p>}
         </div>
         <div className={style.inputGroup}>
           <label>Image URL:</label>
@@ -168,6 +182,7 @@ const NewCardForm = () => {
             Return
           </button>
         </div>
+        {errorSubmit && <p className="error">{errorSubmit}</p>}
       </form>
     </div>
   );
