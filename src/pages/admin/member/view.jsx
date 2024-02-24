@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import style from "@/styles/table.module.css";
 import Popup from "reactjs-popup";
+import styleForm from "@/styles/Admin.Form.module.css";
 
 const MemberTable = () => {
   const [usernameError, setUsernameError] = useState('');
@@ -29,7 +30,7 @@ const MemberTable = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    const usernamePattern = /^[sS]\d{6}$/;
+    const usernamePattern = /^[sS]\d{7}$/;
     if (name === 'username') {
       if (!usernamePattern.test(value)) {
         setErrorSubmit('Invalid format. Cannot submit.');
@@ -67,8 +68,17 @@ const MemberTable = () => {
     window.location.href = "/admin/dashboard/view";
   };
 
-  const hanldeSubmit = async (event) => {
-    event.preventDefault();
+  const hanldeSubmit = async () => {
+    const usernameExists = members.data.mongoData.some(member => member.username === formData.username);
+    if (usernameExists) {
+      alert("Account already exists.");
+      return;
+    }
+
+    if (errorSubmit) {
+      alert("Invalid form. Cannot submit.");
+      return;
+    }
 
     fetch("/api/member_api", {
       method: "POST",
@@ -79,7 +89,7 @@ const MemberTable = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network reponse was not ok");
+          throw new Error("Network response was not ok");
         }
 
         closeModal();
@@ -93,7 +103,11 @@ const MemberTable = () => {
   return (
     <>
       <Popup open={open} closeOnDocumentClick onClose={hanldeSubmit}>
-        <form onSubmit={hanldeSubmit}>
+        <form
+          style={{ backgroundColor: "white", padding: "20px", border: "solid", borderColor: "gray" }}
+          className={styleForm.form}
+          onSubmit={hanldeSubmit}
+        >
           <label>
             Username:
             <input
@@ -108,10 +122,12 @@ const MemberTable = () => {
             Password: The password will be 1 as default. Member can change it
             later.
           </label>
-          <button type="submit">Create Account</button>
-          {errorSubmit && <p className="error">{errorSubmit}</p>}
+          <button
+            className={`${style.btn} ${style.btnForm}`}
+            type="submit">Create Account</button>
         </form>
       </Popup>
+
       <div className={style.divTable}>
         <table className={style.mainTable}>
           <thead className={style.tableHeading}>

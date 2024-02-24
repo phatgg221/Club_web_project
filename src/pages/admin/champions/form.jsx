@@ -195,7 +195,7 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
                 > {isUpdate ? 'Update' : 'Add New'} Champion</div>
                 <div className={style.content}>
                     <form
-                        style={{ marginLeft: '20%' }}
+                        style={{ padding: "20px", margin: "auto", width: "100%" }}
                         className={styleForm.form}
                         onSubmit={saveChampion}>
                         <label htmlFor="teamName">Team Name</label>

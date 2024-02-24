@@ -56,7 +56,8 @@ const NewCardForm = () => {
         setErrorSubmit('Invalid format. Cannot submit.');
         setErrorLink('Invalid link format. Requires to start with: http:// or https://');
       } else {
-        setErrorSubmit(''); setErrorLink('')
+        setErrorSubmit('');
+        setErrorLink('');
       };
     }
     setFormData({
@@ -70,6 +71,12 @@ const NewCardForm = () => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (errorSubmit) {
+      alert("Invalid form. Cannot submit.");
+      return;
+    }
+
     fetch("/api/card_api", {
       method: "POST",
       headers: {
@@ -91,6 +98,11 @@ const NewCardForm = () => {
 
   const handleUpdate = async (event) => {
     event.preventDefault();
+    if (errorSubmit) {
+      alert("Invalid form. Cannot submit.");
+      return;
+    }
+
     try {
       const response = await fetch(`/api/card_api?id=${id}`, {
         method: "PUT",
@@ -181,7 +193,6 @@ const NewCardForm = () => {
             Return
           </button>
         </div>
-        {errorSubmit && <p className="error">{errorSubmit}</p>}
       </form>
     </div>
   );
