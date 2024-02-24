@@ -191,11 +191,11 @@ const NewTipForm = () => {
                 />
               </div>
               <div className={`${style.inputGroup}  `}>
-                <label>Image Link</label>
+                <label>Image</label>
                 <input
-                  type="text"
+                  type="file"
                   name="tipImage"
-                  value={content.tipImage}
+                  accept='.jpeg, .png, .jpg'
                   onChange={(e) => handleInputChange(index, e)}
                 />
               </div>
@@ -237,11 +237,11 @@ const NewTipForm = () => {
                 />
               </div>
               <div className={style.inputGroup}>
-                <label>Image Link</label>
+                <label>Image</label>
                 <input
-                  type="text"
+                  type="file"
                   name="tipImage"
-                  value={content.tipImage}
+                  accept='.jpeg, .png, .jpg'
                   onChange={(e) => handleInputChangeUpdate(index, e)}
                 />
               </div>
