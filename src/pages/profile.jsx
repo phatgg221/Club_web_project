@@ -1,11 +1,18 @@
 import styles from "@/styles/Profile.module.css";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Profile() {
+  const { isLoggedIn, logout } = useAuth();
   const [changePw, setChangePw] = useState(false);
 
-  function logout() {
-    document.location = "/";
+  const handleLogOut = () => {
+    if (isLoggedIn) {
+      logout();
+      document.location = "/";
+    } else {
+      document.location = "/login";
+    }
   }
 
   function toggleChangePw() {
@@ -45,7 +52,7 @@ export default function Profile() {
         </div>
       )}
 
-      <button className={styles.logout} onClick={logout}>
+      <button className={styles.logout} onClick={handleLogOut}>
         Logout
       </button>
     </div>

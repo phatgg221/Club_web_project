@@ -80,6 +80,10 @@ const NewTipForm = () => {
 
   const hanldeSubmit = async (event) => {
     event.preventDefault();
+    if (errorSubmit) {
+      alert("Invalid form. Cannot submit.");
+      return;
+    }
     setFormData((prevState) => ({ ...prevState, realContent: contents }));
     try {
       const response = await fetch("/api/tip_api", {
@@ -100,6 +104,10 @@ const NewTipForm = () => {
 
   const handleUpdate = async (event) => {
     event.preventDefault();
+    if (errorSubmit) {
+      alert("Invalid form. Cannot submit.");
+      return;
+    }
     try {
       const response = await fetch(`/api/tip_api?id=${id}`, {
         method: "PUT",
@@ -281,7 +289,6 @@ const NewTipForm = () => {
             Return
           </button>
         </div>
-        {errorSubmit && <p className="error">{errorSubmit}</p>}
       </form>
     </div>
   );

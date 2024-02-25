@@ -60,7 +60,8 @@ const NewCardForm = () => {
         setErrorSubmit('Invalid format. Cannot submit.');
         setErrorLink('Invalid link format. Requires to start with: http:// or https://');
       } else {
-        setErrorSubmit(''); setErrorLink('')
+        setErrorSubmit('');
+        setErrorLink('');
       };
     }
     setFormData({
@@ -75,10 +76,15 @@ const NewCardForm = () => {
   const handleReturn = () => {
     window.location.href = "/admin/Card/view";
   };
- 
+
 
   const handleUpdate = async (event) => {
     event.preventDefault();
+    if (errorSubmit) {
+      alert("Invalid form. Cannot submit.");
+      return;
+    }
+
     try {
       const formDataCopy = { ...formData };
   
@@ -237,7 +243,6 @@ const NewCardForm = () => {
             Return
           </button>
         </div>
-        {errorSubmit && <p className="error">{errorSubmit}</p>}
       </form>
     </div>
   );
