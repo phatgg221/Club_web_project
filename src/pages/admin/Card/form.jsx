@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import style from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
+
 const NewCardForm = () => {
+  const cloudName = 'dhjapmqga';
+  const apiKey = '439639571242781';
+  const apiSecret = 'Kyyj5Cb6DiGEuA_tQf5KDcM4Eys';
   const router = useRouter();
   const { id } = router.query;
   console.log("id asdasdasd" + id);
@@ -64,30 +68,14 @@ const NewCardForm = () => {
       [event.target.name]: event.target.value,
     });
   };
+  
+ 
+  
 
   const handleReturn = () => {
     window.location.href = "/admin/Card/view";
   };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    fetch("/api/card_api", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        window.location.href = "/admin/Card/view";
-
-        return response.json();
-      })
-      .then((data) => console.log("Success:", data))
-      .catch((error) => console.error("Error:", error));
-  };
+ 
 
   const handleUpdate = async (event) => {
     event.preventDefault();
@@ -105,6 +93,46 @@ const NewCardForm = () => {
       window.location.href = "/admin/Card/view";
     } catch (error) {
       console.error("Error:", error);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const formDataCopy = { ...formData };
+      const imageData = new FormData();
+      imageData.append('file', document.getElementById('Image').files[0]);
+      imageData.append('upload_preset', 'lzz18aot'); // Replace 'your_upload_preset' with your Cloudinary upload preset
+
+      const response = await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload', {
+        method: 'POST',
+          body: imageData,
+});
+
+      if (!response.ok) {
+        throw new Error('Failed to upload image.');
+      }
+
+      const data = await response.json();
+      formDataCopy.imageURL = data.secure_url;
+
+      const cardResponse = await fetch(`/api/card_api`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formDataCopy),
+      });
+
+      if (!cardResponse.ok) {
+        throw new Error('Failed to submit card data.');
+      }
+
+      window.location.href = "/admin/Card/view";
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorSubmit('Failed to submit. Please try again.');
     }
   };
   return (
@@ -136,7 +164,7 @@ const NewCardForm = () => {
           <div className={style.inputGroup}>
             <label>Location:</label>
             <input
-              required={true}
+              require={true}
               type="text"
               name="location"
               placeholder={isEditMode ? formData.location : ""}
@@ -152,6 +180,7 @@ const NewCardForm = () => {
             name="linkToWeb"
             placeholder={isEditMode ? formData.linkToWeb : ""}
             value={formData.linkToWeb}
+            required={true}
             onChange={handleInputChange}
           />
           {errorLink && <p className="error">{errorLink}</p>}
@@ -159,10 +188,12 @@ const NewCardForm = () => {
         <div className={style.inputGroup}>
           <label>Image:</label>
           <input
+            id="Image"
             type="file"
             name="imageURL"
             accept='.jpeg, .png, .jpg'
-            onChange={handleInputChange}
+            require={true}
+            // onChange={handleInputChange}
           />
         </div>
         <div className={styleBtn.btnBottomDiv}>
