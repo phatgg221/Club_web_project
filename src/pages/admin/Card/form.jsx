@@ -80,13 +80,38 @@ const NewCardForm = () => {
   const handleUpdate = async (event) => {
     event.preventDefault();
     try {
+      const formDataCopy = { ...formData };
+  
+      // Check if a new image has been selected
+      const imageFile = document.getElementById('Image').files[0];
+      if (imageFile) {
+        const imageData = new FormData();
+        imageData.append('file', imageFile);
+        imageData.append('upload_preset', 'lzz18aot'); // Replace 'your_upload_preset' with your Cloudinary upload preset
+  
+        // Upload new image
+        const imageResponse = await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload', {
+          method: 'POST',
+          body: imageData,
+        });
+  
+        if (!imageResponse.ok) {
+          throw new Error('Failed to upload image.');
+        }
+  
+        const imageDataJson = await imageResponse.json();
+        formDataCopy.imageURL = imageDataJson.secure_url;
+      }
+  
+      // Update card data
       const response = await fetch(`/api/card_api?id=${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formDataCopy),
       });
+  
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -95,7 +120,7 @@ const NewCardForm = () => {
       console.error("Error:", error);
     }
   };
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
