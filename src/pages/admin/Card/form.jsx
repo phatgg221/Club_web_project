@@ -4,9 +4,6 @@ import style from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
 
 const NewCardForm = () => {
-  const cloudName = 'dhjapmqga';
-  const apiKey = '439639571242781';
-  const apiSecret = 'Kyyj5Cb6DiGEuA_tQf5KDcM4Eys';
   const router = useRouter();
   const { id } = router.query;
   console.log("id asdasdasd" + id);

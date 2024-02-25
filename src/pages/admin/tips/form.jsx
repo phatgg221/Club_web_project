@@ -84,23 +84,61 @@ const NewTipForm = () => {
       alert("Invalid form. Cannot submit.");
       return;
     }
-    setFormData((prevState) => ({ ...prevState, realContent: contents }));
     try {
-      const response = await fetch("/api/tip_api", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      const formDataCopy = { ...formData };
+      // Use Promise.all to wait for all image uploads to complete
+      const updatedRealContent = await Promise.all(formDataCopy.realContent.map(async (content, index) => {
+        const imageData = new FormData();
+        const fileInput = document.getElementById(`Image-${index}`);
+        if (fileInput && fileInput.files.length >  0) {
+          imageData.append('file', fileInput.files[0]);
+          imageData.append('upload_preset', 'lzz18aot'); // Your Cloudinary upload preset
+  
+          const response = await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload', {
+            method: 'POST',
+            body: imageData,
+          });
+  
+          if (!response.ok) {
+            throw new Error('Failed to upload image.');
+          }
+  
+          const data = await response.json();
+          return { ...content, tipImage: data.secure_url };
+        }
+        return content; 
+      }));
+  
+      formDataCopy.realContent = updatedRealContent;
+  
+      const finalResponse = isEditMode ?
+        await fetch(`/api/tip_api?id=${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formDataCopy),
+        }) :
+        await fetch("/api/tip_api", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formDataCopy),
+        });
+  
+      if (!finalResponse.ok) {
+        throw new Error('Failed to submit form data.');
       }
+  
       window.location.href = "/admin/tips/tips";
     } catch (error) {
-      console.error("Error", error);
+      console.error("Error:", error);
     }
   };
+  
+  
+  
 
   const handleUpdate = async (event) => {
     event.preventDefault();
@@ -109,21 +147,51 @@ const NewTipForm = () => {
       return;
     }
     try {
+      const formDataCopy = { ...formData };
+      // Use Promise.all to wait for all image uploads to complete
+      const updatedRealContent = await Promise.all(formDataCopy.realContent.map(async (content, index) => {
+        const imageData = new FormData();
+        const fileInput = document.getElementById(`Image-${index}`); // Ensure each input has a unique ID
+        if (fileInput && fileInput.files.length >  0) {
+          imageData.append('file', fileInput.files[0]);
+          imageData.append('upload_preset', 'lzz18aot'); // Your Cloudinary upload preset
+  
+          const response = await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload', {
+            method: 'POST',
+            body: imageData,
+          });
+  
+          if (!response.ok) {
+            throw new Error('Failed to upload image.');
+          }
+  
+          const data = await response.json();
+          return { ...content, tipImage: data.secure_url }; // Update the content item with the new image URL
+        }
+        return content; // If no file is selected, return the content as is
+      }));
+  
+      formDataCopy.realContent = updatedRealContent;
+  
       const response = await fetch(`/api/tip_api?id=${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formDataCopy),
       });
+  
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+  
       window.location.href = "/admin/tips/tips";
     } catch (error) {
       console.error("Error:", error);
     }
   };
+  
+  
 
   const handleInputValidation = (event) => {
     const { name, value } = event.target;
@@ -201,6 +269,7 @@ const NewTipForm = () => {
               <div className={`${style.inputGroup}  `}>
                 <label>Image</label>
                 <input
+                  id={`Image-${index}`}
                   type="file"
                   name="tipImage"
                   accept='.jpeg, .png, .jpg'
@@ -247,6 +316,7 @@ const NewTipForm = () => {
               <div className={style.inputGroup}>
                 <label>Image</label>
                 <input
+                  id="Image"
                   type="file"
                   name="tipImage"
                   accept='.jpeg, .png, .jpg'
