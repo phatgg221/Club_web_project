@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import style from "@/styles/content.module.css";
 import styleForm from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
+import { useAuth } from "@/contexts/AuthContext";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs"; // Import bcryptjs for hashing
 
-import { set } from "mongoose";
-
-const Content = ({ close, content, isAdminChangePass }) => {
-  const [admin, setAdmin] = useState([]);
-  const [oldPass, setOld] = useState("");
-  const [newPass, setnewPass] = useState("");
+export default function resetPassword() {
+  const [users, setUsers] = useState([]);
+  const [oldPass, setOldPass] = useState("");
+  const [newPass, setNewPass] = useState("");
   const [cannotEmpty, setCannotEmpty] = useState(false);
-  const [wrongPass, setWropass] = useState(false);
+  const [wrongPass, setWrongPass] = useState(false);
   const [changeSuccessful, setSuccess] = useState(false);
+  const [currentUserIndex, setCurrentUserIndex] = useState(-1);
+
+  const { userId } = useAuth(); // Get userId from useAuth hook
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/admin_api`);
+        const response = await fetch(`/api/member_api`);
         const data = await response.json();
+        setUsers(data);
 
-        setAdmin(data);
+        const mongoDataArray = data.data.mongoData;
+        const index = mongoDataArray.findIndex((user) => user._id === userId);
+        setCurrentUserIndex(index);
       } catch (err) {
         console.log("Error fecthing data: ", err);
       }
@@ -29,30 +35,37 @@ const Content = ({ close, content, isAdminChangePass }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const id = admin.data.mongoData[0]._id;
-    console.log(id + "id");
-    // Validate the inputs
+
+    //If users input is empty
     if (!oldPass || !newPass) {
       setCannotEmpty(true);
       return;
     }
 
+    const hashedPassword = users.data.mongoData[currentUserIndex].password; //get the hashed password from the database
+
+    const passwordMatch = await bcrypt.compare(oldPass, hashedPassword);
+    // Check if the old password matches the current password (hashed)
+
     // Check if the old password matches the current password
-    if (oldPass !== admin.data.mongoData[0].adminPassword) {
-      setWropass(true);
+    if (!passwordMatch) {
+      setWrongPass(true);
       return;
     }
 
+
+    // Hash the new password before sending to the server
+    const newHashedPassword = await bcrypt.hash(newPass, 10);
     // Send a request to the server to update the password
     try {
-      const response = await fetch(`/api/admin_api?id=${id}`, {
+      const response = await fetch(`/api/member_api?id=${userId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          adminUsername: admin.data.mongoData[0].adminUsername,
-          adminPassword: newPass,
+          username: users.data.mongoData[currentUserIndex].username,
+          password: newHashedPassword,
         }),
       });
 
@@ -74,47 +87,28 @@ const Content = ({ close, content, isAdminChangePass }) => {
       );
     }
   };
-
-  return !isAdminChangePass ? (
-    <div className={style.modal}>
-      <a className={style.close} onClick={close}>
-        ×
-      </a>
-      <div className={style.header}>{content.name}</div>
-      <div className={style.content}>
-        <p>{content.contents}</p>
-        <p>
-          <img
-            className={style.cotentImage}
-            src={content.tipImage}
-            alt=""
-            width={500}
-            height={300}
-          />
-        </p>
-      </div>
-    </div>
-  ) : (
+  return (
     <div
-      className={`${styleForm.formContainer} ${styleForm.formContainerAdminChangePassword}`}
+      className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
     >
+      <h1>Reset Your Password</h1>
       <form className={styleForm.form} onSubmit={handleSubmit}>
         <div className={styleForm.inputGroup}>
-          <label>Your old Password:</label>
+          <label>Your old password</label>
           <input
             required
             type="password"
             value={oldPass}
-            onChange={(e) => setOld(e.target.value)}
+            onChange={(e) => setOldPass(e.target.value)}
           />
         </div>
         <div className={styleForm.inputGroup}>
-          <label>Your new Password:</label>
+          <label>Your new Password</label>
           <input
             required
             type="password"
             value={newPass}
-            onChange={(e) => setnewPass(e.target.value)}
+            onChange={(e) => setNewPass(e.target.value)}
           />
         </div>
         {cannotEmpty && (
@@ -140,12 +134,10 @@ const Content = ({ close, content, isAdminChangePass }) => {
             className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
             type="submit"
           >
-            Change password
+            Change Password
           </button>
         </div>
       </form>
     </div>
   );
-};
-
-export default Content;
+}

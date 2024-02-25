@@ -8,6 +8,15 @@
 .formContainerTips{
   height: 100%;
 }
+.userResetPasswordContainer{
+  height: 100%;
+  flex-direction: column;
+}
+
+.userResetPasswordContainer h1{
+
+  font-weight: 600;
+}
 
 .formContainerAdminChangePassword{
   margin-top: 150px;

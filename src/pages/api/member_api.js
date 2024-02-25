@@ -14,7 +14,10 @@ export default async function handler (req, res){
       
         case 'POST':
             return handleRequest(() => MemberService.createMember(body), res);
-      
+        
+        case 'PUT':
+            return handleRequest(() => MemberService.updateMember(query.id, body), res);
+
         case 'DELETE':
             let obj = query;
             // console.log(query.id + "id in api ")
