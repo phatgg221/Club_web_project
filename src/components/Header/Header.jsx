@@ -16,6 +16,13 @@ function Header() {
       window.location.href = "/login";
     }
   };
+  const handleViewProfile = () => {
+    if (isLoggedIn) {
+      window.location.href = "/profile";
+    } else {
+      window.location.href = "/login";
+    }
+  };
   useEffect(() => {
     console.log("Current login status: ", isLoggedIn);
   }, [isLoggedIn]);
@@ -96,6 +103,13 @@ function Header() {
                 {isLoggedIn ? "Logout" : "Login"}
               </a>
             </button>
+            {isLoggedIn && (
+              <button className="login-button">
+                <a id="view-profile" onClick={handleViewProfile}>
+                  View Profile
+                </a>
+              </button>
+            )}
           </ul>
         </div>
       </nav>
