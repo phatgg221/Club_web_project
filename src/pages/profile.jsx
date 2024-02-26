@@ -33,9 +33,7 @@ export default function Profile() {
         Update your password
       </button>
 
-      <button className={styles.logout} onClick={handleLogOut}>
-        Logout
-      </button>
+      
     </div>
   );
 }
