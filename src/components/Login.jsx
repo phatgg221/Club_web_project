@@ -64,11 +64,14 @@ export default function Login() {
         console.log('Decoded token:', decodedToken.payload.user.id);
 
         const userId = decodedToken.payload.user.id;
+        const username2= username;
+        console.log(username2+ "username 2");
+        console.log(JSON.stringify(decodedToken.payload.user)+ "akjsdnajnc");
         if (userId) {
           
           console.log('User ID:', userId);
          
-          login(userId);
+          login(userId,username2);
        
             router.push('/userMain');
          
