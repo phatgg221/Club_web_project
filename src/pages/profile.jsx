@@ -16,8 +16,9 @@ export default function Profile() {
   }
 
   function toggleChangePw() {
-    setChangePw(!changePw);
+    window.location.href = "/resetPassword";
   }
+
 
   return (
     <div className={styles.container}>
@@ -31,26 +32,6 @@ export default function Profile() {
       <button className={styles.button} onClick={toggleChangePw}>
         Update your password
       </button>
-
-      {changePw && (
-        <div className={styles.inputContainer}>
-          <form>
-            <input
-              className={styles.inputPass}
-              type="text"
-              placeholder="Enter current password"
-            />
-          </form>
-          <form>
-            <input
-              className={styles.inputPass}
-              type="text"
-              placeholder="Enter new password"
-            />
-          </form>
-          <button className={styles.submit}>Submit</button>
-        </div>
-      )}
 
       <button className={styles.logout} onClick={handleLogOut}>
         Logout
