@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import Content from "@/components/Foldables/content";
 function Dashboard() {
   const {isAdmin} = useAuth();
+  console.log("current login status"+ isAdmin);
   const router = useRouter();
   const handleCardButton = async () => {
     window.location.href = "/admin/Card/view";
@@ -29,6 +30,7 @@ function Dashboard() {
   useEffect(() =>{
     if(!isAdmin){
       router.push('/login');
+      console.log("current admin "+ isAdmin);
     }
   }, [isAdmin,router]);
 
