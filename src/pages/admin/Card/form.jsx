@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import style from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
-
+import {useAuth} from "@/contexts/AuthContext";
 const NewCardForm = () => {
-  const cloudName = 'dhjapmqga';
-  const apiKey = '439639571242781';
-  const apiSecret = 'Kyyj5Cb6DiGEuA_tQf5KDcM4Eys';
+  const {isAdmin} = useAuth();
   const router = useRouter();
   const { id } = router.query;
   console.log("id asdasdasd" + id);
@@ -166,6 +164,13 @@ const NewCardForm = () => {
       setErrorSubmit('Failed to submit. Please try again.');
     }
   };
+
+  useEffect(() =>{
+    if(!isAdmin){
+      router.push('/login');
+    }
+  }, [isAdmin,router]);
+
   return (
     <div className={style.formContainer}>
       <form className={style.form} onSubmit={handleSubmit}>

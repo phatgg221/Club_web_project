@@ -5,10 +5,13 @@ import Link from "next/link";
 import Popup from "reactjs-popup";
 import Content from "@/components/Foldables/content";
 import SearchBar from "@/components/Competitions/SearchBar";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
 const TipsTable = () => {
   const [tips, setTips] = useState([]);
   const [searchTerm, setSearchItem] = useState("");
-
+  const {isAdmin}= useAuth();
+  const router = useRouter();
   const handleSearchInput = (search) => {
     setSearchItem(search);
   };
@@ -66,6 +69,12 @@ const TipsTable = () => {
     tips.data.mongoData.filter((item) => {
       return item.tipName.toLowerCase().includes(searchTerm.toLowerCase());
     });
+    useEffect(() =>{
+      if(!isAdmin){
+        router.push('/login');
+      }
+    }, [isAdmin,router]);
+  
   return (
     <>
       <SearchBar

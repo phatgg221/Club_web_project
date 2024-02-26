@@ -3,8 +3,11 @@ import style from "@/styles/content.module.css";
 import styles from "@/styles/table.module.css";
 import styleForm from "@/styles/Admin.Form.module.css";
 import Image from 'next/image';
-
+import { useRouter } from 'next/router';
+import { useAuth } from '@/contexts/AuthContext';
 export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuccess, order, teamList, setTeamList, close }) {
+    const {isAdmin} = useAuth();
+  const router = useRouter();
     const [championData, setChampionData] = useState({
         teamName: '',
         competitionDescription: '',
@@ -183,6 +186,12 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
         }));
     };
 
+    useEffect(() =>{
+        if(!isAdmin){
+          router.push('/login');
+        }
+      }, [isAdmin,router]);
+    
     return (
         <div>
             <div className={style.modal}>

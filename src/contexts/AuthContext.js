@@ -1,4 +1,5 @@
 // contexts/AuthContext.js
+import { faL } from '@fortawesome/free-solid-svg-icons';
 import { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
@@ -12,6 +13,9 @@ export function AuthProvider({ children }) {
       () => typeof window !== 'undefined' ? Boolean(localStorage.getItem('isLoggedIn')) : false
     );
     
+    const [isAdmin, setAdminLogin] = useState(
+      () => typeof window !== 'undefined' ? Boolean(localStorage.getItem('isAdmin')) : false
+    );
   
      const [userId, setUserId] = useState(
         () => typeof window !== 'undefined' ? localStorage.getItem('userId') : null
@@ -26,7 +30,16 @@ export function AuthProvider({ children }) {
         localStorage.setItem('userId', id);
         localStorage.setItem('username', username2)
      };
-    
+     
+     const adminLogin= ()=>{
+         setAdminLogin(true);
+         localStorage.setItem('isAdmin',true);
+     }
+
+     const adminLogout=()=>{
+      setAdminLogin(false);
+      localStorage.removeItem('isAdmin');
+     }
      const logout = () => {
         setIsLoggedIn(false);
         setUserId(null);
@@ -37,7 +50,7 @@ export function AuthProvider({ children }) {
      };
 
   return (
-    <AuthContext.Provider value={{ username,isLoggedIn, userId, login, logout }}>
+    <AuthContext.Provider value={{ username,isLoggedIn, userId,adminLogin,adminLogout ,login, logout }}>
       {children}
     </AuthContext.Provider>
   );

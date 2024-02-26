@@ -5,7 +5,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/router';
 export default function Login() {
   const router = useRouter();
-  const {login, isLoggedIn} = useAuth();
+  const {login, isLoggedIn,isAdmin,adminLogin} = useAuth();
   const [username,setUsername]= useState('');
   const [password, setPassword] = useState('');
   const[formSubmit, setFormSubmit]= useState(false);
@@ -42,6 +42,7 @@ export default function Login() {
       if (password === admin.data.mongoData[0].adminPassword) {
         // Perform admin login logic here, for example, redirect to admin dashboard
         router.push('/admin/dashboard/view');
+        adminLogin();
         return;
       } else {
         setIsnotcorrect(true);

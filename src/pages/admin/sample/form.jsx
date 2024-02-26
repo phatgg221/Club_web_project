@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import style from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
-
+import { useAuth } from "@/contexts/AuthContext";
 const NewSampleForm = () => {
   const router = useRouter();
   const { id } = router.query;
-
+  const {isAdmin} = useAuth();
   const [formData, setFormData] = useState({
     sampleName: "",
     sampleContents: "",
@@ -118,6 +118,12 @@ const NewSampleForm = () => {
       console.error("Error:", error);
     }
   };
+  useEffect(() =>{
+    if(!isAdmin){
+      router.push('/login');
+    }
+  }, [isAdmin,router]);
+
   return (
     <div className={style.formContainer}>
       <form className={style.form} onSubmit={hanldeSubmit}>

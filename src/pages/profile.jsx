@@ -11,14 +11,7 @@ export default function Profile() {
 
 
 
-  const handleLogOut = () => {
-    if (isLoggedIn) {
-      logout();
-      document.location = "/";
-    } else {
-      document.location = "/login";
-    }
-  };
+  
 
   function toggleChangePw() {
     window.location.href = "/resetPassword";

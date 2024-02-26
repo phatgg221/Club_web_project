@@ -1,9 +1,13 @@
-import React from "react";
+import React,{useEffect} from "react";
 import AdminHeader from "@/components/Header/adminHeader";
 import style from "@/styles/AdminDasboard.module.css";
 import Popup from "reactjs-popup";
+import {useRouter} from "next/router";
+import { useAuth } from "@/contexts/AuthContext";
 import Content from "@/components/Foldables/content";
 function Dashboard() {
+  const {isAdmin} = useAuth();
+  const router = useRouter();
   const handleCardButton = async () => {
     window.location.href = "/admin/Card/view";
   };
@@ -21,6 +25,13 @@ function Dashboard() {
   const handleTips = async () => {
     window.location.href = "/admin/tips/tips";
   };
+
+  useEffect(() =>{
+    if(!isAdmin){
+      router.push('/login');
+    }
+  }, [isAdmin,router]);
+
   return (
     <div>
       <AdminHeader />

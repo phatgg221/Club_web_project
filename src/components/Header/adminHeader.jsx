@@ -1,8 +1,10 @@
 import React from "react";
 import style from "@/styles/AdminHeader.module.css";
-
+import {useAuth} from "@/contexts/AuthContext";
 function AdminHeader() {
+  const {adminLogout}= useAuth();
   const handleButton = async () => {
+    adminLogout();
     window.location.href = "/";
   };
   return (

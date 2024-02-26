@@ -3,8 +3,11 @@ import React from "react";
 import style from "@/styles/table.module.css";
 import Popup from "reactjs-popup";
 import styleForm from "@/styles/Admin.Form.module.css";
-
+import {useRouter} from "next/router";
+import { useAuth } from "@/contexts/AuthContext";
 const MemberTable = () => {
+  const router = useRouter();
+  const {isAdmin}= useAuth();
   const [usernameError, setUsernameError] = useState('');
   const [errorSubmit, setErrorSubmit] = useState('');
   const [members, setMembers] = useState([]);
@@ -99,6 +102,12 @@ const MemberTable = () => {
       .then((data) => console.log("Success: ", data))
       .catch((error) => console.error("Error", error));
   };
+  useEffect(() =>{
+    if(!isAdmin){
+      router.push('/login');
+    }
+  }, [isAdmin,router]);
+
 
   return (
     <>

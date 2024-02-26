@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import style from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
-
+import { useAuth } from "@/contexts/AuthContext";
 const NewTipForm = () => {
   const router = useRouter();
+  const {isAdmin}= useAuth();
   const { id } = router.query;
   const [contentCount, setContentCount] = useState(1);
   const [contents, setContents] = useState([
@@ -138,7 +139,12 @@ const NewTipForm = () => {
   };
   
   
-  
+  useEffect(() =>{
+    if(!isAdmin){
+      router.push('/login');
+    }
+  }, [isAdmin,router]);
+
 
   const handleUpdate = async (event) => {
     event.preventDefault();

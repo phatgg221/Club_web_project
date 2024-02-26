@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import React from "react";
+import { useRouter } from "next/router";
 import style from "@/styles/table.module.css";
 import AdminHeader from "@/components/Header/adminHeader";
 import SearchBar from "@/components/Competitions/SearchBar";
+import {useAuth} from "@/contexts/AuthContext";
 const CardTable = () => {
   const [ongoingCompetitions, setOngoingCompetitions] = useState([]);
   const [searchTerm, setSearchItem] = useState("");
-
+  const {isAdmin} = useAuth();
+  const router= useRouter();
   const handleSearchInput = (searchTerm) => {
     setSearchItem(searchTerm);
   };
@@ -62,6 +65,13 @@ const CardTable = () => {
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
     });
+    
+    useEffect(() =>{
+      if(!isAdmin){
+        router.push('/login');
+      }
+    }, [isAdmin,router]);
+  
   return (
     <>
       <SearchBar

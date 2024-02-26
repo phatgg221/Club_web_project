@@ -5,11 +5,13 @@ import style from "@/styles/table.module.css";
 import CreateChampion from "@/pages/admin/champions/form";
 import AdminHeader from "@/components/Header/adminHeader";
 import Popup from "reactjs-popup";
-
+import { useRouter } from "next/router";
+import { useAuth } from "@/contexts/AuthContext";
 function Champion() {
     const [teamList, setTeamList] = useState([]);
     const [selectedItemIndex, setSelectedItemIndex] = useState(null);
-
+    const router = useRouter();
+    const {isAdmin}= useAuth();
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -84,6 +86,12 @@ function Champion() {
         window.location.reload();
     };
 
+    useEffect(() =>{
+        if(!isAdmin){
+          router.push('/login');
+        }
+      }, [isAdmin,router]);
+    
     return (
         <div>
             <AdminHeader />
