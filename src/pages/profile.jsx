@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic';
 import styles from "@/styles/Profile.module.css";
-import { useState } from "react";
-
+import { useState,useEffect } from "react";
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/router';
 // Dynamically import the component with ssr: false
 const ClientSideUsername = dynamic(() => import('@/components/ClientSideOnly.jsx'), { ssr: false });
 
@@ -9,7 +10,14 @@ export default function Profile() {
   // const { isLoggedIn, logout, username } = useAuth();
   const [changePw, setChangePw] = useState(false);
 
+  const {isLoggedIn}= useAuth();
+  const router = useRouter();
 
+  useEffect(() =>{
+    if(!isLoggedIn){
+      router.push('/login');
+    }
+  }, [isLoggedIn,router]);
 
   
 

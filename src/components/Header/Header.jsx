@@ -77,19 +77,19 @@ function Header() {
               </a>
             </li>
             <li>
-              <a id="samples" href="/samples">
+              <a id="samples" href={isLoggedIn ? "/samples" : "/login"}>
                 Showcase
               </a>
             </li>
             <li>
-              <a id="tips" href={"/tips"}>
+              <a id="tips" href={isLoggedIn ? "/tips" : "/login"}>
                 Tips
               </a>
             </li>
           </ul>
           <ul className="right-nav">
             <li>
-              <a id="competitions" href="/competitions">
+              <a id="competitions"  href={isLoggedIn ? "/competitions" : "/login"}>
                 Competitions
               </a>
             </li>

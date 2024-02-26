@@ -4,7 +4,7 @@ import styleBtn from "@/styles/table.module.css";
 import { useAuth } from "@/contexts/AuthContext";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs"; // Import bcryptjs for hashing
-
+import { useRouter } from "next/router";
 export default function resetPassword() {
   const [users, setUsers] = useState([]);
   const [oldPass, setOldPass] = useState("");
@@ -13,9 +13,14 @@ export default function resetPassword() {
   const [wrongPass, setWrongPass] = useState(false);
   const [changeSuccessful, setSuccess] = useState(false);
   const [currentUserIndex, setCurrentUserIndex] = useState(-1);
-
-  const { userId } = useAuth(); // Get userId from useAuth hook
-
+  const router = useRouter();
+  const { userId,isLoggedIn } = useAuth(); // Get userId from useAuth hook
+  useEffect(() =>{
+    if(!isLoggedIn){
+      router.push('/login');
+    }
+  }, [isLoggedIn,router]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
