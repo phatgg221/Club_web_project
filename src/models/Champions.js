@@ -15,7 +15,6 @@ class Champions {
     const champSchema = new mongoose.Schema({
       teamName: {
         type: String,
-
         require: true,
       },
       competitionDescription: {
@@ -26,24 +25,16 @@ class Champions {
         type: String,
         require: true,
       },
-      images: [
-        {
-          type: String,
-          validate: {
-            validator: function (v) {
-              const isCorrectImageLink = (currentValue) => /^https?:\/\/.+/.test(currentValue);
-              return isCorrectImageLink(v);
-
-            },
-            message: (props) => `${props.value} is not a valid image URL`,
+      image: {
+        type: String,
+        validate: {
+          validator: function (v) {
+            const isCorrectImageLink = (currentValue) => /^https?:\/\/.+/.test(currentValue);
+            return isCorrectImageLink(v);
           },
-          trim: true,
+          message: (props) => `${props.value} is not a valid image URL`,
         },
-      ],
-
-      teamOrder: {
-        type: Number,
-        require: true,
+        trim: true,
       },
     });
     return mongoose.models.Champions || mongoose.model("Champions", champSchema);   // avoid OverwriteModelError

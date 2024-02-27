@@ -5,7 +5,7 @@
   max-width: 1000px;
   max-height: 375px;
   display: grid;
-  grid-template-columns: 25% 75%;
+  /* grid-template-columns: 25% 75%; */
   background-color: #f8a61b;
   padding: 0;
   border-radius: 5px;
@@ -105,11 +105,8 @@ button .team-card {
   transition: all 300ms ease-out;
 }
 
-.curtain h2,
-.curtain h3 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.curtain .content {
+  padding-top: 5%;
   vertical-align: middle;
   margin: 0;
 }
