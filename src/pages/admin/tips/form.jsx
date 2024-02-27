@@ -154,13 +154,13 @@ const NewTipForm = () => {
     }
     try {
       const formDataCopy = { ...formData };
-      // Use Promise.all to wait for all image uploads to complete
+     
       const updatedRealContent = await Promise.all(formDataCopy.realContent.map(async (content, index) => {
         const imageData = new FormData();
         const fileInput = document.getElementById(`Image-${index}`); // Ensure each input has a unique ID
         if (fileInput && fileInput.files.length >  0) {
           imageData.append('file', fileInput.files[0]);
-          imageData.append('upload_preset', 'lzz18aot'); // Your Cloudinary upload preset
+          imageData.append('upload_preset', 'lzz18aot'); 
   
           const response = await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload', {
             method: 'POST',
@@ -322,7 +322,7 @@ const NewTipForm = () => {
               <div className={style.inputGroup}>
                 <label>Image</label>
                 <input
-                  id="Image"
+                  id={`Image-${index}`}
                   type="file"
                   name="tipImage"
                   accept='.jpeg, .png, .jpg'
