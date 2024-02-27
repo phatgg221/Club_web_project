@@ -1,0 +1,79 @@
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 8vh 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+}
+
+.slogan {
+  display: flex;
+  flex-direction: column;
+  & .line {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #181818;
+  }
+}
+
+.loginLogo {
+  margin-right: 20px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  padding: 15px 20px 28px 20px;
+  width: 396px;
+}
+
+.loginButton {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #f8a61b;
+  color: #fffefa;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+#username,
+#password {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #dddfe2;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (max-width: 850px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+  .brand {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  .loginForm {
+    width: 80vw;
+    max-width: 396px;
+  }
+}
+
+@media (max-width: 350px) {
+  .slogan .line {
+    font-size: 1rem;
+  }
+}

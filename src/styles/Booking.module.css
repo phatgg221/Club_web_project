@@ -1,0 +1,33 @@
+.mainContent {
+  background-color: #fffefa;
+  color: #181818;
+}
+
+.mainContent h1 {
+  color: #f8a61b;
+  /* font-size: 50px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainContent p {
+  /* font-size: 20px; */
+  margin: 10px 3vh;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.iframe {
+  width: 100vw;
+  height: 80vh;
+}

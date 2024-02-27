@@ -1,0 +1,51 @@
+/* index.css */
+.modal {
+  font-size: 12px;
+  border-color: gray;
+  border: solid 0.5px;
+}
+
+.modal>.header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+  background-color: #f5b34a;
+}
+
+.modal>.content {
+  min-width: 1000px;
+  min-height: 500px;
+  width: 100%;
+  padding: 10px 5px;
+  background-color: #ffffff;
+}
+
+.modal>.actions {
+  margin: auto;
+}
+
+.modal>.actions {
+  width: 100%;
+  padding: 10px 5px;
+  text-align: center;
+}
+
+.modal>.close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.cotentImage {
+  margin-left: 20%;
+}

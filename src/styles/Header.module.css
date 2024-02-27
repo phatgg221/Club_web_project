@@ -1,0 +1,221 @@
+.primary-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  height: 70px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  background-color: #fffefa;
+}
+
+.primary-header a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: #181818;
+  position: relative;
+  transition: color 150ms linear;
+}
+
+.nav-options {
+  display: flex;
+  flex: 1;
+}
+
+.left-nav,
+.right-nav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  margin: auto;
+  padding: 0;
+  list-style: none;
+}
+
+.left-nav {
+  justify-content: flex-end;
+}
+
+.left-nav li {
+  margin: 0 min(30%, 70px) 0 0;
+}
+
+.right-nav {
+  justify-content: flex-start;
+}
+
+.right-nav li {
+  margin: 0 0 0 min(30%, 70px);
+}
+
+.logo {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.logo a {
+  z-index: 2;
+  pointer-events: all;
+}
+
+.mobile-nav-toggle {
+  display: none;
+}
+
+.login-button {
+  border: none;
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0 0 0 min(30%, 70px);
+  padding: 7.5px 15px;
+  border-radius: 5px;
+  border: #f8a61b 2px solid;
+  background: none;
+  transition: background 150ms linear;
+}
+
+#login-text {
+  color: #f8a61b;
+}
+
+.login-button:hover {
+  background: #f8a61b;
+}
+
+.login-button:hover #login-text {
+  color: #fffefa;
+}
+
+#about:hover,
+#booking:hover,
+#competitions:hover,
+#samples:hover,
+#tips:hover {
+  color: #f8a61b;
+}
+
+#about::after,
+#booking::after,
+#competitions::after,
+#samples::after,
+#tips::after {
+  content: "";
+  height: 0.1rem;
+  width: 100%;
+  background: #f8a61b;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  transition: 150ms ease;
+  pointer-events: none;
+  transform: scale(0, 1);
+}
+
+#about:hover::after,
+#booking:hover::after,
+#competitions:hover::after,
+#samples:hover::after,
+#tips:hover::after {
+  width: 100%;
+  transform: scale(1, 1);
+}
+
+@media (max-width: 1100px) {
+  .primary-header {
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    background: #fffefa;
+  }
+
+  .nav {
+    align-items: baseline;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    background: hsl(36, 100%, 94%);
+    width: 100%;
+    height: 350px;
+    transform: translateY(-100%);
+    transition: transform 350ms ease-in-out;
+  }
+
+  .nav .nav-options {
+    display: block;
+    text-align: center;
+  }
+
+  .nav[datavisible="true"] {
+    transform: translateY(0%);
+  }
+
+  .left-nav,
+  .right-nav {
+    align-items: center;
+    flex-direction: column;
+    justify-content: initial;
+    margin: 0;
+  }
+
+  .left-nav li,
+  .right-nav li {
+    margin: 0 0 12px 0;
+  }
+
+  .left-nav {
+    padding-top: 65px;
+  }
+
+  .primary-header .logo {
+    display: flex;
+    position: static;
+    transform: none;
+    left: 0;
+    top: auto;
+    margin: 8px 10px;
+  }
+
+  .login-button {
+    margin: 0;
+  }
+
+  .login-button:hover {
+    background: none;
+  }
+
+  .login-button:hover #login-text {
+    color: #f8a61b;
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+    position: absolute;
+    z-index: 999;
+    border: 0;
+    width: 2rem;
+    background: none;
+    aspect-ratio: 1;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+  }
+
+  #about::after,
+  #booking::after,
+  #competitions::after,
+  #samples::after,
+  #tips::after {
+    content: none;
+  }
+}

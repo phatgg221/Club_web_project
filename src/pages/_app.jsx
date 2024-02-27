@@ -1,13 +1,42 @@
-// src/pages/_app.jsx
-import '../styles/global.css'; // Adjust the path to your global styles if necessary
+import { useEffect } from 'react';
+import "../styles/global.css";
+import "bootstrap/dist/css/bootstrap.min.global.css";
+import { AuthProvider } from "@/contexts/AuthContext";
+import dynamic from 'next/dynamic';
+// import Header from "@/components/Header/Header";
+import { CloudinaryContext } from 'cloudinary-react';
+import Footer from "@/components/Footer/Footer";
+import { Montserrat } from "next/font/google";
+const connectDB = require('@/lib/mongodb');
+
+connectDB();
+const montserrat = Montserrat({ weight: "400", subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }) {
+  const hideLayout = Component.hideLayout || false;
+  const Header = dynamic(() => import('@/components/Header/Header'), { ssr: false });
+  const cloudName = 'dhjapmqga';
   return (
-    <>
-      {/* Global layout components like header can be added here */}
-      <Component {...pageProps} />
-      {/* Footer components can be added here */}
-    </>
+   <CloudinaryContext cloudName={cloudName}>
+    <AuthProvider>
+      <main className={montserrat.className}>
+        {!hideLayout && <Header />}
+        <div
+          className="mainBody"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "calc(100vh - 70px)",
+            background: "#fffefa",
+            paddingTop: "20px",
+          }}
+        >
+          <Component {...pageProps} />
+          {!hideLayout && <Footer />}
+        </div>
+      </main>
+    </AuthProvider>
+  </CloudinaryContext>
   );
 }
 

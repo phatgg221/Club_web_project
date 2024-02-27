@@ -1,0 +1,50 @@
+.welcomeMain {
+  height: 100%;
+  background-color: #fffefa;
+  margin: 0 10vw;
+}
+
+.welcomeTitle {
+  color: #f8a61b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textContainer {
+  width: 50vw;
+}
+.textContainer p:last-child {
+  margin: 0;
+}
+
+.logo {
+  height: 240px;
+  width: 200px;
+  float: right;
+}
+
+@media (max-width: 750px) {
+  .mainContent {
+    flex-direction: column;
+  }
+
+  .textContainer {
+    width: 100%;
+  }
+
+  .logo {
+    margin-top: 20px;
+    height: 120px;
+    width: 100px;
+    float: right;
+  }
+}

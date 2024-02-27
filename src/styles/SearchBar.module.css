@@ -1,0 +1,46 @@
+.search-bar {
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+input[type="search"] {
+  padding: 10px;
+}
+/* clears the 'X' from Internet Explorer */
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+/* clears the 'X' from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+.submit-btn {
+  aspect-ratio: 1/1;
+  border: none;
+  border-radius: 0 3px 3px 0;
+  background-color: #f8a61b;
+  width: 40px;
+}
+
+.text-box {
+  width: 100%;
+  border: 1px #dddfe2 solid;
+  border-radius: 3px 0 0 3px;
+  &::placeholder {
+    text-align: center;
+  }
+}

@@ -1,5 +1,5 @@
 "use client";
-import "@/styles/champ.css";
+// import "./champ.css";
 
 const CardName = ({ team, activeTeam, handleClick }) => {
   const isActive = activeTeam == team.index;
@@ -7,7 +7,7 @@ const CardName = ({ team, activeTeam, handleClick }) => {
   return (
     <button
       type="button"
-      id={team.index}
+      id={"i"+team.index}
       onClick={() => handleClick(team.index)}
       className={isActive ? "hidden-name card-name" : "card-name"}
     >

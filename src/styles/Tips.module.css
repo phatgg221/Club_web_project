@@ -1,0 +1,103 @@
+.mainContainer {
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  color: #f8a61b;
+}
+
+.container {
+  background-color: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+  height: 1500px;
+}
+
+.titleContainer {
+  background-color: #ffffff;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  justify-content: center;
+  display: flex;
+  padding: 20px;
+  width: 80%;
+}
+
+.bodyContainer {
+  background-color: #ffffff;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 20px;
+  width: 80%;
+  height: 90%;
+  position: relative;
+}
+
+.contentText {
+  font-size: 64px;
+}
+
+.bottomContainer {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  padding: 20px; /* Add padding if necessary */
+  justify-content: center;
+  align-items: center;
+}
+
+.attachFile {
+  font-size: 34px;
+  font-weight: 700;
+  margin-left: 30px;
+}
+
+.btn {
+  font-size: 30px;
+  width: 20%;
+  height: 50px;
+  border-radius: 10px;
+}
+
+/* THIS IS FOR IPHONE */
+@media only screen and (max-width: 740px) {
+  .container {
+    height: 800px;
+  }
+
+  .titleContainer {
+    font-size: 70px;
+  }
+
+  .bodyContainer {
+    margin-top: 20px;
+  }
+
+  .btn {
+    font-size: 15px;
+    width: 30%;
+    height: 30px;
+  }
+  .attachFile {
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 10px;
+  }
+}
+
+/* THIS IS FOR TABLET */
+@media only screen and (min-width: 740px) and (max-width: 1024px) {
+  .btn {
+    font-size: 35px;
+    width: 40%;
+  }
+}

@@ -1,0 +1,121 @@
+.main {
+  background-color: #fffefa;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0 10vw;
+  max-width: 100%;
+}
+
+.hero-text {
+  padding: 0;
+  margin: 0;
+}
+
+.GreetingTile {
+  /* font-size: 80px; */
+  font-size: 5.5vw;
+  font-weight: bold;
+  color: #f8a61b;
+  margin: 0;
+  height: 100px;
+  width: 50%;
+  display: initial;
+}
+
+.PageContent {
+  display: block;
+  /* font-size: 38px; */
+  font-size: 2.5vw;
+  color: #181818;
+  margin: 30px 0;
+  width: 50vw;
+  min-width: 270px;
+  margin: 0 0 30px 0;
+}
+
+.image {
+  padding: 0;
+  margin: 0;
+}
+
+.image .imageContent {
+  /* height: 600px; */
+  /* height: 40vw; */
+  width: 23vw;
+}
+
+.button-container {
+  margin: 0;
+}
+
+.button-container button {
+  /* font-size: 1.5rem; */
+  font-size: 1.5vw;
+  display: block;
+  margin-bottom: 2vw;
+  padding: 15px 10px;
+  background: 0;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.button1 {
+  border: 3px #0a71ba solid;
+  color: #0a71ba;
+  transition: color 150ms ease-in-out, background 150ms ease-in-out;
+}
+
+.button1:hover {
+  background: #0a71ba;
+  color: #fffefa;
+}
+
+.button2 {
+  border: 3px #f8a61b solid;
+  background: #f8a61b;
+  color: #f8a61b;
+  transition: color 150ms ease-in-out, background 150ms ease-in-out;
+}
+
+.button2:hover {
+  background: #f8a61b;
+  color: #fefefa;
+}
+
+.button3 {
+  border: 3px #181818 solid;
+  color: #181818;
+  transition: color 150ms ease-in-out, background 150ms ease-in-out;
+}
+
+.button3:hover {
+  background: #181818;
+  color: #fffefa;
+}
+
+@media (max-width: 450px) {
+  .image {
+    display: none;
+  }
+  .hero-text {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .button-container button {
+    height: 70px;
+    width: 60%;
+    font-size: 15px;
+  }
+  .GreetingTile {
+    font-size: 50px;
+  }
+  .PageContent {
+    font-size: 20px;
+  }
+}
