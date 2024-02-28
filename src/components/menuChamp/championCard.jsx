@@ -21,6 +21,7 @@ export default function ChampionCard() {
           competition: item.competitionDescription || "Description Not Available",
           award: item.awardDes || "Award Not Available",
           image: item.image || "/champ-bg.png",
+          images: item.images|| [],
           index,
         }));
 
@@ -47,7 +48,7 @@ export default function ChampionCard() {
             {teamList.map((team, index) => (
 
               <Carousel.Item id={index} key={index} className="carousel-item">
-                <Image className="carousel-img" src={team.image} alt={'image-${index}'} fluid />
+                <Image className="carousel-img" src={team.images[0]} alt={'image-${index}'} fluid />
               </Carousel.Item>
             ))}
           </Carousel>

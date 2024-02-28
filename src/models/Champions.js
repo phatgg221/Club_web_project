@@ -36,6 +36,17 @@ class Champions {
         },
         trim: true,
       },
+      images: {
+        type: [String], 
+        validate: {
+          validator: function (arr) {
+            
+            return arr.every(url => /^https?:\/\/.+/.test(url));
+          },
+          message: (props) => `${props.value} contains invalid image URL(s)`,
+        },
+        trim: true,
+      },
     });
     return mongoose.models.Champions || mongoose.model("Champions", champSchema);   // avoid OverwriteModelError
   }
