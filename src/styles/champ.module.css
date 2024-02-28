@@ -63,11 +63,12 @@ button .team-card {
 .carousel-inner,
 .carousel-item {
   height: 100%;
+  max-height: 450px;
 }
 
 .carousel .img-fluid {
   height: 100%;
-  max-height: 100%;
+  max-height: 450px;
   width: 100%;
 }
 
@@ -81,12 +82,13 @@ button .team-card {
 }
 
 .slider {
-  height: 100%;
+  /* height: 100%; */
+  max-height: 450px;
   position: relative;
   right: 0;
   border-radius: 0 5px 5px 0;
   overflow: hidden;
-  filter: drop-shadow(0px 0px 0.5px #817f7b);
+  filter: drop-shadow(0px 0px 2px #817f7b);
 }
 
 .curtain {
@@ -149,7 +151,7 @@ button .team-card {
     border-radius: 0 0 5px 5px;
     overflow: clip;
     height: auto;
-    max-height: none;
+    max-height: 450px;
   }
 
   .carousel-inner,
