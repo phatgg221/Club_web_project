@@ -6,9 +6,7 @@ import Image from "react-bootstrap/Image";
 
 export default function ChampionCard() {
   const [activeTeam, setActiveTeam] = useState(0);
-
   const [teamList, setTeamList] = useState([]);
-
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -37,16 +35,9 @@ export default function ChampionCard() {
   }, []);
 
   useEffect(() => {
-    // Update activeTeam based on activeIndex
     setActiveTeam(activeIndex);
   }, [activeIndex]);
 
-
-  const handleClick = (team) => {
-    setActiveTeam(team);
-  };
-
-  let isImagesEmpty = 0;
 
   return (
     <main className="champCardMain">
@@ -56,7 +47,7 @@ export default function ChampionCard() {
             {teamList.map((team, index) => (
 
               <Carousel.Item id={index} key={index} className="carousel-item">
-                <Image className="carousel-img" src={team.image} fluid />
+                <Image className="carousel-img" src={team.image} alt={'image-${index}'} fluid />
               </Carousel.Item>
             ))}
           </Carousel>

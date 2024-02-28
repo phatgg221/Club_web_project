@@ -2,10 +2,10 @@
 
 .Champcontainer {
   width: 80vw;
-  max-width: 1000px;
-  max-height: 375px;
+  max-width: 950px;
+  height: 50%;
+  max-height: 450px;
   display: grid;
-  /* grid-template-columns: 25% 75%; */
   background-color: #f8a61b;
   padding: 0;
   border-radius: 5px;
@@ -66,8 +66,14 @@ button .team-card {
 }
 
 .carousel .img-fluid {
-  max-height: 500px;
   height: 100%;
+  max-height: 100%;
+  width: 100%;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  filter: drop-shadow(0px 0px 1.5px #54524e) contrast(200%);
 }
 
 .hidden {
@@ -75,11 +81,12 @@ button .team-card {
 }
 
 .slider {
-  max-height: 375px;
+  height: 100%;
   position: relative;
   right: 0;
   border-radius: 0 5px 5px 0;
   overflow: hidden;
+  filter: drop-shadow(0px 0px 0.5px #817f7b);
 }
 
 .curtain {
@@ -123,6 +130,7 @@ button .team-card {
 
 .curtain-form .icon-trophy {
   width: 100%;
+  filter: drop-shadow(0px 0px 5px #5c5a57) contrast(150%);
 }
 
 .champ-tabs {
