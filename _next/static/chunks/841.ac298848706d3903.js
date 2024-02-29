@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[841],{1841:function(n,e,r){r.r(e),r.d(e,{default:function(){return t}});var s=r(5893),u=r(4436);function t(){let{username:n}=(0,u.a)();return(0,s.jsxs)("p",{children:["Username: ",(0,s.jsx)("span",{children:n})]})}}}]);
