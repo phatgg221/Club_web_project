@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && next export",
     "start": "node src/server/server.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@fontsource/montserrat": "^5.0.16",
