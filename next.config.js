@@ -4,7 +4,7 @@ module.exports = {
   images: {
     domains: ['res.cloudinary.com'],
  },
-  output: 'export',
+  
   webpack: (config) => {
     config.module.rules.push({
       test: /bootstrap\.min\.css$/,
@@ -16,4 +16,5 @@ module.exports = {
 
     return config;
   },
+  output: 'export'
 };
