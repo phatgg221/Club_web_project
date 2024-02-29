@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  webpack: (config) => {
+ webpack: (config) => {
     config.module.rules.push({
       test: /bootstrap\.min\.css$/,
       use: ['style-loader', 'css-loader'],
@@ -11,6 +11,8 @@ module.exports = {
     config.resolve.alias['@'] = path.resolve(__dirname, 'src');
 
     return config;
-  },
-  output: 'export',
+ },
+ images: {
+    unoptimized: true,
+ },
 };
