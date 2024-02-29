@@ -15,12 +15,8 @@ export default function resetPassword() {
   const [currentUserIndex, setCurrentUserIndex] = useState(-1);
   const router = useRouter();
   const { userId,isLoggedIn } = useAuth(); // Get userId from useAuth hook
-  useEffect(() =>{
-    if(!isLoggedIn){
-      router.push('/login');
-    }
-  }, [isLoggedIn,router]);
   
+
   useEffect(() => {
     const fetchData = async () => {
       try {

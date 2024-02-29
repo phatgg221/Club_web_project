@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import jwt from 'jsonwebtoken';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/router';
+import Link from "next/link";
 export default function Login() {
   const router = useRouter();
   const {login, isLoggedIn,isAdmin,adminLogin} = useAuth();
@@ -128,6 +129,7 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <Link href="/resetPassword">Forgot Password?</Link>
           {formSubmit && !username && <p style={{ color: 'red' }}>Password is required</p>}
           {isNotCorrect && <p style= {{color: 'red'}}> Wrong username or password</p>}
           <button type="submit" className={styles.loginButton} onClick={handleSubmit}>
