@@ -75,12 +75,17 @@
   border: none;
   vertical-align: middle;
   display: inline-block;
-  margin: 0 0 0 min(30%, 70px);
   padding: 7.5px 15px;
   border-radius: 5px;
   border: #f8a61b 2px solid;
   background: none;
   transition: background 150ms linear;
+}
+
+.profile-button {
+  position: absolute !important;
+  left: 47.7vw;
+  top: 100%;
 }
 
 #login-text {
@@ -144,7 +149,6 @@
     padding: 0;
     background: hsl(36, 100%, 94%);
     width: 100%;
-    height: 350px;
     transform: translateY(-100%);
     transition: transform 350ms ease-in-out;
   }

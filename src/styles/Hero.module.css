@@ -16,22 +16,27 @@
 }
 
 .GreetingTile {
-  /* font-size: 80px; */
-  font-size: 5.5vw;
+  font-size: 5.5vw !important;
   font-weight: bold;
   color: #f8a61b;
   margin: 0;
-  height: 100px;
-  width: 50%;
   display: initial;
+}
+
+.link {
+  text-decoration: none;
+  color: #f8a61b;
+  transition: color 150ms ease-in-out;
+}
+
+.link:hover {
+  color: #0a71ba;
 }
 
 .PageContent {
   display: block;
-  /* font-size: 38px; */
-  font-size: 2.5vw;
+  font-size: 2.5vw !important;
   color: #181818;
-  margin: 30px 0;
   width: 50vw;
   min-width: 270px;
   margin: 0 0 30px 0;
@@ -43,8 +48,6 @@
 }
 
 .image .imageContent {
-  /* height: 600px; */
-  /* height: 40vw; */
   width: 23vw;
 }
 
@@ -53,8 +56,7 @@
 }
 
 .button-container button {
-  /* font-size: 1.5rem; */
-  font-size: 1.5vw;
+  font-size: 1.5vw !important;
   display: block;
   margin-bottom: 2vw;
   padding: 15px 10px;
@@ -76,7 +78,6 @@
 
 .button2 {
   border: 3px #f8a61b solid;
-  background: #f8a61b;
   color: #f8a61b;
   transition: color 150ms ease-in-out, background 150ms ease-in-out;
 }

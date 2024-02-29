@@ -1,31 +1,24 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import styles from '@/styles/Header.module.css';
 import { useAuth } from "@/contexts/AuthContext";
-// import { useRouter } from 'next/router';
+
 function Header() {
-  // const router = useRouter();
-  const [dataVisible, setDataVisible] = useState("false");
+  const [dataVisible, setDataVisible] = useState(false);
   const { isLoggedIn, logout } = useAuth();
-  const HandleLogOUT = () => {
+
+  const handleLogout = () => {
     if (isLoggedIn) {
-      // console.log("logout");
       logout();
       window.location.href = "/";
     } else {
       window.location.href = "/login";
     }
   };
-  const handleViewProfile = () => {
-    if (isLoggedIn) {
-      window.location.href = "/profile";
-    } else {
-      window.location.href = "/login";
-    }
-  };
+
   useEffect(() => {
     console.log("Current login status: ", isLoggedIn);
   }, [isLoggedIn]);
+
   return (
     <header className="primary-header">
       <div className="logo">
@@ -36,9 +29,7 @@ function Header() {
 
       <button
         className="mobile-nav-toggle"
-        onClick={() =>
-          setDataVisible(dataVisible === "true" ? "false" : "true")
-        }
+        onClick={() => setDataVisible(!dataVisible)}
       >
         <svg
           width="25px"
@@ -68,7 +59,7 @@ function Header() {
         </svg>
       </button>
 
-      <nav datavisible={dataVisible} className="nav">
+      <nav datavisible={dataVisible.toString()} className="nav">
         <div className="nav-options">
           <ul className="left-nav">
             <li>
@@ -89,7 +80,10 @@ function Header() {
           </ul>
           <ul className="right-nav">
             <li>
-              <a id="competitions"  href={isLoggedIn ? "/competitions" : "/login"}>
+              <a
+                id="competitions"
+                href={isLoggedIn ? "/competitions" : "/login"}
+              >
                 Competitions
               </a>
             </li>
@@ -98,18 +92,13 @@ function Header() {
                 Booking
               </a>
             </li>
-            <button className="login-button">
-              <a id="login-text" onClick={HandleLogOUT}>
-                {isLoggedIn ? "Logout" : "Login"}
-              </a>
-            </button>
-            {isLoggedIn && (
+            <li>
               <button className="login-button">
-                <a id="view-profile" onClick={handleViewProfile}>
-                  View Profile
+                <a id="login-text" onClick={handleLogout}>
+                  {isLoggedIn ? "Logout" : "Login"}
                 </a>
               </button>
-            )}
+            </li>
           </ul>
         </div>
       </nav>

@@ -10,14 +10,20 @@ function Hero() {
   function booking() {
     document.location = "/booking";
   }
+
   return (
     <main className={styles.main}>
       <div className={styles.hero}>
         <div className={styles["hero-text"]}>
-          <title className={styles["GreetingTile"]}>Greetings, User!</title>
-          <tri className={styles["PageContent"]}>
+          <h1 className={styles["GreetingTile"]}>
+            Greetings,{" "}
+            <a href="/profile" className={styles.link}>
+              User!
+            </a>
+          </h1>
+          <p className={styles["PageContent"]}>
             Welcome to the largest (probably) competition database in Vietnam.
-          </tri>
+          </p>
           <div className={styles["button-container"]}>
             <button onClick={competition} className={styles.button1}>
               Explore Competition

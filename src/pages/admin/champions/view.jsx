@@ -24,7 +24,7 @@ function Champion() {
                     name: item.teamName || false,
                     competition: item.competitionDescription || false,
                     award: item.awardDes || false,
-                    images: item.images || [],
+                    images: item.image || '',
                     available: item.teamName || false,
                     index,
                     teamOrder: item.teamOrder || index, // Add teamOrder to each item
@@ -101,7 +101,7 @@ function Champion() {
                 <table className={style.mainTable}>
                     <thead className={style.tableHeading}>
                         <tr>
-                            <th>No</th>
+                            {/* <th>No</th> */}
                             <th>Team name</th>
                             <th>Competition Description</th>
                             <th>Award Description</th>
@@ -109,85 +109,104 @@ function Champion() {
                         </tr>
                     </thead>
                     <tbody>
-                        {[...Array(5)].map((_, index) => {
-                            const team = teamList[index];
-                            const isItemFolded = selectedItemIndex !== index;
-                            // const contentContainerClass = isItemFolded ? styles.hideChamp : styles.contentContainerChamp;
+    {teamList.map((team, index) => {
+        const isItemFolded = selectedItemIndex !== index;
 
-                            // Find the lack teamOrder number
-                            const teamOrders = teamList.map(team => team.teamOrder);
-                            // Create an array from 1 to 5
-                            const allPossibleOrders = Array.from({ length: 5 }, (_, i) => i + 1);
-                            // Find the lack teamOrder number
-                            const lackTeamOrderNumber = allPossibleOrders.find(order => !teamOrders.includes(order));
+        // Find the lack teamOrder number
+        const teamOrders = teamList.map(team => team.teamOrder);
+        // Create an array from 1 to the length of teamList
+        const allPossibleOrders = Array.from({ length: teamList.length }, (_, i) => i + 1);
+        // Find the lack teamOrder number
+        const lackTeamOrderNumber = allPossibleOrders.find(order => !teamOrders.includes(order));
 
-                            return (
-                                <tr key={index} className={style.tableRow}>
-                                    <td>{index + 1}</td>
-                                    <td>{team ? team.name : "No teams here"}</td>
-                                    <td>{team ? team.competition : ""}</td>
-                                    <td>{team ? team.award : ""}</td>
-                                    <td className={style.btnContainer}>
-                                        <div className={style.btnTableDiv}>
-                                            {team && team.available ? (
-                                                <>
-                                                    <div className={style.btnBottomDiv}>
-                                                        <Popup
-                                                            modal
-                                                            trigger={
-                                                                <button
-                                                                    className={`${style.btn} ${style.btnBottom}`}
-                                                                    onClick={() => {
-                                                                        handleAction('update', team)
-                                                                        handleToggleFold(index)
-                                                                    }} >
-                                                                    {isItemFolded ? "Update" : "Cancel"}
-                                                                </button>
-                                                            }
-                                                        >
-                                                            {(close) => (
-                                                                <CreateChampion isUpdate championToUpdate={team || null} onUpdateSuccess={handleUpdateSuccess} index={index} teamList={teamList} setTeamList={setTeamList} close={close} />
-                                                            )}
-                                                        </Popup>
+        return (
+            <tr key={index} className={style.tableRow}>
+                {/* <td>{index + 1}</td> */}
+                <td>{team ? team.name : "No teams here"}</td>
+                <td>{team ? team.competition : ""}</td>
+                <td>{team ? team.award : ""}</td>
+                <td className={style.btnContainer}>
+                    <div className={style.btnTableDiv}>
+                        {team && team.available ? (
+                            <>
+                                <div className={style.btnBottomDiv}>
+                                    <Popup
+                                        modal
+                                        trigger={
+                                            <button
+                                                className={`${style.btn} ${style.btnBottom}`}
+                                                onClick={() => {
+                                                    handleAction('update', team)
+                                                    handleToggleFold(index)
+                                                }} >
+                                                {isItemFolded ? "Update" : "Cancel"}
+                                            </button>
+                                        }
+                                    >
+                                        {(close) => (
+                                            <CreateChampion isUpdate championToUpdate={team || null} onUpdateSuccess={handleUpdateSuccess} index={index} teamList={teamList} setTeamList={setTeamList} close={close} />
+                                        )}
+                                    </Popup>
 
-                                                        <br />
-                                                        <button
-                                                            className={`${style.btn} ${style.btnBottom}`}
-                                                            onClick={() => handleAction('delete', team)}>
-                                                            Delete
-                                                        </button>
-                                                    </div>
-                                                </>
-                                            ) : (
-                                                <div className={style.btnBottomDiv}>
-                                                    <Popup
-                                                        modal
-                                                        trigger={
-                                                            <button
-                                                                className={`${style.btn} ${style.btnBottom}`}
-                                                                onClick={() => {
-                                                                    handleToggleFold(index)
-                                                                    handleAction('new')
-                                                                }}>
-                                                                {isItemFolded ? "Add new" : "Cancel"}
-                                                            </button>
-                                                        }
-                                                    >
-                                                        {(close) => (
-                                                            <CreateChampion order={lackTeamOrderNumber} onUpdateSuccess={handleUpdateSuccess} close={close} />
-                                                        )}
-                                                    </Popup>
+                                    <br />
+                                    <button
+                                        className={`${style.btn} ${style.btnBottom}`}
+                                        onClick={() => handleAction('delete', team)}>
+                                        Delete
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <div className={style.btnBottomDiv}>
+                                <Popup
+                                    modal
+                                    trigger={
+                                        <button
+                                            className={`${style.btn} ${style.btnBottom}`}
+                                            onClick={() => {
+                                                handleToggleFold(index)
+                                                handleAction('new')
+                                            }}>
+                                            {isItemFolded ? "Add new" : "Cancel"}
+                                        </button>
+                                    }
+                                >
+                                    {(close) => (
+                                        <CreateChampion order={lackTeamOrderNumber} onUpdateSuccess={handleUpdateSuccess} close={close} />
+                                    )}
+                                </Popup>
+                                
+                            </div>
+                        )}
+                    </div>
+                </td>
+            </tr>
+        );
+    })}
+</tbody>
 
-                                                </div>
-                                            )}
-                                        </div>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
                 </table>
             </div>
+            <div className={style.btnBottomDiv}>
+                                <Popup
+                                    modal
+                                    trigger={
+                                        <button
+                                            className={`${style.btn} ${style.btnBottom}`}
+                                            onClick={() => {
+                                                handleToggleFold(index)
+                                                handleAction('new')
+                                            }}>
+                                            Create new 
+                                        </button>
+                                    }
+                                >
+                                    {(close) => (
+                                        <CreateChampion  onUpdateSuccess={handleUpdateSuccess} close={close} />
+                                    )}
+                                </Popup>
+                                
+                            </div>
             <div style={{ textAlign: "center" }}>
                 <button
                     className={`${style.btn} ${style.btnBottom}`}

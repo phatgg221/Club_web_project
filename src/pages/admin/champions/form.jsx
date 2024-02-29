@@ -12,10 +12,10 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
         teamName: '',
         competitionDescription: '',
         awardDes: '',
-        images: [],
+        images: '',
         teamOrder: order,
     });
-    const [imageLinks, setImageLinks] = useState([]);
+    const [imageLinks, setImageLinks] = useState('');
 
     useEffect(() => {
         // If in update mode, populate the form with current champion information
@@ -25,34 +25,56 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
                 teamName: championToUpdate.name || '',
                 competitionDescription: championToUpdate.competition || '',
                 awardDes: championToUpdate.award || '',
-                images: championToUpdate.images || [],
-                teamOrder: championToUpdate.teamOrder || order,
+                image: championToUpdate.image || '',
+                // teamOrder: championToUpdate.teamOrder || order,
             });
 
             // Set image links for display
-            setImageLinks(championToUpdate.images || ['']);
+            setImageLinks(championToUpdate.images || '');
         }
     }, [isUpdate, championToUpdate, order]);
 
     async function saveChampion(event) {
         event.preventDefault();
+        const params = new URLSearchParams();
+        let iamgeLink= '';
         try {
-            const params = new URLSearchParams();
+            const imageFile= document.getElementById('Image').files[0];
+            if(imageFile){
+                const imageData= new FormData();
+                imageData.append('file',imageFile);
+                imageData.append('upload_preset', 'lzz18aot');
+
+                const imageResponse= await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload',{
+                    method: 'POST',
+                    body: imageData,
+                });
+
+                if(!imageResponse.ok){
+                    throw new Error('Failer to upload image.');
+                }
+
+                const imageDataJson= await imageResponse.json();
+                iamgeLink= imageDataJson.secure_url;
+            }
+            
 
             params.append('teamName', championData.teamName);
             params.append('competitionDescription', championData.competitionDescription);
             params.append('awardDes', championData.awardDes);
+            if(iamgeLink){
+                params.append('images',iamgeLink);
+            }else{
+                params.append('images','');
+            }
+            
+            
+            console.log("params "+ params);
 
-            // Append each image link to the form data
-            imageLinks.forEach((link, index) => {
-                params.append('images', link);
-            });
-
-            params.append('teamOrder', Number(order));
-
-
+            console.log("Params "+ params);
             const url = isUpdate ? `/api/champion_api?id=${championToUpdate.id}` : '/api/champion_api';
 
+            
             const response = await fetch(url, {
                 method: isUpdate ? 'PUT' : 'POST',
                 body: params,
@@ -85,29 +107,8 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
         });
     };
 
-    const addImageLinkField = () => {
-        setImageLinks((prevLinks) => [...prevLinks, '']);
-
-        setChampionData((prevData) => ({
-            ...prevData,
-            images: [...prevData.images, ''],
-        }));
-    };
-
-    const updateImageLink = (index, value) => {
-        const updatedLinks = [...imageLinks];
-        updatedLinks[index] = value;
-        setImageLinks(updatedLinks);
-
-        setChampionData((prevData) => {
-            const updatedImages = [...prevData.images];
-            updatedImages[index] = value;
-            return {
-                ...prevData,
-                images: updatedImages,
-            };
-        });
-    };
+ 
+    
 
     const updateTeamOrderInDatabase = async (id, newOrder) => {
         try {
@@ -173,18 +174,7 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
     };
 
     // update - remove any image
-    const removeImage = (index) => {
-        const newImages = [...imageLinks];
-        newImages.splice(index, 1);
-        setImageLinks(newImages);
-
-        const newImagesData = [...championData.images];
-        newImagesData.splice(index, 1);
-        setChampionData((prevData) => ({
-            ...prevData,
-            images: newImagesData,
-        }));
-    };
+    
 
     useEffect(() =>{
         if(!isAdmin){
@@ -245,7 +235,7 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
                         />
 
                         <br />
-                        {isUpdate && (
+                        {/* {isUpdate && (
                             <>
                                 <label htmlFor={`changeOrder_${order}`}>Change Order:</label>
                                 <select
@@ -259,12 +249,13 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
                                         </option>
                                     ))}
                                 </select>
-                            </>)}
+                            </>)} */}
 
 
                         <br />
                         <label>Images</label>
-                        {imageLinks.map((link, index) => (
+                        <input id="Image" type= "file" name = "images" accept=".jpg, .jpeg, .png" required ={true}></input>
+                        {/* {imageLinks.map((link, index) => (
                             <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
                                 <input
                                     type="file"
@@ -285,10 +276,10 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
                                     </>
                                 )}
                             </div>
-                        ))}
-                        <button type="button" onClick={addImageLinkField}>
+                        ))} */}
+                        {/* <button type="button" onClick={addImageLinkField}>
                             Add New Image
-                        </button>
+                        </button> */}
                         <br />
                         <button
                             style={{ marginTop: '5%', marginLeft: '30%' }}
