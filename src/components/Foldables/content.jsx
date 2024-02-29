@@ -3,7 +3,7 @@ import Image from "next/image";
 import style from "@/styles/content.module.css";
 import styleForm from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
-
+import Link from "next/link";
 import { set } from "mongoose";
 
 const Content = ({ close, content, isAdminChangePass }) => {
@@ -77,9 +77,9 @@ const Content = ({ close, content, isAdminChangePass }) => {
 
   return !isAdminChangePass ? (
     <div className={style.modal}>
-      <a className={style.close} onClick={close}>
+      <p className={style.close} onClick={close}>
         ×
-      </a>
+      </p>
       <div className={style.header}>{content.name}</div>
       <div className={style.content}>
         <p>{content.contents}</p>

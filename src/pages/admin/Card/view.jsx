@@ -5,6 +5,7 @@ import style from "@/styles/table.module.css";
 import AdminHeader from "@/components/Header/adminHeader";
 import SearchBar from "@/components/Competitions/SearchBar";
 import {useAuth} from "@/contexts/AuthContext";
+import Link from "next/link";
 const CardTable = () => {
   const [ongoingCompetitions, setOngoingCompetitions] = useState([]);
   const [searchTerm, setSearchItem] = useState("");
@@ -99,7 +100,7 @@ const CardTable = () => {
                   <td>{item.competitionName}</td>
                   <td>{item.location}</td>
                   <td>
-                    <a href={item.linkToWeb}>Link</a>
+                    <Link href={item.linkToWeb}>Link</Link>
                   </td>
                   <td>
                     <img

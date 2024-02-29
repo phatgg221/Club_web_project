@@ -1,5 +1,5 @@
 import styles from "@/styles/Hero.module.css";
-
+import Link from "next/link";
 function Hero() {
   function competition() {
     document.location = "/competitions";
@@ -17,9 +17,9 @@ function Hero() {
         <div className={styles["hero-text"]}>
           <h1 className={styles["GreetingTile"]}>
             Greetings,{" "}
-            <a href="/profile" className={styles.link}>
+            <Link href="/profile" className={styles.link}>
               User!
-            </a>
+            </Link>
           </h1>
           <p className={styles["PageContent"]}>
             Welcome to the largest (probably) competition database in Vietnam.

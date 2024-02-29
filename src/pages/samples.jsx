@@ -52,10 +52,6 @@ function SamplesPage() {
         />
       ))}
 
-      {/* <FoldableItem title="Sample" />
-      <FoldableItem title="Sample" />
-      <FoldableItem title="Sample" />
-      <FoldableItem title="Sample" /> */}
     </div>
   );
 }

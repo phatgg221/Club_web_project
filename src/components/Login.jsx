@@ -136,9 +136,6 @@ export default function Login() {
             Login
           </button>
           <p className={styles.forgotPasswordLink}>
-            <a href="/forgotPassword" >
-              Forgot Password
-            </a>
           </p>
         </form>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import Link from "next/link";
 
 function Header() {
   const [dataVisible, setDataVisible] = useState(false);
@@ -22,9 +23,9 @@ function Header() {
   return (
     <header className="primary-header">
       <div className="logo">
-        <a href={isLoggedIn ? "/userMain" : "/login"}>
+        <Link href={isLoggedIn ? "/userMain" : "/login"}>
           <img src="./GFCC.png" width="50" height="46" />
-        </a>
+        </Link>
       </div>
 
       <button
@@ -63,40 +64,40 @@ function Header() {
         <div className="nav-options">
           <ul className="left-nav">
             <li>
-              <a id="about" href="/">
+              <Link id="about" href="/">
                 About
-              </a>
+              </Link>
             </li>
             <li>
-              <a id="samples" href={isLoggedIn ? "/samples" : "/login"}>
+              <Link id="samples" href={isLoggedIn ? "/samples" : "/login"}>
                 Showcase
-              </a>
+              </Link>
             </li>
             <li>
-              <a id="tips" href={isLoggedIn ? "/tips" : "/login"}>
+              <Link id="tips" href={isLoggedIn ? "/tips" : "/login"}>
                 Tips
-              </a>
+              </Link>
             </li>
           </ul>
           <ul className="right-nav">
             <li>
-              <a
+              <Link
                 id="competitions"
                 href={isLoggedIn ? "/competitions" : "/login"}
               >
                 Competitions
-              </a>
+              </Link>
             </li>
             <li>
-              <a id="booking" href={isLoggedIn ? "/booking" : "/login"}>
+              <Link id="booking" href={isLoggedIn ? "/booking" : "/login"}>
                 Booking
-              </a>
+              </Link>
             </li>
             <li>
               <button className="login-button">
-                <a id="login-text" onClick={handleLogout}>
+                <Link href="" id="login-text" onClick={handleLogout}>
                   {isLoggedIn ? "Logout" : "Login"}
-                </a>
+                </Link>
               </button>
             </li>
           </ul>
