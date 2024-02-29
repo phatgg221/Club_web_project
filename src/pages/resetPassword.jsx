@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs"; // Import bcryptjs for hashing
 import { useRouter } from "next/router";
-export default function resetPassword() {
+export default function ResetPassword() {
   const [users, setUsers] = useState([]);
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");

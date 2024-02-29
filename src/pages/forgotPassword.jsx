@@ -3,7 +3,7 @@ import React from "react";
 import styleForm from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
 
- function forgotPassword(){
+ function ForgotPassword(){
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -98,6 +98,6 @@ import styleBtn from "@/styles/table.module.css";
 );
 }
 
-export default forgotPassword;
+export default ForgotPassword;
 
 
