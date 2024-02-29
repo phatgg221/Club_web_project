@@ -117,6 +117,7 @@ const TipsTable = () => {
                           {(close) => (
                             <Content
                               close={close}
+                              key={index2}
                               className={style.modal}
                               content={tip}
                             />
