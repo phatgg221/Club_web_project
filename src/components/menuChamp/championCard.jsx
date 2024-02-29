@@ -32,12 +32,9 @@ export default function ChampionCard() {
     };
    
     fetchData();
-   }, []); 
-   
-   useEffect(() => {
-    console.log("teamList state:", teamList);
    }, [teamList]); 
    
+  
   useEffect(() => {
     setActiveTeam(activeIndex);
   }, [activeIndex]);
