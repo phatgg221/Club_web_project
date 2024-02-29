@@ -101,29 +101,29 @@ const TipsTable = () => {
         <Link href={item.tipsLink}>Link</Link>
       </td>
       <td className={style.btnContainer}>
-        {item.realContent &&
-          item.realContent.map((tip, index2) => (
-            <Popup
-              modal
-              trigger={
-                <button
-                 className={`${style.btn} ${style.btnTable}`}
-                 key={`${item._id}-${index2}`}
-                >
-                 Tip {index2 + 1}
-                </button>
-              }
-            >
-              {(close) => (
-                <Content
-                 close={close}
-                 key={`${item._id}-${index2}`}
-                 className={style.modal}
-                 content={tip}
-                />
-              )}
-            </Popup>
-          ))}
+      {item.realContent &&
+  item.realContent.map((tip, index2) => (
+    <Popup
+      key={`${item._id}-${index2}`} // Assigning unique key prop
+      modal
+      trigger={
+        <button
+          className={`${style.btn} ${style.btnTable}`}
+        >
+          Tip {index2 + 1}
+        </button>
+      }
+    >
+      {(close) => (
+        <Content
+          close={close}
+          className={style.modal}
+          content={tip}
+        />
+      )}
+    </Popup>
+  ))}
+
       </td>
       <td className={style.btnContainer}>
         <div className={style.btnTableDiv}>
