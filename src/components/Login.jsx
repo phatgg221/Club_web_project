@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/router';
 import Link from "next/link";
+import Image from "next/image";
 export default function Login() {
   const router = useRouter();
   const {login, isLoggedIn,isAdmin,adminLogin} = useAuth();
@@ -97,13 +98,13 @@ export default function Login() {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.brand}>
-        <img
+        <Image
           className={styles.loginLogo}
           src="/GFCC.png"
           alt="GFCC Logo"
           width="100"
           height="92"
-        ></img>
+        ></Image>
         <div className={styles.slogan}>
           <span className={styles.line}>Be Brave.</span>
           <span className={styles.line}>Be Competitive.</span>

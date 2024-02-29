@@ -5,6 +5,7 @@ import styleForm from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
 import Link from "next/link";
 import { set } from "mongoose";
+// import { Image } from "next/image";
 
 const Content = ({ close, content, isAdminChangePass }) => {
   const [admin, setAdmin] = useState([]);
@@ -84,7 +85,7 @@ const Content = ({ close, content, isAdminChangePass }) => {
       <div className={style.content}>
         <p>{content.contents}</p>
         <p>
-          <img
+          <Image
             className={style.cotentImage}
             src={content.tipImage}
             alt=""

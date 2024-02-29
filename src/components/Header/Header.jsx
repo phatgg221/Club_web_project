@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
-
+import Image from "next/image";
 function Header() {
   const [dataVisible, setDataVisible] = useState(false);
   const { isLoggedIn, logout } = useAuth();
@@ -24,7 +24,7 @@ function Header() {
     <header className="primary-header">
       <div className="logo">
         <Link href={isLoggedIn ? "/userMain" : "/login"}>
-          <img src="./GFCC.png" width="50" height="46" />
+          <Image src="/GFCC.png" width="50" height="46" />
         </Link>
       </div>
 

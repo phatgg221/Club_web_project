@@ -1,5 +1,6 @@
 import styles from "@/styles/Hero.module.css";
 import Link from "next/link";
+import Image from "next/image";
 function Hero() {
   function competition() {
     document.location = "/competitions";
@@ -37,11 +38,13 @@ function Hero() {
           </div>
         </div>
         <div className={styles.image}>
-          <img
+          <Image
             className={styles.imageContent}
             src="/Mascot.png"
             alt="GFCC Logo"
-          ></img>
+            width={230}
+            height={500}
+          ></Image>
         </div>
       </div>
     </main>
