@@ -7,7 +7,8 @@
     "build": "next build && next export",
     "start": "node src/server/server.js",
     "lint": "next lint",
-    "deploy": "gh-pages -d out"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@fontsource/montserrat": "^5.0.16",
@@ -20,7 +21,6 @@
     "cloudinary-react": "^1.8.1",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
-    "gh-pages": "^6.1.1",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
@@ -38,6 +38,7 @@
     "css-loader": "^6.8.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "gh-pages": "^6.1.1",
     "style-loader": "^3.3.3"
   }
 }
