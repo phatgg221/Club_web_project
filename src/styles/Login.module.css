@@ -48,6 +48,13 @@
   padding: 10px 0;
 }
 
+.forgotPasswordLink{
+  margin-top:10px;
+  margin-bottom: 0;
+  height: 10px;
+  padding: 0px;
+}
+
 #username,
 #password {
   margin-top: 10px;

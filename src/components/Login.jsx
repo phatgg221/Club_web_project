@@ -135,6 +135,11 @@ export default function Login() {
           <button type="submit" className={styles.loginButton} onClick={handleSubmit}>
             Login
           </button>
+          <p className={styles.forgotPasswordLink}>
+            <a href="/forgotPassword" >
+              Forgot Password
+            </a>
+          </p>
         </form>
       </div>
     </div>
