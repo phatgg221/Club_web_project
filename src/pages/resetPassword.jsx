@@ -32,7 +32,7 @@ export default function ResetPassword() {
       }
     };
     fetchData();
-  }, []);
+  }, [userId]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

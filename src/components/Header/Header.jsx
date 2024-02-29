@@ -24,7 +24,7 @@ function Header() {
     <header className="primary-header">
       <div className="logo">
         <Link href={isLoggedIn ? "/userMain" : "/login"}>
-          <Image src="/GFCC.png" width="50" height="46" />
+          <Image src="/GFCC.png" width="50" height="46" alt=""/>
         </Link>
       </div>
 

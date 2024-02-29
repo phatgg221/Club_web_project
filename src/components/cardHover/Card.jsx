@@ -19,7 +19,7 @@ const Card = ({ logoURL, organizer, title, description, imageUrl, linkUrl }) => 
       <Link href={linkUrl} className="card-link"></Link>
       <div className="card-content" id="cardContent">
         <span>
-          <Image width={32} height={32} src={logoURL} />
+          <Image width={32} height={32} src={logoURL} alt="" />
           {organizer}
         </span>
         <h3>{title}</h3>

@@ -3,6 +3,7 @@ import styles from "@/styles/Profile.module.css";
 import { useState,useEffect } from "react";
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 // Dynamically import the component with ssr: false
 const ClientSideUsername = dynamic(() => import('@/components/ClientSideOnly.jsx'), { ssr: false });
 
@@ -27,7 +28,7 @@ export default function Profile() {
 
   return (
     <div className={styles.container}>
-      <img className={styles.img} src="/HappyGFCC.png" width="100px" />
+      <Image alt="" className={styles.img} src="/HappyGFCC.png" width={100} height={117} />
       <ClientSideUsername /> {/* Render the client-side only component */}
       <p className={styles.p}>
         {/* Major: <span>Business Management</span> */}
