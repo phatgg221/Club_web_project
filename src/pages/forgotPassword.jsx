@@ -6,10 +6,18 @@ import styleBtn from "@/styles/table.module.css";
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [wrongUsername, setWrongUsername] = useState(false);
+  const [SendSuccessful, setSendSuccess] = useState(false);
 
 
   useEffect(() => {
     const fetchData = async () => {
+
+      if (!username) {
+        setWrongUsername(false); // Reset wrongUsername when the username is empty
+        return;
+      }
+      
       try {
         const response = await fetch(`/api/member_api`);
         const data = await response.json();
@@ -21,9 +29,10 @@ import styleBtn from "@/styles/table.module.css";
         if (user) {
           console.log("Password:", user.password);
           setPassword(user.password);
+          setWrongUsername(false); // Reset wrongUsername when a user is found
         } else {
           console.log("User not found");
-          // Handle case when user is not found
+          setWrongUsername(true); // Set wrongUsername to true when user is not found
         }
       } catch (err) {
         console.error("Error fetching data: ", err);
@@ -38,6 +47,11 @@ import styleBtn from "@/styles/table.module.css";
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (wrongUsername) {
+      alert("Your username (sID) is wrong");
+      return;
+    }
+
     const res = await fetch('/api/sendemail_api', {
       method: 'POST',
       headers: {
@@ -51,7 +65,7 @@ import styleBtn from "@/styles/table.module.css";
 
     const data = await res.json();
     if (data.success) {
-      //Handle success
+      setSendSuccess(true);
     } else {
       // Handle error
     }
@@ -65,7 +79,7 @@ import styleBtn from "@/styles/table.module.css";
     <h1>Forgot Password</h1>
     <form className={styleForm.form} onSubmit={handleSubmit}>
         <div className={styleForm.inputGroup}>
-        <label>Your email</label>
+        <label>Your email (your personal email)</label>
         <input
             required
             type="email"
@@ -83,6 +97,20 @@ import styleBtn from "@/styles/table.module.css";
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
+
+        {wrongUsername && (
+          <p className={styleForm.notificationMessage} style={{ color: "red" }}>
+            Wrong username.
+          </p>
+        )}
+        {SendSuccessful && (
+          <p
+            className={styleForm.notificationMessage}
+            style={{ color: "green" }}
+          >
+            Password is successfully sent.
+          </p>
+        )}
         
         <div className={styleBtn.btnBottomDiv}>
         <button
