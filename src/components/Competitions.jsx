@@ -1,7 +1,7 @@
 import SearchBar from "@/components/Competitions/SearchBar.jsx";
 import FilterBox from "@/components/Competitions/FilterBox.jsx";
 import { useState, useEffect } from "react";
-
+import Image from "next/image";
 export default function SearchPage() {
   const [dataVisible, setDataVisible] = useState("false");
 
@@ -77,11 +77,12 @@ console.log(categories.length + " categories found.");
       <div className="search-container">
         <div className="search-bar-sect">
           <SearchBar showButton={true} placeholder="Search for Competitions" onChange={handleSearchInput} />
-          <img
+          <Image
             className="filter-icon"
-            src="./dropdown.png"
+            src="/dropdown.png"
             width="30"
             height="30"
+            alt="picture"
             onClick={() =>
               setDataVisible(dataVisible === "true" ? "false" : "true")
             }

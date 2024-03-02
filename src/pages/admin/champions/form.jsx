@@ -185,9 +185,9 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
     return (
         <div>
             <div className={style.modal}>
-                <a className={style.close} onClick={close}>
+                <p className={style.close} onClick={close}>
                     ×
-                </a>
+                </p>
                 <div
                     className={style.header}
                     style={{ fontSize: '30px' }}

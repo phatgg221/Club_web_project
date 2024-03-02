@@ -93,55 +93,57 @@ const TipsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredTips &&
-              filteredTips.map((item, index) => (
-                <tr key={index} className={style.tableRow}>
-                  <td>{item.tipName}</td>
-                  <td>
-                    <Link href={item.tipsLink}>Link</Link>
-                  </td>
-                  <td className={style.btnContainer}>
-                    {item.realContent &&
-                      item.realContent.map((tip, index2) => (
-                        <Popup
-                          modal
-                          trigger={
-                            <button
-                              className={`${style.btn} ${style.btnTable}`}
-                              key={index2}
-                            >
-                              Tip {index2 + 1}
-                            </button>
-                          }
-                        >
-                          {(close) => (
-                            <Content
-                              close={close}
-                              className={style.modal}
-                              content={tip}
-                            />
-                          )}
-                        </Popup>
-                      ))}
-                  </td>
-                  <td className={style.btnContainer}>
-                    <div className={style.btnTableDiv}>
-                      <button
-                        className={`${style.btn} ${style.btnTable}`}
-                        onClick={() => handleUpdate(item)}
-                      >
-                        Update
-                      </button>
-                      <button
-                        className={`${style.btn} ${style.btnTable}`}
-                        onClick={() => handleDelete(item)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+          {filteredTips &&
+ filteredTips.map((item) => (
+    <tr key={item._id} className={style.tableRow}>
+      <td>{item.tipName}</td>
+      <td>
+        <Link href={item.tipsLink}>Link</Link>
+      </td>
+      <td className={style.btnContainer}>
+      {item.realContent &&
+  item.realContent.map((tip, index2) => (
+    <Popup
+      key={`${item._id}-${index2}`} // Assigning unique key prop
+      modal
+      trigger={
+        <button
+          className={`${style.btn} ${style.btnTable}`}
+        >
+          Tip {index2 + 1}
+        </button>
+      }
+    >
+      {(close) => (
+        <Content
+          close={close}
+          className={style.modal}
+          content={tip}
+        />
+      )}
+    </Popup>
+  ))}
+
+      </td>
+      <td className={style.btnContainer}>
+        <div className={style.btnTableDiv}>
+          <button
+            className={`${style.btn} ${style.btnTable}`}
+            onClick={() => handleUpdate(item)}
+          >
+            Update
+          </button>
+          <button
+            className={`${style.btn} ${style.btnTable}`}
+            onClick={() => handleDelete(item)}
+          >
+            Delete
+          </button>
+        </div>
+      </td>
+    </tr>
+  ))}
+
           </tbody>
         </table>
       </div>

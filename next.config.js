@@ -1,6 +1,10 @@
 const path = require('path');
 
 module.exports = {
+  images: {
+    domains: ['res.cloudinary.com'],
+ },
+  
   webpack: (config) => {
     config.module.rules.push({
       test: /bootstrap\.min\.css$/,
@@ -12,4 +16,5 @@ module.exports = {
 
     return config;
   },
+  output: 'export'
 };

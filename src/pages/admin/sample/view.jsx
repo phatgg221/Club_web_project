@@ -4,6 +4,7 @@ import style from "@/styles/table.module.css";
 import SearchBar from "@/components/Competitions/SearchBar";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
+import Link from "next/link";
 const SampleTable = () => {
   const [ongoingCompetitions, setOngoingCompetitions] = useState([]);
   const [searchTerm, setSearchItem] = useState("");
@@ -95,7 +96,7 @@ const SampleTable = () => {
                   <td>{item.sampleContents}</td>
                   <td>{item.sampleAuthor}</td>
                   <td>
-                    <a href={item.sampleLink}>Link</a>
+                    <Link href={item.sampleLink}>Link</Link>
                   </td>
                   <td className={style.btnContainer}>
                     <div className={style.btnTableDiv}>
@@ -116,17 +117,6 @@ const SampleTable = () => {
                 </tr>
               ))}
           </tbody>
-          {/* <tbody>
-                    {ongoingCompetitions && ongoingCompetitions.data && ongoingCompetitions.data.mongoData && ongoingCompetitions.data.mongoData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.sampleName}</td>
-                            <td>{item.sampleContents}</td>
-                            <td>{item.sampleAuthor}</td>
-                            <td><a href={item.sampleLink}>Link</a></td>
-                            <td><button onClick={() => handleUpdateButton(item._id)}>Update</button><button onClick={() => handleDelete(item)}>Delete</button></td>
-                        </tr>
-                    ))}
-                </tbody> */}
         </table>
       </div>
       <div className={style.btnBottomDiv}>

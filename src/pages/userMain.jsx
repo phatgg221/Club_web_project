@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import DraftingComponents from "@/components/DraftingComponents";
 import { useRouter } from 'next/router';
 import { useAuth } from "@/contexts/AuthContext";
-function userMain() {
+function UserMain() {
     const router = useRouter();
     const { id } = router.query;
     const {isLoggedIn}= useAuth();
@@ -20,4 +20,4 @@ function userMain() {
   );
 }
 
-export default userMain;
+export default UserMain;

@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
 // import "./Card.css";
 
 const Card = ({ logoURL, organizer, title, description, imageUrl, linkUrl }) => {
@@ -14,10 +16,10 @@ const Card = ({ logoURL, organizer, title, description, imageUrl, linkUrl }) => 
 
   return (
     <div className="card-item">
-      <a href={linkUrl} className="card-link"></a>
+      <Link href={linkUrl} className="card-link"></Link>
       <div className="card-content" id="cardContent">
         <span>
-          <img src={logoURL} />
+          <Image width={32} height={32} src={logoURL} alt="" />
           {organizer}
         </span>
         <h3>{title}</h3>

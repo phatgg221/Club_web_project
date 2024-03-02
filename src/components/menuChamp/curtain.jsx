@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
-
+import Image from "next/image";
 const Curtain = ({ team, activeTeam }) => {
   const [isClicked, setClicked] = useState("false");
   const isActive = activeTeam === team.index;
@@ -8,7 +8,7 @@ const Curtain = ({ team, activeTeam }) => {
   return (
     <div>
       <Form className={`curtain-form ${isActive ? "" : "hidden"}`}>
-        <img htmlFor={`${team.index}`} src="/trophy.svg" className="icon-trophy" onClick={() => setClicked(isClicked === "true" ? "false" : "true")} />
+        <Image alt="" width={100} height={100} htmlFor={`${team.index}`} src="/trophy.svg" className="icon-trophy" onClick={() => setClicked(isClicked === "true" ? "false" : "true")} />
       </Form>
       <div clicked={isClicked} className={`curtain ${isActive ? "" : "hidden"}`}>
         <div className="content">

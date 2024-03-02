@@ -11,30 +11,30 @@ export default function ChampionCard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch('/api/champion_api');
-        const data = await response.json();
-
-        // Transform the data into the desired format
-        let formattedData = data.data.mongoData.map((item, index) => ({
-          name: item.teamName || "Name Not Available",
-          competition: item.competitionDescription || "Description Not Available",
-          award: item.awardDes || "Award Not Available",
-          image: item.image || "/champ-bg.png",
-          images: item.images|| [],
-          index,
-        }));
-
-        setTeamList(formattedData);
-        console.log("teamList state:", teamList);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+       try {
+         const response = await fetch('/api/champion_api');
+         const data = await response.json();
+   
+         let formattedData = data.data.mongoData.map((item, index) => ({
+           name: item.teamName || "Name Not Available",
+           competition: item.competitionDescription || "Description Not Available",
+           award: item.awardDes || "Award Not Available",
+           image: item.image || "/champ-bg.png",
+           images: item.images|| [],
+           index,
+         }));
+   
+         setTeamList(formattedData);
+         console.log("teamList state:", teamList);
+       } catch (error) {
+         console.error('Error fetching data:', error);
+       }
     };
-
+   
     fetchData();
-  }, []);
-
+   }, [teamList]); 
+   
+  
   useEffect(() => {
     setActiveTeam(activeIndex);
   }, [activeIndex]);

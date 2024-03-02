@@ -2,6 +2,7 @@
 import React from "react";
 import Card from "./Card";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 // import "@/styles/Card.module.css"; // Import specific component styles
 
 
@@ -109,12 +110,12 @@ if (ongoingCompetitions.data && ongoingCompetitions.data.mongoData) {
           {cards1}
         </div>
         <div className="show-more-container">
-          <a
+          <Link
             className="NutShowMore"
-            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            href="/Competitions"
           >
             Show More
-          </a>
+          </Link>
         </div>
       </div>
       <div className="event-section">
@@ -124,12 +125,12 @@ if (ongoingCompetitions.data && ongoingCompetitions.data.mongoData) {
           {/* Add more Card components as needed */}
         </div>
         <div className="show-more-container">
-          <a
+          <Link
             className="NutShowMore"
-            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            href="/Competitions"
           >
             Show More
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -5,6 +5,8 @@ import style from "@/styles/table.module.css";
 import AdminHeader from "@/components/Header/adminHeader";
 import SearchBar from "@/components/Competitions/SearchBar";
 import {useAuth} from "@/contexts/AuthContext";
+import Link from "next/link";
+import Image from "next/image";
 const CardTable = () => {
   const [ongoingCompetitions, setOngoingCompetitions] = useState([]);
   const [searchTerm, setSearchItem] = useState("");
@@ -99,12 +101,14 @@ const CardTable = () => {
                   <td>{item.competitionName}</td>
                   <td>{item.location}</td>
                   <td>
-                    <a href={item.linkToWeb}>Link</a>
+                    <Link href={item.linkToWeb}>Link</Link>
                   </td>
                   <td>
-                    <img
+                    <Image
                       className={style.imageTable}
                       src={item.imageURL}
+                      width={100}
+                      height={100}
                       alt="Compete image"
                     />
                   </td>

@@ -1,5 +1,5 @@
 import styles from "@/styles/Welcome.module.css";
-
+import Image from "next/image";
 export default function About() {
   return (
     <main className={styles.welcomeMain}>
@@ -20,7 +20,7 @@ export default function About() {
             your inner warrior and set the Flames in side you.
           </p>
         </div>
-        <img src="/HappyGFCC.png" alt="GFCC Logo" className={styles.logo}></img>
+        <Image src="/HappyGFCC.png" alt="GFCC Logo" height={240} width={200} className={styles.logo}></Image>
       </div>
     </main>
   );

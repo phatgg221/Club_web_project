@@ -3,6 +3,8 @@ import { useState,useEffect } from 'react';
 import jwt from 'jsonwebtoken';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/router';
+import Link from "next/link";
+import Image from "next/image";
 export default function Login() {
   const router = useRouter();
   const {login, isLoggedIn,isAdmin,adminLogin} = useAuth();
@@ -96,13 +98,13 @@ export default function Login() {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.brand}>
-        <img
+        <Image
           className={styles.loginLogo}
           src="/GFCC.png"
           alt="GFCC Logo"
           width="100"
           height="92"
-        ></img>
+        ></Image>
         <div className={styles.slogan}>
           <span className={styles.line}>Be Brave.</span>
           <span className={styles.line}>Be Competitive.</span>
@@ -128,15 +130,13 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <Link href="/resetPassword">Forgot Password?</Link>
           {formSubmit && !username && <p style={{ color: 'red' }}>Password is required</p>}
           {isNotCorrect && <p style= {{color: 'red'}}> Wrong username or password</p>}
           <button type="submit" className={styles.loginButton} onClick={handleSubmit}>
             Login
           </button>
           <p className={styles.forgotPasswordLink}>
-            <a href="/forgotPassword" >
-              Forgot Password
-            </a>
           </p>
         </form>
       </div>
