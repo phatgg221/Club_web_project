@@ -130,7 +130,7 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Link href="/resetPassword">Forgot Password?</Link>
+          <Link href="/forgotPassword">Forgot Password?</Link>
           {formSubmit && !username && <p style={{ color: 'red' }}>Password is required</p>}
           {isNotCorrect && <p style= {{color: 'red'}}> Wrong username or password</p>}
           <button type="submit" className={styles.loginButton} onClick={handleSubmit}>

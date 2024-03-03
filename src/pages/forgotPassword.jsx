@@ -1,49 +1,87 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import styleForm from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/router';
 
- function ForgotPassword(){
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+// Separate OTPInput component
+const OTPInput = ({ onSubmit, onCancel }) => {
+  const [otp, setOtp] = useState("");
+
+  const handleOtpChange = (e) => {
+    setOtp(e.target.value);
+  };
+
+  return (
+    <div className={styleForm.overlay}>
+      <div className={styleForm.popup}>
+        <h2>Enter OTP</h2>
+        <input
+          type="text"
+          placeholder="Enter OTP"
+          value={otp}
+          onChange={handleOtpChange}
+        />
+        <div>
+          <button onClick={() => onSubmit(otp)}>Submit</button>
+          <button onClick={onCancel}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+function ForgotPassword() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [wrongUsername, setWrongUsername] = useState(false);
-  const [SendSuccessful, setSendSuccess] = useState(false);
-
+  const [sendSuccessful, setSendSuccess] = useState(false);
+  const [showOTPInput, setShowOTPInput] = useState(false);
+  const [generatedOtp, setGeneratedOtp] = useState("");
+  const [loginSuccessful, setLoginSuccessful] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-
       if (!username) {
         setWrongUsername(false); // Reset wrongUsername when the username is empty
         return;
       }
-      
+
       try {
         const response = await fetch(`/api/member_api`);
         const data = await response.json();
-  
+
         const mongoDataArray = data.data.mongoData;
-  
+
         const user = mongoDataArray.find((user) => user.username === username);
-  
+
         if (user) {
-          console.log("Password:", user.password);
-          setPassword(user.password);
+          const randomOtp = Math.floor(100000 + Math.random() * 900000);
+          setGeneratedOtp(randomOtp);
+
           setWrongUsername(false); // Reset wrongUsername when a user is found
+          setShowOTPInput(true);
         } else {
           console.log("User not found");
-          setWrongUsername(true); // Set wrongUsername to true when user is not found
+          setWrongUsername(true); // Set wrongUsername to true when the user is not found
         }
       } catch (err) {
         console.error("Error fetching data: ", err);
         // Handle error appropriately (e.g., display an error message)
       }
     };
-  
+
     fetchData();
   }, [username]);
 
+  useEffect(() => {
+    // Ensure that showOTPInput is set to false if there is no generated OTP
+    if (!generatedOtp) {
+      setShowOTPInput(false);
+    }
+  }, [generatedOtp]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,7 +98,7 @@ import styleBtn from "@/styles/table.module.css";
       },
       body: JSON.stringify({
         email: email,
-        password: password
+        otp: generatedOtp
       }),
     });
 
@@ -72,21 +110,43 @@ import styleBtn from "@/styles/table.module.css";
     }
 
   };
-    
-  return(
-    <div
-    className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
-    >
-    <h1>Forgot Password</h1>
-    <form className={styleForm.form} onSubmit={handleSubmit}>
+
+  const handleOTPSubmit = (otp) => {
+    // Validate the entered OTP
+    if (otp === generatedOtp.toString()) {
+      // Proceed with the login process
+
+      // For example, you can set a session or perform other authentication steps
+
+      setSendSuccess(true);
+      setShowOTPInput(false);
+      // Set login successful state to true
+      setLoginSuccessful(true);
+      
+
+    // Use the push method to navigate to the '/userMain' page
+      router.push('/userMain');
+    } else {
+      alert("Invalid OTP. Please try again.");
+    }
+  };
+
+  const handleOTPCancel = () => {
+    setShowOTPInput(false);
+  };
+
+  return (
+    <div className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}>
+      <h1>Forgot Password</h1>
+      <form className={styleForm.form} onSubmit={handleSubmit}>
         <div className={styleForm.inputGroup}>
-        <label>Your email (your personal email)</label>
-        <input
+          <label>Your email (your personal email)</label>
+          <input
             required
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-        />
+          />
         </div>
 
         <div className={styleForm.inputGroup}>
@@ -104,28 +164,33 @@ import styleBtn from "@/styles/table.module.css";
             Wrong username.
           </p>
         )}
-        {SendSuccessful && (
-          <p
-            className={styleForm.notificationMessage}
-            style={{ color: "green" }}
-          >
-            Password is successfully sent.
+        {sendSuccessful && (
+          <p className={styleForm.notificationMessage} style={{ color: "green" }}>
+            OTP is successfully sent.
+          </p>
+        )}
+
+        {loginSuccessful && (
+          <p className={styleForm.notificationMessage} style={{ color: "green" }}>
+            Login successful.
           </p>
         )}
         
         <div className={styleBtn.btnBottomDiv}>
-        <button
+          <button
             className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
             type="submit"
-        >
+          >
             Forgot Password
-        </button>
+          </button>
         </div>
-    </form>
+      </form>
+
+      {showOTPInput && (
+        <OTPInput onSubmit={handleOTPSubmit} onCancel={handleOTPCancel} />
+      )}
     </div>
-);
+  );
 }
 
 export default ForgotPassword;
-
-

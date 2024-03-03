@@ -3,7 +3,7 @@ require('dotenv').config();
 
 export default async function handler(req, res) {
   const { email } = req.body;
-  const { password} = req.body;
+  const { otp} = req.body;
 
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       to: email,
       subject: 'Your password',
       html: `<h1>Hello!</h1>
-      <p>Your password is: ${password}</p>`,
+      <p>Your password is: ${otp}</p>`,
       
     });
     console.log(info.messageId);
