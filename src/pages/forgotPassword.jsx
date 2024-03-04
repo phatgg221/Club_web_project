@@ -25,7 +25,7 @@ const OTPInput = ({ onSubmit, onCancel }) => {
         />
         <div>
           <button onClick={() => onSubmit(otp)}>Submit</button>
-          <button onClick={onCancel}>Cancel</button>
+        
         </div>
       </div>
     </div>
@@ -40,8 +40,7 @@ function ForgotPassword() {
   const [sendSuccessful, setSendSuccess] = useState(false);
   const [showOTPInput, setShowOTPInput] = useState(false);
   const [generatedOtp, setGeneratedOtp] = useState("");
-  const [loginSuccessful, setLoginSuccessful] = useState(false);
-
+  const { login, isLoggedIn, userId} = useAuth();
   useEffect(() => {
     const fetchData = async () => {
       if (!username) {
@@ -117,11 +116,13 @@ function ForgotPassword() {
       // Proceed with the login process
 
       // For example, you can set a session or perform other authentication steps
+      login(userId, username);
 
       setSendSuccess(true);
       setShowOTPInput(false);
       // Set login successful state to true
-      setLoginSuccessful(true);
+
+      
       
 
     // Use the push method to navigate to the '/userMain' page
@@ -139,16 +140,6 @@ function ForgotPassword() {
     <div className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}>
       <h1>Forgot Password</h1>
       <form className={styleForm.form} onSubmit={handleSubmit}>
-        <div className={styleForm.inputGroup}>
-          <label>Your email (your personal email)</label>
-          <input
-            required
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-
         <div className={styleForm.inputGroup}>
           <label>Your username (sID)</label>
           <input
@@ -170,11 +161,7 @@ function ForgotPassword() {
           </p>
         )}
 
-        {loginSuccessful && (
-          <p className={styleForm.notificationMessage} style={{ color: "green" }}>
-            Login successful.
-          </p>
-        )}
+        
         
         <div className={styleBtn.btnBottomDiv}>
           <button
