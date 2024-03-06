@@ -5,7 +5,6 @@ class Account {
         const accountSchema = new mongoose.Schema({
             email: {
                 type: String,
-                require: true,
                 validate: {
                     validator: function (v) {
                         const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,}$/;
