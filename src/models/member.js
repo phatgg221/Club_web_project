@@ -1,11 +1,18 @@
-// tai khoan mat khau
-
 const { default: mongoose, model } = require("mongoose");
 
-class Account{
-    initSchema(){
-        const accountSchema= new mongoose.Schema({
-            username:{
+class Account {
+    initSchema() {
+        const accountSchema = new mongoose.Schema({
+            email: {
+                type: String,
+                validate: {
+                    validator: function (v) {
+                        const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,}$/;
+                        return emailRegex.test(v);
+                    }
+                },
+            },
+            username: {
                 type: String,
                 required: true,
                 // validate if the studentID is in the correct format (sXXXXXXX)
@@ -19,16 +26,16 @@ class Account{
                     );
                 },
             },
-            password:{
+            password: {
                 type: String,
-                require:true,
+                require: true,
             },
         });
-        return  mongoose.models.Account|| mongoose.model("Account", accountSchema);
+        return mongoose.models.Account || mongoose.model("Account", accountSchema);
     }
     getInstance() {
-        return this.initSchema(); 
-      }
+        return this.initSchema();
+    }
 }
 
-module.exports= Account;
+module.exports = Account;

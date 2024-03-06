@@ -3,18 +3,20 @@ import React from "react";
 import style from "@/styles/table.module.css";
 import Popup from "reactjs-popup";
 import styleForm from "@/styles/Admin.Form.module.css";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
 const MemberTable = () => {
   const router = useRouter();
-  const {isAdmin}= useAuth();
+  const { isAdmin } = useAuth();
   const [usernameError, setUsernameError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [errorSubmit, setErrorSubmit] = useState('');
   const [members, setMembers] = useState([]);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "1",
+    email: "",
   });
   const closeModal = () => setOpen(false);
   const openModal = () => setOpen(true);
@@ -34,15 +36,25 @@ const MemberTable = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     const usernamePattern = /^[sS]\d{7}$/;
+    const emailPattern = /^s\d{7}@rmit\.edu\.vn$/;
+
+    setErrorSubmit('');
+    setUsernameError('');
+
     if (name === 'username') {
       if (!usernamePattern.test(value)) {
-        setErrorSubmit('Invalid format. Cannot submit.');
         setUsernameError('Invalid username. Required format: "sXXXXXXX" or "SXXXXXXX"');
-      } else {
-        setErrorSubmit('');
-        setUsernameError('');
+        setErrorSubmit('Invalid format. Cannot submit.');
       }
     }
+
+    if (name === 'email') {
+      if (!emailPattern.test(value)) {
+        setEmailError('Invalid email.');
+        setErrorSubmit('Invalid format. Cannot submit.');
+      }
+    }
+
     setFormData({
       ...formData,
       [name]: value,
@@ -102,11 +114,11 @@ const MemberTable = () => {
       .then((data) => console.log("Success: ", data))
       .catch((error) => console.error("Error", error));
   };
-  useEffect(() =>{
-    if(!isAdmin){
+  useEffect(() => {
+    if (!isAdmin) {
       router.push('/login');
     }
-  }, [isAdmin,router]);
+  }, [isAdmin, router]);
 
 
   return (
@@ -117,6 +129,16 @@ const MemberTable = () => {
           className={styleForm.form}
           onSubmit={hanldeSubmit}
         >
+          <label>
+            Email:
+            <input
+              name="email"
+              required={true}
+              type="email"
+              onChange={handleInputChange}
+            ></input>
+            {emailError && <p className="error">{emailError}</p>}
+          </label>
           <label>
             Username:
             <input
@@ -141,6 +163,7 @@ const MemberTable = () => {
         <table className={style.mainTable}>
           <thead className={style.tableHeading}>
             <tr className={style.tableRow}>
+              <th>Email</th>
               <th>Username</th>
               <th>Password</th>
               <th>Action</th>
@@ -152,6 +175,7 @@ const MemberTable = () => {
               members.data.mongoData &&
               members.data.mongoData.map((item, index) => (
                 <tr key={index}>
+                  <td>{item.email}</td>
                   <td>{item.username}</td>
                   <td>{item.password}</td>
                   <td className={style.btnContainer}>

@@ -14,11 +14,13 @@ export default function ResetPassword() {
   const [changeSuccessful, setSuccess] = useState(false);
   const [currentUserIndex, setCurrentUserIndex] = useState(-1);
   const router = useRouter();
-  const { userId,isLoggedIn } = useAuth(); // Get userId from useAuth hook
-  
+  const { userId, isLoggedIn } = useAuth(); // Get userId from useAuth hook
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!isLoggedIn) {
+        router.push('/login');
+      }
       try {
         const response = await fetch(`/api/member_api`);
         const data = await response.json();
@@ -32,7 +34,12 @@ export default function ResetPassword() {
       }
     };
     fetchData();
-  }, [userId]);
+  }, [isLoggedIn, router, userId]);
+
+  const handleSuccess = () => {
+    alert("Password successfully updated.");
+    window.location.reload();
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -73,11 +80,12 @@ export default function ResetPassword() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      window.location.reload();
+
       const data = await response.json();
 
-      if (data.success) {
+      if (!data.error) {
         setSuccess(true);
+        return;
       } else {
         console.error(data.message);
       }
@@ -88,6 +96,7 @@ export default function ResetPassword() {
       );
     }
   };
+
   return (
     <div
       className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
@@ -122,15 +131,13 @@ export default function ResetPassword() {
             Wrong old password.
           </p>
         )}
-        {changeSuccessful && (
-          <p
-            className={styleForm.notificationMessage}
-            style={{ color: "green" }}
-          >
-            Password successfully updated.
-          </p>
-        )}
         <div className={styleBtn.btnBottomDiv}>
+          <button
+            className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
+            onClick={() => router.back()}
+          >
+            Return
+          </button>
           <button
             className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
             type="submit"
@@ -139,6 +146,7 @@ export default function ResetPassword() {
           </button>
         </div>
       </form>
+      {changeSuccessful && handleSuccess()}
     </div>
   );
 }
