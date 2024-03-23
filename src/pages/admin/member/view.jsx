@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import style from "@/styles/table.module.css";
 import Popup from "reactjs-popup";
+import { Jwt } from "jsonwebtoken";
 import styleForm from "@/styles/Admin.Form.module.css";
 import { useRouter } from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
@@ -133,12 +134,14 @@ const MemberTable = () => {
             Email:
             <input
               name="email"
-              required={true}
               type="email"
               onChange={handleInputChange}
             ></input>
             {emailError && <p className="error">{emailError}</p>}
           </label>
+          <h11>
+            Please use personal email 
+          </h11>
           <label>
             Username:
             <input
@@ -165,7 +168,6 @@ const MemberTable = () => {
             <tr className={style.tableRow}>
               <th>Email</th>
               <th>Username</th>
-              <th>Password</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -177,7 +179,6 @@ const MemberTable = () => {
                 <tr key={index}>
                   <td>{item.email}</td>
                   <td>{item.username}</td>
-                  <td>{item.password}</td>
                   <td className={style.btnContainer}>
                     <button
                       className={`${style.btn} ${style.btnTable}`}
