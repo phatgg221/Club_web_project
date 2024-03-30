@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
 const MemberTable = () => {
   const router = useRouter();
-  const { isAdmin } = useAuth();
+  const { isAdmin, isHighestAdmin } = useAuth();
   const [usernameError, setUsernameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [errorSubmit, setErrorSubmit] = useState('');
@@ -194,7 +194,7 @@ const MemberTable = () => {
             <tr className={style.tableRow}>
               <th>Email</th>
               <th>Username</th>
-              <th>Is Admin Member</th>
+              <th>Is Admin Member (only president can change this information)</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -207,13 +207,13 @@ const MemberTable = () => {
                   <td>{item.email}</td>
                   <td>{item.username}</td>
                   <td className={style.btnContainer}>
-                    {item.isAdmin &&<button
+                    {item.isAdmin &&<button disabled={!isHighestAdmin}
                       className={`${style.btn} ${style.btnTable}`}
                       onClick={() => updateUserAdminStatus(item._id, false)}
                     >
                         Make normal member
                     </button>}
-                    {!item.isAdmin &&<button
+                    {!item.isAdmin &&<button disabled={!isHighestAdmin}
                       className={`${style.btn} ${style.btnTable}`}
                       onClick={() => updateUserAdminStatus(item._id, true)}
                     >
