@@ -169,6 +169,7 @@ const MemberTable = () => {
             <tr className={style.tableRow}>
               <th>Email</th>
               <th>Username</th>
+              <th>Is Admin Member</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -180,6 +181,20 @@ const MemberTable = () => {
                 <tr key={index}>
                   <td>{item.email}</td>
                   <td>{item.username}</td>
+                  <td className={style.btnContainer}>
+                    {item.isAdmin &&<button
+                      className={`${style.btn} ${style.btnTable}`}
+                      onClick={() => handleDelete(item._id)}
+                    >
+                        Make normal member
+                    </button>}
+                    {!item.isAdmin &&<button
+                      className={`${style.btn} ${style.btnTable}`}
+                      onClick={() => handleDelete(item._id)}
+                    >
+                        Make admin
+                    </button>}
+                  </td>
                   <td className={style.btnContainer}>
                     <button
                       className={`${style.btn} ${style.btnTable}`}
