@@ -15,7 +15,9 @@ export function AuthProvider({ children }) {
   const [isAdmin, setAdminLogin] = useState(
     () => typeof window !== 'undefined' ? Boolean(localStorage.getItem('isAdmin')) : false
   );
-
+  const [isHighestAdmin, setHighestAdmin]= useState(
+    ()=> typeof window !== 'undefined' ? Boolean(localStorage.getItem('isHighestAdmin')):false
+  )
   const [userId, setUserId] = useState(
     () => typeof window !== 'undefined' ? localStorage.getItem('userId') : null
   );
@@ -34,23 +36,30 @@ export function AuthProvider({ children }) {
     setAdminLogin(true);
     localStorage.setItem('isAdmin', 'true'); // Store as a string
   };
-
+  const highestAdminLogin=()=>{
+    setHighestAdmin(true);
+    localStorage.setItem('isHighestAdmin','true');
+    localStorage.setItem('isAdmin','true');
+  }
   const adminLogout = () => {
     setAdminLogin(false);
     localStorage.removeItem('isAdmin');
+    localStorage.removeItem('isHighestAdmin');
   };
+  
 
   const logout = () => {
     setIsLoggedIn(false);
     setUserId(null);
     setUsername(null);
+    
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('userId');
     localStorage.removeItem('username');
   };
 
   return (
-    <AuthContext.Provider value={{ username, isLoggedIn, userId, isAdmin, adminLogin, adminLogout, login, logout }}>
+    <AuthContext.Provider value={{isHighestAdmin ,username, isLoggedIn, userId, isAdmin,highestAdminLogin ,adminLogin, adminLogout, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,13 +1,19 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useState} from "react";
 import AdminHeader from "@/components/Header/adminHeader";
 import style from "@/styles/AdminDasboard.module.css";
 import Popup from "reactjs-popup";
 import {useRouter} from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
 import Content from "@/components/Foldables/content";
+
 function Dashboard() {
-  const {isAdmin} = useAuth();
+  const {isAdmin, isHighestAdmin} = useAuth();
+  const [isClient, setIsClient] = useState(false);
+  
   console.log("current login status"+ isAdmin);
+  useEffect(() => {
+    setIsClient(true);
+ }, []);
   const router = useRouter();
   const handleCardButton = async () => {
     window.location.href = "/admin/Card/view";
@@ -58,7 +64,15 @@ function Dashboard() {
         <button className={`${style.btn}`} onClick={handleTips}>
           Manage Tips
         </button>
-        <button className={`${style.btn}`} onClick={handle}>Move to user dashboard</button>
+        {!isHighestAdmin && isClient&& <button className={`${style.btn}`} onClick={handle}>Move to user dashboard</button>}
+        {isHighestAdmin&&isClient && <Popup
+          modal
+          trigger={
+            <button className={`${style.btn}`}>Change Admin Password</button>
+          }
+        >
+          {(close) => <Content close={close} isAdminChangePass={true} />}
+        </Popup>}
       </div>
     </div>
   );
