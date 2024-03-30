@@ -13,6 +13,7 @@ const MemberTable = () => {
   const [emailError, setEmailError] = useState('');
   const [errorSubmit, setErrorSubmit] = useState('');
   const [members, setMembers] = useState([]);
+  // const [user, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
@@ -81,6 +82,30 @@ const MemberTable = () => {
     }
   };
 
+  const updateUserAdminStatus = async (userId, isAdmin1) => {
+    try {
+      const response = await fetch(`/api/member_api?id=${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          isAdmin: isAdmin1
+        }),
+      });
+   
+       if (!response.ok) {
+         throw new Error("Failed to update user admin status");
+       }
+       
+       console.log("User admin status updated successfully");
+       window.location.href = "/admin/member/view";
+    } catch (error) {
+       console.error("Error updating user admin status:", error);
+    }
+   };
+   
+   
   const handleReturn = async () => {
     window.location.href = "/admin/dashboard/view";
   };
@@ -184,13 +209,13 @@ const MemberTable = () => {
                   <td className={style.btnContainer}>
                     {item.isAdmin &&<button
                       className={`${style.btn} ${style.btnTable}`}
-                      onClick={() => handleDelete(item._id)}
+                      onClick={() => updateUserAdminStatus(item._id, false)}
                     >
                         Make normal member
                     </button>}
                     {!item.isAdmin &&<button
                       className={`${style.btn} ${style.btnTable}`}
-                      onClick={() => handleDelete(item._id)}
+                      onClick={() => updateUserAdminStatus(item._id, true)}
                     >
                         Make admin
                     </button>}
