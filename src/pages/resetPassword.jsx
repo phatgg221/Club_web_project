@@ -18,9 +18,6 @@ export default function ResetPassword() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!isLoggedIn) {
-        router.push('/login');
-      }
       try {
         const response = await fetch(`/api/member_api`);
         const data = await response.json();

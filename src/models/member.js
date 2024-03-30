@@ -30,6 +30,12 @@ class Account {
                 type: String,
                 require: true,
             },
+            isAdmin: {
+                type: Boolean,
+                required: true,
+                default: false,
+            }
+            
         });
         return mongoose.models.Account || mongoose.model("Account", accountSchema);
     }

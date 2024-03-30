@@ -68,8 +68,8 @@ export default function Login() {
 
         const userId = decodedToken.payload.user.id;
         const username2= username;
-        console.log(username2+ "username 2");
-        console.log(JSON.stringify(decodedToken.payload.user)+ "akjsdnajnc");
+        // console.log(username2+ "username 2");
+        // console.log(JSON.stringify(decodedToken.payload.user)+ "akjsdnajnc");
         if (userId) {
           
           console.log('User ID:', userId);

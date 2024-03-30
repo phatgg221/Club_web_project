@@ -56,6 +56,7 @@ class MemberService extends Service {
             username: Member.username,
             password: hashedPassword,
             email: Member.email,
+            isAdmin: Member.isAdmin
         })
     }
     async getSearchMember(query) {
@@ -129,6 +130,7 @@ class MemberService extends Service {
                 username: Member.username,
                 password: Member.password,
                 email: Member.email,
+                isAdmin: Member.isAdmin
             });
             if (!updateData) {
                 throw new Error("Member not found");

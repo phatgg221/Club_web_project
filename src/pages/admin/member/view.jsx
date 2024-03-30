@@ -18,6 +18,7 @@ const MemberTable = () => {
     username: "",
     password: "1",
     email: "",
+    isAdmin: false
   });
   const closeModal = () => setOpen(false);
   const openModal = () => setOpen(true);
