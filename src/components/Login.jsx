@@ -14,19 +14,19 @@ export default function Login() {
   const [isNotCorrect, setIsnotcorrect] = useState(false);
   const [admin, setAdmin]= useState([]);
 
-  useEffect(() => {
-    const fetchData= async () =>{
-      try{
-        const response= await fetch(`/api/admin_api`);
-        const data= await response.json();
+  // useEffect(() => {
+  //   const fetchData= async () =>{
+  //     try{
+  //       const response= await fetch(`/api/admin_api`);
+  //       const data= await response.json();
 
-        setAdmin(data);
-      }catch(err){
-        console.log('Error fecthing data: ', err);
-      }
-    };
-    fetchData();
-  }, []);
+  //       setAdmin(data);
+  //     }catch(err){
+  //       console.log('Error fecthing data: ', err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
 
 
@@ -39,18 +39,18 @@ export default function Login() {
       return;
     }
 
-    if (username === 'admin') {
-      // Check if the entered password matches the admin password
-      if (password === admin.data.mongoData[0].adminPassword) {
-        // Perform admin login logic here, for example, redirect to admin dashboard
-        router.push('/admin/dashboard/view');
-        adminLogin();
-        return;
-      } else {
-        setIsnotcorrect(true);
-        return;
-      }
-    }
+    // if (username === 'admin') {
+    //   // Check if the entered password matches the admin password
+    //   if (password === admin.data.mongoData[0].adminPassword) {
+    //     // Perform admin login logic here, for example, redirect to admin dashboard
+    //     router.push('/admin/dashboard/view');
+    //     adminLogin();
+    //     return;
+    //   } else {
+    //     setIsnotcorrect(true);
+    //     return;
+    //   }
+    // }
       
   
     const response = await fetch('/api/login_api', {
@@ -67,16 +67,22 @@ export default function Login() {
         console.log('Decoded token:', decodedToken.payload.user.id);
 
         const userId = decodedToken.payload.user.id;
+        const isAdmin = data.data.user.isAdmin;
         const username2= username;
         // console.log(username2+ "username 2");
         // console.log(JSON.stringify(decodedToken.payload.user)+ "akjsdnajnc");
         if (userId) {
-          
-          console.log('User ID:', userId);
+          if(isAdmin){
+            router.push('/admin/dashboard/view');
+            adminLogin(); 
+          }else{
+            console.log('User ID:', userId);
          
-          login(userId,username2);
-       
-            router.push('/userMain');
+            login(userId,username2);
+         
+              router.push('/userMain');
+          }
+          
          
           
           

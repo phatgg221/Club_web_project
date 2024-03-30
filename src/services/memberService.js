@@ -28,7 +28,8 @@ class MemberService extends Service {
 
             const payload = {
                 user: {
-                    id: user.id
+                    id: user.id,
+                    isAdmin: user.isAdmin
                 }
             };
             const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 });
@@ -37,7 +38,11 @@ class MemberService extends Service {
                 error: false,
                 statusCode: 200,
                 data: {
-                    token
+                    token,
+                    user:{
+                        id:user.id,
+                        isAdmin: user.isAdmin
+                    }
                 }
             };
         } catch (error) {
