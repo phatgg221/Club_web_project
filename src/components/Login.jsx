@@ -75,6 +75,7 @@ export default function Login() {
           if(isAdmin){
             router.push('/admin/dashboard/view');
             adminLogin(); 
+            login(userId, username2);
           }else{
             console.log('User ID:', userId);
          

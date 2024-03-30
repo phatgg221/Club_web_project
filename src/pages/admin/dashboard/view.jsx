@@ -26,7 +26,9 @@ function Dashboard() {
   const handleTips = async () => {
     window.location.href = "/admin/tips/tips";
   };
-
+  const handle = async ()=>{
+    window.location.href= "/userMain";
+  }
   useEffect(() =>{
     if(!isAdmin){
       router.push('/login');
@@ -56,15 +58,7 @@ function Dashboard() {
         <button className={`${style.btn}`} onClick={handleTips}>
           Manage Tips
         </button>
-
-        <Popup
-          modal
-          trigger={
-            <button className={`${style.btn}`}>Change Admin Password</button>
-          }
-        >
-          {(close) => <Content close={close} isAdminChangePass={true} />}
-        </Popup>
+        <button className={`${style.btn}`} onClick={handle}>Move to user dashboard</button>
       </div>
     </div>
   );
