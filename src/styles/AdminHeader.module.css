@@ -41,6 +41,9 @@
     background-color: #f8a61b;
     color: #fff; /* Change text color when hovering if needed */
   }
+  .buttonTextStyle{
+    margin-bottom: 0px;
+  }
   
   @media (max-width: 768px) { /* Adjust the font size for smaller screens */
     .textStyle {

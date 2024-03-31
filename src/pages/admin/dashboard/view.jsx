@@ -1,19 +1,19 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import AdminHeader from "@/components/Header/adminHeader";
 import style from "@/styles/AdminDasboard.module.css";
 import Popup from "reactjs-popup";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
 import Content from "@/components/Foldables/content";
 
 function Dashboard() {
-  const {isAdmin, isHighestAdmin} = useAuth();
+  const { isAdmin, isHighestAdmin } = useAuth();
   const [isClient, setIsClient] = useState(false);
-  
-  console.log("current login status"+ isAdmin);
+
+  console.log("current login status" + isAdmin);
   useEffect(() => {
     setIsClient(true);
- }, []);
+  }, []);
   const router = useRouter();
   const handleCardButton = async () => {
     window.location.href = "/admin/Card/view";
@@ -32,15 +32,15 @@ function Dashboard() {
   const handleTips = async () => {
     window.location.href = "/admin/tips/tips";
   };
-  const handle = async ()=>{
-    window.location.href= "/userMain";
-  }
-  useEffect(() =>{
-    if(!isAdmin){
-      router.push('/login');
-      console.log("current admin "+ isAdmin);
+  const handle = async () => {
+    window.location.href = "/userMain";
+  };
+  useEffect(() => {
+    if (!isAdmin) {
+      router.push("/login");
+      console.log("current admin " + isAdmin);
     }
-  }, [isAdmin,router]);
+  }, [isAdmin, router]);
 
   return (
     <div>
@@ -64,15 +64,21 @@ function Dashboard() {
         <button className={`${style.btn}`} onClick={handleTips}>
           Manage Tips
         </button>
-        {!isHighestAdmin && isClient&& <button className={`${style.btn}`} onClick={handle}>Move to user dashboard</button>}
-        {isHighestAdmin&&isClient && <Popup
-          modal
-          trigger={
-            <button className={`${style.btn}`}>Change Admin Password</button>
-          }
-        >
-          {(close) => <Content close={close} isAdminChangePass={true} />}
-        </Popup>}
+        {!isHighestAdmin && isClient && (
+          <button className={`${style.btn}`} onClick={handle}>
+            Move to user dashboard
+          </button>
+        )}
+        {isHighestAdmin && isClient && (
+          <Popup
+            modal
+            trigger={
+              <button className={`${style.btn}`}>Change Admin Password</button>
+            }
+          >
+            {(close) => <Content close={close} isAdminChangePass={true} />}
+          </Popup>
+        )}
       </div>
     </div>
   );

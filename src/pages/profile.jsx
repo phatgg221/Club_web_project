@@ -46,14 +46,14 @@ export default function Profile() {
         height={117}
       />
       <ClientSideUsername /> {/* Render the client-side only component */}
-      <button className={styles.button} onClick={toggleChangeEmail}>
+      <button className={styles.btn} onClick={toggleChangeEmail}>
         Update your email
       </button>
-      <button className={styles.button} onClick={toggleChangePw}>
+      <button className={styles.btn} onClick={toggleChangePw}>
         Update your password
       </button>
       {isAdmin && (
-        <button className={styles.button} onClick={toggleAdmin}>
+        <button className={styles.btn} onClick={toggleAdmin}>
           Go to Admin Dashboard
         </button>
       )}

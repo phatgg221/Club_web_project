@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styleForm from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
+import styleBtn2 from "@/styles/resetEmailAndPassword.module.css";
 import { useAuth } from "@/contexts/AuthContext";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs"; // Import bcryptjs for hashing
@@ -19,7 +20,7 @@ export default function ResetPassword() {
   useEffect(() => {
     const fetchData = async () => {
       if (!isLoggedIn) {
-        router.push('/login');
+        router.push("/login");
       }
       try {
         const response = await fetch(`/api/member_api`);
@@ -39,7 +40,7 @@ export default function ResetPassword() {
   const handleSuccess = () => {
     alert("Password successfully updated.");
     window.location.reload();
-  }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -60,7 +61,6 @@ export default function ResetPassword() {
       setWrongPass(true);
       return;
     }
-
 
     // Hash the new password before sending to the server
     const newHashedPassword = await bcrypt.hash(newPass, 10);
@@ -132,16 +132,10 @@ export default function ResetPassword() {
           </p>
         )}
         <div className={styleBtn.btnBottomDiv}>
-          <button
-            className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
-            onClick={() => router.back()}
-          >
+          <button className={`${styleBtn2.btn} `} onClick={() => router.back()}>
             Return
           </button>
-          <button
-            className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
-            type="submit"
-          >
+          <button className={`${styleBtn2.btn} `} type="submit">
             Change Password
           </button>
         </div>
