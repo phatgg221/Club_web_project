@@ -16,6 +16,7 @@ export default async function handler (req, res){
             return handleRequest(() => MemberService.createMember(body), res);
         
         case 'PUT':
+            
             return handleRequest(() => MemberService.updateMember(query.id, body), res);
 
         case 'DELETE':

@@ -1,9 +1,9 @@
 import React from "react";
 import style from "@/styles/AdminHeader.module.css";
-import {useAuth} from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
 function AdminHeader() {
-  const {adminLogout}= useAuth();
+  const { adminLogout } = useAuth();
   const handleButton = async () => {
     adminLogout();
     window.location.href = "/";
@@ -13,7 +13,7 @@ function AdminHeader() {
       <div className={style.Hstyle}>
         <h3 className={style.textStyle}>Admin Dashboard</h3>
         <button onClick={handleButton} className={style.buttonStyle}>
-          <p>Logout</p>
+          <p className={style.buttonTextStyle}>Logout</p>
         </button>
       </div>
     </header>

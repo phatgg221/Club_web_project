@@ -2,19 +2,24 @@ import { useEffect, useState } from "react";
 import React from "react";
 import style from "@/styles/table.module.css";
 import Popup from "reactjs-popup";
+import { Jwt } from "jsonwebtoken";
 import styleForm from "@/styles/Admin.Form.module.css";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
 const MemberTable = () => {
   const router = useRouter();
-  const {isAdmin}= useAuth();
+  const { isAdmin, isHighestAdmin } = useAuth();
   const [usernameError, setUsernameError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [errorSubmit, setErrorSubmit] = useState('');
   const [members, setMembers] = useState([]);
+  // const [user, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "1",
+    email: "",
+    isAdmin: false
   });
   const closeModal = () => setOpen(false);
   const openModal = () => setOpen(true);
@@ -34,15 +39,25 @@ const MemberTable = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     const usernamePattern = /^[sS]\d{7}$/;
+    const emailPattern = /^s\d{7}@rmit\.edu\.vn$/;
+
+    setErrorSubmit('');
+    setUsernameError('');
+
     if (name === 'username') {
       if (!usernamePattern.test(value)) {
-        setErrorSubmit('Invalid format. Cannot submit.');
         setUsernameError('Invalid username. Required format: "sXXXXXXX" or "SXXXXXXX"');
-      } else {
-        setErrorSubmit('');
-        setUsernameError('');
+        setErrorSubmit('Invalid format. Cannot submit.');
       }
     }
+
+    if (name === 'email') {
+      if (!emailPattern.test(value)) {
+        setEmailError('Invalid email.');
+        setErrorSubmit('Invalid format. Cannot submit.');
+      }
+    }
+
     setFormData({
       ...formData,
       [name]: value,
@@ -67,6 +82,30 @@ const MemberTable = () => {
     }
   };
 
+  const updateUserAdminStatus = async (userId, isAdmin1) => {
+    try {
+      const response = await fetch(`/api/member_api?id=${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          isAdmin: isAdmin1
+        }),
+      });
+   
+       if (!response.ok) {
+         throw new Error("Failed to update user admin status");
+       }
+       
+       console.log("User admin status updated successfully");
+       window.location.href = "/admin/member/view";
+    } catch (error) {
+       console.error("Error updating user admin status:", error);
+    }
+   };
+   
+   
   const handleReturn = async () => {
     window.location.href = "/admin/dashboard/view";
   };
@@ -102,11 +141,11 @@ const MemberTable = () => {
       .then((data) => console.log("Success: ", data))
       .catch((error) => console.error("Error", error));
   };
-  useEffect(() =>{
-    if(!isAdmin){
+  useEffect(() => {
+    if (!isAdmin) {
       router.push('/login');
     }
-  }, [isAdmin,router]);
+  }, [isAdmin, router]);
 
 
   return (
@@ -117,6 +156,18 @@ const MemberTable = () => {
           className={styleForm.form}
           onSubmit={hanldeSubmit}
         >
+          <label>
+            Email:
+            <input
+              name="email"
+              type="email"
+              onChange={handleInputChange}
+            ></input>
+            {emailError && <p className="error">{emailError}</p>}
+          </label>
+          <h11>
+            Please use personal email 
+          </h11>
           <label>
             Username:
             <input
@@ -141,8 +192,9 @@ const MemberTable = () => {
         <table className={style.mainTable}>
           <thead className={style.tableHeading}>
             <tr className={style.tableRow}>
+              <th>Email</th>
               <th>Username</th>
-              <th>Password</th>
+              <th>Is Admin Member (only president can change this information)</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -152,8 +204,22 @@ const MemberTable = () => {
               members.data.mongoData &&
               members.data.mongoData.map((item, index) => (
                 <tr key={index}>
+                  <td>{item.email}</td>
                   <td>{item.username}</td>
-                  <td>{item.password}</td>
+                  <td className={style.btnContainer}>
+                    {item.isAdmin &&<button disabled={!isHighestAdmin}
+                      className={`${style.btn} ${style.btnTable}`}
+                      onClick={() => updateUserAdminStatus(item._id, false)}
+                    >
+                        Make normal member
+                    </button>}
+                    {!item.isAdmin &&<button disabled={!isHighestAdmin}
+                      className={`${style.btn} ${style.btnTable}`}
+                      onClick={() => updateUserAdminStatus(item._id, true)}
+                    >
+                        Make admin
+                    </button>}
+                  </td>
                   <td className={style.btnContainer}>
                     <button
                       className={`${style.btn} ${style.btnTable}`}

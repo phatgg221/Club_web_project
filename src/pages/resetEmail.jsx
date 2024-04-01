@@ -3,25 +3,25 @@ import styleForm from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
 import styleBtn2 from "@/styles/resetEmailAndPassword.module.css";
 import { useAuth } from "@/contexts/AuthContext";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs"; // Import bcryptjs for hashing
 import { useRouter } from "next/router";
-export default function ResetPassword() {
+
+export default function ResetEmail() {
   const [users, setUsers] = useState([]);
-  const [oldPass, setOldPass] = useState("");
-  const [newPass, setNewPass] = useState("");
+  const [oldEmail, setOldEmail] = useState("");
+  const [newEmail, setNewEmail] = useState("");
   const [cannotEmpty, setCannotEmpty] = useState(false);
-  const [wrongPass, setWrongPass] = useState(false);
+  const [emailNotMatch, setEmailNotMatch] = useState(false);
   const [changeSuccessful, setSuccess] = useState(false);
   const [currentUserIndex, setCurrentUserIndex] = useState(-1);
   const router = useRouter();
-  const { userId, isLoggedIn } = useAuth(); // Get userId from useAuth hook
+  const { userId, isLoggedIn } = useAuth();
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      router.push("/login");
+    }
+
     const fetchData = async () => {
-      if (!isLoggedIn) {
-        router.push("/login");
-      }
       try {
         const response = await fetch(`/api/member_api`);
         const data = await response.json();
@@ -30,41 +30,34 @@ export default function ResetPassword() {
         const mongoDataArray = data.data.mongoData;
         const index = mongoDataArray.findIndex((user) => user._id === userId);
         setCurrentUserIndex(index);
+        setOldEmail(mongoDataArray[index].email);
       } catch (err) {
-        console.log("Error fecthing data: ", err);
+        console.log("Error fetching data: ", err);
       }
     };
     fetchData();
   }, [isLoggedIn, router, userId]);
 
   const handleSuccess = () => {
-    alert("Password successfully updated.");
+    alert("Email successfully updated.");
     window.location.reload();
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    //If users input is empty
-    if (!oldPass || !newPass) {
+    if (!newEmail) {
       setCannotEmpty(true);
       return;
     }
 
-    const hashedPassword = users.data.mongoData[currentUserIndex].password; //get the hashed password from the database
+    const currentUserEmail = users.data.mongoData[currentUserIndex].email;
 
-    const passwordMatch = await bcrypt.compare(oldPass, hashedPassword);
-    // Check if the old password matches the current password (hashed)
-
-    // Check if the old password matches the current password
-    if (!passwordMatch) {
-      setWrongPass(true);
+    if (currentUserEmail !== oldEmail) {
+      setEmailNotMatch(true);
       return;
     }
 
-    // Hash the new password before sending to the server
-    const newHashedPassword = await bcrypt.hash(newPass, 10);
-    // Send a request to the server to update the password
     try {
       const response = await fetch(`/api/member_api?id=${userId}`, {
         method: "PUT",
@@ -72,8 +65,7 @@ export default function ResetPassword() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: users.data.mongoData[currentUserIndex].username,
-          password: newHashedPassword,
+          email: newEmail,
         }),
       });
 
@@ -83,7 +75,7 @@ export default function ResetPassword() {
 
       const data = await response.json();
 
-      if (!data.error) {
+      if (data.updated_data.data.email === newEmail) {
         setSuccess(true);
         return;
       } else {
@@ -101,24 +93,17 @@ export default function ResetPassword() {
     <div
       className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
     >
-      <h1>Reset Your Password</h1>
+      <h1>Reset Your Email</h1>
       <form className={styleForm.form} onSubmit={handleSubmit}>
         <div className={styleForm.inputGroup}>
-          <label>Your old password</label>
+          <label>Your old email</label>
+          <input value={oldEmail} disabled></input>
+          <label>Enter new email</label>
           <input
             required
-            type="password"
-            value={oldPass}
-            onChange={(e) => setOldPass(e.target.value)}
-          />
-        </div>
-        <div className={styleForm.inputGroup}>
-          <label>Your new Password</label>
-          <input
-            required
-            type="password"
-            value={newPass}
-            onChange={(e) => setNewPass(e.target.value)}
+            type="email"
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
           />
         </div>
         {cannotEmpty && (
@@ -126,17 +111,18 @@ export default function ResetPassword() {
             Please fill in the blank.
           </p>
         )}
-        {wrongPass && (
+        {emailNotMatch && (
           <p className={styleForm.notificationMessage} style={{ color: "red" }}>
-            Wrong old password.
+            The current email does not match.
           </p>
         )}
+
         <div className={styleBtn.btnBottomDiv}>
           <button className={`${styleBtn2.btn} `} onClick={() => router.back()}>
             Return
           </button>
-          <button className={`${styleBtn2.btn} `} type="submit">
-            Change Password
+          <button className={`${styleBtn2.btn}`} type="submit">
+            Change Email
           </button>
         </div>
       </form>

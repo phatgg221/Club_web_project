@@ -13,6 +13,7 @@
 }
   
 .btn{
+  border-radius: 5px;
   font-weight: 900;
   border: 1px solid #f8a61b;
   background: none;

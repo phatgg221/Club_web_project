@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 export default function Login() {
   const router = useRouter();
-  const {login, isLoggedIn,isAdmin,adminLogin} = useAuth();
+  const {login, isLoggedIn,isAdmin,adminLogin, highestAdminLogin} = useAuth();
   const [username,setUsername]= useState('');
   const [password, setPassword] = useState('');
   const[formSubmit, setFormSubmit]= useState(false);
@@ -19,7 +19,7 @@ export default function Login() {
       try{
         const response= await fetch(`/api/admin_api`);
         const data= await response.json();
-
+        
         setAdmin(data);
       }catch(err){
         console.log('Error fecthing data: ', err);
@@ -43,8 +43,9 @@ export default function Login() {
       // Check if the entered password matches the admin password
       if (password === admin.data.mongoData[0].adminPassword) {
         // Perform admin login logic here, for example, redirect to admin dashboard
+        highestAdminLogin();
         router.push('/admin/dashboard/view');
-        adminLogin();
+       
         return;
       } else {
         setIsnotcorrect(true);
@@ -67,16 +68,23 @@ export default function Login() {
         console.log('Decoded token:', decodedToken.payload.user.id);
 
         const userId = decodedToken.payload.user.id;
+        const isAdmin = data.data.user.isAdmin;
         const username2= username;
-        console.log(username2+ "username 2");
-        console.log(JSON.stringify(decodedToken.payload.user)+ "akjsdnajnc");
+        // console.log(username2+ "username 2");
+        // console.log(JSON.stringify(decodedToken.payload.user)+ "akjsdnajnc");
         if (userId) {
-          
-          console.log('User ID:', userId);
+          if(isAdmin){
+            router.push('/admin/dashboard/view');
+            adminLogin(); 
+            login(userId, username2);
+          }else{
+            console.log('User ID:', userId);
          
-          login(userId,username2);
-       
-            router.push('/userMain');
+            login(userId,username2);
+         
+              router.push('/userMain');
+          }
+          
          
           
           
