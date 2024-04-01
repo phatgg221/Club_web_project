@@ -15,10 +15,13 @@ export default function Profile() {
   // const { isLoggedIn, logout, username } = useAuth();
   const [changePw, setChangePw] = useState(false);
 
+  const [isClient, setIsClient] = useState(false); // State to track if we're on the client
   const { isLoggedIn, isAdmin } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
+    setIsClient(true); // Once component mounts, we're definitely on the client
+
     if (!isLoggedIn) {
       router.push("/login");
     }
@@ -52,7 +55,7 @@ export default function Profile() {
       <button className={styles.btn} onClick={toggleChangePw}>
         Update your password
       </button>
-      {isAdmin && (
+      {isClient && isAdmin && (
         <button className={styles.btn} onClick={toggleAdmin}>
           Go to Admin Dashboard
         </button>
