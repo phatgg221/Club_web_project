@@ -52,6 +52,7 @@ export function AuthProvider({ children }) {
     setIsLoggedIn(false);
     setUserId(null);
     setUsername(null);
+    setAdminLogin(false);
     
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('userId');
