@@ -34,15 +34,19 @@ export function AuthProvider({ children }) {
 
   const adminLogin = () => {
     setAdminLogin(true);
+    // setHighestAdmin(true);
     localStorage.setItem('isAdmin', 'true'); // Store as a string
+    // localStorage.setItem('isHighestAdmin','true');
   };
   const highestAdminLogin=()=>{
+    setAdminLogin(true);
     setHighestAdmin(true);
     localStorage.setItem('isHighestAdmin','true');
     localStorage.setItem('isAdmin','true');
   }
   const adminLogout = () => {
     setAdminLogin(false);
+    setHighestAdmin(false);
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('isHighestAdmin');
   };
