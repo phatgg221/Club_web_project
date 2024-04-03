@@ -39,7 +39,7 @@ const MemberTable = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     const usernamePattern = /^[sS]\d{7}$/;
-    const emailPattern = /^s\d{7}@rmit\.edu\.vn$/;
+    const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     setErrorSubmit('');
     setUsernameError('');
@@ -48,6 +48,9 @@ const MemberTable = () => {
       if (!usernamePattern.test(value)) {
         setUsernameError('Invalid username. Required format: "sXXXXXXX" or "SXXXXXXX"');
         setErrorSubmit('Invalid format. Cannot submit.');
+      } else {
+        setUsernameError('');
+        setErrorSubmit('');
       }
     }
 
@@ -55,6 +58,9 @@ const MemberTable = () => {
       if (!emailPattern.test(value)) {
         setEmailError('Invalid email.');
         setErrorSubmit('Invalid format. Cannot submit.');
+      } else {
+        setEmailError('');
+        setErrorSubmit('');
       }
     }
 
@@ -93,19 +99,19 @@ const MemberTable = () => {
           isAdmin: isAdmin1
         }),
       });
-   
-       if (!response.ok) {
-         throw new Error("Failed to update user admin status");
-       }
-       
-       console.log("User admin status updated successfully");
-       window.location.href = "/admin/member/view";
+
+      if (!response.ok) {
+        throw new Error("Failed to update user admin status");
+      }
+
+      console.log("User admin status updated successfully");
+      window.location.href = "/admin/member/view";
     } catch (error) {
-       console.error("Error updating user admin status:", error);
+      console.error("Error updating user admin status:", error);
     }
-   };
-   
-   
+  };
+
+
   const handleReturn = async () => {
     window.location.href = "/admin/dashboard/view";
   };
@@ -166,7 +172,7 @@ const MemberTable = () => {
             {emailError && <p className="error">{emailError}</p>}
           </label>
           <h11>
-            Please use personal email 
+            Please use personal email
           </h11>
           <label>
             Username:
@@ -207,17 +213,17 @@ const MemberTable = () => {
                   <td>{item.email}</td>
                   <td>{item.username}</td>
                   <td className={style.btnContainer}>
-                    {item.isAdmin &&<button disabled={!isHighestAdmin}
+                    {item.isAdmin && <button disabled={!isHighestAdmin}
                       className={`${style.btn} ${style.btnTable}`}
                       onClick={() => updateUserAdminStatus(item._id, false)}
                     >
-                        Make normal member
+                      Make normal member
                     </button>}
-                    {!item.isAdmin &&<button disabled={!isHighestAdmin}
+                    {!item.isAdmin && <button disabled={!isHighestAdmin}
                       className={`${style.btn} ${style.btnTable}`}
                       onClick={() => updateUserAdminStatus(item._id, true)}
                     >
-                        Make admin
+                      Make admin
                     </button>}
                   </td>
                   <td className={style.btnContainer}>
