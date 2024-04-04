@@ -89,6 +89,7 @@ const CardTable = () => {
               <th>Competition name</th>
               <th>Location</th>
               <th>Link to web</th>
+              <th>Competition date</th>
               <th>Image</th>
               <th>Action</th>
             </tr>
@@ -103,6 +104,10 @@ const CardTable = () => {
                   <td>
                     <Link href={item.linkToWeb}>Link</Link>
                   </td>
+                  <td>
+                    {item.competitionDate && !isNaN(Date.parse(item.competitionDate)) ? new Date(item.competitionDate).toISOString().split('T')[0] : ''}
+                  </td>
+
                   <td>
                     <Image
                       className={style.imageTable}

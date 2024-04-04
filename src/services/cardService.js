@@ -23,6 +23,7 @@ class CardService extends Service{
             competitionName: Card.competitionName,
             location: Card.location,
             imageURL: Card.imageURL,
+            competitionDate: Card.competitionDate,
             linkToWeb: Card.linkToWeb
           });
         } catch (error) {
@@ -108,6 +109,7 @@ class CardService extends Service{
           competitionName: Card.competitionName,
           location: Card.location,
           imageURL: Card.imageURL,
+          competitionDate: Card.competitionDate,
           linkToWeb: Card.linkToWeb
         });
         if(!updateData){

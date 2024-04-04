@@ -1,3 +1,4 @@
+const ENUM = require("../constant/enum");
 const mongoose = require("mongoose");
 
 class Card {
@@ -56,6 +57,14 @@ class Card {
         },
         trim: true,
       },
+      competitionDate: {
+        type: Date,
+
+      },
+      competitionStatus: {
+        type: String,
+        default: ENUM.competitionStatus.incoming,
+      }
     });
 
    
