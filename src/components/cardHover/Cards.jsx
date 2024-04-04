@@ -83,10 +83,9 @@ if (ongoingCompetitions.data && ongoingCompetitions.data.mongoData) {
 
   let cards2= [];
   if(ongoingCompetitions.data && ongoingCompetitions.data.mongoData){
-    for(let i=3; i<= ongoingCompetitions.data.mongoData.length-1; i++){
+    for(let i=ongoingCompetitions.data.mongoData.length-3; i<= ongoingCompetitions.data.mongoData.length-1; i++){
       let item2 = ongoingCompetitions.data.mongoData[i];
-      // console.log(ongoingCompetitions.data.mongoData[i]+ "alksdjalksjda");
-      // console.log("Item data:", item2);
+
       cards2.push(
         <Card
         logoURL="/RMIT-logo.png"
@@ -100,7 +99,6 @@ if (ongoingCompetitions.data && ongoingCompetitions.data.mongoData) {
     }
   }
 
-  // console.log(JSON.stringify(cards1));
 
   return (
     <div className="app">
@@ -112,7 +110,7 @@ if (ongoingCompetitions.data && ongoingCompetitions.data.mongoData) {
         <div className="show-more-container">
           <Link
             className="NutShowMore"
-            href="/Competitions"
+            href="/competitions"
           >
             Show More
           </Link>
@@ -127,7 +125,7 @@ if (ongoingCompetitions.data && ongoingCompetitions.data.mongoData) {
         <div className="show-more-container">
           <Link
             className="NutShowMore"
-            href="/Competitions"
+            href="/competitions"
           >
             Show More
           </Link>

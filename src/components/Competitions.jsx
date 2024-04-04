@@ -10,6 +10,7 @@ export default function SearchPage() {
   const [samples, setSample]= useState([]);
   const [searchItem, setSearchItem]= useState('');
   const [selectedOrganizer, setselectedOrganizer]= useState('');
+  const [searchForCompeittionStatus, setSearchForCompetitionStatus]= useState('');
   const handleResize = () => {
     setIsDesktopOrLaptop(window.matchMedia("(min-width: 490px)").matches);
     setIsTabletOrMobile(window.matchMedia("(max-width: 490px)").matches);
@@ -40,6 +41,9 @@ console.log(categories.length + " categories found.");
   const handleSearchInput = (searchTerm) => {
     setSearchItem(searchTerm);
   };
+  const handleSearchForStatus= (searchItem) =>{
+    setSearchForCompetitionStatus(searchItem);
+  }
   const handleSearchForOrganizer= (searchItem)=>{
     setselectedOrganizer(searchItem);
   }
@@ -60,8 +64,10 @@ console.log(categories.length + " categories found.");
     const filteredSamples = samples.data?.mongoData?.filter((item) => {
       const matchesSearch = !searchItem || item.competitionName.toLowerCase().includes(searchItem.toLowerCase());
       const matchesOrganizer = !selectedOrganizer || item.organizer.toLowerCase().includes(selectedOrganizer.toLowerCase());
-      return matchesSearch && matchesOrganizer;
-    }) ?? []; 
+      const matchesStatus = !searchForCompeittionStatus || item.competitionStatus?.toLowerCase() === searchForCompeittionStatus.toLowerCase();
+      return matchesSearch && matchesOrganizer && matchesStatus;
+     }) ?? [];
+     
   
     // Map over the filtered samples to render them
     return filteredSamples.map((item, index) => (
@@ -100,15 +106,14 @@ console.log(categories.length + " categories found.");
                 name={"By organizer"}
                 onChange={handleSearchForOrganizer}
               />
-              {/* <FilterBox
+              <FilterBox
                 categories={[
-                  "Category1",
-                  "Category2",
-                  "Category3",
-                  "Category4",
+                  "incoming",
+                  "past"
                 ]}
-                name={"By category"}
-              /> */}
+                name={"By Competition Status"}
+                onChange={handleSearchForStatus}
+              />
             </div>
             <div className="filter-sect-search">
               <SearchBar
