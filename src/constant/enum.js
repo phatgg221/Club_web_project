@@ -6,3 +6,4 @@ function define(name, value) {
   }
 
   define("cloudinaryType",["cards"]);
+  define("competitionStatus",["incoming","past"]);

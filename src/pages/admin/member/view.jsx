@@ -3,6 +3,7 @@ import React from "react";
 import style from "@/styles/table.module.css";
 import Popup from "reactjs-popup";
 import { Jwt } from "jsonwebtoken";
+import SearchBar from "@/components/Competitions/SearchBar";
 import styleForm from "@/styles/Admin.Form.module.css";
 import { useRouter } from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
@@ -13,6 +14,7 @@ const MemberTable = () => {
   const [emailError, setEmailError] = useState('');
   const [errorSubmit, setErrorSubmit] = useState('');
   const [members, setMembers] = useState([]);
+  const [searchItem, setSearchItem] = useState('');
   // const [user, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -35,11 +37,13 @@ const MemberTable = () => {
     };
     fetchData();
   }, []);
-
+  const handleSeaerchItem = (searchItem) => {
+    setSearchItem(searchItem);
+  }
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     const usernamePattern = /^[sS]\d{7}$/;
-    const emailPattern = /^s\d{7}@rmit\.edu\.vn$/;
+    const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     setErrorSubmit('');
     setUsernameError('');
@@ -48,6 +52,9 @@ const MemberTable = () => {
       if (!usernamePattern.test(value)) {
         setUsernameError('Invalid username. Required format: "sXXXXXXX" or "SXXXXXXX"');
         setErrorSubmit('Invalid format. Cannot submit.');
+      } else {
+        setUsernameError('');
+        setErrorSubmit('');
       }
     }
 
@@ -55,6 +62,9 @@ const MemberTable = () => {
       if (!emailPattern.test(value)) {
         setEmailError('Invalid email.');
         setErrorSubmit('Invalid format. Cannot submit.');
+      } else {
+        setUsernameError('');
+        setErrorSubmit('');
       }
     }
 
@@ -93,19 +103,23 @@ const MemberTable = () => {
           isAdmin: isAdmin1
         }),
       });
-   
-       if (!response.ok) {
-         throw new Error("Failed to update user admin status");
-       }
-       
-       console.log("User admin status updated successfully");
-       window.location.href = "/admin/member/view";
+
+      if (!response.ok) {
+        throw new Error("Failed to update user admin status");
+      }
+
+      console.log("User admin status updated successfully");
+      window.location.href = "/admin/member/view";
     } catch (error) {
-       console.error("Error updating user admin status:", error);
+      console.error("Error updating user admin status:", error);
     }
-   };
-   
-   
+  };
+
+  const filteredMember =
+    members && members.data && members.data.mongoData && members.data.mongoData.filter((item) => {
+      return item.username.toLowerCase().includes(searchItem.toLowerCase());
+    });
+
   const handleReturn = async () => {
     window.location.href = "/admin/dashboard/view";
   };
@@ -166,7 +180,7 @@ const MemberTable = () => {
             {emailError && <p className="error">{emailError}</p>}
           </label>
           <h11>
-            Please use personal email 
+            Please use personal email
           </h11>
           <label>
             Username:
@@ -187,7 +201,7 @@ const MemberTable = () => {
             type="submit">Create Account</button>
         </form>
       </Popup>
-
+      <SearchBar showButton={true} placeholder="Search for user id" onChange={handleSeaerchItem}></SearchBar>
       <div className={style.divTable}>
         <table className={style.mainTable}>
           <thead className={style.tableHeading}>
@@ -199,38 +213,36 @@ const MemberTable = () => {
             </tr>
           </thead>
           <tbody>
-            {members &&
-              members.data &&
-              members.data.mongoData &&
-              members.data.mongoData.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.email}</td>
-                  <td>{item.username}</td>
-                  <td className={style.btnContainer}>
-                    {item.isAdmin &&<button disabled={!isHighestAdmin}
-                      className={`${style.btn} ${style.btnTable}`}
-                      onClick={() => updateUserAdminStatus(item._id, false)}
-                    >
-                        Make normal member
-                    </button>}
-                    {!item.isAdmin &&<button disabled={!isHighestAdmin}
-                      className={`${style.btn} ${style.btnTable}`}
-                      onClick={() => updateUserAdminStatus(item._id, true)}
-                    >
-                        Make admin
-                    </button>}
-                  </td>
-                  <td className={style.btnContainer}>
-                    <button
-                      className={`${style.btn} ${style.btnTable}`}
-                      onClick={() => handleDelete(item._id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+            {filteredMember && filteredMember.map((item, index) => (
+              <tr key={index}>
+                <td>{item.email}</td>
+                <td>{item.username}</td>
+                <td className={style.btnContainer}>
+                  {item.isAdmin && <button disabled={!isHighestAdmin}
+                    className={`${style.btn} ${style.btnTable}`}
+                    onClick={() => updateUserAdminStatus(item._id, false)}
+                  >
+                    Make normal member
+                  </button>}
+                  {!item.isAdmin && <button disabled={!isHighestAdmin}
+                    className={`${style.btn} ${style.btnTable}`}
+                    onClick={() => updateUserAdminStatus(item._id, true)}
+                  >
+                    Make admin
+                  </button>}
+                </td>
+                <td className={style.btnContainer}>
+                  <button
+                    className={`${style.btn} ${style.btnTable}`}
+                    onClick={() => handleDelete(item._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
+
         </table>
       </div>
       <div className={style.btnBottomDiv}>

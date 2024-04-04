@@ -1,5 +1,5 @@
 import Service from "./Service";
-
+import ENUM from "../constant/enum";
 
 class CardService extends Service{
     constructor(model){
@@ -23,7 +23,9 @@ class CardService extends Service{
             competitionName: Card.competitionName,
             location: Card.location,
             imageURL: Card.imageURL,
-            linkToWeb: Card.linkToWeb
+            competitionDate: Card.competitionDate,
+            linkToWeb: Card.linkToWeb,
+            competitionStatus: Card.competitionStatus,
           });
         } catch (error) {
           console.error(error);
@@ -99,7 +101,29 @@ class CardService extends Service{
 
       }
     }
-
+  async updateCompetitionStatus() {
+      try {
+         const currentDate = new Date();
+         currentDate.setHours(0, 0, 0, 0); 
+     
+         // Find competitions whose competitionDate is in the past
+         const competitionsToUpdate = await this.model.find({
+           competitionDate: { $lt: currentDate },
+           competitionStatus: ENUM.competitionStatus.incoming,
+         });
+     
+         // Update the competitionStatus of these competitions to 'past'
+         await this.model.updateMany(
+           { _id: { $in: competitionsToUpdate.map(c => c._id) } },
+           { competitionStatus: ENUM.competitionStatus.past }
+         );
+     
+         console.log(`Updated ${competitionsToUpdate.length} competitions to 'past'.`);
+      } catch (error) {
+         console.error("Error updating competition status:", error);
+      }
+     }
+     
     async updateCard(id, Card) {
       try{
         let updateData = await this.update(id, {
@@ -108,7 +132,9 @@ class CardService extends Service{
           competitionName: Card.competitionName,
           location: Card.location,
           imageURL: Card.imageURL,
-          linkToWeb: Card.linkToWeb
+          competitionDate: Card.competitionDate,
+          linkToWeb: Card.linkToWeb,
+          competitionStatus: Card.competitionStatus
         });
         if(!updateData){
           throw new Error("Card not found");

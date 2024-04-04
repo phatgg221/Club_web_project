@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import style from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {useAuth} from "@/contexts/AuthContext";
 const NewCardForm = () => {
   const {isAdmin} = useAuth();
   const router = useRouter();
   const { id } = router.query;
-  console.log("id asdasdasd" + id);
+
   const [formData, setFormData] = useState({
     organizer: "",
     logoURL: "/RMIT-logo.png",
@@ -15,14 +17,23 @@ const NewCardForm = () => {
     location: "",
     linkToWeb: "",
     imageURL: "",
+    competitionDate:"",
+    competitionStatus:"incoming"
   });
   const [isEditMode, setIsEditMode] = useState(false);
-
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [errorLink, setErrorLink] = useState('');
   const [errorSubmit, setErrorSubmit] = useState('');
 
-  // console.log("id "+ initialCard._id);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setFormData({
+       ...formData,
+       competitionDate: date.toISOString(),
+    });
+   };
 
+   
   useEffect(() => {
     if (id) {
       const fetchData = async () => {
@@ -177,7 +188,7 @@ const NewCardForm = () => {
         <div className={style.inputGroup}>
           <label>Competition Name:</label>
           <input
-            required={true}
+            require={true}
             type="text"
             name="competitionName"
             placeholder={isEditMode ? formData.competitionName : ""}
@@ -189,7 +200,7 @@ const NewCardForm = () => {
           <div className={`${style.inputGroup} ${style.organizerInput}`}>
             <label>Organizer:</label>
             <input
-              required={true}
+              require={true}
               type="text"
               name="organizer"
               placeholder={isEditMode ? formData.organizer : ""}
@@ -216,10 +227,18 @@ const NewCardForm = () => {
             name="linkToWeb"
             placeholder={isEditMode ? formData.linkToWeb : ""}
             value={formData.linkToWeb}
-            required={true}
+            require={true}
             onChange={handleInputChange}
           />
           {errorLink && <p className="error">{errorLink}</p>}
+        </div>
+        <div className={style.inputGroup}>
+            <label>Date of competition</label>
+            <DatePicker 
+            selected={selectedDate}
+            onChange={handleDateChange}
+            dateFormat="yyyy-MM-dd"/>
+            
         </div>
         <div className={style.inputGroup}>
           <label>Image:</label>

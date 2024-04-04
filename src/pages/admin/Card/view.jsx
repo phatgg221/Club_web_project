@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { useRouter } from "next/router";
 import style from "@/styles/table.module.css";
-import AdminHeader from "@/components/Header/adminHeader";
 import SearchBar from "@/components/Competitions/SearchBar";
 import {useAuth} from "@/contexts/AuthContext";
 import Link from "next/link";
@@ -89,6 +88,7 @@ const CardTable = () => {
               <th>Competition name</th>
               <th>Location</th>
               <th>Link to web</th>
+              <th>Competition date</th>
               <th>Image</th>
               <th>Action</th>
             </tr>
@@ -103,6 +103,10 @@ const CardTable = () => {
                   <td>
                     <Link href={item.linkToWeb}>Link</Link>
                   </td>
+                  <td>
+                    {item.competitionDate && !isNaN(Date.parse(item.competitionDate)) ? new Date(item.competitionDate).toISOString().split('T')[0] : ''}
+                  </td>
+
                   <td>
                     <Image
                       className={style.imageTable}

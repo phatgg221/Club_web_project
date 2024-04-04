@@ -24,7 +24,7 @@ function Header() {
     <header className="primary-header">
       <div className="logo">
         <Link href={isLoggedIn ? "/userMain" : "/login"}>
-          <Image src="/GFCC.png" width="50" height="46" alt=""/>
+          <Image src="/GFCC.png" width="50" height="46" alt="" />
         </Link>
       </div>
 
@@ -69,7 +69,7 @@ function Header() {
               </Link>
             </li>
             <li>
-              <Link id="samples" href={isLoggedIn ? "/samples" : "/login"}>
+              <Link id="samples" href="/samples">
                 Showcase
               </Link>
             </li>
@@ -93,6 +93,15 @@ function Header() {
                 Booking
               </Link>
             </li>
+
+            {isLoggedIn && (
+              <li>
+                <Link id="booking" href={"/profile"}>
+                  Profile
+                </Link>
+              </li>
+            )}
+
             <li>
               <button className="login-button">
                 <Link href="" id="login-text" onClick={handleLogout}>
