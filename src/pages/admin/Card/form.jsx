@@ -17,7 +17,8 @@ const NewCardForm = () => {
     location: "",
     linkToWeb: "",
     imageURL: "",
-    competitionDate:""
+    competitionDate:"",
+    competitionStatus:"incoming"
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -188,7 +189,7 @@ const NewCardForm = () => {
         <div className={style.inputGroup}>
           <label>Competition Name:</label>
           <input
-            required={true}
+            require={true}
             type="text"
             name="competitionName"
             placeholder={isEditMode ? formData.competitionName : ""}
@@ -200,7 +201,7 @@ const NewCardForm = () => {
           <div className={`${style.inputGroup} ${style.organizerInput}`}>
             <label>Organizer:</label>
             <input
-              required={true}
+              require={true}
               type="text"
               name="organizer"
               placeholder={isEditMode ? formData.organizer : ""}
@@ -227,7 +228,7 @@ const NewCardForm = () => {
             name="linkToWeb"
             placeholder={isEditMode ? formData.linkToWeb : ""}
             value={formData.linkToWeb}
-            required={true}
+            require={true}
             onChange={handleInputChange}
           />
           {errorLink && <p className="error">{errorLink}</p>}

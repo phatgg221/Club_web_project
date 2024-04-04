@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { useRouter } from "next/router";
 import style from "@/styles/table.module.css";
-import AdminHeader from "@/components/Header/adminHeader";
 import SearchBar from "@/components/Competitions/SearchBar";
 import {useAuth} from "@/contexts/AuthContext";
 import Link from "next/link";
