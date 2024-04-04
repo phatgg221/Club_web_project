@@ -2,15 +2,52 @@ import { useEffect, useState } from "react";
 import React from "react";
 import styleForm from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
-import styleBtn2 from "@/styles/resetEmailAndPassword.module.css";
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/router';
+
+// Separate OTPInput component
+const OTPInput = ({ onSubmit, onCancel }) => {
+  const [otp, setOtp] = useState("");
+
+  const handleOtpChange = (e) => {
+    setOtp(e.target.value);
+  };
+
+  return (
+    <div className={styleForm.overlay}>
+      <div className={styleForm.popup}>
+        <h2>Enter OTP</h2>
+        <input
+          type="text"
+          placeholder="Enter OTP"
+          value={otp}
+          onChange={handleOtpChange}
+        />
+        <div>
+          <button onClick={() => onSubmit(otp)}>Submit</button>
+        
+        </div>
+      </div>
+    </div>
+  );
+};
 
 function ForgotPassword() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
+  const [wrongUsername, setWrongUsername] = useState(false);
+  const [sendSuccessful, setSendSuccess] = useState(false);
+  const [showOTPInput, setShowOTPInput] = useState(false);
+  const [generatedOtp, setGeneratedOtp] = useState("");
+  const { login, isLoggedIn, userId} = useAuth();
   useEffect(() => {
     const fetchData = async () => {
+      if (!username) {
+        setWrongUsername(false); // Reset wrongUsername when the username is empty
+        return;
+      }
+
       try {
         const response = await fetch(`/api/member_api`);
         const data = await response.json();
@@ -18,13 +55,17 @@ function ForgotPassword() {
         const mongoDataArray = data.data.mongoData;
 
         const user = mongoDataArray.find((user) => user.username === username);
-
+       
         if (user) {
-          console.log("Password:", user.password);
-          setPassword(user.password);
+          setEmail(user.email); // Store the user's email
+          const randomOtp = Math.floor(100000 + Math.random() * 900000);
+          setGeneratedOtp(randomOtp);
+
+          setWrongUsername(false); // Reset wrongUsername when a user is found
+          setShowOTPInput(true);
         } else {
           console.log("User not found");
-          // Handle case when user is not found
+          setWrongUsername(true); // Set wrongUsername to true when the user is not found
         }
       } catch (err) {
         console.error("Error fetching data: ", err);
@@ -35,44 +76,71 @@ function ForgotPassword() {
     fetchData();
   }, [username]);
 
+  useEffect(() => {
+    // Ensure that showOTPInput is set to false if there is no generated OTP
+    if (!generatedOtp) {
+      setShowOTPInput(false);
+    }
+  }, [generatedOtp]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/api/sendemail_api", {
-      method: "POST",
+    if (wrongUsername) {
+      alert("Your username (sID) is wrong");
+      return;
+    }
+
+    const res = await fetch('/api/sendemail_api', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: email,
-        password: password,
+        otp: generatedOtp
       }),
     });
 
     const data = await res.json();
     if (data.success) {
-      //Handle success
+      setSendSuccess(true);
     } else {
       // Handle error
     }
+
+  };
+
+  const handleOTPSubmit = (otp) => {
+    // Validate the entered OTP
+    if (otp === generatedOtp.toString()) {
+      // Proceed with the login process
+
+      // For example, you can set a session or perform other authentication steps
+      login(userId, username);
+
+      setSendSuccess(true);
+      setShowOTPInput(false);
+      // Set login successful state to true
+
+      
+      
+
+    // Use the push method to navigate to the '/userMain' page
+      router.push('/userMain');
+    } else {
+      alert("Invalid OTP. Please try again.");
+    }
+  };
+
+  const handleOTPCancel = () => {
+    setShowOTPInput(false);
   };
 
   return (
-    <div
-      className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
-    >
+    <div className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}>
       <h1>Forgot Password</h1>
       <form className={styleForm.form} onSubmit={handleSubmit}>
-        <div className={styleForm.inputGroup}>
-          <label>Your email</label>
-          <input
-            required
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-
         <div className={styleForm.inputGroup}>
           <label>Your username (sID)</label>
           <input
@@ -83,15 +151,32 @@ function ForgotPassword() {
           />
         </div>
 
+        {wrongUsername && (
+          <p className={styleForm.notificationMessage} style={{ color: "red" }}>
+            Wrong username.
+          </p>
+        )}
+        {sendSuccessful && (
+          <p className={styleForm.notificationMessage} style={{ color: "green" }}>
+            OTP is successfully sent.
+          </p>
+        )}
+
+        
+        
         <div className={styleBtn.btnBottomDiv}>
           <button
-            className={`${styleBtn2.btn} `}
+            className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
             type="submit"
           >
             Forgot Password
           </button>
         </div>
       </form>
+
+      {showOTPInput && (
+        <OTPInput onSubmit={handleOTPSubmit} onCancel={handleOTPCancel} />
+      )}
     </div>
   );
 }
