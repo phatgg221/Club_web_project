@@ -1,24 +1,24 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import styleForm from "@/styles/Admin.Form.module.css";
 import styleBtn from "@/styles/table.module.css";
+import styleBtn2 from "@/styles/resetEmailAndPassword.module.css";
 
- function ForgotPassword(){
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
+function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`/api/member_api`);
         const data = await response.json();
-  
+
         const mongoDataArray = data.data.mongoData;
-  
+
         const user = mongoDataArray.find((user) => user.username === username);
-  
+
         if (user) {
           console.log("Password:", user.password);
           setPassword(user.password);
@@ -31,22 +31,21 @@ import styleBtn from "@/styles/table.module.css";
         // Handle error appropriately (e.g., display an error message)
       }
     };
-  
+
     fetchData();
   }, [username]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch('/api/sendemail_api', {
-      method: 'POST',
+    const res = await fetch("/api/sendemail_api", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: email,
-        password: password
+        password: password,
       }),
     });
 
@@ -56,23 +55,22 @@ import styleBtn from "@/styles/table.module.css";
     } else {
       // Handle error
     }
-
   };
-    
-  return(
+
+  return (
     <div
-    className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
+      className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
     >
-    <h1>Forgot Password</h1>
-    <form className={styleForm.form} onSubmit={handleSubmit}>
+      <h1>Forgot Password</h1>
+      <form className={styleForm.form} onSubmit={handleSubmit}>
         <div className={styleForm.inputGroup}>
-        <label>Your email</label>
-        <input
+          <label>Your email</label>
+          <input
             required
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-        />
+          />
         </div>
 
         <div className={styleForm.inputGroup}>
@@ -84,20 +82,18 @@ import styleBtn from "@/styles/table.module.css";
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        
+
         <div className={styleBtn.btnBottomDiv}>
-        <button
-            className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
+          <button
+            className={`${styleBtn2.btn} `}
             type="submit"
-        >
+          >
             Forgot Password
-        </button>
+          </button>
         </div>
-    </form>
+      </form>
     </div>
-);
+  );
 }
 
 export default ForgotPassword;
-
-
