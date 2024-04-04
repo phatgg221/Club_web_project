@@ -29,7 +29,6 @@ const CardTable = () => {
   }, []);
 
   const handleDelete = async (card) => {
-    // console.log("card id "+ card._id)
     try {
       const response = await fetch(`/api/card_api?id=${card._id}`, {
         method: "DELETE",

@@ -21,7 +21,6 @@ export default async function handler (req, res){
 
         case 'DELETE':
             let obj = query;
-            // console.log(query.id + "id in api ")
             return handleRequest(() => MemberService.deleteMember(obj['']), res);
       
         default:

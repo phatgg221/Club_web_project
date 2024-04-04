@@ -248,7 +248,6 @@ const NewCardForm = () => {
             name="imageURL"
             accept='.jpeg, .png, .jpg'
             require={true}
-            // onChange={handleInputChange}
           />
         </div>
         <div className={styleBtn.btnBottomDiv}>

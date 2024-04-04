@@ -25,7 +25,6 @@ const NewSampleForm = () => {
           setIsEditMode(true);
           const response = await fetch(`/api/sample_api?id=${id}`);
           const data = await response.json();
-          // console.log(JSON.stringify(data.data.sampleData) + "aksdjhasdkjashdkasdahsdmv,navkadljj");
           if (
             data &&
             data.error === false &&

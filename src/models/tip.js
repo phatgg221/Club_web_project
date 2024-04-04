@@ -1,7 +1,4 @@
-//name
-//contents
-//image URL
-// will be more
+
 
 const mongoose = require("mongoose");
 

@@ -18,7 +18,6 @@ const SampleTable = () => {
       try {
         const competitionsResponse = await fetch("/api/sample_api");
         const competitionsData = await competitionsResponse.json();
-        // console.log("aklsdjalskdja" + JSON.stringify(competitionsData.data));
         setOngoingCompetitions(competitionsData);
       } catch (error) {
         console.error("Error fetching data:", error);

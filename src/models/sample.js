@@ -1,8 +1,4 @@
 const mongoose = require('mongoose');
-//name of sample
-// contents
-// author
-// link URL
 
 class Sample{
     constructor(){

@@ -1,4 +1,3 @@
-// src/pages/Booking.jsx
 import Booking from "@/components/Booking";
 import React, {useEffect} from "react";
 import {useRouter} from "next/router";

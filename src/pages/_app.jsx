@@ -3,7 +3,6 @@ import "../styles/global.css";
 import "bootstrap/dist/css/bootstrap.min.global.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import dynamic from 'next/dynamic';
-// import Header from "@/components/Header/Header";
 import { CloudinaryContext } from 'cloudinary-react';
 import Footer from "@/components/Footer/Footer";
 import { Montserrat } from "next/font/google";

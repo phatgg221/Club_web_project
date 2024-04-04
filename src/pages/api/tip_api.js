@@ -1,4 +1,3 @@
-// import Tips from "@/components/Tips";
 import service from "@/models/tip";
 import TipsService from "@/services/tipService";
 

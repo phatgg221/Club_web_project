@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import React from "react";
 import style from "@/styles/table.module.css";
 import Popup from "reactjs-popup";
-import { Jwt } from "jsonwebtoken";
 import SearchBar from "@/components/Competitions/SearchBar";
 import styleForm from "@/styles/Admin.Form.module.css";
 import { useRouter } from "next/router";
@@ -15,7 +14,6 @@ const MemberTable = () => {
   const [errorSubmit, setErrorSubmit] = useState('');
   const [members, setMembers] = useState([]);
   const [searchItem, setSearchItem] = useState('');
-  // const [user, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
