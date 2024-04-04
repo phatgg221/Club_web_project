@@ -9,7 +9,7 @@ const NewCardForm = () => {
   const {isAdmin} = useAuth();
   const router = useRouter();
   const { id } = router.query;
-  console.log("id asdasdasd" + id);
+
   const [formData, setFormData] = useState({
     organizer: "",
     logoURL: "/RMIT-logo.png",
@@ -25,7 +25,6 @@ const NewCardForm = () => {
   const [errorLink, setErrorLink] = useState('');
   const [errorSubmit, setErrorSubmit] = useState('');
 
-  // console.log("id "+ initialCard._id);
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setFormData({

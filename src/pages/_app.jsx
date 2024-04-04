@@ -7,9 +7,11 @@ import dynamic from 'next/dynamic';
 import { CloudinaryContext } from 'cloudinary-react';
 import Footer from "@/components/Footer/Footer";
 import { Montserrat } from "next/font/google";
-const connectDB = require('@/lib/mongodb');
 
+//MongoDB connection
+const connectDB = require('@/lib/mongodb');
 connectDB();
+
 const montserrat = Montserrat({ weight: "400", subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }) {

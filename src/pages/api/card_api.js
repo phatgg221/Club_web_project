@@ -12,6 +12,7 @@ import CardService from "@/services/cardService";
                 if(query.id){
                         return handleRequest(() => cardService.getCardById(query.id), res);
                 }else{
+                        await cardService.updateCompetitionStatus();
                         return handleRequest(() => cardService.getCard(),res);
                 }
 
