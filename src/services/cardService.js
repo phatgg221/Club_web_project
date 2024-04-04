@@ -104,7 +104,7 @@ class CardService extends Service{
   async updateCompetitionStatus() {
       try {
          const currentDate = new Date();
-         currentDate.setHours(0, 0, 0, 0); // Set the time to midnight
+         currentDate.setHours(0, 0, 0, 0); 
      
          // Find competitions whose competitionDate is in the past
          const competitionsToUpdate = await this.model.find({
