@@ -41,6 +41,8 @@ console.log(categories.length + " categories found.");
   const handleSearchInput = (searchTerm) => {
     setSearchItem(searchTerm);
   };
+
+  
   const handleSearchForStatus= (searchItem) =>{
     setSearchForCompetitionStatus(searchItem);
   }
@@ -71,7 +73,7 @@ console.log(categories.length + " categories found.");
   
     // Map over the filtered samples to render them
     return filteredSamples.map((item, index) => (
-      <div key={index} className="sample-content">
+      <div onClick={() => window.location.href = item.linkToWeb}  key={index} className="sample-content">
         {item.competitionName} - {item.organizer}
       </div>
     ));
