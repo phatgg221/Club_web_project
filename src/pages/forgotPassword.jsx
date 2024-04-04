@@ -55,8 +55,9 @@ function ForgotPassword() {
         const mongoDataArray = data.data.mongoData;
 
         const user = mongoDataArray.find((user) => user.username === username);
-
+       
         if (user) {
+          setEmail(user.email); // Store the user's email
           const randomOtp = Math.floor(100000 + Math.random() * 900000);
           setGeneratedOtp(randomOtp);
 
