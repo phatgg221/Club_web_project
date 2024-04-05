@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import "../styles/global.css";
-import "bootstrap/dist/css/bootstrap.min.global.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import dynamic from 'next/dynamic';
 import { CloudinaryContext } from 'cloudinary-react';
