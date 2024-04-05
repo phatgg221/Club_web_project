@@ -35,7 +35,8 @@
     "react-dom": "^18",
     "react-router-dom": "^6.21.3",
     "react-sortablejs": "^6.1.4",
-    "reactjs-popup": "^2.0.6"
+    "reactjs-popup": "^2.0.6",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "css-loader": "^6.8.1",
