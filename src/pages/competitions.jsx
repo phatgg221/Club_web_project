@@ -1,5 +1,5 @@
 // src/pages/competitions.jsx
-import Comp from "@/components/Competitions";
+import Comp from "../components/Competitions";
 import React, {useEffect} from "react";
 import {useRouter} from "next/router";
 import { useAuth } from "@/contexts/AuthContext";

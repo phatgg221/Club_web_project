@@ -20,5 +20,6 @@ module.exports = {
 
     return config;
  },
+ 
 //  output: 'export'     // comment this line to run localhost
 };
