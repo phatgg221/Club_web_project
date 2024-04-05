@@ -5,7 +5,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "cp node_modules/bootstrap/dist/css/bootstrap.min.global.css node_modules/bootstrap/dist/css/bootstrap.min.css",
     "build": "next build && next export",
     "start": "node src/server/server.js",
     "lint": "next lint",
