@@ -1,4 +1,4 @@
-import Booking from "../components/Booking";
+import Booking from "../components/booking";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../contexts/AuthContext";
