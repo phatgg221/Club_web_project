@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import style from "@/styles/table.module.css";
+import style from "../../../styles/table.module.css";
 import Link from "next/link";
 import Popup from "reactjs-popup";
-import Content from "@/components/Foldables/content";
-import SearchBar from "@/components/Competitions/SearchBar";
-import { useAuth } from "@/contexts/AuthContext";
+import Content from "../../../components/Foldables/content";
+import SearchBar from "../../../components/Competitions/SearchBar";
+import { useAuth } from "../../../contexts/AuthContext";
 import { useRouter } from "next/router";
 const TipsTable = () => {
   const [tips, setTips] = useState([]);
   const [searchTerm, setSearchItem] = useState("");
-  const {isAdmin}= useAuth();
+  const { isAdmin } = useAuth();
   const router = useRouter();
   const handleSearchInput = (search) => {
     setSearchItem(search);
@@ -69,12 +69,12 @@ const TipsTable = () => {
     tips.data.mongoData.filter((item) => {
       return item.tipName.toLowerCase().includes(searchTerm.toLowerCase());
     });
-    useEffect(() =>{
-      if(!isAdmin){
-        router.push('/login');
-      }
-    }, [isAdmin,router]);
-  
+  useEffect(() => {
+    if (!isAdmin) {
+      router.push('/login');
+    }
+  }, [isAdmin, router]);
+
   return (
     <>
       <SearchBar
@@ -93,56 +93,56 @@ const TipsTable = () => {
             </tr>
           </thead>
           <tbody>
-          {filteredTips &&
- filteredTips.map((item) => (
-    <tr key={item._id} className={style.tableRow}>
-      <td>{item.tipName}</td>
-      <td>
-        <Link href={item.tipsLink}>Link</Link>
-      </td>
-      <td className={style.btnContainer}>
-      {item.realContent &&
-  item.realContent.map((tip, index2) => (
-    <Popup
-      key={`${item._id}-${index2}`} // Assigning unique key prop
-      modal
-      trigger={
-        <button
-          className={`${style.btn} ${style.btnTable}`}
-        >
-          Tip {index2 + 1}
-        </button>
-      }
-    >
-      {(close) => (
-        <Content
-          close={close}
-          className={style.modal}
-          content={tip}
-        />
-      )}
-    </Popup>
-  ))}
+            {filteredTips &&
+              filteredTips.map((item) => (
+                <tr key={item._id} className={style.tableRow}>
+                  <td>{item.tipName}</td>
+                  <td>
+                    <Link href={item.tipsLink}>Link</Link>
+                  </td>
+                  <td className={style.btnContainer}>
+                    {item.realContent &&
+                      item.realContent.map((tip, index2) => (
+                        <Popup
+                          key={`${item._id}-${index2}`} // Assigning unique key prop
+                          modal
+                          trigger={
+                            <button
+                              className={`${style.btn} ${style.btnTable}`}
+                            >
+                              Tip {index2 + 1}
+                            </button>
+                          }
+                        >
+                          {(close) => (
+                            <Content
+                              close={close}
+                              className={style.modal}
+                              content={tip}
+                            />
+                          )}
+                        </Popup>
+                      ))}
 
-      </td>
-      <td className={style.btnContainer}>
-        <div className={style.btnTableDiv}>
-          <button
-            className={`${style.btn} ${style.btnTable}`}
-            onClick={() => handleUpdate(item)}
-          >
-            Update
-          </button>
-          <button
-            className={`${style.btn} ${style.btnTable}`}
-            onClick={() => handleDelete(item)}
-          >
-            Delete
-          </button>
-        </div>
-      </td>
-    </tr>
-  ))}
+                  </td>
+                  <td className={style.btnContainer}>
+                    <div className={style.btnTableDiv}>
+                      <button
+                        className={`${style.btn} ${style.btnTable}`}
+                        onClick={() => handleUpdate(item)}
+                      >
+                        Update
+                      </button>
+                      <button
+                        className={`${style.btn} ${style.btnTable}`}
+                        onClick={() => handleDelete(item)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
 
           </tbody>
         </table>

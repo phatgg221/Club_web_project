@@ -1,16 +1,16 @@
-import Booking from "@/components/Booking";
-import React, {useEffect} from "react";
-import {useRouter} from "next/router";
-import { useAuth } from "@/contexts/AuthContext";
+import Booking from "../components/Booking";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "../contexts/AuthContext";
 function BookingPage() {
   const router = useRouter();
-  const {isLoggedIn}= useAuth();
-  useEffect(() =>{
-    if(!isLoggedIn){
+  const { isLoggedIn } = useAuth();
+  useEffect(() => {
+    if (!isLoggedIn) {
       router.push('/login');
     }
-  }, [isLoggedIn,router]);
-  
+  }, [isLoggedIn, router]);
+
   return (
     <>
       <Booking />

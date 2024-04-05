@@ -1,6 +1,6 @@
 import React from "react";
-import style from "@/styles/AdminHeader.module.css";
-import { useAuth } from "@/contexts/AuthContext";
+import style from "../../styles/AdminHeader.module.css";
+import { useAuth } from "../../contexts/AuthContext";
 import Link from "next/link";
 function AdminHeader() {
   const { adminLogout } = useAuth();

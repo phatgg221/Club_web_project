@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Popup from "reactjs-popup";
 import Content from "./content";
-import style from "@/styles/content.module.css";
+import style from "../../styles/content.module.css";
 const FoldableItem = ({ title, year, author, link, isTip, tips }) => {
   // State for tracking fold/unfold state
   const [isFolded, setIsFolded] = useState(true);
@@ -18,12 +18,11 @@ const FoldableItem = ({ title, year, author, link, isTip, tips }) => {
       <div className={styles.innerContainer}>
         {/* Displaying title based on whether it's a tip or not */}
         <h3 className={styles.title}>{isTip ? tips.tipName : title}</h3>
-        {isTip && tips.tipsLink && <Link href={tips.tipsLink}>Link</Link>} 
+        {isTip && tips.tipsLink && <Link href={tips.tipsLink}>Link</Link>}
         {/* Fold/Unfold button */}
         <div
-          className={`${styles.foldableContainer} ${
-            isFolded ? styles.folded : ""
-          }`}
+          className={`${styles.foldableContainer} ${isFolded ? styles.folded : ""
+            }`}
         >
           <button onClick={handleToggleFold} className={styles.foldButton}>
             {isFolded ? "Show" : "Hide"}
@@ -34,12 +33,11 @@ const FoldableItem = ({ title, year, author, link, isTip, tips }) => {
       {/* Displaying additional content if it's not a tip */}
       {!isTip && (
         <div
-          className={`${styles.contentContainer} ${
-            isFolded ? styles.foldedContent : ""
-          }`}
+          className={`${styles.contentContainer} ${isFolded ? styles.foldedContent : ""
+            }`}
         >
           <div className={styles.content}>
-          
+
             <span>{year}</span>
             <span>{author}</span>
 
@@ -48,7 +46,7 @@ const FoldableItem = ({ title, year, author, link, isTip, tips }) => {
           </div>
         </div>
       )}
-      
+
 
       {isTip && tips.realContent && tips.realContent.map((content, index) => (
         <div key={index} className={`${styles.contentContainer} ${isFolded ? styles.foldedContent : ""}`}>

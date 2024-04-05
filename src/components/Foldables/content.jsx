@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import style from "@/styles/content.module.css";
-import styleForm from "@/styles/Admin.Form.module.css";
-import styleBtn from "@/styles/table.module.css";
+import style from "../../styles/content.module.css";
+import styleForm from "../../styles/Admin.Form.module.css";
+import styleBtn from "../../styles/table.module.css";
 import Link from "next/link";
 import { set } from "mongoose";
 // import { Image } from "next/image";

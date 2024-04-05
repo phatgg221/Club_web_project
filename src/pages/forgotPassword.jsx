@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import styleForm from "@/styles/Admin.Form.module.css";
-import styleBtn from "@/styles/table.module.css";
-import { useAuth } from '@/contexts/AuthContext';
+import styleForm from "../styles/Admin.Form.module.css";
+import styleBtn from "../styles/table.module.css";
+import { useAuth } from '../contexts/AuthContext';
 import { useRouter } from 'next/router';
 
 // Separate OTPInput component
@@ -25,7 +25,7 @@ const OTPInput = ({ onSubmit, onCancel }) => {
         />
         <div>
           <button onClick={() => onSubmit(otp)}>Submit</button>
-        
+
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@ function ForgotPassword() {
   const [sendSuccessful, setSendSuccess] = useState(false);
   const [showOTPInput, setShowOTPInput] = useState(false);
   const [generatedOtp, setGeneratedOtp] = useState("");
-  const { login, isLoggedIn, userId} = useAuth();
+  const { login, isLoggedIn, userId } = useAuth();
   useEffect(() => {
     const fetchData = async () => {
       if (!username) {
@@ -55,7 +55,7 @@ function ForgotPassword() {
         const mongoDataArray = data.data.mongoData;
 
         const user = mongoDataArray.find((user) => user.username === username);
-       
+
         if (user) {
           setEmail(user.email); // Store the user's email
           const randomOtp = Math.floor(100000 + Math.random() * 900000);
@@ -123,10 +123,10 @@ function ForgotPassword() {
       setShowOTPInput(false);
       // Set login successful state to true
 
-      
-      
 
-    // Use the push method to navigate to the '/userMain' page
+
+
+      // Use the push method to navigate to the '/userMain' page
       router.push('/userMain');
     } else {
       alert("Invalid OTP. Please try again.");
@@ -162,8 +162,8 @@ function ForgotPassword() {
           </p>
         )}
 
-        
-        
+
+
         <div className={styleBtn.btnBottomDiv}>
           <button
             className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import style from "@/styles/table.module.css";
-import SearchBar from "@/components/Competitions/SearchBar";
-import { useAuth } from "@/contexts/AuthContext";
+import style from "../../../styles/table.module.css";
+import SearchBar from "../../../components/Competitions/SearchBar";
+import { useAuth } from "../../../contexts/AuthContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 const SampleTable = () => {
   const [ongoingCompetitions, setOngoingCompetitions] = useState([]);
   const [searchTerm, setSearchItem] = useState("");
-  const {isAdmin} = useAuth();
+  const { isAdmin } = useAuth();
   const router = useRouter();
   const handleSearchInput = (searchTerm) => {
     setSearchItem(searchTerm);
@@ -63,12 +63,12 @@ const SampleTable = () => {
     ongoingCompetitions.data.mongoData.filter((item) => {
       return item.sampleName.toLowerCase().includes(searchTerm.toLowerCase());
     });
-    useEffect(() =>{
-      if(!isAdmin){
-        router.push('/login');
-      }
-    }, [isAdmin,router]);
-  
+  useEffect(() => {
+    if (!isAdmin) {
+      router.push('/login');
+    }
+  }, [isAdmin, router]);
+
   return (
     <>
       <SearchBar

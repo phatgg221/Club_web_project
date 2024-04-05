@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import style from "@/styles/Admin.Form.module.css";
-import styleBtn from "@/styles/table.module.css";
+import style from "../../../styles/Admin.Form.module.css";
+import styleBtn from "../../../styles/table.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {useAuth} from "@/contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 const NewCardForm = () => {
-  const {isAdmin} = useAuth();
+  const { isAdmin } = useAuth();
   const router = useRouter();
   const { id } = router.query;
 
@@ -17,8 +17,8 @@ const NewCardForm = () => {
     location: "",
     linkToWeb: "",
     imageURL: "",
-    competitionDate:"",
-    competitionStatus:"incoming"
+    competitionDate: "",
+    competitionStatus: "incoming"
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -28,12 +28,12 @@ const NewCardForm = () => {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setFormData({
-       ...formData,
-       competitionDate: date.toISOString(),
+      ...formData,
+      competitionDate: date.toISOString(),
     });
-   };
+  };
 
-   
+
   useEffect(() => {
     if (id) {
       const fetchData = async () => {
@@ -78,9 +78,9 @@ const NewCardForm = () => {
       [event.target.name]: event.target.value,
     });
   };
-  
- 
-  
+
+
+
 
   const handleReturn = () => {
     window.location.href = "/admin/Card/view";
@@ -96,28 +96,28 @@ const NewCardForm = () => {
 
     try {
       const formDataCopy = { ...formData };
-  
+
       // Check if a new image has been selected
       const imageFile = document.getElementById('Image').files[0];
       if (imageFile) {
         const imageData = new FormData();
         imageData.append('file', imageFile);
         imageData.append('upload_preset', 'lzz18aot'); // Replace 'your_upload_preset' with your Cloudinary upload preset
-  
+
         // Upload new image
         const imageResponse = await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload', {
           method: 'POST',
           body: imageData,
         });
-  
+
         if (!imageResponse.ok) {
           throw new Error('Failed to upload image.');
         }
-  
+
         const imageDataJson = await imageResponse.json();
         formDataCopy.imageURL = imageDataJson.secure_url;
       }
-  
+
       // Update card data
       const response = await fetch(`/api/card_api?id=${id}`, {
         method: "PUT",
@@ -126,7 +126,7 @@ const NewCardForm = () => {
         },
         body: JSON.stringify(formDataCopy),
       });
-  
+
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -135,7 +135,7 @@ const NewCardForm = () => {
       console.error("Error:", error);
     }
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -146,8 +146,8 @@ const NewCardForm = () => {
 
       const response = await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload', {
         method: 'POST',
-          body: imageData,
-});
+        body: imageData,
+      });
 
       if (!response.ok) {
         throw new Error('Failed to upload image.');
@@ -176,11 +176,11 @@ const NewCardForm = () => {
     }
   };
 
-  useEffect(() =>{
-    if(!isAdmin){
+  useEffect(() => {
+    if (!isAdmin) {
       router.push('/login');
     }
-  }, [isAdmin,router]);
+  }, [isAdmin, router]);
 
   return (
     <div className={style.formContainer}>
@@ -233,12 +233,12 @@ const NewCardForm = () => {
           {errorLink && <p className="error">{errorLink}</p>}
         </div>
         <div className={style.inputGroup}>
-            <label>Date of competition</label>
-            <DatePicker 
+          <label>Date of competition</label>
+          <DatePicker
             selected={selectedDate}
             onChange={handleDateChange}
-            dateFormat="yyyy-MM-dd"/>
-            
+            dateFormat="yyyy-MM-dd" />
+
         </div>
         <div className={style.inputGroup}>
           <label>Image:</label>

@@ -1,5 +1,5 @@
-import service from "@/models/asset";
-import AssetService from "@/services/assetService";
+import service from "../../models/asset";
+import AssetService from "../../services/assetService";
 import multer from "multer";
 import fs from "fs";
 import path from "path";
@@ -58,25 +58,25 @@ export default async function handler(req, res) {
 }
 
 async function handleRequest(serviceFunction, res) {
-    try {
-      const result = await serviceFunction();
-      return res.status(result.statusCode).json(result);
-    } catch (error) {
-      console.error('Error:', error);
+  try {
+    const result = await serviceFunction();
+    return res.status(result.statusCode).json(result);
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({
+      error: true,
+      statusCode: 500,
+      message: 'Internal Server Error',
+    });
+  } finally {
+
+    if (!res.headersSent) {
       return res.status(500).json({
         error: true,
         statusCode: 500,
         message: 'Internal Server Error',
       });
-    } finally {
-    
-      if (!res.headersSent) {
-        return res.status(500).json({
-          error: true,
-          statusCode: 500,
-          message: 'Internal Server Error',
-        });
-      }
     }
   }
-  
+}
+

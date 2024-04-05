@@ -1,4 +1,4 @@
-import styles from "@/styles/Welcome.module.css";
+import styles from "../styles/Welcome.module.css";
 import Image from "next/image";
 export default function About() {
   return (

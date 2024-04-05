@@ -1,4 +1,4 @@
-import styles from "@/styles/Hero.module.css";
+import styles from "../styles/Hero.module.css";
 import Link from "next/link";
 import Image from "next/image";
 function Hero() {

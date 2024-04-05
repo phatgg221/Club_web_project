@@ -1,14 +1,14 @@
-import service from "@/models/sample";
-import SampleService from "@/services/sampleService";
+import service from "../../models/sample";
+import SampleService from "../../services/sampleService";
 
 const sampleService = new SampleService(new service().getInstance());
 
 function handleApiRequest(req, res) {
-    const {method, query, body} = req;
+    const { method, query, body } = req;
 
-    switch(method) {
+    switch (method) {
         case 'GET':
-            if(query.id){
+            if (query.id) {
                 return handleRequest(() => sampleService.getSampleById(query.id), res);
             } else {
                 return handleRequest(() => sampleService.getSample(), res);
@@ -22,7 +22,7 @@ function handleApiRequest(req, res) {
 
         case 'DELETE':
             return handleRequest(() => sampleService.deleteSample(query.id), res);
-        
+
         default:
     }
 }

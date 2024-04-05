@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import style from "@/styles/table.module.css";
+import style from "../../../styles/table.module.css";
 import Popup from "reactjs-popup";
-import SearchBar from "@/components/Competitions/SearchBar";
-import styleForm from "@/styles/Admin.Form.module.css";
+import SearchBar from "../../../components/Competitions/SearchBar";
+import styleForm from "../../../styles/Admin.Form.module.css";
 import { useRouter } from "next/router";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 const MemberTable = () => {
   const router = useRouter();
   const { isAdmin, isHighestAdmin } = useAuth();

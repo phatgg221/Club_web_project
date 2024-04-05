@@ -1,5 +1,5 @@
 // src/pages/Login.jsx
-import Login from "@/components/Login";
+import Login from "../components/Login";
 function LoginPage() {
   return (
     <>
