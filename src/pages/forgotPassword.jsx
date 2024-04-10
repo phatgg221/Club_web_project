@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import React from "react";
 import styleForm from "../styles/Admin.Form.module.css";
 import styleBtn from "../styles/table.module.css";
-import { useAuth } from '../contexts/AuthContext';
-import { useRouter } from 'next/router';
+import { useAuth } from "../contexts/AuthContext";
+import { useRouter } from "next/router";
+import styleBtn2 from "../styles/resetEmailAndPassword.module.css";
 
 // Separate OTPInput component
 const OTPInput = ({ onSubmit, onCancel }) => {
@@ -14,21 +15,41 @@ const OTPInput = ({ onSubmit, onCancel }) => {
   };
 
   return (
-    <div className={styleForm.overlay}>
-      <div className={styleForm.popup}>
-        <h2>Enter OTP</h2>
-        <input
-          type="text"
-          placeholder="Enter OTP"
-          value={otp}
-          onChange={handleOtpChange}
-        />
-        <div>
-          <button onClick={() => onSubmit(otp)}>Submit</button>
-
+    <div
+      className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
+    >
+      <form className={styleForm.form}>
+        <div className={styleForm.inputGroup}>
+          <label>Enter OTP</label>
+          <input
+            type="text"
+            placeholder="Enter OTP"
+            value={otp}
+            onChange={handleOtpChange}
+          />
         </div>
-      </div>
+        <div className={styleBtn.btnBottomDiv}>
+          <button className={`${styleBtn2.btn} `} onClick={() => onSubmit(otp)}>
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
+    // <div className={styleForm.overlay}>
+    //   <div className={styleForm.popup}>
+    //     <h2>Enter OTP</h2>
+    //     <input
+    //       type="text"
+    //       placeholder="Enter OTP"
+    //       value={otp}
+    //       onChange={handleOtpChange}
+    //     />
+    //     <div>
+    //       <button onClick={() => onSubmit(otp)}>Submit</button>
+
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 
@@ -91,14 +112,14 @@ function ForgotPassword() {
       return;
     }
 
-    const res = await fetch('/api/sendemail_api', {
-      method: 'POST',
+    const res = await fetch("/api/sendemail_api", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: email,
-        otp: generatedOtp
+        otp: generatedOtp,
       }),
     });
 
@@ -108,7 +129,6 @@ function ForgotPassword() {
     } else {
       // Handle error
     }
-
   };
 
   const handleOTPSubmit = (otp) => {
@@ -123,11 +143,8 @@ function ForgotPassword() {
       setShowOTPInput(false);
       // Set login successful state to true
 
-
-
-
       // Use the push method to navigate to the '/userMain' page
-      router.push('/userMain');
+      router.push("/userMain");
     } else {
       alert("Invalid OTP. Please try again.");
     }
@@ -138,7 +155,9 @@ function ForgotPassword() {
   };
 
   return (
-    <div className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}>
+    <div
+      className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
+    >
       <h1>Forgot Password</h1>
       <form className={styleForm.form} onSubmit={handleSubmit}>
         <div className={styleForm.inputGroup}>
@@ -157,16 +176,18 @@ function ForgotPassword() {
           </p>
         )}
         {sendSuccessful && (
-          <p className={styleForm.notificationMessage} style={{ color: "green" }}>
+          <p
+            className={styleForm.notificationMessage}
+            style={{ color: "green" }}
+          >
             OTP is successfully sent.
           </p>
         )}
 
-
-
         <div className={styleBtn.btnBottomDiv}>
           <button
-            className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
+            // className={`${styleBtn.btn} ${styleBtn.btnBottom} ${styleBtn.btnForm}`}
+            className={`${styleBtn2.btn} `}
             type="submit"
           >
             Forgot Password
