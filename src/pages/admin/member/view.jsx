@@ -217,13 +217,13 @@ const MemberTable = () => {
                 <td>{item.username}</td>
                 <td className={style.btnContainer}>
                   {item.isAdmin && <button disabled={!isHighestAdmin}
-                    className={`${style.btn} ${style.btnTable}`}
+                    className={`${isHighestAdmin ? style.btn : style.disabledBtn}`}
                     onClick={() => updateUserAdminStatus(item._id, false)}
                   >
                     Make normal member
                   </button>}
                   {!item.isAdmin && <button disabled={!isHighestAdmin}
-                    className={`${style.btn} ${style.btnTable}`}
+                    className={`${isHighestAdmin ? style.btn : style.disabledBtn}`}
                     onClick={() => updateUserAdminStatus(item._id, true)}
                   >
                     Make admin
