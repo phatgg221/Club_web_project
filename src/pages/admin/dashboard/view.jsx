@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import AdminHeader from "@/components/Header/adminHeader";
-import style from "@/styles/AdminDasboard.module.css";
+import AdminHeader from "../../../components/Header/adminHeader";
+import style from "../../../styles/AdminDasboard.module.css";
 import Popup from "reactjs-popup";
 import { useRouter } from "next/router";
-import { useAuth } from "@/contexts/AuthContext";
-import Content from "@/components/Foldables/content";
+import { useAuth } from "../../../contexts/AuthContext";
+import Content from "../../../components/Foldables/content";
 
 function Dashboard() {
   const { isAdmin, isHighestAdmin } = useAuth();

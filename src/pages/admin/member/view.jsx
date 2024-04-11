@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import style from "@/styles/table.module.css";
+import style from "../../../styles/table.module.css";
 import Popup from "reactjs-popup";
-import { Jwt } from "jsonwebtoken";
-import SearchBar from "@/components/Competitions/SearchBar";
-import styleForm from "@/styles/Admin.Form.module.css";
+import SearchBar from "../../../components/Competitions/SearchBar";
+import styleForm from "../../../styles/Admin.Form.module.css";
 import { useRouter } from "next/router";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 const MemberTable = () => {
   const router = useRouter();
   const { isAdmin, isHighestAdmin } = useAuth();
@@ -15,7 +14,6 @@ const MemberTable = () => {
   const [errorSubmit, setErrorSubmit] = useState('');
   const [members, setMembers] = useState([]);
   const [searchItem, setSearchItem] = useState('');
-  // const [user, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
@@ -219,13 +217,13 @@ const MemberTable = () => {
                 <td>{item.username}</td>
                 <td className={style.btnContainer}>
                   {item.isAdmin && <button disabled={!isHighestAdmin}
-                    className={`${style.btn} ${style.btnTable}`}
+                    className={`${isHighestAdmin ? style.btn : style.disabledBtn}`}
                     onClick={() => updateUserAdminStatus(item._id, false)}
                   >
                     Make normal member
                   </button>}
                   {!item.isAdmin && <button disabled={!isHighestAdmin}
-                    className={`${style.btn} ${style.btnTable}`}
+                    className={`${isHighestAdmin ? style.btn : style.disabledBtn}`}
                     onClick={() => updateUserAdminStatus(item._id, true)}
                   >
                     Make admin

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import style from "@/styles/content.module.css";
-import styles from "@/styles/table.module.css";
-import styleForm from "@/styles/Admin.Form.module.css";
+import style from "../../../styles/content.module.css";
+import styles from "../../../styles/table.module.css";
+import styleForm from "../../../styles/Admin.Form.module.css";
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '../../../contexts/AuthContext';
 export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuccess, order, teamList, setTeamList, close }) {
-    const {isAdmin} = useAuth();
-  const router = useRouter();
+    const { isAdmin } = useAuth();
+    const router = useRouter();
     const [championData, setChampionData] = useState({
         teamName: '',
         competitionDescription: '',
@@ -26,7 +26,6 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
                 competitionDescription: championToUpdate.competition || '',
                 awardDes: championToUpdate.award || '',
                 image: championToUpdate.image || '',
-                // teamOrder: championToUpdate.teamOrder || order,
             });
 
             // Set image links for display
@@ -37,44 +36,44 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
     async function saveChampion(event) {
         event.preventDefault();
         const params = new URLSearchParams();
-        let iamgeLink= '';
+        let iamgeLink = '';
         try {
-            const imageFile= document.getElementById('Image').files[0];
-            if(imageFile){
-                const imageData= new FormData();
-                imageData.append('file',imageFile);
+            const imageFile = document.getElementById('Image').files[0];
+            if (imageFile) {
+                const imageData = new FormData();
+                imageData.append('file', imageFile);
                 imageData.append('upload_preset', 'lzz18aot');
 
-                const imageResponse= await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload',{
+                const imageResponse = await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload', {
                     method: 'POST',
                     body: imageData,
                 });
 
-                if(!imageResponse.ok){
+                if (!imageResponse.ok) {
                     throw new Error('Failer to upload image.');
                 }
 
-                const imageDataJson= await imageResponse.json();
-                iamgeLink= imageDataJson.secure_url;
+                const imageDataJson = await imageResponse.json();
+                iamgeLink = imageDataJson.secure_url;
             }
-            
+
 
             params.append('teamName', championData.teamName);
             params.append('competitionDescription', championData.competitionDescription);
             params.append('awardDes', championData.awardDes);
-            if(iamgeLink){
-                params.append('images',iamgeLink);
-            }else{
-                params.append('images','');
+            if (iamgeLink) {
+                params.append('images', iamgeLink);
+            } else {
+                params.append('images', '');
             }
-            
-            
-            console.log("params "+ params);
 
-            console.log("Params "+ params);
+
+            console.log("params " + params);
+
+            console.log("Params " + params);
             const url = isUpdate ? `/api/champion_api?id=${championToUpdate.id}` : '/api/champion_api';
 
-            
+
             const response = await fetch(url, {
                 method: isUpdate ? 'PUT' : 'POST',
                 body: params,
@@ -107,8 +106,8 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
         });
     };
 
- 
-    
+
+
 
     const updateTeamOrderInDatabase = async (id, newOrder) => {
         try {
@@ -174,14 +173,14 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
     };
 
     // update - remove any image
-    
 
-    useEffect(() =>{
-        if(!isAdmin){
-          router.push('/login');
+
+    useEffect(() => {
+        if (!isAdmin) {
+            router.push('/login');
         }
-      }, [isAdmin,router]);
-    
+    }, [isAdmin, router]);
+
     return (
         <div>
             <div className={style.modal}>
@@ -235,51 +234,12 @@ export default function CreateChampion({ isUpdate, championToUpdate, onUpdateSuc
                         />
 
                         <br />
-                        {/* {isUpdate && (
-                            <>
-                                <label htmlFor={`changeOrder_${order}`}>Change Order:</label>
-                                <select
-                                    id={`changeOrder_${order}`}
-                                    onChange={(e) => handleChangeOrder(parseInt(e.target.value))}
-                                    value={championData.teamOrder}
-                                >
-                                    {[1, 2, 3, 4, 5].map((order) => (
-                                        <option key={order} value={order} disabled={order === championData.teamOrder}>
-                                            {order}
-                                        </option>
-                                    ))}
-                                </select>
-                            </>)} */}
 
 
                         <br />
                         <label>Images</label>
-                        <input id="Image" type= "file" name = "images" accept=".jpg, .jpeg, .png" required ={true}></input>
-                        {/* {imageLinks.map((link, index) => (
-                            <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-                                <input
-                                    type="file"
-                                    onChange={(e) => updateImageLink(index, e.target.value)}
-                                    name="images"
-                                    accept='.jpeg, .png, .jpg'
-                                />
-                                {link && (
-                                    <>
-                                        <Image
-                                            src={link}
-                                            alt={`Image ${index + 1}`}
-                                            width={50}
-                                            height={50}
-                                            style={{ marginRight: '10px' }}
-                                        />
-                                        <button onClick={() => removeImage(index)}>Delete</button>
-                                    </>
-                                )}
-                            </div>
-                        ))} */}
-                        {/* <button type="button" onClick={addImageLinkField}>
-                            Add New Image
-                        </button> */}
+                        <input id="Image" type="file" name="images" accept=".jpg, .jpeg, .png" required={true}></input>
+
                         <br />
                         <button
                             style={{ marginTop: '5%', marginLeft: '30%' }}

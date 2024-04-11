@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import style from "@/styles/Admin.Form.module.css";
-import styleBtn from "@/styles/table.module.css";
-import { useAuth } from "@/contexts/AuthContext";
+import style from "../../../styles/Admin.Form.module.css";
+import styleBtn from "../../../styles/table.module.css";
+import { useAuth } from "../../../contexts/AuthContext";
 const NewTipForm = () => {
   const router = useRouter();
-  const {isAdmin}= useAuth();
+  const { isAdmin } = useAuth();
   const { id } = router.query;
   const [contentCount, setContentCount] = useState(1);
   const [contents, setContents] = useState([
@@ -91,27 +91,27 @@ const NewTipForm = () => {
       const updatedRealContent = await Promise.all(formDataCopy.realContent.map(async (content, index) => {
         const imageData = new FormData();
         const fileInput = document.getElementById(`Image-${index}`);
-        if (fileInput && fileInput.files.length >  0) {
+        if (fileInput && fileInput.files.length > 0) {
           imageData.append('file', fileInput.files[0]);
           imageData.append('upload_preset', 'lzz18aot'); // Your Cloudinary upload preset
-  
+
           const response = await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload', {
             method: 'POST',
             body: imageData,
           });
-  
+
           if (!response.ok) {
             throw new Error('Failed to upload image.');
           }
-  
+
           const data = await response.json();
           return { ...content, tipImage: data.secure_url };
         }
-        return content; 
+        return content;
       }));
-  
+
       formDataCopy.realContent = updatedRealContent;
-  
+
       const finalResponse = isEditMode ?
         await fetch(`/api/tip_api?id=${id}`, {
           method: "PUT",
@@ -127,23 +127,23 @@ const NewTipForm = () => {
           },
           body: JSON.stringify(formDataCopy),
         });
-  
+
       if (!finalResponse.ok) {
         throw new Error('Failed to submit form data.');
       }
-  
+
       window.location.href = "/admin/tips/tips";
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  
-  
-  useEffect(() =>{
-    if(!isAdmin){
+
+
+  useEffect(() => {
+    if (!isAdmin) {
       router.push('/login');
     }
-  }, [isAdmin,router]);
+  }, [isAdmin, router]);
 
 
   const handleUpdate = async (event) => {
@@ -154,31 +154,31 @@ const NewTipForm = () => {
     }
     try {
       const formDataCopy = { ...formData };
-     
+
       const updatedRealContent = await Promise.all(formDataCopy.realContent.map(async (content, index) => {
         const imageData = new FormData();
         const fileInput = document.getElementById(`Image-${index}`); // Ensure each input has a unique ID
-        if (fileInput && fileInput.files.length >  0) {
+        if (fileInput && fileInput.files.length > 0) {
           imageData.append('file', fileInput.files[0]);
-          imageData.append('upload_preset', 'lzz18aot'); 
-  
+          imageData.append('upload_preset', 'lzz18aot');
+
           const response = await fetch('https://api.cloudinary.com/v1_1/dhjapmqga/image/upload', {
             method: 'POST',
             body: imageData,
           });
-  
+
           if (!response.ok) {
             throw new Error('Failed to upload image.');
           }
-  
+
           const data = await response.json();
           return { ...content, tipImage: data.secure_url }; // Update the content item with the new image URL
         }
         return content; // If no file is selected, return the content as is
       }));
-  
+
       formDataCopy.realContent = updatedRealContent;
-  
+
       const response = await fetch(`/api/tip_api?id=${id}`, {
         method: "PUT",
         headers: {
@@ -186,18 +186,18 @@ const NewTipForm = () => {
         },
         body: JSON.stringify(formDataCopy),
       });
-  
+
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-  
+
       window.location.href = "/admin/tips/tips";
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  
-  
+
+
 
   const handleInputValidation = (event) => {
     const { name, value } = event.target;

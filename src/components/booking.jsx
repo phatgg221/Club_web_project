@@ -1,4 +1,4 @@
-import styles from "@/styles/Booking.module.css";
+import styles from "../styles/Booking.module.css";
 
 export default function Booking() {
   return (

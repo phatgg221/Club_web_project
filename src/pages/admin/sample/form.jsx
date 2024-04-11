@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import style from "@/styles/Admin.Form.module.css";
-import styleBtn from "@/styles/table.module.css";
-import { useAuth } from "@/contexts/AuthContext";
+import style from "../../../styles/Admin.Form.module.css";
+import styleBtn from "../../../styles/table.module.css";
+import { useAuth } from "../../../contexts/AuthContext";
 const NewSampleForm = () => {
   const router = useRouter();
   const { id } = router.query;
-  const {isAdmin} = useAuth();
+  const { isAdmin } = useAuth();
   const [formData, setFormData] = useState({
     sampleName: "",
     sampleContents: "",
@@ -25,7 +25,6 @@ const NewSampleForm = () => {
           setIsEditMode(true);
           const response = await fetch(`/api/sample_api?id=${id}`);
           const data = await response.json();
-          // console.log(JSON.stringify(data.data.sampleData) + "aksdjhasdkjashdkasdahsdmv,navkadljj");
           if (
             data &&
             data.error === false &&
@@ -118,11 +117,11 @@ const NewSampleForm = () => {
       console.error("Error:", error);
     }
   };
-  useEffect(() =>{
-    if(!isAdmin){
+  useEffect(() => {
+    if (!isAdmin) {
       router.push('/login');
     }
-  }, [isAdmin,router]);
+  }, [isAdmin, router]);
 
   return (
     <div className={style.formContainer}>

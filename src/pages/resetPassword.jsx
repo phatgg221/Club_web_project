@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styleForm from "@/styles/Admin.Form.module.css";
-import styleBtn from "@/styles/table.module.css";
-import styleBtn2 from "@/styles/resetEmailAndPassword.module.css";
-import { useAuth } from "@/contexts/AuthContext";
-import jwt from "jsonwebtoken";
+import styleForm from "../styles/Admin.Form.module.css";
+import styleBtn from "../styles/table.module.css";
+import styleBtn2 from "../styles/resetEmailAndPassword.module.css";
+import { useAuth } from "../contexts/AuthContext";
 import bcrypt from "bcryptjs"; // Import bcryptjs for hashing
 import { useRouter } from "next/router";
 export default function ResetPassword() {

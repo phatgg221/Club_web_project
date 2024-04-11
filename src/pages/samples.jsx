@@ -1,13 +1,13 @@
-import FoldableItem from "@/components/Foldables/FoldableItem";
-import SearchBar from "@/components/Competitions/SearchBar.jsx";
-import styles from "@/styles/Samples.module.css";
+import FoldableItem from "../components/Foldables/FoldableItem";
+import SearchBar from "../components/Competitions/SearchBar.jsx";
+import styles from "../styles/Samples.module.css";
 import React from "react";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 function SamplesPage() {
   const [samples, setSamples] = useState({ data: [] });
 
 
-  const [searchTerm, setSearchItem]= useState('');
+  const [searchTerm, setSearchItem] = useState('');
 
   const handleSearchInput = (searchItem) => {
     setSearchItem(searchItem);
@@ -28,10 +28,10 @@ function SamplesPage() {
   const filteredSamples = samples.data && samples.data.mongoData ? samples.data.mongoData.filter((item) => {
     return item.sampleName.toLowerCase().includes(searchTerm.toLowerCase());
   }) : [];
-  
-  
-  
-  
+
+
+
+
   console.log(JSON.stringify(samples.data) + "aksdjhasdkjashdkasdahsdmv,navkadljj");
   return (
     <div className={styles.mainContainer}>

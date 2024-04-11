@@ -74,6 +74,9 @@
   margin: 0 0 10px 0;
 }
 
+.sample-content:hover {
+  background-color: #f0f0f0; 
+ }
 @media (max-width: 490px) {
   .search-container {
     margin: 0 20px;

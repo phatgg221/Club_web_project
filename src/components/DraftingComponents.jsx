@@ -1,6 +1,6 @@
 import React from "react";
-import Hero from "@/components/Hero";
-import Cards from "@/components/cardHover/Cards"
+import Hero from "../components/Hero";
+import Cards from "../components/cardHover/Cards"
 function userMain() {
   return (
     <>

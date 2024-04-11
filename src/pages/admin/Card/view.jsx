@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import { useRouter } from "next/router";
-import style from "@/styles/table.module.css";
-import SearchBar from "@/components/Competitions/SearchBar";
-import {useAuth} from "@/contexts/AuthContext";
+import style from "../../../styles/table.module.css";
+import SearchBar from "../../../components/Competitions/SearchBar";
+import { useAuth } from "../../../contexts/AuthContext";
 import Link from "next/link";
 import Image from "next/image";
 const CardTable = () => {
   const [ongoingCompetitions, setOngoingCompetitions] = useState([]);
   const [searchTerm, setSearchItem] = useState("");
-  const {isAdmin} = useAuth();
-  const router= useRouter();
+  const { isAdmin } = useAuth();
+  const router = useRouter();
   const handleSearchInput = (searchTerm) => {
     setSearchItem(searchTerm);
   };
@@ -29,7 +29,6 @@ const CardTable = () => {
   }, []);
 
   const handleDelete = async (card) => {
-    // console.log("card id "+ card._id)
     try {
       const response = await fetch(`/api/card_api?id=${card._id}`, {
         method: "DELETE",
@@ -66,13 +65,13 @@ const CardTable = () => {
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
     });
-    
-    useEffect(() =>{
-      if(!isAdmin){
-        router.push('/login');
-      }
-    }, [isAdmin,router]);
-  
+
+  useEffect(() => {
+    if (!isAdmin) {
+      router.push('/login');
+    }
+  }, [isAdmin, router]);
+
   return (
     <>
       <SearchBar

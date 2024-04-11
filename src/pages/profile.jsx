@@ -1,13 +1,13 @@
 import dynamic from "next/dynamic";
-import styles from "@/styles/Profile.module.css";
+import styles from "../styles/Profile.module.css";
 import { useState, useEffect } from "react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 import { useRouter } from "next/router";
 import Image from "next/image";
 // Dynamically import the component with ssr: false
 
 const ClientSideUsername = dynamic(
-  () => import("@/components/ClientSideOnly.jsx"),
+  () => import("../components/ClientSideOnly.jsx"),
   { ssr: false }
 );
 

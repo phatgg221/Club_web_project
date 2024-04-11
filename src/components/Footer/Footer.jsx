@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/styles/Footer.module.css"; // Make sure the path to your CSS module is correct
+import styles from "../../styles/Footer.module.css";
 import Link from "next/link";
 function Footer() {
   return (
