@@ -25,7 +25,7 @@ export default function Profile() {
     if (!isLoggedIn) {
       router.push("/login");
     }
-  }, [isLoggedIn, router]);
+  }, [isLoggedIn, isAdmin, router]);
 
   function toggleChangePw() {
     window.location.href = "/resetPassword";

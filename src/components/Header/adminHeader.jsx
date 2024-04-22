@@ -3,9 +3,10 @@ import style from "../../styles/AdminHeader.module.css";
 import { useAuth } from "../../contexts/AuthContext";
 import Link from "next/link";
 function AdminHeader() {
-  const { adminLogout } = useAuth();
+  const { adminLogout, logout } = useAuth();
   const handleButton = async () => {
     adminLogout();
+    logout();
     window.location.href = "/";
   };
   return (

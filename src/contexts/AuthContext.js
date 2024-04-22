@@ -54,10 +54,15 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     setIsLoggedIn(false);
+    setAdminLogin(false);
+    setHighestAdmin(false);
+
     setUserId(null);
     setUsername(null);
     
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('isHighestAdmin')
     localStorage.removeItem('userId');
     localStorage.removeItem('username');
   };
