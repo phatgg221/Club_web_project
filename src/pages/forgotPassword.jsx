@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import styleForm from "../styles/Admin.Form.module.css";
 import styleBtn from "../styles/table.module.css";
+import styleHeading from "../styles/resetEmailAndPassword.module.css"
 import { useAuth } from "../contexts/AuthContext";
 import { useRouter } from "next/router";
 import styleBtn2 from "../styles/resetEmailAndPassword.module.css";
@@ -158,7 +159,7 @@ function ForgotPassword() {
     <div
       className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
     >
-      <h1>Forgot Password</h1>
+      <h1 className={styleHeading.h1}>Forgot Password</h1>
       <form className={styleForm.form} onSubmit={handleSubmit}>
         <div className={styleForm.inputGroup}>
           <label>Your username (sID)</label>

@@ -100,7 +100,7 @@ export default function ResetPassword() {
     <div
       className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
     >
-      <h1>Reset Your Password</h1>
+      <h1 className={styleBtn2.h1}>Reset Your Password</h1>
       <form className={styleForm.form} onSubmit={handleSubmit}>
         <div className={styleForm.inputGroup}>
           <label>Your old password</label>

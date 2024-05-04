@@ -93,7 +93,7 @@ export default function ResetEmail() {
     <div
       className={`${styleForm.formContainer} ${styleForm.userResetPasswordContainer}`}
     >
-      <h1>Reset Your Email</h1>
+      <h1 className={styleBtn2.h1}>Reset Your Email</h1>
       <form className={styleForm.form} onSubmit={handleSubmit}>
         <div className={styleForm.inputGroup}>
           <label>Your old email</label>
