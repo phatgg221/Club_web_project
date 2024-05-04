@@ -206,7 +206,7 @@ const MemberTable = () => {
             <tr className={style.tableRow}>
               <th>Email</th>
               <th>Username</th>
-              <th>Is Admin Member (only president can change this information)</th>
+              <th>Is Admin Member</th>
               <th>Action</th>
             </tr>
           </thead>
