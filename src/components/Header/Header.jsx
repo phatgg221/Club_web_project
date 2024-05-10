@@ -73,13 +73,7 @@ function Header() {
                 Showcase
               </Link>
             </li>
-            <li>
-              <Link id="tips" href={isLoggedIn ? "/tips" : "/login"}>
-                Tips
-              </Link>
-            </li>
-          </ul>
-          <ul className="right-nav">
+
             <li>
               <Link
                 id="competitions"
@@ -88,6 +82,14 @@ function Header() {
                 Competitions
               </Link>
             </li>
+          </ul>
+          <ul className="right-nav">
+            <li>
+              <Link id="tips" href={isLoggedIn ? "/tips" : "/login"}>
+                Tips
+              </Link>
+            </li>
+
             <li>
               <Link id="booking" href={isLoggedIn ? "/booking" : "/login"}>
                 Booking

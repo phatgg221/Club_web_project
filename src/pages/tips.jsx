@@ -2,6 +2,7 @@ import FoldableItem from "../components/Foldables/FoldableItem";
 import SearchBar from "../components/Competitions/SearchBar.jsx";
 import styles from "../styles/Tips.module.css";
 import { useEffect, useState } from "react";
+
 function TipsPage() {
   const [tips, setTips] = useState([]);
   const isTip = true;
@@ -15,10 +16,25 @@ function TipsPage() {
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
-    }
+    };
 
     fetchData();
   }, []);
+
+  const [searchItem, setSearchItem] = useState("");
+
+  const handleSearchInput = (searchItem) => {
+    setSearchItem(searchItem);
+  };
+
+  const filteredTips =
+    tips.data && tips.data.mongoData
+      ? tips.data.mongoData.filter((item, index) => {
+          return item.tipName
+            .toLowerCase()
+            .includes(searchItem.toLowerCase());
+        })
+      : [];
 
   return (
     <div className={styles.mainContainer}>
@@ -27,10 +43,17 @@ function TipsPage() {
         showButton={true}
         placeholder="Search for Competitions"
         style={{ width: "80%" }}
+        onChange={handleSearchInput}
       />
-      {tips && tips.data && tips.data.mongoData && tips.data.mongoData.map((item, index) => (
+      {filteredTips.map((item, index) => (
         <FoldableItem key={index} isTip={isTip} tips={item} />
       ))}
+      {/* {tips &&
+        tips.data &&
+        tips.data.mongoData &&
+        tips.data.mongoData.map((item, index) => (
+          <FoldableItem key={index} isTip={isTip} tips={item} />
+        ))} */}
       {/* <FoldableItem isTip={isTip} title="Tip #1" />
       <FoldableItem title="Tip #2" />
       <FoldableItem title="Tip #3" />

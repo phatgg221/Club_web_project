@@ -8,7 +8,7 @@ function CompetitionsPage() {
   const { isLoggedIn } = useAuth();
   useEffect(() => {
     if (!isLoggedIn) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [isLoggedIn, router]);
 

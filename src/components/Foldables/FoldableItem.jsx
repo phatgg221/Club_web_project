@@ -21,8 +21,9 @@ const FoldableItem = ({ title, year, author, link, isTip, tips }) => {
         {isTip && tips.tipsLink && <Link href={tips.tipsLink}>Link</Link>}
         {/* Fold/Unfold button */}
         <div
-          className={`${styles.foldableContainer} ${isFolded ? styles.folded : ""
-            }`}
+          className={`${styles.foldableContainer} ${
+            isFolded ? styles.folded : ""
+          }`}
         >
           <button onClick={handleToggleFold} className={styles.foldButton}>
             {isFolded ? "Show" : "Hide"}
@@ -33,11 +34,11 @@ const FoldableItem = ({ title, year, author, link, isTip, tips }) => {
       {/* Displaying additional content if it's not a tip */}
       {!isTip && (
         <div
-          className={`${styles.contentContainer} ${isFolded ? styles.foldedContent : ""
-            }`}
+          className={`${styles.contentContainer} ${
+            isFolded ? styles.foldedContent : ""
+          }`}
         >
           <div className={styles.content}>
-
             <span>{year}</span>
             <span>{author}</span>
 
@@ -47,17 +48,32 @@ const FoldableItem = ({ title, year, author, link, isTip, tips }) => {
         </div>
       )}
 
-
-      {isTip && tips.realContent && tips.realContent.map((content, index) => (
-        <div key={index} className={`${styles.contentContainer} ${isFolded ? styles.foldedContent : ""}`}>
-          <div className={styles.content}>
-            <h4>{content.name}</h4>
-            <Popup modal trigger={<button className={styles.foldButton}>View</button>}>
-              {close => <Content close={close} className={style.modal} content={content} />}
-            </Popup>
+      {isTip &&
+        tips.realContent &&
+        tips.realContent.map((content, index) => (
+          <div
+            key={index}
+            className={`${styles.contentContainer} ${
+              isFolded ? styles.foldedContent : ""
+            }`}
+          >
+            <div className={styles.content}>
+              <h4>{content.name}</h4>
+              <Popup
+                modal
+                trigger={<button className={styles.foldButton}>View</button>}
+              >
+                {(close) => (
+                  <Content
+                    close={close}
+                    className={style.modal}
+                    content={content}
+                  />
+                )}
+              </Popup>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
 
       {/* {isTip &&(
         <div

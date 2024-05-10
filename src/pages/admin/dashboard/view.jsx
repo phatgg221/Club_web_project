@@ -50,7 +50,7 @@ function Dashboard() {
           className={`${style.btn} ${style.btn1}`}
           onClick={handleCardButton}
         >
-          Manage Card
+          Manage Competitions
         </button>
         <button className={`${style.btn}`} onClick={handleChampButton}>
           Manage Champion
