@@ -14,11 +14,5 @@
     { "src": "/api/member_api/(.*)", "dest": "/api/member_api.js" },
     { "src": "/api/sample_api/(.*)", "dest": "/api/sample_api.js" },
     { "src": "/api/sendemail_api/(.*)", "dest": "/api/sendemail_api.js" }
-  ],
-  "functions": {
-    "api/**/*.js": {
-      "memory": 1024,  
-      "maxDuration": 10  
-    }
-  }
+  ]
 }
