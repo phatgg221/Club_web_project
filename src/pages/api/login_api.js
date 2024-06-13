@@ -7,22 +7,17 @@ const userService = new MemberService(new service().getInstance());
 export default async function handler(req, res) {
   const { method, body } = req;
 
-  try {
-    switch (method) {
-      case 'POST':
-        if (body.action === 'login') {
-          const result = await userService.loginMember(body.username, body.password);
-          res.status(result.statusCode).json(result);
-        } else {
-          // Handle other POST actions or return a default message
-          res.status(400).json({ error: true, message: "Invalid action specified" });
-        }
-        break;
+  if (method !== 'POST') {
+    return res.status(405).json({ error: true, message: `Method ${method} Not Allowed` });
+  }
 
-      default:
-        res.status(405).json({ error: true, message: `Method ${method} Not Allowed` });
-        break;
-    }
+  if (!body || body.action !== 'login') {
+    return res.status(400).json({ error: true, message: "Invalid action specified or missing data" });
+  }
+
+  try {
+    const result = await userService.loginMember(body.username, body.password);
+    res.status(result.statusCode).json(result);
   } catch (error) {
     console.error('Error during request handling:', error);
     res.status(500).json({
