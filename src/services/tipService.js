@@ -1,135 +1,135 @@
 import Service from "./Service";
+import NodeCache from "node-cache";
+const tipsCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
-class TipsService extends Service{
-    constructor(model){
+class TipsService extends Service {
+    constructor(model) {
         super(model);
     }
 
-    async createTips(tips){
-        return await this.insert({
-            tipName: tips.tipName,
-            tipsLink: tips.tipsLink,
-            realContent: tips.realContent,
-        });
-    }
-
-    async getSearchTips(query){
-        try{
-            let result = await this.getAllSearch(query);
-
-            return{
-                error: false,
-                statusCode: 200,
-                data: result,
-            };
-        }catch(errors){
-            console.log(errors);
-            return{
-                error: true,
-                statusCode:500,
-                errors
-            };
-        }
-    }
-
-
-    async getTips(){
-        try{
-            let mongoData= (await this.getAll({})).data;
-
-            let json={
-                mongoData : mongoData,
-            };
-
-            return {
-                error: false,
-                statusCode: 200,
-                data: json,
-            };
-        }catch(errors){
-            console.log(errors);
-            return{
-                error: true,
-                statusCode:500,
-                errors,
+    async getTips() {
+        try {
+            let cacheKey = 'allTips';
+            let cachedData = tipsCache.get(cacheKey);
+            if (cachedData) {
+                return {
+                    error: false,
+                    statusCode: 200,
+                    data: cachedData,
+                };
             }
-        }
-    }
-
-    async getTipsById(id){
-        try{
-            let sampleData = await this.getById(id);
-
-            let json={
-                sampleData : sampleData,
-            };
+            let mongoData = (await this.getAll({})).data;
+            tipsCache.set(cacheKey, mongoData);
             return {
                 error: false,
                 statusCode: 200,
-                data: json,
+                data: { mongoData },
             };
-
-        }catch(error){
+        } catch (errors) {
+            console.log(errors);
+            return {
+                error: true,
+                statusCode: 500,
+                errors,
+            };
+        }
+    }
+    async getTipsById(id) {
+        try {
+            let cacheKey = `tip-${id}`;
+            let cachedData = tipsCache.get(cacheKey);
+            if (cachedData) {
+                return {
+                    error: false,
+                    statusCode: 200,
+                    data: cachedData,
+                };
+            }
+            let sampleData = await this.getById(id);
+            tipsCache.set(cacheKey, sampleData);
+            return {
+                error: false,
+                statusCode: 200,
+                data: { sampleData },
+            };
+        } catch (error) {
             console.log(error);
             return {
                 error: true,
                 statusCode: 500,
                 error,
-            }
+            };
         }
     }
 
-
-    async updateTip(id, tips){
-        try{
-            let reuslt = await this.update(id, {
+    async createTips(tips) {
+        try {
+            let result = await this.insert({
                 tipName: tips.tipName,
-                tipsLink : tips.tipsLink,
-                realContent: tips.realContent
+                tipsLink: tips.tipsLink,
+                realContent: tips.realContent,
             });
+            return {
+                error: false,
+                statusCode: 200,
+                data: result,
+            };
+        } catch (error) {
+            console.log(error);
+            return {
+                error: true,
+                statusCode: 500,
+                error,
+            };
+        }
+    }
 
-
-            if(!reuslt){
-                throw new Error("Tips not found");
+    async updateTip(id, tips) {
+        try {
+            let result = await this.update(id, {
+                tipName: tips.tipName,
+                tipsLink: tips.tipsLink,
+                realContent: tips.realContent,
+            });
+            if (!result) {
+                throw new Error("Tip not found");
             }
             return {
                 error: false,
                 statusCode: 200,
-                data: reuslt,
-            }
-        }catch(error){
+                data: result,
+            };
+        } catch (error) {
             console.log(error);
-            return{
-                error:true,
-                statusCode:500,
-                error
-            }
+            return {
+                error: true,
+                statusCode: 500,
+                error,
+            };
         }
     }
 
-    async deleteTip(id){
-        console.log(id);
-        try{
-            let deleteData= await this.delete(id);
-
-            if(!deleteData){
-                throw new Error ("Tip not found");
+    async deleteTip(id) {
+        try {
+            let deleteData = await this.delete(id);
+            if (!deleteData) {
+                throw new Error("Tip not found");
             }
-
             return {
                 deleted_data: deleteData,
-                error:false,
+                error: false,
                 statusCode: 200,
             };
-        }catch(errors){
+        } catch (errors) {
             console.log(errors);
-            return{
+            return {
                 error: true,
                 statusCode: 500,
-                errors: "Falied to delete tip"
+                errors: "Failed to delete tip",
             };
         }
     }
 }
 
 export default TipsService;
+
