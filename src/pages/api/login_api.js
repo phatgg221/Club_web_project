@@ -1,38 +1,34 @@
 import MemberService from "../../services/memberService";
 import service from "../../models/member";
+
+// Initialize MemberService with a singleton instance
 const userService = new MemberService(new service().getInstance());
 
-
 export default async function handler(req, res) {
-  const { method, query, body } = req;
+  const { method, body } = req;
 
-  switch (method) {
-    case 'GET':
-      // Handle GET request
-      break;
-
-    case 'POST':
-      if (body.action === 'login') {
-        return handleRequest(() => userService.loginMember(body.username, body.password), res);
-      } else {
-        // Handle other POST requests
-      }
-      break;
-
-    default:
-      res.status(405).end(`Method ${method} Not Allowed`);
-  }
-}
-async function handleRequest(serviceFunction, res) {
   try {
-    const result = await serviceFunction();
-    return res.status(result.statusCode).json(result);
+    switch (method) {
+      case 'POST':
+        if (body.action === 'login') {
+          const result = await userService.loginMember(body.username, body.password);
+          res.status(result.statusCode).json(result);
+        } else {
+          // Handle other POST actions or return a default message
+          res.status(400).json({ error: true, message: "Invalid action specified" });
+        }
+        break;
+
+      default:
+        res.status(405).json({ error: true, message: `Method ${method} Not Allowed` });
+        break;
+    }
   } catch (error) {
-    console.log('Error', error);
-    return res.status(500).json({
+    console.error('Error during request handling:', error);
+    res.status(500).json({
       error: true,
-      statusCode: 500,
       message: 'Internal Server Error',
+      details: error.message
     });
   }
 }
