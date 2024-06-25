@@ -8,8 +8,8 @@ import Footer from "../components/Footer/Footer";
 import { Montserrat } from "next/font/google";
 
 //MongoDB connection
-const connectDB = require('../lib/mongodb');
-connectDB();
+// const connectDB = require('../lib/mongodb');
+// connectDB();
 
 const montserrat = Montserrat({ weight: "400", subsets: ["latin"] });
 
