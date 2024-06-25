@@ -101,28 +101,25 @@ class CardService extends Service{
 
       }
     }
-  async updateCompetitionStatus() {
+    async updateCompetitionStatus() {
       try {
-         const currentDate = new Date();
-         currentDate.setHours(0, 0, 0, 0); 
-     
-         // Find competitions whose competitionDate is in the past
-         const competitionsToUpdate = await this.model.find({
-           competitionDate: { $lt: currentDate },
-           competitionStatus: ENUM.competitionStatus.incoming,
-         });
-     
-         // Update the competitionStatus of these competitions to 'past'
-         await this.model.updateMany(
-           { _id: { $in: competitionsToUpdate.map(c => c._id) } },
-           { competitionStatus: ENUM.competitionStatus.past }
-         );
-     
-         console.log(`Updated ${competitionsToUpdate.length} competitions to 'past'.`);
+          const currentDate = new Date();
+          currentDate.setHours(0, 0, 0, 0);
+  
+          // Directly update competitions without fetching them first
+          const updateResult = await this.model.updateMany(
+              {
+                  competitionDate: { $lt: currentDate },
+                  competitionStatus: ENUM.competitionStatus.incoming,
+              },
+              { $set: { competitionStatus: ENUM.competitionStatus.past } }
+          );
+  
+          console.log(`Updated ${updateResult.nModified} competitions to 'past'.`);
       } catch (error) {
-         console.error("Error updating competition status:", error);
+          console.error("Error updating competition status:", error);
       }
-     }
+  }
      
     async updateCard(id, Card) {
       try{

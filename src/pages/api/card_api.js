@@ -12,7 +12,8 @@ export default async function handler(req, res) {
                         if (query.id) {
                                 return handleRequest(() => cardService.getCardById(query.id), res);
                         } else {
-                                await cardService.updateCompetitionStatus();
+                                // Optionally, update competition status periodically or via a scheduled job instead of on every call
+                                // await cardService.updateCompetitionStatus();
                                 return handleRequest(() => cardService.getCard(), res);
                         }
 
