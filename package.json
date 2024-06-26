@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node src/server/server.js",
+    "start": "next start",
     "lint": "next lint",
     "deploy": "gh-pages -d out"
   },
@@ -36,7 +36,8 @@
     "react-router-dom": "^6.21.3",
     "react-sortablejs": "^6.1.4",
     "reactjs-popup": "^2.0.6",
-    "swr": "^2.2.5"
+    "swr": "^2.2.5",
+    "vercel": "^34.2.8"
   },
   "devDependencies": {
     "css-loader": "^6.8.1",
