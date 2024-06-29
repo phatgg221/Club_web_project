@@ -81,7 +81,7 @@ export default function SearchPage() {
 
   return (
     <div className="main-search">
-      <h1>On-going Competitions</h1>
+      <h1>Competition Database</h1>
       <div className="search-container">
         <div className="search-bar-sect">
           <SearchBar showButton={true} placeholder="Search for Competitions" onChange={handleSearchInput} />

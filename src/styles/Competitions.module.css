@@ -23,6 +23,7 @@
   display: flex;
   align-items: center;
   margin: 10px 0;
+  font-family: 'Montserrat'
 }
 
 .filter-sect-title h2 {
@@ -48,7 +49,7 @@
 }
 
 .filter-sect-boxes .filter-box {
-  width: 150px;
+  width: 250px;
   margin: 0 0 10px 0;
 }
 
@@ -57,7 +58,12 @@
 }
 
 .filter-box-checkbox {
-  margin-right: 5px;
+  display: flex;
+  margin-right: 20px;
+}
+
+.checkbox-lable {
+  display:flex;
 }
 
 .competition-list {

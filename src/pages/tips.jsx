@@ -38,10 +38,10 @@ function TipsPage() {
 
   return (
     <div className={styles.mainContainer}>
-      <h1 className={styles.title}>Tips</h1>
+      <h1 className={styles.title}>Sharing Tips</h1>
       <SearchBar
         showButton={true}
-        placeholder="Search for Competitions"
+        placeholder="Search for Tips"
         style={{ width: "80%" }}
         onChange={handleSearchInput}
       />

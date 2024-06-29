@@ -35,7 +35,7 @@ function SamplesPage() {
   console.log(JSON.stringify(samples.data) + "aksdjhasdkjashdkasdahsdmv,navkadljj");
   return (
     <div className={styles.mainContainer}>
-      <h1 className={styles.title}>Showcase</h1>
+      <h1 className={styles.title}>Competition Samples</h1>
       <SearchBar
         showButton={true}
         placeholder="Search for Competitions"

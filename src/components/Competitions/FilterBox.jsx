@@ -23,7 +23,7 @@ function FilterBox({ categories, name, onChange }) {
       <span className="filter-box-title">{name}</span>
       <div className="btn-div">
         {categories.map((category, index) => (
-          <label key={category}>
+          <label className="checkbox-lable" key={category}>
             <input
               type="checkbox"
               className="filter-box-checkbox"
