@@ -31,6 +31,7 @@
   height: 240px;
   width: 200px;
   float: right;
+  margin-left: 50px;
 }
 
 @media (max-width: 750px) {
