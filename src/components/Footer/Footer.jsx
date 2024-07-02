@@ -46,9 +46,6 @@ function Footer() {
         </span>
       </div>
       <div className={styles.copyright}>
-        <span>
-          Copyright Golden Flame Competition Club. All rights reserved.
-        </span>
       </div>
     </footer>
   );
