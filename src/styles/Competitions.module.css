@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   margin: 10px 0;
-  font-family: 'Montserrat'
+  font-family: 'Montserrat';
 }
 
 .filter-sect-title h2 {
@@ -49,8 +49,9 @@
 }
 
 .filter-sect-boxes .filter-box {
-  width: 250px;
+  width: 325px;
   margin: 0 0 10px 0;
+  font-family: 'Montserrat'; 
 }
 
 .filter-sect-search {
@@ -60,6 +61,10 @@
 .filter-box-checkbox {
   display: flex;
   margin-right: 20px;
+}
+
+.filter-box-title {
+  font-weight: bold;
 }
 
 .checkbox-lable {

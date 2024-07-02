@@ -86,6 +86,7 @@ const CardTable = () => {
               <th>Organizer</th>
               <th>Competition name</th>
               <th>Location</th>
+              <th>Competiton type</th>
               <th>Link to web</th>
               <th>Competition date</th>
               <th>Image</th>
@@ -99,6 +100,7 @@ const CardTable = () => {
                   <td>{item.organizer}</td>
                   <td>{item.competitionName}</td>
                   <td>{item.location}</td>
+                  <td>{item.competitionType}</td>
                   <td>
                     <Link href={item.linkToWeb}>Link</Link>
                   </td>

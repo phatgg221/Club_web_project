@@ -26,6 +26,7 @@ class CardService extends Service{
             competitionDate: Card.competitionDate,
             linkToWeb: Card.linkToWeb,
             competitionStatus: Card.competitionStatus,
+            competitionType: Card.competitionType
           });
         } catch (error) {
           console.error(error);
@@ -134,7 +135,8 @@ class CardService extends Service{
           imageURL: Card.imageURL,
           competitionDate: Card.competitionDate,
           linkToWeb: Card.linkToWeb,
-          competitionStatus: Card.competitionStatus
+          competitionStatus: Card.competitionStatus,
+          competitionType: Card.competitionType
         });
         if(!updateData){
           throw new Error("Card not found");

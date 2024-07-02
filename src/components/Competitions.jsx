@@ -11,6 +11,7 @@ export default function SearchPage() {
   const [searchItem, setSearchItem] = useState('');
   const [selectedOrganizer, setselectedOrganizer] = useState('');
   const [searchForCompeittionStatus, setSearchForCompetitionStatus] = useState('');
+  const [selectedCompetitionType, setselectedCompetitionType] = useState('');
   const handleResize = () => {
     setIsDesktopOrLaptop(window.matchMedia("(min-width: 490px)").matches);
     setIsTabletOrMobile(window.matchMedia("(max-width: 490px)").matches);
@@ -28,6 +29,19 @@ export default function SearchPage() {
     }
   }
   console.log(categories.length + " categories found.");
+
+  let types = [];
+  if (samples.data && samples.data.mongoData) {
+    for (let i = 0; i <= samples.data.mongoData.length - 1; i++) {
+      let type = samples.data.mongoData[i].competitionType;
+
+      // Check if the item is not already in the categories array
+      if (!types.includes(type)) {
+        types.push(type);
+      }
+    }
+  }
+  console.log(types.length + " types found.");
 
   useEffect(() => {
     handleResize();
@@ -49,6 +63,9 @@ export default function SearchPage() {
   const handleSearchForOrganizer = (searchItem) => {
     setselectedOrganizer(searchItem);
   }
+  const handleSearchForCompetitionType = (searchItem) => {
+    setselectedCompetitionType(searchItem);
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -67,7 +84,8 @@ export default function SearchPage() {
       const matchesSearch = !searchItem || item.competitionName.toLowerCase().includes(searchItem.toLowerCase());
       const matchesOrganizer = !selectedOrganizer || item.organizer.toLowerCase().includes(selectedOrganizer.toLowerCase());
       const matchesStatus = !searchForCompeittionStatus || item.competitionStatus?.toLowerCase() === searchForCompeittionStatus.toLowerCase();
-      return matchesSearch && matchesOrganizer && matchesStatus;
+      const matchesCompetitionType = !selectedCompetitionType || item.competitionType.toLowerCase().includes(selectedCompetitionType.toLowerCase());
+      return matchesSearch && matchesOrganizer && matchesStatus && matchesCompetitionType;
     }) ?? [];
 
 
@@ -99,7 +117,7 @@ export default function SearchPage() {
         <div datavisible={dataVisible} className="filter-sect">
           <div className="filter-sect-title">
             <h2>Filters</h2>
-            <span>clear all filters</span>
+            {/* <span>clear all filters</span> */}
           </div>
           <div className="filter-sect-container">
             <div className="filter-sect-boxes">
@@ -108,21 +126,26 @@ export default function SearchPage() {
                 name={"By organizer"}
                 onChange={handleSearchForOrganizer}
               />
+              <FilterBox className
+                categories={types}
+                name={"By type"}
+                onChange={handleSearchForCompetitionType}
+              />
               <FilterBox
                 categories={[
-                  "incoming",
-                  "past"
+                  "Incoming",
+                  "Past"
                 ]}
                 name={"By Competition Status"}
                 onChange={handleSearchForStatus}
               />
             </div>
             <div className="filter-sect-search">
-              <SearchBar
+              {/* <SearchBar
                 style={{ width: "100%" }}
                 placeholder="Filter by Organizer"
                 onChange={handleSearchForOrganizer}
-              />
+              /> */}
               {isDesktopOrLaptop && (
                 <div className="competition-list">
                   {renderSearchResults()}

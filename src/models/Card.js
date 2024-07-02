@@ -64,6 +64,12 @@ class Card {
       competitionStatus: {
         type: String,
         default: ENUM.competitionStatus.incoming,
+      },
+      
+      competitionType: {
+        type: String,
+        required: true,
+        trim: true,
       }
     });
 

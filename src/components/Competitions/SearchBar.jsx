@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import "./SearchBar.css";
+import styles from "@/styles/SearchBar.module.css";
 
 function SearchBar({ onChange,style, showButton, placeholder = "" }) {
   const [query, setQuery] = useState("");
@@ -16,17 +16,21 @@ function SearchBar({ onChange,style, showButton, placeholder = "" }) {
   };
 
   return (
-    <form className="search-bar" style={style} onSubmit={handleFormSubmit}>
+    <form className={styles.searchBar} style={style} onSubmit={handleFormSubmit}>
       <input
-        className="text-box"
+        className={styles.searchInput}
         type="search"
         value={query}
         onChange={handleInputChange}
         placeholder={placeholder}
       />
-      {showButton && <button className="submit-btn" type="submit"></button>}
+      {showButton && (
+        <button className={styles.submitBtn} type="submit">
+        </button>  // Clearly label the button
+      )}
     </form>
   );
 }
+
 
 export default SearchBar;

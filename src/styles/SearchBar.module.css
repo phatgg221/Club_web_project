@@ -1,4 +1,5 @@
-.search-bar {
+/* SearchBar.module.css */
+.searchBar {
   width: 100%;
   height: 2.5rem;
   display: flex;
@@ -6,41 +7,40 @@
   margin: 20px 0;
 }
 
-input[type="search"] {
+.searchInput {
+  width: 100%;
   padding: 10px;
+  border: 1px #dddfe2 solid;
+  border-right: none; /* To make it seamless with the button */
+  border-radius: 3px 0 0 3px;
+  font-family: 'Montserrat';
 }
+
+.searchInput::placeholder {
+  text-align: center;
+}
+
 /* clears the 'X' from Internet Explorer */
-input[type="search"]::-ms-clear {
-  display: none;
-  width: 0;
-  height: 0;
-}
-input[type="search"]::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-/* clears the 'X' from Chrome */
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
+.searchInput::-ms-clear {
   display: none;
 }
 
-.submit-btn {
-  aspect-ratio: 1/1;
+.searchInput::-ms-reveal {
+  display: none;
+}
+
+/* clears the 'X' from Chrome */
+.searchInput::-webkit-search-decoration,
+.searchInput::-webkit-search-cancel-button,
+.searchInput::-webkit-search-results-button,
+.searchInput::-webkit-search-results-decoration {
+  display: none;
+}
+
+.submitBtn {
+  aspect-ratio: 1 / 1;
   border: none;
   border-radius: 0 3px 3px 0;
   background-color: #f8a61b;
   width: 40px;
-}
-
-.text-box {
-  width: 100%;
-  border: 1px #dddfe2 solid;
-  border-radius: 3px 0 0 3px;
-  &::placeholder {
-    text-align: center;
-  }
 }

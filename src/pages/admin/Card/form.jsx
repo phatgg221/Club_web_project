@@ -18,7 +18,8 @@ const NewCardForm = () => {
     linkToWeb: "",
     imageURL: "",
     competitionDate: "",
-    competitionStatus: "incoming"
+    competitionStatus: "incoming",
+    competitionType: "",
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -219,6 +220,17 @@ const NewCardForm = () => {
               onChange={handleInputChange}
             />
           </div>
+        </div>
+        <div className={style.inputGroup}>
+          <label>Competition Type:</label>
+          <input
+            require={true}
+            type="text"
+            name="competitionType"
+            placeholder={isEditMode ? formData.competitionType : ""}
+            value={formData.competitionType}
+            onChange={handleInputChange}
+          />
         </div>
         <div className={style.inputGroup}>
           <label>Link to Web:</label>

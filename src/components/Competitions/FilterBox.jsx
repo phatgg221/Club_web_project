@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import "./FilterBox.css";
+import "@/styles/FilterBox.module.css"
 
 function FilterBox({ categories, name, onChange }) {
   const [checkedItems, setCheckedItems] = useState(
