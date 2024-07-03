@@ -3,6 +3,7 @@
   font-size: 12px;
   border-color: gray;
   border: solid 0.5px;
+  width: 1200px;
 }
 
 .modal>.header {
