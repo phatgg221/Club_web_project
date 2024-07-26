@@ -36,21 +36,6 @@ const OTPInput = ({ onSubmit, onCancel }) => {
         </div>
       </form>
     </div>
-    // <div className={styleForm.overlay}>
-    //   <div className={styleForm.popup}>
-    //     <h2>Enter OTP</h2>
-    //     <input
-    //       type="text"
-    //       placeholder="Enter OTP"
-    //       value={otp}
-    //       onChange={handleOtpChange}
-    //     />
-    //     <div>
-    //       <button onClick={() => onSubmit(otp)}>Submit</button>
-
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
@@ -138,14 +123,13 @@ function ForgotPassword() {
       // Proceed with the login process
 
       // For example, you can set a session or perform other authentication steps
-      login(userId, username);
-
+      sessionStorage.setItem("otpVerified", "true");
       setSendSuccess(true);
       setShowOTPInput(false);
       // Set login successful state to true
 
       // Use the push method to navigate to the '/userMain' page
-      router.push("/userMain");
+      router.push("/changePassword");
     } else {
       alert("Invalid OTP. Please try again.");
     }
