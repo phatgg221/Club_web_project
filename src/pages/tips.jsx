@@ -2,8 +2,18 @@ import FoldableItem from "../components/Foldables/FoldableItem";
 import SearchBar from "../components/Competitions/SearchBar.jsx";
 import styles from "../styles/Tips.module.css";
 import { useEffect, useState } from "react";
-
+import { useRouter } from "next/router";
+import { useAuth } from "../contexts/AuthContext";
 function TipsPage() {
+  
+  const router = useRouter();
+  const { isLoggedIn } = useAuth();
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/login');
+    }
+  }, [isLoggedIn, router]);
+
   const [tips, setTips] = useState([]);
   const isTip = true;
   useEffect(() => {
@@ -48,16 +58,6 @@ function TipsPage() {
       {filteredTips.map((item, index) => (
         <FoldableItem key={index} isTip={isTip} tips={item} />
       ))}
-      {/* {tips &&
-        tips.data &&
-        tips.data.mongoData &&
-        tips.data.mongoData.map((item, index) => (
-          <FoldableItem key={index} isTip={isTip} tips={item} />
-        ))} */}
-      {/* <FoldableItem isTip={isTip} title="Tip #1" />
-      <FoldableItem title="Tip #2" />
-      <FoldableItem title="Tip #3" />
-      <FoldableItem title="Tip #4" /> */}
     </div>
   );
 }

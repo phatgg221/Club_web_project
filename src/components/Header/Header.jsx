@@ -69,7 +69,10 @@ function Header() {
               </Link>
             </li>
             <li>
-              <Link id="samples" href="/samples">
+              <Link 
+                id="samples" 
+                href={isLoggedIn ? "/samples" : "/login"}
+              >
                 Sample
               </Link>
             </li>

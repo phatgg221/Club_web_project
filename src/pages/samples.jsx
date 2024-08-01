@@ -3,7 +3,18 @@ import SearchBar from "../components/Competitions/SearchBar.jsx";
 import styles from "../styles/Samples.module.css";
 import React from "react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "../contexts/AuthContext";
 function SamplesPage() {
+
+  const router = useRouter();
+  const { isLoggedIn } = useAuth();
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/login');
+    }
+  }, [isLoggedIn, router]);
+
   const [samples, setSamples] = useState({ data: [] });
 
 
